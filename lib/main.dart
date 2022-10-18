@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/Main_lists_water_unit.dart';
+import 'package:waterworks/Main_menu_page.dart';
 import 'package:waterworks/test.dart';
 
 void main() {
@@ -62,8 +62,7 @@ class _Load_PageState extends State<Load_Page> {
         PageTransition(
           duration: Duration(seconds: 1),
           type: PageTransitionType.rightToLeft,
-          //
-          child: Water_Unit_List(),
+          child: Menu_Page(),
         ),
       );
     });
