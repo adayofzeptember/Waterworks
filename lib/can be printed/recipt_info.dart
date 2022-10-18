@@ -53,7 +53,7 @@ class _Recipt_InfoState extends State<Recipt_Info> {
                   Navigator.push(
                     context,
                     PageTransition(
-                      duration: Duration(seconds: 1),
+                      duration: Duration(milliseconds: 250),
                       type: PageTransitionType.rightToLeft,
                       child: Irregular_Water(),
                     ),

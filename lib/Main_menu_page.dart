@@ -10,7 +10,7 @@ import 'package:waterworks/test.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/water_unit_info.dart';
 
-import '3 main widgets/list_water_unit.dart';
+import '3 main widgets/list_unit.dart';
 
 class Menu_Page extends StatefulWidget {
   Menu_Page({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class Menu_Page extends StatefulWidget {
 class _Menu_PageState extends State<Menu_Page> {
   List<String> districItems = [
     'ในเมือง',
-    'นครราชสีมา55',
+    'นครราชสีมา',
   ];
 
   var _bottomNavIndex = 0;
@@ -64,19 +64,29 @@ class _Menu_PageState extends State<Menu_Page> {
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                activeIcon: Icon(
-                  Icons.home,
-                  size: 40,
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/home.svg',
+                  height: 30,
                   color: Palette.thisGreen,
                 ),
-                icon: Icon(
-                  Icons.house_sharp,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  'assets/icons/home.svg',
+                                    color: Color.fromARGB(255, 194, 194, 194),
+
+                  height: 30,
                 ),
                 label: 'หน้าหลัก'),
             BottomNavigationBarItem(
-                icon: CircleAvatar(
+                activeIcon: CircleAvatar(
                   backgroundColor: Palette.thisGreen,
+                  child: Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                icon: CircleAvatar(
+                  backgroundColor: Color.fromARGB(255, 194, 194, 194),
                   child: Icon(
                     Icons.search,
                     size: 20,
@@ -85,14 +95,20 @@ class _Menu_PageState extends State<Menu_Page> {
                 ),
                 label: 'ค้นหา'),
             BottomNavigationBarItem(
-                activeIcon: Icon(
-                  Icons.person,
-                  size: 40,
+
+
+              
+                activeIcon: SvgPicture.asset(
+                  'assets/icons/person.svg',
+                  height: 30,
                   color: Palette.thisGreen,
                 ),
-                icon: Icon(
-                  Icons.person,
-                  size: 40,
+                icon: SvgPicture.asset(
+                  
+                  'assets/icons/person.svg',
+                                                      color: Color.fromARGB(255, 194, 194, 194),
+ 
+                  height: 30,
                 ),
                 label: 'บัญชี')
           ],

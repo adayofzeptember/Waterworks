@@ -55,14 +55,14 @@ class Profile extends StatelessWidget {
                           child: Column(
                             children: [
                               SizedBox(
-                                height: 100,
+                                height: 90,
                               ),
                               Text(
                                 'คุณชำนาญ สู้งาน',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
-                                  color: Color.fromARGB(255, 51, 51, 51),
+                                  color: Color.fromARGB(255, 71, 71, 71),
                                 ),
                               ),
                               SizedBox(

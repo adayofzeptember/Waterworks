@@ -399,7 +399,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                             Navigator.pushReplacement(
                               context,
                               PageTransition(
-                                duration: Duration(seconds: 1),
+                                duration: Duration(milliseconds: 250),
                                 type: PageTransitionType.rightToLeft,
                                 child: Recipt_Info(),
                               ),
