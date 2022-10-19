@@ -23,23 +23,23 @@ class xxx extends StatelessWidget {
           ),
         ),
         Scaffold(
-              appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(Icons.arrow_back_ios_new)),
-            Text('จดมาตราวัดน้ำ'),
-            Text(''),
-          ],
-        ),
-      ),
+          appBar: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.arrow_back_ios_new)),
+                Text('จดมาตราวัดน้ำ'),
+                Text(''),
+              ],
+            ),
+          ),
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -47,7 +47,6 @@ class xxx extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 73),
               child: Column(
                 children: [
-                 
                   SizedBox(
                     height: 20,
                   ),
@@ -166,7 +165,6 @@ class xxx extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            
                             Positioned(
                               top: 0,
                               left: 0,

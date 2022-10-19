@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/3%20main%20widgets/profile.dart';
+import 'package:waterworks/3%20main%20widgets/serch.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/test.dart';
 import 'package:waterworks/user_consume_info.dart';
@@ -30,7 +31,7 @@ class _Menu_PageState extends State<Menu_Page> {
     Icons.brightness_5,
     Icons.brightness_4,
   ];
-  List<Widget> _widgetsPages = [Water_Unit_List(), xxx(), Profile()];
+  List<Widget> _widgetsPages = [Water_Unit_List(), Search_Page(), Profile()];
   int _index = 0;
   void _onItemTapped(int index2) {
     setState(() {

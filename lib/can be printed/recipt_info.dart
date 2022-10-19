@@ -90,7 +90,7 @@ class _Recipt_InfoState extends State<Recipt_Info> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 255,232,232),
+                    color: Color.fromARGB(255, 255, 232, 232),
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -114,9 +114,11 @@ class _Recipt_InfoState extends State<Recipt_Info> {
                 ),
               ),
               Container(
-                width: double.infinity,
-                
-                child: SvgPicture.asset('assets/images/r2.svg', fit: BoxFit.cover,)),
+                  width: double.infinity,
+                  child: SvgPicture.asset(
+                    'assets/images/r2.svg',
+                    fit: BoxFit.cover,
+                  )),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     primary: Palette.thisGreen,
