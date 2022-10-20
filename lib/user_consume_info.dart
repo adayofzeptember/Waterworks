@@ -16,28 +16,29 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Palette.thisGreen,
-                )),
-            Text(
-              'ข้อมูลผู้ใช้น้ำ',
-              style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
-            ),
-            Text(''),
-          ],
-        ),
-      ),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: Row(
+            children: [
+              InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Icon(Icons.arrow_back_ios_new,
+                          color: Palette.thisGreen))),
+              SizedBox(
+                width: 70,
+              ),
+              Text(
+                'ข้อมูลผู้ใช้น้ำ',
+                style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
+              ),
+            ],
+          )),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -49,7 +50,8 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                 SvgPicture.asset('assets/images/alert.svg', color: Color.fromARGB(255, 255, 0, 0)),
+                  SvgPicture.asset('assets/images/alert.svg',
+                      color: Color.fromARGB(255, 255, 0, 0)),
                   SizedBox(
                     width: 10,
                   ),

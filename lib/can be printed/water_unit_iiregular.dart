@@ -4,7 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/water_unit_info.dart';
 
 import '../ETC/color_green.dart';
-
+//!รายการหน่วยน้ำผิดปกติ
 class Irregular_Water extends StatefulWidget {
   Irregular_Water({Key? key}) : super(key: key);
 
@@ -21,21 +21,23 @@ class _Irregular_WaterState extends State<Irregular_Water> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Palette.thisGreen,
-                )),
+                child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Icon(Icons.arrow_back_ios_new,
+                        color: Palette.thisGreen))),
+            SizedBox(
+              width: 50,
+            ),
             Text(
               'ใบแจ้งหน่วยน้ำผิดปกติ',
               style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
             ),
-            Text(''),
           ],
         ),
       ),

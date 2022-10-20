@@ -3,9 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/can%20be%20printed/water_unit_iiregular.dart';
 import 'package:waterworks/water_unit_info.dart';
-
 import '../ETC/color_green.dart';
 
+//!ใบแจ้งหนี้
 class Recipt_Info extends StatefulWidget {
   Recipt_Info({Key? key}) : super(key: key);
 
@@ -22,21 +22,23 @@ class _Recipt_InfoState extends State<Recipt_Info> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Palette.thisGreen,
-                )),
+                child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Icon(Icons.arrow_back_ios_new,
+                        color: Palette.thisGreen))),
+            SizedBox(
+              width: 90,
+            ),
             Text(
-              'ใบแจ้งหนี้',
+              'ใบแจ้งนี้',
               style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
             ),
-            Text(''),
           ],
         ),
       ),

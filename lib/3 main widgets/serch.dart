@@ -46,34 +46,37 @@ class _Search_PageState extends State<Search_Page> {
                 SizedBox(
                   height: 10,
                 ),
-                    Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                  height: MediaQuery.of(context).size.height * 0.059,
-                  width: double.infinity,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'ค้นหา',
-                      prefixIcon: Icon(
-                        Icons.search,
-                        color: Palette.thisGreen,
-                        size: 20,
-                      ),
-                      hintStyle: TextStyle(color: Palette.thisGreen),
-                      fillColor: Colors.white70,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(
-                            color: Color.fromARGB(255, 230, 228, 228),
-                            width: 0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(color: Colors.grey, width: 0),
-                      ),
-                    ),
-                  )),
-            ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                      height: MediaQuery.of(context).size.height * 0.059,
+                      width: double.infinity,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'ค้นหา',
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Palette.thisGreen,
+                            size: 20,
+                          ),
+                          hintStyle: TextStyle(color: Palette.thisGreen),
+                          fillColor: Colors.white70,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide: BorderSide(
+                                color: Color.fromARGB(255, 230, 228, 228),
+                                width: 0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0)),
+                            borderSide:
+                                BorderSide(color: Colors.grey, width: 0),
+                          ),
+                        ),
+                      )),
+                ),
                 // Container(
                 //   child: Column(
                 //     children: [
