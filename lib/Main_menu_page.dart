@@ -7,7 +7,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/3%20main%20widgets/profile.dart';
 import 'package:waterworks/3%20main%20widgets/serch.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/test.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/water_unit_info.dart';
 
@@ -72,8 +71,7 @@ class _Menu_PageState extends State<Menu_Page> {
                 ),
                 icon: SvgPicture.asset(
                   'assets/icons/home.svg',
-                                    color: Color.fromARGB(255, 194, 194, 194),
-
+                  color: Color.fromARGB(255, 194, 194, 194),
                   height: 30,
                 ),
                 label: 'หน้าหลัก'),
@@ -96,19 +94,14 @@ class _Menu_PageState extends State<Menu_Page> {
                 ),
                 label: 'ค้นหา'),
             BottomNavigationBarItem(
-
-
-              
                 activeIcon: SvgPicture.asset(
                   'assets/icons/person.svg',
                   height: 30,
                   color: Palette.thisGreen,
                 ),
                 icon: SvgPicture.asset(
-                  
                   'assets/icons/person.svg',
-                                                      color: Color.fromARGB(255, 194, 194, 194),
- 
+                  color: Color.fromARGB(255, 194, 194, 194),
                   height: 30,
                 ),
                 label: 'บัญชี')

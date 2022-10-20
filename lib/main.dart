@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:waterworks/ETC/color_green.dart'                                                                                                                                             ;
 import 'package:waterworks/Main_menu_page.dart';
-import 'package:waterworks/test.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,7 +59,7 @@ class _Load_PageState extends State<Load_Page> {
       Navigator.pushReplacement(
         context,
         PageTransition(
-          duration: Duration(seconds: 1),
+          duration: Duration(milliseconds: 350),
           type: PageTransitionType.rightToLeft,
           child: Menu_Page(),
         ),

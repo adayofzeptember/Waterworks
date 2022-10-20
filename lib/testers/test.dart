@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'ETC/color_green.dart';
-
 class xxx extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

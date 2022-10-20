@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/can%20be%20printed/recipt_info.dart';
+import 'package:waterworks/print%20pages/recipt_info.dart';
 
 //! จดมาตราวัดน้ำ
 class Water_Unit_Detail extends StatefulWidget {
