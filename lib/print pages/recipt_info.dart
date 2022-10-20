@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:waterworks/print%20pages/water_unit_iiregular.dart';
+import 'package:waterworks/print%20pages/water_unit_iregular.dart';
 import 'package:waterworks/water_unit_info.dart';
 import '../ETC/color_green.dart';
 
@@ -76,7 +76,7 @@ class _Recipt_InfoState extends State<Recipt_Info> {
                           width: 10,
                         ),
                         Text(
-                          'หน่วยน้ำผิดปกติ (กด)',
+                          'หน่วยน้ำผิดปกติ',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -138,6 +138,32 @@ class _Recipt_InfoState extends State<Recipt_Info> {
                     child: Text(
                       "สั่งพิมพ์",
                       style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 255, 235, 192),
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    )),
+                onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "สั่งพิมพ์ใบแจ้งหน่วยน้ำผิดปกติ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 98, 41, 0)),
                     ),
                   ),
                 ),

@@ -312,7 +312,7 @@ class _DoneState extends State<Done> {
                                 ),
                                 InkWell(
                                   onTap: (() {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       PageTransition(
                                         duration: Duration(milliseconds: 250),

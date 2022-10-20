@@ -147,7 +147,7 @@ class _NotyetState extends State<Notyet> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               Container(
                 child: Column(
@@ -305,7 +305,7 @@ class _NotyetState extends State<Notyet> {
                                 ),
                                 InkWell(
                                   onTap: (() {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       PageTransition(
                                         duration: Duration(milliseconds: 250),

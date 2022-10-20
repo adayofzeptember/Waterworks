@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/water_unit_info.dart';
-
 import '../ETC/color_green.dart';
 //!รายการหน่วยน้ำผิดปกติ
 class Irregular_Water extends StatefulWidget {
@@ -75,6 +74,7 @@ class _Irregular_WaterState extends State<Irregular_Water> {
                 ),
               ),
             ),
+            
           ]),
         ),
       ),
