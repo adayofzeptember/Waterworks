@@ -1,5 +1,4 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:diamond_bottom_bar/diamond_bottom_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,11 +14,13 @@ class Search_Page extends StatefulWidget {
   State<Search_Page> createState() => _Search_PageState();
 }
 
+
 class _Search_PageState extends State<Search_Page> {
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
+    
   ];
 
   String? selectedValue;
@@ -102,7 +103,7 @@ class _Search_PageState extends State<Search_Page> {
                 //                     crossAxisAlignment:
                 //                         CrossAxisAlignment.start,
                 //                     mainAxisAlignment:
-                //                         MainAxisAlignment.spaceAround,
+                //                         MainAxisAlignment.spaceAround,+55
                 //                     children: [
                 //                       Text(
                 //                         '416',
