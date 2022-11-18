@@ -47,6 +47,7 @@ class _Menu_PageState extends State<Menu_Page> {
       bottomNavigationBar: Container(
         height: 80,
         decoration: BoxDecoration(
+    
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [
