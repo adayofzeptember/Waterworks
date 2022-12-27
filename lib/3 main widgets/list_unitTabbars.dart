@@ -20,18 +20,16 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
   List<String> districItems = [
     'ในเมือง',
     'เขตที่ 1 เมืองนครราชสีมา'
-    'นครราชสีมา',
+        'นครราชสีมา',
   ];
+
+  List<String> epItems = ['ตอน1', 'ตอน2', 'ตอน3'];
 
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
   ];
-  
-
-
-  List<String> epItems = ['ตอน1', 'ตอน2', 'ตอน3'];
 
   String? selectedValue;
   String? xs;
@@ -66,9 +64,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           ),
         ),
         body: TabBarView(
-          children: [
-           Notyet(),
-           Done()],
+          children: [Notyet(), Done()],
         ),
       ),
     );

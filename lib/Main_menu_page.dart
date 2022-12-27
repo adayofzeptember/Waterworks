@@ -23,6 +23,7 @@ class _Menu_PageState extends State<Menu_Page> {
     'ในเมือง',
     'นครราชสีมา',
   ];
+  List<String> epItems = ['ตอน 1', 'ตอน 2', 'ตอน 3'];
 
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
@@ -37,8 +38,6 @@ class _Menu_PageState extends State<Menu_Page> {
     });
   }
 
-  List<String> epItems = ['ตอน 1', 'ตอน 2', 'ตอน 3'];
-
   String? selectedValue;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,6 @@ class _Menu_PageState extends State<Menu_Page> {
       bottomNavigationBar: Container(
         height: 80,
         decoration: BoxDecoration(
-    
           borderRadius: BorderRadius.only(
               topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [

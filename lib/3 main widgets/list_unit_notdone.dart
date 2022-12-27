@@ -85,8 +85,11 @@ class _NotyetState extends State<Notyet> {
                           return 'Please select gender.';
                         }
                       },
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                 print(value);
+                      },
                       onSaved: (value) {
+                        print(value);
                         selectedValue = value.toString();
                       },
                     ),
