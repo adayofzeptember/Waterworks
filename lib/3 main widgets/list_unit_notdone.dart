@@ -146,7 +146,7 @@ class _NotyetState extends State<Notyet> {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Container(
                 child: Column(

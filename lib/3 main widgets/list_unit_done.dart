@@ -151,9 +151,7 @@ class _DoneState extends State<Done> {
               Container(
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 10,
-                    ),
+               
                     ClipRRect(
                       borderRadius:
                           const BorderRadius.all(Radius.circular(16.0)),
@@ -201,6 +199,7 @@ class _DoneState extends State<Done> {
                                                 Color.fromARGB(255, 6, 148, 93),
                                             fontSize: 20),
                                       ),
+                                     
                                       Text(
                                         'Bollocks Hightower',
                                         style: TextStyle(

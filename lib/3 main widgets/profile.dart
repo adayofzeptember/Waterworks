@@ -22,7 +22,7 @@ class Profile extends StatelessWidget {
       ),
       backgroundColor: Palette.thisGreen,
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: NeverScrollableScrollPhysics(),
         child: Column(
           children: [
             SizedBox(
@@ -32,11 +32,13 @@ class Profile extends StatelessWidget {
               alignment: Alignment.topCenter,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 80,),
+                  padding: const EdgeInsets.only(
+                    top: 80,
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 1,
@@ -46,7 +48,7 @@ class Profile extends StatelessWidget {
                           height: 115,
                         ),
                         Text(
-                          'Jon Snow the Bastard',
+                          'The King in the North',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
@@ -116,13 +118,11 @@ class Profile extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
                     radius: 80,
-                    backgroundImage: AssetImage('assets/images/jon.png'),
+                    backgroundImage: AssetImage('assets/images/rob.jpg'),
                   ),
                 )
-          
               ],
             ),
-          
           ],
         ),
       ),

@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:waterworks/ETC/color_green.dart'                                                                                                                                             ;
+import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/Main_menu_page.dart';
 
 void main() {
@@ -72,6 +72,7 @@ class _Load_PageState extends State<Load_Page> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
+
     return Scaffold(
         body: Stack(
       children: <Widget>[
