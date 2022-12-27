@@ -20,6 +20,10 @@ dependencies:
   responsive_framework: ^0.1.9
   fluttertoast: ^8.0.9
   page_transition: ^2.0.9
+  printing: ^5.9.3
+  esc_pos_bluetooth: ^0.4.1
+  flutter_bluetooth_basic: ^0.1.7
+
 
 dev_dependencies:
   flutter_test:
@@ -41,3 +45,5 @@ flutter:
     - family: Kanit
       fonts:
         - asset: assets/fonts/Kanit-Light.ttf
+
+ 

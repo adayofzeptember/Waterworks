@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,6 +20,7 @@ void main() {
 class Start_Page_Waterworks extends StatelessWidget {
   const Start_Page_Waterworks({Key? key}) : super(key: key);
   @override
+  
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -117,14 +117,14 @@ class _Load_PageState extends State<Load_Page> {
   }
 }
 
-Widget x() {
-  return Container(
-    child: Text('1'),
-  );
-}
+// Widget x() {
+//   return Container(
+//     child: Text('1'),
+//   );
+// }
 
-Widget y() {
-  return Container(
-    child: Text('2'),
-  );
-}
+// Widget y() {
+//   return Container(
+//     child: Text('2'),
+//   );
+// }
