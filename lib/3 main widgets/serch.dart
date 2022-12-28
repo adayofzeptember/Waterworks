@@ -14,13 +14,11 @@ class Search_Page extends StatefulWidget {
   State<Search_Page> createState() => _Search_PageState();
 }
 
-
 class _Search_PageState extends State<Search_Page> {
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
-    
   ];
 
   String? selectedValue;
@@ -52,7 +50,8 @@ class _Search_PageState extends State<Search_Page> {
                   child: Container(
                       height: MediaQuery.of(context).size.height * 0.059,
                       width: double.infinity,
-                      child: TextField(
+                      child: TextFormField(
+                        onChanged: ((value) => print(value)),
                         decoration: InputDecoration(
                           hintText: 'ค้นหา',
                           prefixIcon: Icon(
