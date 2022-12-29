@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +25,47 @@ class _printTest_3State extends State<printTest_3> {
 
   Future<void> initPrinter3() async {
     bluetoothPrint.startScan(timeout: Duration(seconds: 2));
-    if(!mounted) return;
+    if (!mounted) return;
     bluetoothPrint.scanResults.listen((val) {
-      if(!mounted) return;
+      if (!mounted) return;
       setState(() {
         _devices = val;
       });
       print(_devices);
-      if(_devices.isEmpty){
+      if (_devices.isEmpty) {
         _devicesMsg = 'no devices';
       }
-     });
+    });
+  }
+
+  Future<void> _startPrint(BluetoothDevice deviceGu) async {
+    if (deviceGu != null && deviceGu.address != null) {
+      await bluetoothPrint.connect(deviceGu);
+
+      Map<String, dynamic> config = Map();
+      List<LineText> list = [];
+      list.add(
+        LineText(
+            type: LineText.TYPE_TEXT,
+            content: "-----------------------",
+            weight: 2,
+            width: 2,
+            height: 2,
+            align: LineText.ALIGN_CENTER,
+            linefeed: 1),
+      );
+
+      list.add(LineText(
+          type: LineText.TYPE_TEXT,
+          content: "zepzep",
+          weight: 2,
+          width: 2,
+          height: 2,
+          align: LineText.ALIGN_RIGHT,
+          linefeed: 1));
+      bluetoothPrint.printTest();
+      bluetoothPrint.printLabel(config, list);
+    }
   }
 
   @override
@@ -51,13 +83,22 @@ class _printTest_3State extends State<printTest_3> {
             title: new Text("test printer"),
             backgroundColor: Color.fromARGB(255, 169, 191, 207),
           ),
-          body: _devices.isEmpty ? Center(child: Text(_devicesMsg ??  'sdasd'),)
-          : ListView.builder(
-            itemCount: _devices.length,
-            itemBuilder: (context, index) {
-              return ListTile(title: Text(_devices[index].name.toString()),);
-            },)
-          ),
+          body: _devices.isEmpty
+              ? Center(
+                  child: Text(_devicesMsg),
+                )
+              : ListView.builder(
+                  itemCount: _devices.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      subtitle: Text(_devices[index].address.toString()),
+                      title: Text(_devices[index].name.toString()),
+                      onTap: () {
+                        _startPrint(_devices[index]);
+                      },
+                    );
+                  },
+                )),
     );
   }
 }

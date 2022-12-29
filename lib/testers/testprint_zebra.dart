@@ -1,6 +1,7 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-
 import 'package:zsdk/zsdk.dart';
+
 
 void main(List<String> args) {
   runApp(printTest_Zebra());
@@ -98,10 +99,13 @@ resetPrinter() {
   });
 }
 
+
+
+
 checkStatus() {
   zsdk
       .checkPrinterStatusOverTCPIP(
-    address: '10.0.0.100',
+    address: '10.0.0.100',  
     port: 9100, //optional
   )
       .then((value) {
@@ -114,5 +118,14 @@ checkStatus() {
       Cause cause = printerResponse.statusInfo.cause;
       print(cause);
     }
+
   });
+  
+ 
 }
+
+
+
+
+
+
