@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/Main_menu_page.dart';
+import 'package:waterworks/First_Page_bottomBar.dart';
+import 'package:waterworks/login.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +22,10 @@ void main() {
 class Start_Page_Waterworks extends StatelessWidget {
   const Start_Page_Waterworks({Key? key}) : super(key: key);
   @override
-  
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [
+      localizationsDelegates: const [ 
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
@@ -61,10 +61,10 @@ class _Load_PageState extends State<Load_Page> {
       Navigator.pushReplacement(
         context,
         PageTransition(
-          duration: Duration(milliseconds: 350),
-          type: PageTransitionType.rightToLeft,
-          child: Menu_Page(),
-        ),
+            duration: Duration(milliseconds: 500),
+            type: PageTransitionType.rightToLeft,
+            //child: Menu_Page(),
+            child: Login()),
       );
     });
   }
@@ -77,7 +77,7 @@ class _Load_PageState extends State<Load_Page> {
 
     return Scaffold(
         body: Stack(
-      children: <Widget>[
+      children: <Widget>[ 
         Image.asset('assets/images/background_green.png',
             width: MediaQuery.of(context).size.width * 1,
             height: MediaQuery.of(context).size.height * 1,
@@ -86,7 +86,6 @@ class _Load_PageState extends State<Load_Page> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-           
             Column(
               children: [
                 Padding(

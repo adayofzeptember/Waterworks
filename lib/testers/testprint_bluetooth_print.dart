@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +35,9 @@ class _printTest_3State extends State<printTest_3> {
       }
     });
   }
-
+  
+  
+ 
   Future<void> _startPrint(BluetoothDevice deviceGu) async {
     if (deviceGu != null && deviceGu.address != null) {
       await bluetoothPrint.connect(deviceGu);
@@ -54,10 +54,11 @@ class _printTest_3State extends State<printTest_3> {
             align: LineText.ALIGN_CENTER,
             linefeed: 1),
       );
+       
 
       list.add(LineText(
           type: LineText.TYPE_TEXT,
-          content: "zepzep",
+          content: "zep--zep",
           weight: 2,
           width: 2,
           height: 2,
@@ -73,6 +74,7 @@ class _printTest_3State extends State<printTest_3> {
     initPrinter3();
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {

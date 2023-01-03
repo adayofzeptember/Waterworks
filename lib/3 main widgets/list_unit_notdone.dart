@@ -86,7 +86,7 @@ class _NotyetState extends State<Notyet> {
                         }
                       },
                       onChanged: (value) {
-                 print(value);
+                        print(value);
                       },
                       onSaved: (value) {
                         print(value);
@@ -307,7 +307,7 @@ class _NotyetState extends State<Notyet> {
                                 ),
                                 InkWell(
                                   onTap: (() {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                       context,
                                       PageTransition(
                                         duration: Duration(milliseconds: 250),

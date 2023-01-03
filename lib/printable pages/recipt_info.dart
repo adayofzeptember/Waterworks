@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:waterworks/printable%20pages/water_unit_iregular.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
+import 'package:waterworks/printable%20pages/water_unit_irregular.dart';
 import 'package:waterworks/water_unit_info.dart';
 import '../ETC/color_green.dart';
 
@@ -14,6 +15,12 @@ class Recipt_Info extends StatefulWidget {
 }
 
 class _Recipt_InfoState extends State<Recipt_Info> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +43,7 @@ class _Recipt_InfoState extends State<Recipt_Info> {
               width: 90,
             ),
             Text(
-              'ใบแจ้งนี้',
+              'ใบแจ้งนี้55',
               style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
             ),
           ],
@@ -130,6 +137,10 @@ class _Recipt_InfoState extends State<Recipt_Info> {
                     )),
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
+                  // SweetAlertV2.show(context,
+                  //     title: "Just show a message",
+                  //     subtitle: "Sweet alert is pretty",
+                  //     style: SweetAlertV2Style.success);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),

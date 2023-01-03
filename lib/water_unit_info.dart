@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/printable%20pages/recipt_info.dart';
 
@@ -478,7 +479,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
               CupertinoDialogAction(
                   child: Text(
                     "ยกเลิก",
-                    style: TextStyle(fontFamily: 'Kanit',color: Colors.red),
+                    style: TextStyle(fontFamily: 'Kanit', color: Colors.red),
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
@@ -489,7 +490,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   style: TextStyle(fontFamily: 'Kanit'),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                     context,
                     PageTransition(
                       duration: Duration(milliseconds: 250),
@@ -497,6 +498,10 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                       child: Recipt_Info(),
                     ),
                   );
+                  SweetAlertV2.show(context,
+                      title: "เสร็จสิ้น",
+                      subtitle: "--- จดหน่วยน้ำเสร็จสิ้น ---",
+                      style: SweetAlertV2Style.success);
                 },
               )
             ],
