@@ -25,7 +25,7 @@ class Start_Page_Waterworks extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: const [ 
+      localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
@@ -57,13 +57,12 @@ class _Load_PageState extends State<Load_Page> {
   }
 
   Future _Load_And_Go() async {
-    await Future.delayed(const Duration(seconds: 3), () {
+    await Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
         PageTransition(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(seconds: 2),
             type: PageTransitionType.rightToLeft,
-            //child: Menu_Page(),
             child: Login()),
       );
     });
@@ -77,7 +76,7 @@ class _Load_PageState extends State<Load_Page> {
 
     return Scaffold(
         body: Stack(
-      children: <Widget>[ 
+      children: <Widget>[
         Image.asset('assets/images/background_green.png',
             width: MediaQuery.of(context).size.width * 1,
             height: MediaQuery.of(context).size.height * 1,

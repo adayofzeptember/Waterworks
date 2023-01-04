@@ -8,7 +8,7 @@ import 'package:waterworks/3%20main%20widgets/list_unit_notdone.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/water_unit_info.dart';
-
+String k = '40|qetYhyrARwFCQbYjVpclEYBqcG0y0qu8BtFwA0Lh';
 class Water_Unit_List extends StatefulWidget {
   Water_Unit_List({Key? key}) : super(key: key);
 
@@ -64,7 +64,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           ),
         ),
         body: TabBarView(
-          children: [Notyet(), Done()],
+          children: [Notyet(token: k,), Done()],
         ),
       ),
     );

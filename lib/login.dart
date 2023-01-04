@@ -16,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/API/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/testers/testprint_bluetooth_print.dart';
 import 'package:http/http.dart' as http;
 
@@ -159,22 +160,15 @@ class _LoginState extends State<Login> {
                               if (formKey_LogIn.currentState!.validate()) {
                                 formKey_LogIn.currentState?.save();
                               }
-                              print(userName + passWord);
+                              //?print(userName + passWord);
                               _login_request.username = 'watermeter1';
                               _login_request.password = 'password';
                               _login_request.device_name =
                                   deviceDetail.toString();
-                              print(jsonEncode(_login_request));
+                             //? print(jsonEncode(_login_request));
                               _loginNormal(_login_request);
 
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   PageTransition( 
-                              //       duration: Duration(milliseconds: 500),
-                              //       type: PageTransitionType.rightToLeft,
-                              //       //child: Menu_Page(),
-                              //       child: Login()),
-                              // );
+                         
                             },
                             child: Padding(
                               padding: EdgeInsets.all(15.0),
@@ -224,7 +218,7 @@ class _LoginState extends State<Login> {
 
     setState(() {
       _deviceData = deviceData;
-      deviceDetail = deviceData['brand'] + '-'+deviceData['model'];
+      deviceDetail = deviceData['brand'] + '-' + deviceData['model'];
     });
     print(deviceDetail);
   }
@@ -244,10 +238,18 @@ class _LoginState extends State<Login> {
 
     var jsonRes = json.decode(response.body);
     if (response.statusCode == 200 || response.statusCode == 400) {
-      print(response.body);
-      print(jsonRes['data']['access_token']);
+      //?print(response.body);
+      
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
+      Navigator.pushReplacement(
+        context,
+        PageTransition(
+            duration: Duration(milliseconds: 500),
+            type: PageTransitionType.rightToLeft,
+            child: Menu_Page(),
+     ),
+      );
     } else {
       print(response.body);
     }
