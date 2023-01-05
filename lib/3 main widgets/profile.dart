@@ -14,6 +14,8 @@ import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
 
 import '../API/get_profile.dart';
+import '../ETC/progressHUD.dart';
+import '../main.dart';
 
 String theTokenOne = '';
 
@@ -25,6 +27,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  bool circleHUD = false;
   @override
   void initState() {
     getToken();
@@ -35,6 +38,14 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(
+        child: _uiLogOut(context), inAsyncCall: circleHUD, opacity: 0.3);
+  }
+
+  @override
+  Widget _uiLogOut(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -147,7 +158,43 @@ class _ProfileState extends State<Profile> {
                                     ],
                                   ),
                                 ],
-                              )
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      elevation: 0,
+                                      side:
+                                          BorderSide(color: Palette.thisGreen),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      )),
+                                  onPressed: () {
+                                    setState(() {
+                                     circleHUD = true;
+                                    });
+                                    logout_removeToken();
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(15.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "ออกจากระบบ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Palette.thisGreen,
+                                            fontSize: 15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -190,5 +237,18 @@ class _ProfileState extends State<Profile> {
     setState(() {
       theTokenOne = getThatToken.toString();
     });
+  }
+
+  Future logout_removeToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.remove('keyToken');
+    prefs.clear();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Start_Page_Waterworks(),
+      ),
+    );
   }
 }

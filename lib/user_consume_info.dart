@@ -21,7 +21,6 @@ class Use_Water_Info extends StatefulWidget {
 class _Use_Water_InfoState extends State<Use_Water_Info> {
   @override
   void initState() {
-    print(widget.id);
     super.initState();
   }
 
@@ -291,22 +290,19 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                     );
                   }
 
-                  return 
-                     Column(
-                              children: [
-                                SizedBox(height: 50,),
-                                Center(child: CircularProgressIndicator(color: Palette.thisGreen,)),
-                              ],
-                            );
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Center(
+                          child: CircularProgressIndicator(
+                        color: Palette.thisGreen,
+                      )),
+                    ],
+                  );
                 },
               ),
-
-
-
-
-
-
-
             ],
           ),
         ),

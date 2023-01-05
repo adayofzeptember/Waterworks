@@ -20,6 +20,8 @@ import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/testers/testprint_bluetooth_print.dart';
 import 'package:http/http.dart' as http;
 
+import 'ETC/progressHUD.dart';
+
 String deviceDetail = '';
 String storedToken = '';
 
@@ -39,8 +41,10 @@ class _LoginState extends State<Login> {
   Map<String, dynamic> _deviceData = <String, dynamic>{};
   String userName = '';
   String passWord = '';
+  bool circleHUD = false;
 
   void initState() {
+    circleHUD = false;
     _login_request = Login_Request();
     getDeviceInfo();
     super.initState();
@@ -48,6 +52,14 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(
+        child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
+  }
+
+  @override
+  Widget _uiSetUp(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
       child: Stack(
@@ -113,6 +125,12 @@ class _LoginState extends State<Login> {
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
+                                enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 0),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              
                             ),
                           ),
                           SizedBox(
@@ -131,17 +149,25 @@ class _LoginState extends State<Login> {
                               }
                             },
                             keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
+                            decoration: 
+                            InputDecoration(
+                              
                               hintText: 'กรอกรหัสผ่าน',
                               labelStyle: TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: Colors.transparent),
+                                      BorderSide(color: Colors.white, width: 0),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
                               fillColor: Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 0),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
@@ -149,40 +175,45 @@ class _LoginState extends State<Login> {
                           SizedBox(
                             height: 25,
                           ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: Palette.thisGreen,
-                                elevation: 0,
-                                // side: BorderSide(color: Colors.white),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                )),
-                            onPressed: () {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              if (formKey_LogIn.currentState!.validate()) {
-                                formKey_LogIn.currentState?.save();
-                              }
-                              
-                               _login_request.username = userName;
-                               _login_request.password = passWord;
-                              _login_request.device_name = 
-                                  deviceDetail.toString().toUpperCase();
-                              print(jsonEncode(_login_request));
-                              _loginNormal(_login_request);
+                          SizedBox(
+                            height: 60,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                
+                                  primary: Palette.thisGreen,
+                                  elevation: 0,
+                                  // side: BorderSide(color: Colors.white),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  )),
+                              onPressed: () {
+                                setState(() {
+                                  circleHUD = true;
+                                });
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                if (formKey_LogIn.currentState!.validate()) {
+                                  formKey_LogIn.currentState?.save();
+                                }
 
-                         
-                            },
-                            child: Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Container(
-                                width: double.infinity,
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "เข้าสู่ระบบ",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                      fontSize: 15),
+                                _login_request.username = userName;
+                                _login_request.password = passWord;
+                                _login_request.device_name =
+                                    deviceDetail.toString().toUpperCase();
+                                print(jsonEncode(_login_request));
+                                loginNormal(_login_request);
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.all(15.0),
+                                child: Container(
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "เข้าสู่ระบบ",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                        fontSize: 15),
+                                  ),
                                 ),
                               ),
                             ),
@@ -198,6 +229,39 @@ class _LoginState extends State<Login> {
         ],
       ),
     ));
+  }
+
+  Future<void> loginNormal(Login_Request requestModel) async {
+    String urlPost = waterWork_domain + 'login';
+
+    var body_Login = json.encode(requestModel.toJson());
+    final response = await http.post(
+      Uri.parse(urlPost),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: body_Login,
+    );
+
+    var jsonRes = json.decode(response.body);
+    if (response.statusCode == 400 || response.statusCode == 200) {
+      setState(() {
+        circleHUD = false;
+      });
+      //print(jsonDecode(response.body.toString()));
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
+
+      Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: Duration(milliseconds: 500),
+              type: PageTransitionType.rightToLeft,
+              child: Menu_Page()));
+    } else {
+      print(response.body);
+    }
   }
 
   Future<void> getDeviceInfo() async {
@@ -223,37 +287,5 @@ class _LoginState extends State<Login> {
       deviceDetail = deviceData['brand'] + '-' + deviceData['model'];
     });
     print(deviceDetail);
-  }
-
-  Future<void> _loginNormal(Login_Request requestModel) async {
-    String urlPost = waterWork_domain + 'login';
-
-    var body_Login = json.encode(requestModel.toJson());
-    final response = await http.post(
-      Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: body_Login,
-    );
-
-    var jsonRes = json.decode(response.body);
-    if (response.statusCode == 200 || response.statusCode == 400) {
-      //?print(response.body);
-      
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-            duration: Duration(milliseconds: 500),
-            type: PageTransitionType.rightToLeft,
-            child: Menu_Page(),
-     ),
-      );
-    } else {
-      print(response.body);
-    }
   }
 }

@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
+import 'package:waterworks/API/post_waterUnit.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/printable%20pages/recipt_info.dart';
 
@@ -19,6 +22,13 @@ class Water_Unit_Detail extends StatefulWidget {
 class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   var waterUnitController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  late WriteUnit_Request _writeUnit_Request;
+
+  @override
+  void initState() {
+    _writeUnit_Request = WriteUnit_Request();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -335,7 +345,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             autofocus: false,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
-                                            onSaved: (input) => print(input),
+                                            onSaved: (input) => 
+                                            
+                                            _writeUnit_Request.current_unit = input
+                                            
+                                            ,
                                             validator: (value) {
                                               if (value!.isEmpty) {
                                                 return 'โปรดกรอกเลขมาตราวัดน้ำก่อนการยืนยัน';
@@ -386,14 +400,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   .validate()) {
                                                 formKey.currentState?.save();
                                                 showDialog();
-                                                // Navigator.pushReplacement(
-                                                //   context,
-                                                //   PageTransition(
-                                                //     duration: Duration(milliseconds: 250),
-                                                //     type: PageTransitionType.rightToLeft,
-                                                //     child: Recipt_Info(),
-                                                //   ),
-                                                // );
+                                                _writeUnit_Request.water_meter_record_id = widget.id.toString();                                               print(jsonEncode(_writeUnit_Request));
+
                                               }
                                             },
                                             child: Padding(
@@ -415,11 +423,15 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                               );
                             }
 
-                            return 
-                            Column(
+                            return Column(
                               children: [
-                                SizedBox(height: 50,),
-                                Center(child: CircularProgressIndicator(color: Colors.white,)),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                                Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                )),
                               ],
                             );
                           },
@@ -469,14 +481,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   style: TextStyle(fontFamily: 'Kanit'),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                      duration: Duration(milliseconds: 250),
-                      type: PageTransitionType.rightToLeft,
-                      child: Recipt_Info(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //     duration: Duration(milliseconds: 250),
+                  //     type: PageTransitionType.rightToLeft,
+                  //     child: Recipt_Info(),
+                  //   ),
+                  // );
                   SweetAlertV2.show(context,
                       title: "เสร็จสิ้น",
                       subtitle: "--- จดหน่วยน้ำเสร็จสิ้น ---",

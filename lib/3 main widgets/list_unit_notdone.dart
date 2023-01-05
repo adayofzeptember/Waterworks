@@ -163,6 +163,7 @@ class _NotyetState extends State<Notyet> {
                       },
                       onChanged: (value) {},
                       onSaved: (value) {
+
                         selectedValue = value.toString();
                       },
                     ),
@@ -176,11 +177,12 @@ class _NotyetState extends State<Notyet> {
                   shrinkWrap: true,
                   controller: scrollController,
                   itemCount: isLoadingMore ? data.length + 1 : data.length,
-                  itemBuilder: (context, index) {
+                  itemBuilder: (context, index,) {
+                    
                     if (index < data.length) {
                       final post = data[index];
 
-                      //final stoer_id = post
+              
                       final user_id = post['id'].toString();
                       final user_name = post['user_name'];
                       final water_number = post['water_number'];
@@ -202,7 +204,7 @@ class _NotyetState extends State<Notyet> {
                                   Radius.circular(16.0)),
                               child: InkWell(
                                 onTap: () {
-                                  print(user_id);
+     
                                   Navigator.push(
                                     context,
                                     PageTransition(
@@ -444,7 +446,8 @@ class _NotyetState extends State<Notyet> {
                           ],
                         ),
                       );
-                    } else {
+                    } 
+                    else {
                       return Center(
                         child: CircularProgressIndicator(color: Palette.thisGreen,),
                       );

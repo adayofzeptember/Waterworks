@@ -27,6 +27,7 @@ dependencies:
   #flutter_bluetooth_basic: ^0.1.7
   #zebrautility: ^0.0.40
   bluetooth_print: ^4.3.0 
+  percent_indicator: ^4.2.0
 
   sweetalertv2: ^0.0.2
   package_info_plus: ^1.4.2
