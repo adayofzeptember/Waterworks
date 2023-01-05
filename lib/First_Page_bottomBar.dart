@@ -7,7 +7,7 @@ import 'package:waterworks/3%20main%20widgets/profile.dart';
 import 'package:waterworks/3%20main%20widgets/serch.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/water_unit_info.dart';
+import 'package:waterworks/write_water_unit_info.dart';
 
 import '3 main widgets/list_Main.dart';
 

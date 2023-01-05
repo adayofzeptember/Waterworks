@@ -61,8 +61,8 @@ class _Load_PageState extends State<Load_Page> {
       Navigator.pushReplacement(
         context,
         PageTransition(
-            duration: Duration(seconds: 2),
-            type: PageTransitionType.rightToLeft,
+            duration: Duration(milliseconds: 1500),
+            type: PageTransitionType.bottomToTop,
             child: Login()),
       );
     });

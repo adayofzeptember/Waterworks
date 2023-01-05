@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/water_unit_info.dart';
+import 'package:waterworks/write_water_unit_info.dart';
 
 class Search_Page extends StatefulWidget {
   Search_Page({Key? key}) : super(key: key);

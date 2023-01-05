@@ -42,8 +42,7 @@ class _LoginState extends State<Login> {
 
   void initState() {
     _login_request = Login_Request();
-    initPlatformState();
-
+    getDeviceInfo();
     super.initState();
   }
 
@@ -90,6 +89,7 @@ class _LoginState extends State<Login> {
                             height: 5,
                           ),
                           TextFormField(
+                            initialValue: 'watermeter1',
                             textAlign: TextAlign.left,
                             autofocus: false,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -119,6 +119,8 @@ class _LoginState extends State<Login> {
                             height: 10,
                           ),
                           TextFormField(
+                            initialValue: 'password',
+                            obscureText: true,
                             textAlign: TextAlign.left,
                             autofocus: false,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -160,12 +162,12 @@ class _LoginState extends State<Login> {
                               if (formKey_LogIn.currentState!.validate()) {
                                 formKey_LogIn.currentState?.save();
                               }
-                              //?print(userName + passWord);
-                              _login_request.username = 'watermeter1';
-                              _login_request.password = 'password';
-                              _login_request.device_name =
-                                  deviceDetail.toString();
-                             //? print(jsonEncode(_login_request));
+                              
+                               _login_request.username = userName;
+                               _login_request.password = passWord;
+                              _login_request.device_name = 
+                                  deviceDetail.toString().toUpperCase();
+                              print(jsonEncode(_login_request));
                               _loginNormal(_login_request);
 
                          
@@ -198,7 +200,7 @@ class _LoginState extends State<Login> {
     ));
   }
 
-  Future<void> initPlatformState() async {
+  Future<void> getDeviceInfo() async {
     Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
       return <String, dynamic>{
         'brand': build.brand,

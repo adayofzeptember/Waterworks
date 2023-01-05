@@ -164,7 +164,17 @@ class _ProfileState extends State<Profile> {
                   );
                 }
 
-                return Center(child: CircularProgressIndicator());
+                return Column(
+                  children: [
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Center(
+                        child: CircularProgressIndicator(
+                      color: Colors.white,
+                    )),
+                  ],
+                );
               },
             ),
           ],

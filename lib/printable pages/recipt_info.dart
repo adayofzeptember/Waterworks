@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:waterworks/printable%20pages/water_unit_irregular.dart';
-import 'package:waterworks/water_unit_info.dart';
+import 'package:waterworks/write_water_unit_info.dart';
 import '../ETC/color_green.dart';
 
 //!ใบแจ้งหนี้
