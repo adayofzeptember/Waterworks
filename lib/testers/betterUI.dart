@@ -33,7 +33,7 @@ class xxx extends StatelessWidget {
                       Navigator.pop(context);
                     },
                     child: Icon(Icons.arrow_back_ios_new)),
-                Text('จดมาตราวัดน้ำ'),
+                Text('จดมาตรวัดน้ำ'),
                 Text(''),
               ],
             ),

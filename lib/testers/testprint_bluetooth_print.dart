@@ -65,6 +65,7 @@ class _printTest_3State extends State<printTest_3> {
           align: LineText.ALIGN_RIGHT,
           linefeed: 1));
       bluetoothPrint.printTest();
+   
       bluetoothPrint.printLabel(config, list);
     }
   }

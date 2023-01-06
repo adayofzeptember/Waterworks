@@ -123,7 +123,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'มาตราวัดน้ำ:',
+                                      'มาตรวัดน้ำ:',
                                       style: TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.bold,

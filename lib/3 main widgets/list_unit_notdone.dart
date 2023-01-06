@@ -59,7 +59,6 @@ class _NotyetState extends State<Notyet> {
     return Scaffold(
       body: SingleChildScrollView(
         controller: singleChildScrollController,
-        // physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -259,7 +258,7 @@ class _NotyetState extends State<Notyet> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'มาตราวัดน้ำ:',
+                                                    'มาตรวัดน้ำ:',
                                                     style: TextStyle(
                                                         fontSize: 13,
                                                         fontWeight:
@@ -425,7 +424,7 @@ class _NotyetState extends State<Notyet> {
                                                   height: 8,
                                                 ),
                                                 Text(
-                                                  'จดมาตราวัดน้ำ',
+                                                  'จดมาตรวัดน้ำ',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:

@@ -57,7 +57,9 @@ class _Load_PageState extends State<Load_Page> {
   }
 
   Future _Load_And_Go() async {
-    await Future.delayed(const Duration(seconds: 2), () {
+    await 
+    
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
         PageTransition(

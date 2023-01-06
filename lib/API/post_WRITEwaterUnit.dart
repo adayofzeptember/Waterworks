@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,6 +9,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import '../First_Page_bottomBar.dart';
+import '../printable pages/invoice.dart';
 
 class WriteUnit_Request {
   String? current_unit;
@@ -44,9 +46,29 @@ Future<void> write_unit(context, WriteUnit_Request write_requestModel) async {
   var jsonRes = json.decode(response.body);
   if (response.statusCode == 200 || response.statusCode == 400) {
     print('----------- success -----------');
-    print(response.body);
+    print(jsonRes['data']['invoice']['id']);
+    Future.delayed(const Duration(microseconds: 500), () {
+      Navigator.push(
+        context,
+        PageTransition(
+            duration: Duration(milliseconds: 100),
+            type: PageTransitionType.rightToLeft,
+            child: Invoice_Page(
+              invoiceID: jsonRes['data']['invoice']['id'].toString(),
+            )),
+      );
+    });
+    // Navigator.push(
+    //   context,
+    //   PageTransition(
+    //     duration: Duration(milliseconds: 250),
+    //     type: PageTransitionType.rightToLeft,
+    //     child: Invoice_Page(),
+    //   ),
+    // );
   } else {
     print('----------- failed -----------');
     print(response.body);
+    throw Exception(e);
   }
 }

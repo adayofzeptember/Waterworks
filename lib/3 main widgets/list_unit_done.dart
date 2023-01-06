@@ -16,7 +16,6 @@ import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
 import '../write_water_unit_info.dart';
 
-
 class Done extends StatefulWidget {
   Done({Key? key}) : super(key: key);
 
@@ -45,6 +44,7 @@ class _DoneState extends State<Done> {
   final singleChildScrollController = ScrollController();
   int page = 1;
   bool isLoadingMore = false;
+  @override
   void initState() {
     fetch_unit_done();
     scrollController.addListener(_scrollListener);
@@ -56,7 +56,6 @@ class _DoneState extends State<Done> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         controller: singleChildScrollController,
-        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -252,7 +251,7 @@ class _DoneState extends State<Done> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    'มาตราวัดน้ำ:',
+                                                    'มาตรวัดน้ำ:',
                                                     style: TextStyle(
                                                         fontSize: 13,
                                                         fontWeight:
@@ -405,7 +404,7 @@ class _DoneState extends State<Done> {
                                                   height: 8,
                                                 ),
                                                 Text(
-                                                  'จดมาตราวัดน้ำ',
+                                                  'จดมาตรวัดน้ำ',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
@@ -426,9 +425,14 @@ class _DoneState extends State<Done> {
                           ],
                         ),
                       );
-                    } else {
+                    }
+                    
+                    
+                    else {
                       return Center(
-                        child: CircularProgressIndicator(color: Palette.thisGreen,),
+                        child: CircularProgressIndicator(
+                          color: Palette.thisGreen,
+                        ),
                       );
                     }
                   }),
@@ -438,11 +442,10 @@ class _DoneState extends State<Done> {
   }
 
   Future<void> fetch_unit_done() async {
-       SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
     print(getThatToken.toString());
 
- 
     final response = await http.get(
       Uri.parse(waterWork_domain +
           'water_meter_record/index?per_page=10&status=processing&page=${page}'),

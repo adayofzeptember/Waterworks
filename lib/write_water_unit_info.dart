@@ -4,13 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sweetalertv2/sweetalertv2.dart';
-import 'package:waterworks/API/post_waterUnit.dart';
+import 'package:waterworks/API/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/printable%20pages/recipt_info.dart';
+import 'package:waterworks/printable%20pages/invoice.dart';
 
 import 'API/get_user_consume.dart';
 
-//! จดมาตราวัดน้ำ
 class Water_Unit_Detail extends StatefulWidget {
   String? id = '';
   Water_Unit_Detail({Key? key, this.id}) : super(key: key);
@@ -50,7 +49,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
             SizedBox(
               width: 70,
             ),
-            Text('จดมาตราวัดน้ำ'),
+            Text('จดมาตรวัดน้ำ'),
           ],
         ),
       ),
@@ -119,7 +118,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'มาตราวัดน้ำ:',
+                                                'มาตรวัดน้ำ:',
                                                 style: TextStyle(
                                                     fontSize: 15,
                                                     fontWeight: FontWeight.bold,
@@ -345,19 +344,17 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             autofocus: false,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
-                                            onSaved: (input) => 
-                                            
-                                            _writeUnit_Request.current_unit = input
-                                            
-                                            ,
+                                            onSaved: (input) =>
+                                                _writeUnit_Request
+                                                    .current_unit = input,
                                             validator: (value) {
                                               if (value!.isEmpty) {
-                                                return 'โปรดกรอกเลขมาตราวัดน้ำก่อนการยืนยัน';
+                                                return 'โปรดกรอกเลขมาตรวัดน้ำก่อนการยืนยัน';
                                               }
                                             },
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                              labelText: 'กรอกเลขมาตราวัดน้ำ',
+                                              labelText: 'กรอกเลขมาตรวัดน้ำ',
                                               focusedBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Colors.grey),
@@ -399,9 +396,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               if (formKey.currentState!
                                                   .validate()) {
                                                 formKey.currentState?.save();
-                                                showDialog();
-                                                _writeUnit_Request.water_meter_record_id = widget.id.toString();                                               print(jsonEncode(_writeUnit_Request));
 
+                                                _writeUnit_Request
+                                                        .water_meter_record_id =
+                                                    widget.id.toString();
+
+                                                showDialog();
+                                                // print(jsonEncode(
+                                                //     _writeUnit_Request));
                                               }
                                             },
                                             child: Padding(
@@ -425,6 +427,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
                             return Column(
                               children: [
+                            
                                 SizedBox(
                                   height: 50,
                                 ),
@@ -456,7 +459,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
           padding: const EdgeInsets.all(8.0),
           child: CupertinoAlertDialog(
             title: Text(
-              "โปรดตรวจสอบความถูกต้องของมาตราวัดน้ำก่อนยืนยัน",
+              "โปรดตรวจสอบความถูกต้องของมาตรวัดน้ำก่อนยืนยัน",
             ),
             content: Padding(
               padding: const EdgeInsets.only(top: 15),
@@ -467,6 +470,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
               ),
             ),
             actions: [
+              
               CupertinoDialogAction(
                   child: Text(
                     "ยกเลิก",
@@ -481,6 +485,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   style: TextStyle(fontFamily: 'Kanit'),
                 ),
                 onPressed: () {
+                  write_unit(context, _writeUnit_Request);
                   // Navigator.push(
                   //   context,
                   //   PageTransition(
@@ -489,9 +494,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   //     child: Recipt_Info(),
                   //   ),
                   // );
+
                   SweetAlertV2.show(context,
-                      title: "เสร็จสิ้น",
-                      subtitle: "--- จดหน่วยน้ำเสร็จสิ้น ---",
+                      confirmButtonText: 'เสร็จสิ้น',
+                      confirmButtonColor: Palette.thisGreen,
+                      title: "จดหน่วยน้ำเสร็จสิ้น",
                       style: SweetAlertV2Style.success);
                 },
               )
