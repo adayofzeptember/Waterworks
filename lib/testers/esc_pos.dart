@@ -1,8 +1,6 @@
 // import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 // import 'package:flutter/material.dart';
-// // import 'package:zebrautility/ZebraPrinter.dart';
-// // import 'package:zebrautility/zebrautility.dart';
-// // import 'package:zsdk/zsdk.dart';
+
 
 // void main(List<String> args) {
 //   runApp(printTest());
@@ -38,33 +36,6 @@
 //     super.initState();
 //   }
 
-//   // final zsdk = ZSDK();
-//   // x() {
-//   //   zsdk.doManualCalibrationOverTCPIP(
-//   //     address: '10.0.0.100',
-//   //   );
-//   // }
-
-//   // y() {
-//   //   zsdk
-//   //       .getPrinterSettingsOverTCPIP(address: '10.0.0.100')
-//   //       .then((value) => null);
-//   // }
-
-//   // Future<ZebraPrinter> zebraPrinter = Zebrautility.getPrinterInstance(
-//   //   onPrinterFound: (name, ipAddress, isWifi) {
-//   //     print(name + ' ' + ipAddress);
-//   //   },
-//   //   onPrinterDiscoveryDone: () {
-//   //     print('found');
-//   //   },
-//   //   onChangePrinterStatus: (status, color) {
-//   //     print('status' + status + ' ' + color);
-//   //   },
-//   //   onPermissionDenied: () {
-//   //     print('permission denied');
-//   //   },
-//   // );
 
 //   @override
 //   Widget build(BuildContext context) {

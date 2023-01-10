@@ -13,8 +13,9 @@ import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
 import '../write_water_unit_info.dart';
 
-class Notyet extends StatefulWidget {
+// mounted
 
+class Notyet extends StatefulWidget {
   Notyet({Key? key}) : super(key: key);
 
   @override
@@ -162,7 +163,6 @@ class _NotyetState extends State<Notyet> {
                       },
                       onChanged: (value) {},
                       onSaved: (value) {
-
                         selectedValue = value.toString();
                       },
                     ),
@@ -176,12 +176,13 @@ class _NotyetState extends State<Notyet> {
                   shrinkWrap: true,
                   controller: scrollController,
                   itemCount: isLoadingMore ? data.length + 1 : data.length,
-                  itemBuilder: (context, index,) {
-                    
+                  itemBuilder: (
+                    context,
+                    index,
+                  ) {
                     if (index < data.length) {
                       final post = data[index];
 
-              
                       final user_id = post['id'].toString();
                       final user_name = post['user_name'];
                       final water_number = post['water_number'];
@@ -193,23 +194,23 @@ class _NotyetState extends State<Notyet> {
                       if (meter_number == 'null') {
                         meter_number = '00';
                       }
-                      
 
                       return Container(
                         child: Column(
                           children: [
                             ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(16.0)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(16.0)),
                               child: InkWell(
                                 onTap: () {
-     
                                   Navigator.push(
                                     context,
                                     PageTransition(
                                       duration: Duration(milliseconds: 250),
                                       type: PageTransitionType.rightToLeft,
-                                      child: Use_Water_Info(id: user_id,),
+                                      child: Use_Water_Info(
+                                        id: user_id,
+                                      ),
                                     ),
                                   );
                                   ;
@@ -230,8 +231,8 @@ class _NotyetState extends State<Notyet> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8.0),
+                                          padding:
+                                              const EdgeInsets.only(left: 8.0),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -241,16 +242,14 @@ class _NotyetState extends State<Notyet> {
                                               Text(
                                                 address,
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Colors.grey,
                                                     fontSize: 20),
                                               ),
                                               Text(
                                                 user_name,
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Color.fromARGB(
                                                         255, 83, 83, 83),
                                                     fontSize: 18),
@@ -273,26 +272,22 @@ class _NotyetState extends State<Notyet> {
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        5)),
+                                                                Radius.circular(
+                                                                    5)),
                                                         color: Color.fromARGB(
                                                             255,
                                                             221,
                                                             221,
                                                             221)),
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.only(
-                                                              left: 5,
-                                                              right: 5),
+                                                      padding: EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                       child: Text(
                                                         meter_number,
                                                         style: TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .bold,
+                                                                FontWeight.bold,
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -317,26 +312,22 @@ class _NotyetState extends State<Notyet> {
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        5)),
+                                                                Radius.circular(
+                                                                    5)),
                                                         color: Color.fromARGB(
                                                             255,
                                                             221,
                                                             221,
                                                             221)),
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.only(
-                                                              left: 5,
-                                                              right: 5),
+                                                      padding: EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                       child: Text(
                                                         water_number,
                                                         style: TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .bold,
+                                                                FontWeight.bold,
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -361,26 +352,22 @@ class _NotyetState extends State<Notyet> {
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.all(
-                                                                Radius
-                                                                    .circular(
-                                                                        5)),
+                                                                Radius.circular(
+                                                                    5)),
                                                         color: Color.fromARGB(
                                                             255,
                                                             221,
                                                             221,
                                                             221)),
                                                     child: Padding(
-                                                      padding:
-                                                          EdgeInsets.only(
-                                                              left: 5,
-                                                              right: 5),
+                                                      padding: EdgeInsets.only(
+                                                          left: 5, right: 5),
                                                       child: Text(
                                                         area_number,
                                                         style: TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .bold,
+                                                                FontWeight.bold,
                                                             color:
                                                                 Colors.black),
                                                       ),
@@ -396,11 +383,13 @@ class _NotyetState extends State<Notyet> {
                                             Navigator.push(
                                               context,
                                               PageTransition(
-                                                duration: Duration(
-                                                    milliseconds: 250),
+                                                duration:
+                                                    Duration(milliseconds: 250),
                                                 type: PageTransitionType
                                                     .rightToLeft,
-                                                child: Water_Unit_Detail(id: user_id.toString(),),
+                                                child: Water_Unit_Detail(
+                                                  id: user_id.toString(),
+                                                ),
                                               ),
                                             );
                                           }),
@@ -409,9 +398,8 @@ class _NotyetState extends State<Notyet> {
                                             height: double.infinity,
                                             decoration: BoxDecoration(
                                                 color: Colors.grey,
-                                                borderRadius:
-                                                    BorderRadius.all(
-                                                        Radius.circular(10))),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(10))),
                                             child: Column(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -419,7 +407,11 @@ class _NotyetState extends State<Notyet> {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 SvgPicture.asset(
-                                                    'assets/images/dripping.svg'),
+                                                  'assets/images/droplet.svg',
+                                                  height: 40,
+                                                  color: Color.fromARGB(
+                                                      255, 228, 228, 228),
+                                                ),
                                                 SizedBox(
                                                   height: 8,
                                                 ),
@@ -445,10 +437,11 @@ class _NotyetState extends State<Notyet> {
                           ],
                         ),
                       );
-                    } 
-                    else {
+                    } else {
                       return Center(
-                        child: CircularProgressIndicator(color: Palette.thisGreen,),
+                        child: CircularProgressIndicator(
+                          color: Palette.thisGreen,
+                        ),
                       );
                     }
                   }),
@@ -462,9 +455,8 @@ class _NotyetState extends State<Notyet> {
   Future<void> fetch_unit_notDone() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
-    print(getThatToken.toString() + '+++++++++++++++++++++++++++++++++++++');
+    print(getThatToken.toString());
 
-  
     final response = await http.get(
       Uri.parse(waterWork_domain +
           'water_meter_record/index?per_page=10&status=pending&page=${page}'),
@@ -477,9 +469,12 @@ class _NotyetState extends State<Notyet> {
     final jsonCon = jsonResponse['data']['data'] as List;
     if (response.statusCode == 200) {
       //print(response.body);
-      setState(() {
-        data = data + jsonCon;
-      });
+
+      if (this.mounted) {
+        setState(() {
+          data = data + jsonCon;
+        });
+      }
       //print(data[1]['title']);
     } else {
       throw Exception("error...");
@@ -492,16 +487,20 @@ class _NotyetState extends State<Notyet> {
         scrollController.position.maxScrollExtent) {
       singleChildScrollController.addListener(_scrollListener);
 
-      setState(() {
-        isLoadingMore = true;
-      });
+      if (this.mounted) {
+        setState(() {
+          isLoadingMore = true;
+        });
+      }
       page = page + 1;
 
       await fetch_unit_notDone();
-      setState(() {
-        isLoadingMore = false;
-      });
+
+      if (this.mounted) {
+        setState(() {
+          isLoadingMore = false;
+        });
+      }
     }
   }
-
 }

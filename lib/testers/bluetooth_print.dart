@@ -21,7 +21,7 @@ class _printTest_3State extends State<printTest_3> {
   List<BluetoothDevice> _devices = [];
   String _devicesMsg = '';
 
-  Future<void> initPrinter3() async {
+  Future<void> initPrinter() async {
     bluetoothPrint.startScan(timeout: Duration(seconds: 2));
     if (!mounted) return;
     bluetoothPrint.scanResults.listen((val) {
@@ -29,20 +29,23 @@ class _printTest_3State extends State<printTest_3> {
       setState(() {
         _devices = val;
       });
+
       print(_devices);
       if (_devices.isEmpty) {
         _devicesMsg = 'no devices';
       }
     });
   }
-  
-  
- 
+
   Future<void> _startPrint(BluetoothDevice deviceGu) async {
     if (deviceGu != null && deviceGu.address != null) {
       await bluetoothPrint.connect(deviceGu);
 
       Map<String, dynamic> config = Map();
+      config['width'] = 40;
+      config['height'] = 50;
+      config['gap'] = 2;
+
       List<LineText> list = [];
       list.add(
         LineText(
@@ -54,7 +57,6 @@ class _printTest_3State extends State<printTest_3> {
             align: LineText.ALIGN_CENTER,
             linefeed: 1),
       );
-       
 
       list.add(LineText(
           type: LineText.TYPE_TEXT,
@@ -65,17 +67,16 @@ class _printTest_3State extends State<printTest_3> {
           align: LineText.ALIGN_RIGHT,
           linefeed: 1));
       bluetoothPrint.printTest();
-   
-      bluetoothPrint.printLabel(config, list);
+
+       //bluetoothPrint.printLabel(config, list);
     }
   }
 
   @override
   void initState() {
-    initPrinter3();
+    initPrinter();
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

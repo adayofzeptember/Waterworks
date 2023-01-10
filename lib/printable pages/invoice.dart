@@ -7,6 +7,7 @@ import 'package:waterworks/printable%20pages/water_unit_irregular.dart';
 import 'package:waterworks/write_water_unit_info.dart';
 import '../API/get_invoice.dart';
 import '../ETC/color_green.dart';
+import '../First_Page_bottomBar.dart';
 
 //!ใบแจ้งหนี้
 
@@ -39,7 +40,14 @@ class _Invoice_PageState extends State<Invoice_Page> {
           children: [
             InkWell(
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                      duration: Duration(milliseconds: 250),
+                      type: PageTransitionType.rightToLeft,
+                      child: Menu_Page(),
+                    ),
+                  );
                 },
                 child: SizedBox(
                     width: 50,
@@ -188,7 +196,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                     Text('บ้านเลขที่',
                                         style: TextStyle(color: Colors.grey)),
                                     Text('777',
-                                    
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold))
                                   ],

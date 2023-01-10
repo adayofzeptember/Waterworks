@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_svg/flutter_svg.dart';
@@ -204,7 +202,6 @@ class _DoneState extends State<Done> {
                                   //     child: Use_Water_Info(),
                                   //   ),
                                   // );
-                                  ;
                                 },
                                 child: Container(
                                   height: 110,
@@ -373,18 +370,7 @@ class _DoneState extends State<Done> {
                                           ),
                                         ),
                                         InkWell(
-                                          onTap: (() {
-                                            // Navigator.pushReplacement(
-                                            //   context,
-                                            //   PageTransition(
-                                            //     duration:
-                                            //         Duration(milliseconds: 250),
-                                            //     type: PageTransitionType
-                                            //         .rightToLeft,
-                                            //     child: Water_Unit_Detail(),
-                                            //   ),
-                                            // );
-                                          }),
+                                          onTap: (() {}),
                                           child: Container(
                                             width: 110,
                                             height: double.infinity,
@@ -398,18 +384,21 @@ class _DoneState extends State<Done> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                SvgPicture.asset(
-                                                    'assets/images/dripping.svg'),
+                                                Image.asset(
+                                                  'assets/images/mark2.png',
+                                                  height: 50,
+                                                  color: Colors.white,
+                                                ),
                                                 SizedBox(
                                                   height: 8,
                                                 ),
                                                 Text(
-                                                  'จดมาตรวัดน้ำ',
+                                                  'จดมาตรวัดน้ำแล้ว',
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 15),
+                                                      fontSize: 14),
                                                 )
                                               ],
                                             ),
@@ -425,10 +414,7 @@ class _DoneState extends State<Done> {
                           ],
                         ),
                       );
-                    }
-                    
-                    
-                    else {
+                    } else {
                       return Center(
                         child: CircularProgressIndicator(
                           color: Palette.thisGreen,

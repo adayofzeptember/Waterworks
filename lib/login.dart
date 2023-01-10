@@ -17,7 +17,7 @@ import 'package:waterworks/API/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
-import 'package:waterworks/testers/testprint_bluetooth_print.dart';
+import 'package:waterworks/testers/bluetooth_print.dart';
 import 'package:http/http.dart' as http;
 
 import 'ETC/progressHUD.dart';
