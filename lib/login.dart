@@ -17,7 +17,6 @@ import 'package:waterworks/API/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
-import 'package:waterworks/testers/bluetooth_print.dart';
 import 'package:http/http.dart' as http;
 
 import 'ETC/progressHUD.dart';
@@ -125,12 +124,11 @@ class _LoginState extends State<Login> {
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
-                                enabledBorder: OutlineInputBorder(
+                              enabledBorder: OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
-                              
                             ),
                           ),
                           SizedBox(
@@ -149,9 +147,7 @@ class _LoginState extends State<Login> {
                               }
                             },
                             keyboardType: TextInputType.text,
-                            decoration: 
-                            InputDecoration(
-                              
+                            decoration: InputDecoration(
                               hintText: 'กรอกรหัสผ่าน',
                               labelStyle: TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
@@ -179,7 +175,6 @@ class _LoginState extends State<Login> {
                             height: 60,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                
                                   primary: Palette.thisGreen,
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),

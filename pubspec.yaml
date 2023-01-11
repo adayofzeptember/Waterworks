@@ -21,18 +21,20 @@ dependencies:
   responsive_framework: ^0.1.9
   fluttertoast: ^8.0.9
   page_transition: ^2.0.9
-  zsdk: ^2.0.0+11
-  printing: ^5.9.3
-  #esc_pos_bluetooth: ^0.4.1
-  bluetooth_print: ^4.3.0 
+  #lue_print_pos: ^0.0.14
+  
+  #bluetooth_print: ^4.3.0
   sweetalertv2: ^0.0.2
   package_info_plus: ^1.4.2
-  pdf: ^3.8.4
-  flutter_pdfview: ^1.2.1
   blue_thermal_printer: ^1.2.3
   path_provider: ^2.0.11
-  bluetooth_thermal_printer: ^0.0.6
   esc_pos_utils: ^1.1.0
+  permission_handler: ^9.2.0
+  flutter_speed_dial: ^6.0.0
+  screenshot: ^1.2.3
+  esc_pos_bluetooth: ^0.4.1
+
+  image: ^3.0.8
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +42,6 @@ dev_dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_lints: ^1.0.0
-
 
 flutter:
   uses-material-design: true
@@ -54,5 +55,3 @@ flutter:
     - family: Kanit
       fonts:
         - asset: assets/fonts/Kanit-Light.ttf
-
- 
