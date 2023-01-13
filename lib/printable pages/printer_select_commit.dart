@@ -8,24 +8,10 @@ import 'package:esc_pos_utils/esc_pos_utils.dart';
 import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 import 'package:flutter/material.dart' hide Image;
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Bluetooth demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Bluetooth demo'),
-    );
-  }
-}
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -63,11 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final Generator ticket = Generator(paper, profile);
     List<int> bytes = [];
 
-    // Print image
-    // final ByteData data = await rootBundle.load('assets/rabbit_black.jpg');
-    // final Uint8List imageBytes = data.buffer.asUint8List();
-    // final Image? image = decodeImage(imageBytes);
-    // bytes += ticket.image(image);
+    
 
     bytes += ticket.text('GROCERYLY',
         styles: PosStyles(
@@ -180,8 +162,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final String timestamp = formatter.format(now);
     bytes += ticket.text(timestamp,
         styles: PosStyles(align: PosAlign.center), linesAfter: 2);
-
-
 
     // Print QR Code from image
     // try {
@@ -298,13 +278,15 @@ class _MyHomePageState extends State<MyHomePage> {
     // DEMO RECEIPT
     final PosPrintResult res =
         await printerManager.printTicket((await demoReceipt(paper, profile)));
+
+ 
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('เลือกเครื่องปริ้น'),
       ),
       body: ListView.builder(
           itemCount: _devices.length,
@@ -327,9 +309,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(_devices[index].name ?? ''),
-                              Text(_devices[index].address!),
+                           
                               Text(
-                                'Click to print a test receipt',
+                                'เลือก',
                                 style: TextStyle(color: Colors.grey[700]),
                               ),
                             ],

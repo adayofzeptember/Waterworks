@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
+import '../ETC/color_green.dart';
 import '../First_Page_bottomBar.dart';
 import '../printable pages/invoice.dart';
 
@@ -47,7 +48,10 @@ Future<void> write_unit(context, WriteUnit_Request write_requestModel) async {
   if (response.statusCode == 200 || response.statusCode == 400) {
     print('----------- success -----------');
     print(jsonRes['data']['invoice']['id']);
-    Future.delayed(const Duration(microseconds: 500), () {
+         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    backgroundColor: Palette.thisGreen,
+                    content: Text('จดหน่วยน้ำเสร็จสิ้น'),
+                  ));
       Navigator.push(
         context,
         PageTransition(
@@ -57,7 +61,9 @@ Future<void> write_unit(context, WriteUnit_Request write_requestModel) async {
               invoiceID: jsonRes['data']['invoice']['id'].toString(),
             )),
       );
-    });
+    
+  
+    
     // Navigator.push(
     //   context,
     //   PageTransition(

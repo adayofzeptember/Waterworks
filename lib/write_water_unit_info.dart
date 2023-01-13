@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:sweetalertv2/sweetalertv2.dart';
 import 'package:waterworks/API/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/printable%20pages/invoice.dart';
@@ -427,7 +425,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
                             return Column(
                               children: [
-                            
                                 SizedBox(
                                   height: 50,
                                 ),
@@ -470,7 +467,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
               ),
             ),
             actions: [
-              
               CupertinoDialogAction(
                   child: Text(
                     "ยกเลิก",
@@ -486,20 +482,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                 ),
                 onPressed: () {
                   write_unit(context, _writeUnit_Request);
-                  // Navigator.push(
-                  //   context,
-                  //   PageTransition(
-                  //     duration: Duration(milliseconds: 250),
-                  //     type: PageTransitionType.rightToLeft,
-                  //     child: Recipt_Info(),
-                  //   ),
-                  // );
-
-                  SweetAlertV2.show(context,
-                      confirmButtonText: 'เสร็จสิ้น',
-                      confirmButtonColor: Palette.thisGreen,
-                      title: "จดหน่วยน้ำเสร็จสิ้น",
-                      style: SweetAlertV2Style.success);
                 },
               )
             ],

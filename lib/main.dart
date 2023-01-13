@@ -12,6 +12,9 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
 
+
+
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -57,9 +60,7 @@ class _Load_PageState extends State<Load_Page> {
   }
 
   Future _Load_And_Go() async {
-    await 
-    
-    Future.delayed(const Duration(seconds: 2), () {
+    await Future.delayed(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
         PageTransition(

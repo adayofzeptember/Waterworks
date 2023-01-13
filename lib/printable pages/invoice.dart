@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sweetalertv2/sweetalertv2.dart';
+import 'package:waterworks/printable%20pages/printer_select_commit.dart';
 import 'package:waterworks/printable%20pages/water_unit_irregular.dart';
 import 'package:waterworks/write_water_unit_info.dart';
 import '../API/get_invoice.dart';
@@ -24,6 +24,7 @@ class Invoice_Page extends StatefulWidget {
 class _Invoice_PageState extends State<Invoice_Page> {
   @override
   void initState() {
+    
     getToken();
     print(widget.invoiceID.toString());
     super.initState();
@@ -349,6 +350,14 @@ class _Invoice_PageState extends State<Invoice_Page> {
                   //     title: "Just show a message",
                   //     subtitle: "Sweet alert is pretty",
                   //     style: SweetAlertV2Style.success);
+
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                        duration: Duration(milliseconds: 500),
+                        type: PageTransitionType.bottomToTop,
+                        child: MyHomePage()),
+                  );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
