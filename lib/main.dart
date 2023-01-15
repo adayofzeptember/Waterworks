@@ -12,9 +12,6 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
 
-
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -46,6 +43,7 @@ class Start_Page_Waterworks extends StatelessWidget {
   }
 }
 
+
 class Load_Page extends StatefulWidget {
   const Load_Page({Key? key}) : super(key: key);
   @override
@@ -76,7 +74,6 @@ class _Load_PageState extends State<Load_Page> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -125,9 +122,10 @@ class _Load_PageState extends State<Load_Page> {
 //     child: Text('1'),
 //   );
 // }
-
 // Widget y() {
 //   return Container(
 //     child: Text('2'),
 //   );
 // }
+
+
