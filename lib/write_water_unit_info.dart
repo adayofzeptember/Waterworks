@@ -88,7 +88,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            data!.userName.toString(),
+                                            data!.customerWater!.customer!.name.toString(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20),

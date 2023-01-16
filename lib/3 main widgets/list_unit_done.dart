@@ -182,7 +182,7 @@ class _DoneState extends State<Done> {
                       }
 
                       final user_id = post['id'].toString();
-                      final user_name = post['user_name'];
+                      final user_name = post['customer_water']['customer']['name'];
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
