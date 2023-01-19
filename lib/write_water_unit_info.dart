@@ -70,6 +70,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               User_Consume_Data? data = snapshot.data;
+                              var meter_spare =
+                                  data!.customerWater!.meterNumber.toString();
+                              if (meter_spare == 'null') {
+                                meter_spare = '00';
+                              }
                               return Column(
                                 children: [
                                   Container(
@@ -88,7 +93,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            data!.customerWater!.customer!.name.toString(),
+                                            data.customerWater!.customer!.name
+                                                .toString(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20),
@@ -137,9 +143,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: EdgeInsets.only(
                                                       left: 5, right: 5),
                                                   child: Text(
-                                                    data.customerWater!
-                                                        .meterNumber
-                                                        .toString(),
+                                                     meter_spare.toString(),
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -222,113 +226,113 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    width: double.maxFinite,
-                                    padding: const EdgeInsets.all(5.0),
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        left: BorderSide(
-                                            width: 5.0,
-                                            color: Palette.thisGreen),
-                                      ),
-                                    ),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 5.0),
-                                            child: Text(
-                                              'ประวัติค้างชำระ',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 101, 101, 101),
-                                                  fontSize: 20),
-                                            ),
-                                          ),
-                                        ]),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Color.fromARGB(255, 237, 83, 83),
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          topRight: Radius.circular(10)),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'เดือน',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                          Text('หน่วย',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                          Text('จำนวนเงิน',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            color: Color.fromARGB(
-                                                255, 255, 232, 232),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 3, right: 3),
-                                              child: Text(
-                                                '04/2565',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color.fromARGB(
-                                                        255, 233, 14, 14)),
-                                              ),
-                                            ),
-                                          ),
-                                          Text('283',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 233, 14, 14))),
-                                          Text('453.13',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromARGB(
-                                                      255, 233, 14, 14))),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // Container(
+                                  //   width: double.maxFinite,
+                                  //   padding: const EdgeInsets.all(5.0),
+                                  //   decoration: BoxDecoration(
+                                  //     border: Border(
+                                  //       left: BorderSide(
+                                  //           width: 5.0,
+                                  //           color: Palette.thisGreen),
+                                  //     ),
+                                  //   ),
+                                  //   child: Row(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.spaceBetween,
+                                  //       children: [
+                                  //         Padding(
+                                  //           padding: const EdgeInsets.only(
+                                  //               left: 5.0),
+                                  //           child: Text(
+                                  //             'ประวัติค้างชำระ',
+                                  //             style: TextStyle(
+                                  //                 fontWeight: FontWeight.bold,
+                                  //                 color: Color.fromARGB(
+                                  //                     255, 101, 101, 101),
+                                  //                 fontSize: 20),
+                                  //           ),
+                                  //         ),
+                                  //       ]),
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     color: Color.fromARGB(255, 237, 83, 83),
+                                  //     borderRadius: BorderRadius.only(
+                                  //         topLeft: Radius.circular(10),
+                                  //         topRight: Radius.circular(10)),
+                                  //   ),
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(15.0),
+                                  //     child: Row(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.spaceBetween,
+                                  //       children: [
+                                  //         Text(
+                                  //           'เดือน',
+                                  //           style: TextStyle(
+                                  //               fontSize: 18,
+                                  //               color: Colors.white,
+                                  //               fontWeight: FontWeight.bold),
+                                  //         ),
+                                  //         Text('หน่วย',
+                                  //             style: TextStyle(
+                                  //                 fontSize: 18,
+                                  //                 color: Colors.white,
+                                  //                 fontWeight: FontWeight.bold)),
+                                  //         Text('จำนวนเงิน',
+                                  //             style: TextStyle(
+                                  //                 fontSize: 18,
+                                  //                 color: Colors.white,
+                                  //                 fontWeight: FontWeight.bold)),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  // Container(
+                                  //   decoration: BoxDecoration(
+                                  //     color: Colors.white,
+                                  //   ),
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(10.0),
+                                  //     child: Row(
+                                  //       mainAxisAlignment:
+                                  //           MainAxisAlignment.spaceBetween,
+                                  //       children: [
+                                  //         Container(
+                                  //           color: Color.fromARGB(
+                                  //               255, 255, 232, 232),
+                                  //           child: Padding(
+                                  //             padding: const EdgeInsets.only(
+                                  //                 left: 3, right: 3),
+                                  //             child: Text(
+                                  //               '04/2565',
+                                  //               style: TextStyle(
+                                  //                   fontWeight: FontWeight.bold,
+                                  //                   color: Color.fromARGB(
+                                  //                       255, 233, 14, 14)),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //         Text('283',
+                                  //             style: TextStyle(
+                                  //                 fontWeight: FontWeight.bold,
+                                  //                 color: Color.fromARGB(
+                                  //                     255, 233, 14, 14))),
+                                  //         Text('453.13',
+                                  //             style: TextStyle(
+                                  //                 fontWeight: FontWeight.bold,
+                                  //                 color: Color.fromARGB(
+                                  //                     255, 233, 14, 14))),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   SizedBox(
                                     height: 20,
                                   ),

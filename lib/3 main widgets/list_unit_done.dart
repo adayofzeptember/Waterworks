@@ -237,13 +237,20 @@ class _DoneState extends State<Done> {
                                                         255, 6, 148, 93),
                                                     fontSize: 20),
                                               ),
-                                              Text(
-                                                user_name,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color.fromARGB(
-                                                        255, 83, 83, 83),
-                                                    fontSize: 18),
+                                                 Container(
+                                                width: 200,
+                                                child: Text(
+                                                  user_name,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color.fromARGB(
+                                                          255, 83, 83, 83),
+                                                      fontSize: 18),
+                                                ),
                                               ),
                                               Row(
                                                 children: [
@@ -385,7 +392,7 @@ class _DoneState extends State<Done> {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 Image.asset(
-                                                  'assets/images/mark2.png',
+                                                  'assets/images/done_icon.png',
                                                   height: 50,
                                                   color: Colors.white,
                                                 ),

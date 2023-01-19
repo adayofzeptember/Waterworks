@@ -204,7 +204,7 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 80,
-                          backgroundImage: AssetImage('assets/images/rob.jpg'),
+                          backgroundImage: AssetImage('assets/images/person.png'),
                         ),
                       )
                     ],

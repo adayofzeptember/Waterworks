@@ -8,10 +8,10 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +44,6 @@ class Start_Page_Waterworks extends StatelessWidget {
   }
 }
 
-
 class Load_Page extends StatefulWidget {
   const Load_Page({Key? key}) : super(key: key);
   @override
@@ -52,6 +51,19 @@ class Load_Page extends StatefulWidget {
 }
 
 class _Load_PageState extends State<Load_Page> {
+  String? jokk;
+  Future _fetch_data(String x) async {
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var getThatToken = prefs2.get('keyToken').toString();
+    setState(() {
+      jokk = getThatToken + '';
+    });
+    print('gettingToken'+getThatToken);
+    initState();
+    setState(() {
+    });
+  }
+
   @override
   initState() {
     _Load_And_Go();
@@ -59,15 +71,30 @@ class _Load_PageState extends State<Load_Page> {
   }
 
   Future _Load_And_Go() async {
-    await Future.delayed(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        PageTransition(
-            duration: Duration(milliseconds: 1500),
-            type: PageTransitionType.bottomToTop,
-            child: Login()),
-      );
-    });
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var getThatToken = prefs2.get('keyToken');
+
+    if (getThatToken.toString() == 'null') {
+      await Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: Duration(milliseconds: 1500),
+              type: PageTransitionType.bottomToTop,
+              child: Login()),
+        );
+      });
+    } else {
+      await Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: Duration(milliseconds: 500),
+              type: PageTransitionType.bottomToTop,
+              child: Menu_Page()),
+        );
+      });
+    }
   }
 
   @override

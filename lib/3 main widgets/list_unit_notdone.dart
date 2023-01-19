@@ -184,7 +184,8 @@ class _NotyetState extends State<Notyet> {
                       final post = data[index];
 
                       final user_id = post['id'].toString();
-                      final user_name = post['customer_water']['customer']['name'];
+                      final user_name =
+                          post['customer_water']['customer']['name'];
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
@@ -246,13 +247,20 @@ class _NotyetState extends State<Notyet> {
                                                     color: Colors.grey,
                                                     fontSize: 20),
                                               ),
-                                              Text(
-                                                user_name,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color.fromARGB(
-                                                        255, 83, 83, 83),
-                                                    fontSize: 18),
+                                              Container(
+                                                width: 200,
+                                                child: Text(
+                                                  user_name,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  softWrap: false,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color.fromARGB(
+                                                          255, 83, 83, 83),
+                                                      fontSize: 18),
+                                                ),
                                               ),
                                               Row(
                                                 children: [

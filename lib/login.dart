@@ -238,13 +238,13 @@ class _LoginState extends State<Login> {
       },
       body: body_Login,
     );
-
+    //print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
     if (response.statusCode == 400 || response.statusCode == 200) {
       setState(() {
         circleHUD = false;
       });
-      //print(jsonDecode(response.body.toString()));
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
 
@@ -255,7 +255,10 @@ class _LoginState extends State<Login> {
               type: PageTransitionType.rightToLeft,
               child: Menu_Page()));
     } else {
-      print(response.body);
+      setState(() {
+        circleHUD = false;
+      });
+      print('response.body');
     }
   }
 

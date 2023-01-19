@@ -374,7 +374,7 @@ class _Search_PageState extends State<Search_Page> {
                                                               .center,
                                                       children: [
                                                         SvgPicture.asset(
-                                                            'assets/images/dripping.svg'),
+                                                            'assets/images/droplet.svg'),
                                                         SizedBox(
                                                           height: 8,
                                                         ),

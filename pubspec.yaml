@@ -23,22 +23,23 @@ dependencies:
   page_transition: ^2.0.9
   package_info_plus: ^1.4.2
   path_provider: ^2.0.11
-  #permission_handler: ^10.2.0
   flutter_speed_dial: ^6.0.0
   screenshot: ^1.2.3
   image: ^3.0.8
 
 ################ printer ##############################
+
+
+
+
+  #esc_pos_bluetooth: ^0.4.1
+  #esc_pos_utils: ^1.1.0
+  #bluetooth_thermal_printer: ^0.0.6
   blue_thermal_printer: ^1.2.3
-  esc_pos_utils: ^1.1.0
-  zebrautility: ^0.0.40
-  esc_pos_bluetooth: ^0.4.1
+
 
 
   
-  #blue_print_pos: ^0.0.14
-  #bluetooth_print: ^4.3.0
-
 
 
 dev_dependencies:
