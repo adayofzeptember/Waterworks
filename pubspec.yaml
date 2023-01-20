@@ -26,6 +26,7 @@ dependencies:
   flutter_speed_dial: ^6.0.0
   screenshot: ^1.2.3
   image: ^3.0.8
+ 
 
 ################ printer ##############################
 

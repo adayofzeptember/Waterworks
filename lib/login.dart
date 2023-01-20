@@ -258,6 +258,15 @@ class _LoginState extends State<Login> {
       setState(() {
         circleHUD = false;
       });
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.red[400],
+        content: Text(
+          'บัญชีหรือรหัสผ่านไม่ถูกต้อง',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+      ));
       print('response.body');
     }
   }

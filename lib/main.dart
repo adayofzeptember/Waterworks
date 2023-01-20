@@ -58,10 +58,9 @@ class _Load_PageState extends State<Load_Page> {
     setState(() {
       jokk = getThatToken + '';
     });
-    print('gettingToken'+getThatToken);
+    print('gettingToken' + getThatToken);
     initState();
-    setState(() {
-    });
+    setState(() {});
   }
 
   @override

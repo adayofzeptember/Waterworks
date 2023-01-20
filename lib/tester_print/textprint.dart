@@ -13,7 +13,7 @@ class TestPrint {
 
   sample() async {
     //image max 300px X 300px
-    
+
     ///image from File path
     String filename = 'yourlogo.png';
     ByteData bytesData = await rootBundle.load("assets/images/yourlogo.png");
@@ -25,10 +25,9 @@ class TestPrint {
     ByteData bytesAsset = await rootBundle.load("assets/images/yourlogo.png");
     Uint8List imageBytesFromAsset = bytesAsset.buffer
         .asUint8List(bytesAsset.offsetInBytes, bytesAsset.lengthInBytes);
-       
+
     ///image from Network
     var response = await http.get(Uri.parse(
-   
         "https://raw.githubusercontent.com/kakzaki/blue_thermal_printer/master/example/assets/images/yourlogo.png"));
     Uint8List bytesNetwork = response.bodyBytes;
     Uint8List imageBytesFromNetwork = bytesNetwork.buffer
@@ -39,17 +38,16 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printCustom("HEADER", Size.boldMedium.val, Align.center.val);
         bluetooth.printNewLine();
-        bluetooth.printImage(file.path); //path of your image/logo
+        bluetooth.printImage(file.path); 
         bluetooth.printNewLine();
-        bluetooth.printImageBytes(imageBytesFromAsset); //image from Asset
+        bluetooth.printImageBytes(imageBytesFromAsset); 
         bluetooth.printNewLine();
-        bluetooth.printImageBytes(imageBytesFromNetwork); //image from Network
+        bluetooth.printImageBytes(imageBytesFromNetwork); 
         bluetooth.printNewLine();
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.medium.val);
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.bold.val);
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.bold.val,
-            format:
-                "%-15s %15s %n"); //15 is number off character from left or right
+            format: "%-15s %15s %n");
         bluetooth.printNewLine();
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.boldMedium.val);
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.boldLarge.val);
@@ -57,9 +55,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.print3Column("Col1", "Col2", "Col3", Size.bold.val);
         bluetooth.print3Column("Col1", "Col2", "Col3", Size.bold.val,
-            format:
-            
-                "%-10s %10s %10s %n"); //10 is number off character from left center and right
+            format: "%-10s %10s %10s %n");
         bluetooth.printNewLine();
         bluetooth.print4Column("Col1", "Col2", "Col3", "Col4", Size.bold.val);
         bluetooth.print4Column("Col1", "Col2", "Col3", "Col4", Size.bold.val,
@@ -69,22 +65,20 @@ class TestPrint {
             charset: "windows-1250");
         bluetooth.printLeftRight("Številka:", "18000001", Size.bold.val,
             charset: "windows-1250");
-        bluetooth.printCustom("Body lehjkhjkกดเกดเกดft", Size.bold.val, Align.left.val);
+        bluetooth.printCustom(
+            "Body lehjkhjkft", Size.bold.val, Align.left.val);
         bluetooth.printCustom("Body right", Size.medium.val, Align.right.val);
-    
         bluetooth.printNewLine();
         bluetooth.printCustom("Thank You", Size.bold.val, Align.center.val);
         bluetooth.printNewLine();
-    
         bluetooth.printQRcode(
             "Insert Your Own Text to Generate", 200, 200, Align.center.val);
         bluetooth.printNewLine();
         bluetooth.printNewLine();
         bluetooth
-            .paperCut(); //some printer not supported (sometime making image not centered)
-        //=bluetooth.drawerPin2(); // or you can use bluetooth.drawerPin5();
+            .paperCut(); 
+        
       }
- 
     });
   }
 
@@ -97,9 +91,9 @@ class TestPrint {
 //     //ALIGN
 //     // 0- ESC_ALIGN_LEFT
 //     // 1- ESC_ALIGN_CENTER
-//     // 2- ESC_ALIGN_RIGHT 
+//     // 2- ESC_ALIGN_RIGHT
 // //     var response = await http.get("IMAGE_URL");
-// //     Uint8List bytes = response.bodyBytes;
+
 //     bluetooth.isConnected.then((isConnected) {
 //       if (isConnected == true) {
 //         bluetooth.printNewLine();
@@ -110,10 +104,9 @@ class TestPrint {
 // //      bluetooth.printImageBytes(bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 0);
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 1);
+ 
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 1, format: "%-15s %15s %n");
 //         bluetooth.printNewLine();
-
-
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 2);
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 3);
 //         bluetooth.printLeftRight("LEFT", "RIGHT", 4);

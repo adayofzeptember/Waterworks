@@ -48,22 +48,26 @@ Future<void> write_unit(context, WriteUnit_Request write_requestModel) async {
   if (response.statusCode == 200 || response.statusCode == 400) {
     print('----------- success -----------');
     print(jsonRes['data']['invoice']['id']);
-         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    backgroundColor: Palette.thisGreen,
-                    content: Text('จดหน่วยน้ำเสร็จสิ้น'),
-                  ));
-      Navigator.push(
-        context,
-        PageTransition(
-            duration: Duration(milliseconds: 100),
-            type: PageTransitionType.rightToLeft,
-            child: Invoice_Page(
-              invoiceID: jsonRes['data']['invoice']['id'].toString(),
-            )),
-      );
     
-  
-    
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Palette.thisGreen,
+      content: Text(
+        'จดหน่วยน้ำเสร็จสิ้น',
+        style: TextStyle(color: Colors.white),
+        textAlign: TextAlign.center,
+      ),
+    ));
+    Navigator.push(
+      context,
+      PageTransition(
+          duration: Duration(milliseconds: 100),
+          type: PageTransitionType.rightToLeft,
+          child: Invoice_Page(
+            invoiceID: jsonRes['data']['invoice']['id'].toString(),
+          )),
+    );
+
     // Navigator.push(
     //   context,
     //   PageTransition(
