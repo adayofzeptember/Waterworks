@@ -46,23 +46,12 @@ class Start_Page_Waterworks extends StatelessWidget {
 
 class Load_Page extends StatefulWidget {
   const Load_Page({Key? key}) : super(key: key);
+
   @override
   State<Load_Page> createState() => _Load_PageState();
 }
 
 class _Load_PageState extends State<Load_Page> {
-  String? jokk;
-  Future _fetch_data(String x) async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var getThatToken = prefs2.get('keyToken').toString();
-    setState(() {
-      jokk = getThatToken + '';
-    });
-    print('gettingToken' + getThatToken);
-    initState();
-    setState(() {});
-  }
-
   @override
   initState() {
     _Load_And_Go();
@@ -101,6 +90,7 @@ class _Load_PageState extends State<Load_Page> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
+
     return Scaffold(
         body: Stack(
       children: <Widget>[
@@ -154,5 +144,10 @@ class _Load_PageState extends State<Load_Page> {
 //     child: Text('2'),
 //   );
 // }
+
+
+
+
+
 
 

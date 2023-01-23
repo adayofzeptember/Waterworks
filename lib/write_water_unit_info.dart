@@ -486,6 +486,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                 ),
                 onPressed: () {
                   write_unit(context, _writeUnit_Request);
+                      // Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //     duration: Duration(milliseconds: 250),
+                  //     type: PageTransitionType.rightToLeft,
+                  //     child: Recipt_Info(),
+                  //   ),
+                  // );
                 },
               )
             ],

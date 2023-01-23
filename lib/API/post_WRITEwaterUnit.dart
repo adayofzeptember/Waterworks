@@ -48,9 +48,8 @@ Future<void> write_unit(context, WriteUnit_Request write_requestModel) async {
   if (response.statusCode == 200 || response.statusCode == 400) {
     print('----------- success -----------');
     print(jsonRes['data']['invoice']['id']);
-    
+
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      behavior: SnackBarBehavior.floating,
       backgroundColor: Palette.thisGreen,
       content: Text(
         'จดหน่วยน้ำเสร็จสิ้น',

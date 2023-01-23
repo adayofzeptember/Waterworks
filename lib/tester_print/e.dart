@@ -7,7 +7,7 @@ enum Size {
 }
 
 enum Align {
-  left, //ESC_ALIGN_LEFT
+  left, //ESC_ALIGN_LEFT             
   center, //ESC_ALIGN_CENTER
   right, //ESC_ALIGN_RIGHT
 }
