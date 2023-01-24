@@ -67,7 +67,7 @@ class _Load_PageState extends State<Load_Page> {
         Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: Duration(milliseconds: 750),
+              duration: Duration(milliseconds: 820),
               type: PageTransitionType.bottomToTop,
               child: Login()),
         );
@@ -77,7 +77,7 @@ class _Load_PageState extends State<Load_Page> {
         Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: Duration(milliseconds: 750),
+              duration: Duration(milliseconds: 820),
               type: PageTransitionType.bottomToTop,
               child: Menu_Page()),
         );

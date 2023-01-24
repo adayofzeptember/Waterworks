@@ -52,120 +52,130 @@ class _DoneState extends State<Done> {
 
   @override
   Widget build(BuildContext context) {
+    if (data.length == 0) {
+      return Scaffold(
+          body: Center(
+        child: SizedBox(
+          // width: 50,
+          // height: 50,
+          child: CircularProgressIndicator(
+            color: Palette.thisGreen,
+          ),
+        ),
+      ));
+    }
     return SingleChildScrollView(
         controller: singleChildScrollController,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 180,
-                    child: DropdownButtonFormField2(
-                      focusColor: Palette.thisGreen,
-                      decoration: InputDecoration(
-                        focusColor: Palette.thisGreen,
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      isExpanded: true,
-                      hint: const Text(
-                        'เขต',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black45,
-                      ),
-                      iconSize: 50,
-                      buttonHeight: 60,
-                      buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      items: districItems
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please select gender.';
-                        }
-                      },
-                      onChanged: (value) {},
-                      onSaved: (value) {
-                        selectedValue = value.toString();
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  SizedBox(
-                    width: 180,
-                    child: DropdownButtonFormField2(
-                      iconEnabledColor: Palette.thisGreen,
-                      decoration: InputDecoration(
-                        focusColor: Palette.thisGreen,
-                        fillColor: Palette.thisGreen,
-                        hoverColor: Palette.thisGreen,
-                        contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Palette.thisGreen)),
-                      ),
-                      isExpanded: true,
-                      focusColor: Palette.thisGreen,
-                      hint: const Text(
-                        'ตอน',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black45,
-                      ),
-                      iconSize: 50,
-                      buttonHeight: 60,
-                      buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      items: epItems
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      validator: (value) {
-                        if (value == null) {}
-                      },
-                      onChanged: (value) {},
-                      onSaved: (value) {
-                        selectedValue = value.toString();
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     SizedBox(
+              //       width: 180,
+              //       child: DropdownButtonFormField2(
+              //         focusColor: Palette.thisGreen,
+              //         decoration: InputDecoration(
+              //           focusColor: Palette.thisGreen,
+              //           contentPadding: EdgeInsets.zero,
+              //           border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.circular(30),
+              //           ),
+              //         ),
+              //         isExpanded: true,
+              //         hint: const Text(
+              //           'เขต',
+              //           style: TextStyle(fontSize: 20),
+              //         ),
+              //         icon: Icon(
+              //           Icons.arrow_drop_down,
+              //           color: Colors.black45,
+              //         ),
+              //         iconSize: 50,
+              //         buttonHeight: 60,
+              //         buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              //         dropdownDecoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(15),
+              //         ),
+              //         items: districItems
+              //             .map((item) => DropdownMenuItem<String>(
+              //                   value: item,
+              //                   child: Text(
+              //                     item,
+              //                     style: const TextStyle(
+              //                       fontSize: 14,
+              //                     ),
+              //                   ),
+              //                 ))
+              //             .toList(),
+              //         validator: (value) {
+              //           if (value == null) {
+              //             return 'Please select gender.';
+              //           }
+              //         },
+              //         onChanged: (value) {},
+              //         onSaved: (value) {
+              //           selectedValue = value.toString();
+              //         },
+              //       ),
+              //     ),
+              //     SizedBox(
+              //       width: 10,
+              //     ),
+              //     SizedBox(
+              //       width: 180,
+              //       child: DropdownButtonFormField2(
+              //         iconEnabledColor: Palette.thisGreen,
+              //         decoration: InputDecoration(
+              //           focusColor: Palette.thisGreen,
+              //           fillColor: Palette.thisGreen,
+              //           hoverColor: Palette.thisGreen,
+              //           contentPadding: EdgeInsets.zero,
+              //           border: OutlineInputBorder(
+              //               borderRadius: BorderRadius.circular(30),
+              //               borderSide: BorderSide(color: Palette.thisGreen)),
+              //         ),
+              //         isExpanded: true,
+              //         focusColor: Palette.thisGreen,
+              //         hint: const Text(
+              //           'ตอน',
+              //           style: TextStyle(fontSize: 20),
+              //         ),
+              //         icon: Icon(
+              //           Icons.arrow_drop_down,
+              //           color: Colors.black45,
+              //         ),
+              //         iconSize: 50,
+              //         buttonHeight: 60,
+              //         buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+              //         dropdownDecoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(15),
+              //         ),
+              //         items: epItems
+              //             .map((item) => DropdownMenuItem<String>(
+              //                   value: item,
+              //                   child: Text(
+              //                     item,
+              //                     style: const TextStyle(
+              //                       fontSize: 14,
+              //                     ),
+              //                   ),
+              //                 ))
+              //             .toList(),
+              //         validator: (value) {
+              //           if (value == null) {}
+              //         },
+              //         onChanged: (value) {},
+              //         onSaved: (value) {
+              //           selectedValue = value.toString();
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
               ListView.builder(
                   shrinkWrap: true,
                   controller: scrollController,
@@ -182,7 +192,8 @@ class _DoneState extends State<Done> {
                       }
 
                       final user_id = post['id'].toString();
-                      final user_name = post['customer_water']['customer']['name'];
+                      final user_name =
+                          post['customer_water']['customer']['name'];
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
@@ -199,21 +210,23 @@ class _DoneState extends State<Done> {
                                   //   PageTransition(
                                   //     duration: Duration(milliseconds: 250),
                                   //     type: PageTransitionType.rightToLeft,
-                                  //     child: Use_Water_Info(),
+                                  //     child: Use_Water_Info(
+                                  //       id: user_id,
+                                  //     ),
                                   //   ),
                                   // );
+                                  ;
                                 },
                                 child: Container(
-                                  height: 110,
+                                  height: 130,
                                   width: double.maxFinite,
                                   padding: const EdgeInsets.all(5.0),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     border: Border(
                                       left: BorderSide(
-                                        width: 10.0,
-                                        color: Palette.thisGreen,
-                                      ),
+                                          width: 15.0,
+                                          color: Palette.thisGreen),
                                     ),
                                   ),
                                   child: Row(
@@ -229,19 +242,57 @@ class _DoneState extends State<Done> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
                                             children: [
-                                              Text(
-                                                address,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Color.fromARGB(
-                                                        255, 6, 148, 93),
-                                                    fontSize: 20),
+                                              Row(
+                                                children: [
+                                                  // Text(
+                                                  //   'เลข ป.',
+                                                  //   style: TextStyle(
+                                                  //       fontSize: 20,
+                                                  //       fontWeight:
+                                                  //           FontWeight.bold,
+                                                  //       color: Color.fromARGB(
+                                                  //           255, 83, 83, 83)),
+                                                  // ),
+                                                  // SizedBox(
+                                                  //   width: 5,
+                                                  // ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    5)),
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            221,
+                                                            221,
+                                                            221)),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 5, right: 5),
+                                                      child: Text(
+                                                        'เลข ป. ' +
+                                                            water_number,
+                                                        style: TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                                 Container(
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Container(
                                                 width: 200,
                                                 child: Text(
                                                   user_name,
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                   softWrap: false,
                                                   style: TextStyle(
@@ -251,6 +302,53 @@ class _DoneState extends State<Done> {
                                                           255, 83, 83, 83),
                                                       fontSize: 18),
                                                 ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    'ที่อยู่:',
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Color.fromARGB(
+                                                            255, 83, 83, 83)),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    5)),
+                                                        color: Color.fromARGB(
+                                                            255,
+                                                            221,
+                                                            221,
+                                                            221)),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.only(
+                                                          left: 5, right: 5),
+                                                      child: Text(
+                                                        address,
+                                                        style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 8,
                                               ),
                                               Row(
                                                 children: [
@@ -292,47 +390,7 @@ class _DoneState extends State<Done> {
                                                     ),
                                                   ),
                                                   SizedBox(
-                                                    width: 3,
-                                                  ),
-                                                  Text(
-                                                    'เลข ป.',
-                                                    style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 83, 83, 83)),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 3,
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5)),
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            221,
-                                                            221,
-                                                            221)),
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 5, right: 5),
-                                                      child: Text(
-                                                        water_number,
-                                                        style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Colors.black),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 8,
+                                                    width: 5,
                                                   ),
                                                   Text(
                                                     'เขต',
@@ -376,39 +434,35 @@ class _DoneState extends State<Done> {
                                             ],
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: (() {}),
-                                          child: Container(
-                                            width: 110,
-                                            height: double.infinity,
-                                            decoration: BoxDecoration(
-                                                color: Palette.thisGreen,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  'assets/images/done_icon.png',
-                                                  height: 50,
-                                                  color: Colors.white,
-                                                ),
-                                                SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Text(
-                                                  'จดมาตรวัดน้ำแล้ว',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 14),
-                                                )
-                                              ],
-                                            ),
+                                        Container(
+                                          width: 115,
+                                          height: double.infinity,
+                                          decoration: BoxDecoration(
+                                              color: Palette.thisGreen,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/done_icon.png',
+                                                height: 50,
+                                                color: Colors.white,
+                                              ),
+                                              SizedBox(
+                                                height: 8,
+                                              ),
+                                              Text(
+                                                'จดมาตรวัดน้ำแล้ว',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              )
+                                            ],
                                           ),
                                         )
                                       ]),
@@ -454,6 +508,7 @@ class _DoneState extends State<Done> {
       setState(() {
         data = data + jsonCon;
       });
+
       //print(data[1]['title']);
     } else {
       throw Exception("error...");

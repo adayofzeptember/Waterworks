@@ -9,7 +9,7 @@ import '../API/get_invoice.dart';
 import '../ETC/color_green.dart';
 import '../First_Page_bottomBar.dart';
 
-//!ใบแจ้งหนี้
+//!ใบแจ้งหนี้ไปหน้าปริ๊น 
 
 String theTokenOne = '';
 
@@ -351,13 +351,13 @@ class _Invoice_PageState extends State<Invoice_Page> {
                   //     subtitle: "Sweet alert is pretty",
                   //     style: SweetAlertV2Style.success);
 
-                  Navigator.push(
-                    context,
-                    PageTransition(
-                        duration: Duration(milliseconds: 500),
-                        type: PageTransitionType.bottomToTop,
-                        child: MyHomePage()),
-                  );
+                  //! Navigator.push(
+                  //   context,
+                  //   PageTransition(
+                  //       duration: Duration(milliseconds: 500),
+                  //       type: PageTransitionType.bottomToTop,
+                  //       child: MyHomePage()),
+                  // );
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
