@@ -5,10 +5,12 @@ import 'package:blue_print_pos/models/models.dart';
 import 'package:blue_print_pos/receipt/receipt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void main() {
   runApp(MyApp());
 }
+
 
 class MyApp extends StatefulWidget {
   @override
@@ -23,11 +25,25 @@ class _MyAppState extends State<MyApp> {
   int _loadingAtIndex = -1;
 
   @override
+  void initState() {
+    xT();
+    super.initState();
+  }
+
+  Future<void> xT() async {
+    var statusLocation = Permission.location;
+    if (await statusLocation.isGranted != true) {
+      await Permission.location.request();
+      await Permission.bluetooth.request();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Blue Print Pos'),
+          title: const Text('test 2. Blue Print Pos'),
         ),
         body: SafeArea(
           child: _isLoading && _blueDevices.isEmpty
@@ -71,7 +87,7 @@ class _MyAppState extends State<MyApp> {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            Text(
+                                            Text(                                              
                                               _blueDevices[index].address,
                                               style: TextStyle(
                                                 color:
@@ -207,63 +223,79 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Uint8List _parseByteList(String input) {
+    final parts = input.split(',');
+    final parsedBytes = parts.map((e) => int.tryParse(e)).toList();
+    if (parsedBytes.contains(null)) {
+      throw FormatException("Could not parse $input as list of bytes");
+    }
+
+    return Uint8List.fromList(parsedBytes.cast<int>());
+  }
+
   Future<void> _onPrintReceipt() async {
     /// Example for Print Image
     final ByteData logoBytes = await rootBundle.load(
-      'assets/logo.jpg',
+      'assets/images/test.jpg',
     );
-
-    /// Example for Print Text
     final ReceiptSectionText receiptText = ReceiptSectionText();
-    receiptText.addImage(
-      base64.encode(Uint8List.view(logoBytes.buffer)),
-      width: 150,
-    );
-    receiptText.addSpacer();
+    // receiptText.addImage(
+    //   base64.encode(Uint8List.view(logoBytes.buffer)),
+    //   width: 150,
+    // );
+
     receiptText.addText(
-      'MY STORE',
+      '่กกกีกด่ีกดี',
+      alignment: ReceiptAlignment.center,
       size: ReceiptTextSizeType.medium,
       style: ReceiptTextStyleType.bold,
     );
-    receiptText.addText(
-      'Black White Street, Jakarta, Indonesia',
-      size: ReceiptTextSizeType.small,
-    );
-    receiptText.addSpacer(useDashed: true);
-    receiptText.addLeftRightText('Time', '04/06/21, 10:00');
-    receiptText.addSpacer(useDashed: true);
-    receiptText.addLeftRightText(
-      'Apple 1kg',
-      'Rp30.000',
-      leftStyle: ReceiptTextStyleType.normal,
-      rightStyle: ReceiptTextStyleType.bold,
-    );
-    receiptText.addSpacer(useDashed: true);
-    receiptText.addLeftRightText(
-      'TOTAL',
-      'Rp30.000',
-      leftStyle: ReceiptTextStyleType.normal,
-      rightStyle: ReceiptTextStyleType.bold,
-    );
-    receiptText.addSpacer(useDashed: true);
-    receiptText.addLeftRightText(
-      'Payment',
-      'Cash',
-      leftStyle: ReceiptTextStyleType.normal,
-      rightStyle: ReceiptTextStyleType.normal,
-    );
+    // receiptText.addText(
+    //   '^XA^FO50,60^A0,40^FDWorlds Best Griddle^FS^XZ',
+    //   alignment: ReceiptAlignment.center,
+    //   size: ReceiptTextSizeType.medium,
+    //   style: ReceiptTextStyleType.bold,
+    // );
+    //    receiptText.addText(
+    //   '^XA^FX Top s  ection with company logo, name and address.^CFF,50^CI28^PA0,1,1,1^FO55,55^GC100^FS^FO75,55^GC100^FS^FO75,75^GC100^FS^FO55,75^GC100^FS^FO88,8^GC50,50^FS^FO220,50^FDLorem Ipsum, กดเกดเInc.^FS^CF0,40^FO220,100^FD1000 Sกหดหกดhipping Lane^FS^FO220,135^FDShelbyville TN 38102^FS^FO220,170^FDEURO UNION (EU)^FS^FO50,250^GB700,1,3^FS^FX Second section with recipient address and permit information.^CFA,30^FO50,300^FDKarl Marks^FS^FO50,340^FD100 Main Street^FS^FO50,380^FDEURO UNION (EU)^FS^CFA,15^FO50,450^GB700,1,3^FS^XZ',
+    //   size: ReceiptTextSizeType.medium,
+    //   style: ReceiptTextStyleType.bold,
+    // );
+    // receiptText.addText(
+    //   'Black White Street, Jakarta, Indonesia',
+    //   size: ReceiptTextSizeType.small,
+    // );
+    // receiptText.addSpacer(useDashed: true);
+    // receiptText.addLeftRightText('Time', '04/06/21, 10:00');
+    // receiptText.addSpacer(useDashed: true);
+    // receiptText.addLeftRightText(
+    //   'Apple 1kg',
+    //   'Rp30.000',
+    //   leftStyle: ReceiptTextStyleType.normal,
+    //   rightStyle: ReceiptTextStyleType.bold,
+    // );
+    // receiptText.addSpacer(useDashed: true);
+    // receiptText.addLeftRightText(
+    //   'TOTAL',
+    //   'Rp30.000',
+    //   leftStyle: ReceiptTextStyleType.normal,
+    //   rightStyle: ReceiptTextStyleType.bold,
+    // );
+    // receiptText.addSpacer(useDashed: true);
+    // receiptText.addLeftRightText(
+    //   'Payment',
+    //   'Cash',
+    //   leftStyle: ReceiptTextStyleType.normal,
+    //   rightStyle: ReceiptTextStyleType.normal,
+    // );
     receiptText.addSpacer(count: 2);
-
     await _bluePrintPos.printReceiptText(receiptText);
 
-    /// Example for print QR
-    await _bluePrintPos.printQR('www.google.com', size: 250);
-
     /// Text after QR
-    final ReceiptSectionText receiptSecondText = ReceiptSectionText();
-    receiptSecondText.addText('Powered by ayeee',
-        size: ReceiptTextSizeType.small);
-    receiptSecondText.addSpacer();
-    await _bluePrintPos.printReceiptText(receiptSecondText, feedCount: 1);
+    // final ReceiptSectionText receiptSecondText = ReceiptSectionText();
+    // receiptSecondText.addText('Powered by ayeee',
+    //     size: ReceiptTextSizeType.small);
+    // receiptSecondText.addSpacer();
+    // await _bluePrintPos.printReceiptText(receiptSecondText, feedCount: 1);
   }
 }

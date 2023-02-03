@@ -121,6 +121,7 @@ class _PermissionState extends State<PermissionWidget> {
         requestPermission(_permission);
       },
     );
+
   }
 
   void checkServiceStatus(
@@ -134,8 +135,10 @@ class _PermissionState extends State<PermissionWidget> {
     final status = await permission.request();
 
     setState(() {
+      
       print(status);
       _permissionStatus = status;
+      
       print(_permissionStatus);
     });
   }

@@ -317,11 +317,7 @@ class _MyAppState extends State<MyApp> {
     //bytes += generator.setGlobalFont(PosFontType.fontA);
     bytes += generator.reset();
 
-    final ByteData data = await rootBundle.load('assets/mylogo.jpg');
-    final Uint8List bytesImg = data.buffer.asUint8List();
-    final image = Imag.decodeImage(bytesImg);
-    // Using `ESC *`
-    bytes += generator.image(image!);
+ 
 
     bytes += generator.text('Regular: aA bB cC dD eE fF gG hH iI jJ kK lL mM nN oO pP qQ rR sS tT uU vV wW xX yY zZ', styles: PosStyles());
     bytes += generator.text('Special 1: ñÑ àÀ èÈ éÉ üÜ çÇ ôÔ', styles: PosStyles(codeTable: 'CP1252'));

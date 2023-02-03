@@ -12,13 +12,10 @@ class TestPrint {
 
   sample() async {
 
+    ByteData bytesAsset = await rootBundle.load("assets/images/person.png");
+    Uint8List imageBytesFromAsset = bytesAsset.buffer
+        .asUint8List(bytesAsset.offsetInBytes, bytesAsset.lengthInBytes);
 
-    ///image from Network
-    var response = await http.get(Uri.parse(
-        "https://raw.githubusercontent.com/kakzaki/blue_thermal_printer/master/example/assets/images/yourlogo.png"));
-    Uint8List bytesNetwork = response.bodyBytes;
-    Uint8List imageBytesFromNetwork = bytesNetwork.buffer
-        .asUint8List(bytesNetwork.offsetInBytes, bytesNetwork.lengthInBytes);
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
@@ -27,7 +24,7 @@ class TestPrint {
         bluetooth.printNewLine();
         bluetooth.printNewLine();
         bluetooth.printNewLine();
-        bluetooth.printImageBytes(imageBytesFromNetwork); //image from Network
+        bluetooth.printImageBytes(imageBytesFromAsset); //image from Network
         bluetooth.printNewLine();
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.medium.val);
         bluetooth.printLeftRight("LEFT", "RIGHT", Size.bold.val);

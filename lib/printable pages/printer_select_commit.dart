@@ -1,12 +1,13 @@
 // import 'dart:io';
 // import 'dart:typed_data';
+// import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
+// import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 // import 'package:intl/intl.dart';
 // import 'package:path_provider/path_provider.dart';
 // import 'package:flutter/services.dart';
 // import 'package:image/image.dart';
-// import 'package:esc_pos_utils/esc_pos_utils.dart';
-// import 'package:esc_pos_bluetooth/esc_pos_bluetooth.dart';
 // import 'package:flutter/material.dart' hide Image;
+// import 'package:permission_handler/permission_handler.dart';
 // import 'package:waterworks/ETC/color_green.dart';
 
 // void main(List<String> args) {
@@ -26,6 +27,7 @@
 
 //   @override
 //   void initState() {
+//     grantBlue();
 //     super.initState();
 
 //     printerManager.scanResults.listen((devices) async {
@@ -34,6 +36,21 @@
 //         _devices = devices;
 //       });
 //     });
+//   }
+
+//   Future<void> grantBlue() async {
+//     final profiles = await CapabilityProfile.getAvailableProfiles();
+//     print(profiles[3]);
+
+//     for (var i = 0; i < profiles.length; i++) {
+//       print(profiles[i]);
+//     }
+
+//     var statusLocation = Permission.location;
+//     if (await statusLocation.isGranted != true) {
+//       await Permission.location.request();
+//       await Permission.bluetooth.request();
+//     }
 //   }
 
 //   void _startScanDevices() {
@@ -49,13 +66,14 @@
 
 //   Future<List<int>> demoReceipt(
 //       PaperSize paper, CapabilityProfile profile) async {
-//     String x = 'ดเกดเ';
+//     String x = 'eee';
 //     final Generator ticket = Generator(paper, profile);
 //     List<int> bytes = [];
 
-//     bytes += ticket.text(x, styles: PosStyles(align: PosAlign.center));
+//     bytes += ticket.setGlobalCodeTable('CP874');
 
-//     bytes += ticket.text('12 unit', styles: PosStyles(align: PosAlign.center));
+//     String zplData = "^XA^FO290,10^A1,50,50^FDชื่อ:ธัญญพร ชูเกียรติพัฒน์^FS^XZ";
+//     bytes += ticket.text(zplData, styles: PosStyles(codeTable: 'CP874'));
 
 //     final now = DateTime.now();
 //     final formatter = DateFormat('MM/dd/yyyy H:m');
@@ -73,7 +91,7 @@
 
 //     // TODO Don't forget to choose printer's paper
 //     const PaperSize paper = PaperSize.mm80;
-//     final profile = await CapabilityProfile.load();
+//     final profile = await CapabilityProfile.load(name: 'default');
 
 //     final PosPrintResult res =
 //         await printerManager.printTicket((await demoReceipt(paper, profile)));
