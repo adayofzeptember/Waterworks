@@ -175,7 +175,7 @@ class _ProfileState extends State<Profile> {
                                       )),
                                   onPressed: () {
                                     setState(() {
-                                     circleHUD = true;
+                                      circleHUD = true;
                                     });
                                     logout_removeToken();
                                   },
@@ -204,7 +204,8 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 80,
-                          backgroundImage: AssetImage('assets/images/person.png'),
+                          backgroundImage:
+                              AssetImage('assets/images/person.png'),
                         ),
                       )
                     ],
@@ -212,10 +213,12 @@ class _ProfileState extends State<Profile> {
                 }
 
                 return Column(
+
                   children: [
                     SizedBox(
                       height: 50,
                     ),
+
                     Center(
                         child: CircularProgressIndicator(
                       color: Colors.white,

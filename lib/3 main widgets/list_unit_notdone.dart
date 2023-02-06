@@ -87,8 +87,7 @@ class _NotyetState extends State<Notyet> {
                       final post = data[index];
 
                       final user_id = post['id'].toString();
-                      final user_name =
-                          post['customer_water']['customer']['name'];
+                      final user_name = post['customer_water']['name'];
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
@@ -99,8 +98,8 @@ class _NotyetState extends State<Notyet> {
                         meter_number = '00';
                       }
 
-                      return Column(
-
+                      return 
+                      Column(
                         children: [
                           ClipRRect(
                             borderRadius:
@@ -159,35 +158,31 @@ class _NotyetState extends State<Notyet> {
                                                 // ),
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                               ),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                  ),
                                                   child: Text(
-                                                    'เลข ป. ' +
-                                                        water_number,
+                                                    'เลข ป. ' + water_number,
                                                     style: TextStyle(
                                                         fontSize: 25,
                                                         fontWeight:
                                                             FontWeight.bold,
-                                                        color: Color.fromARGB(255, 240, 41, 27)),
+                                                        color: Color.fromARGB(
+                                                            255, 240, 41, 27)),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                         
                                             Container(
                                               width: 200,
                                               child: Text(
                                                 user_name,
-                                                overflow:
-                                                    TextOverflow.ellipsis,
+                                                overflow: TextOverflow.ellipsis,
                                                 maxLines: 1,
                                                 softWrap: false,
                                                 style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     color: Color.fromARGB(
                                                         255, 83, 83, 83),
                                                     fontSize: 18),
@@ -217,10 +212,7 @@ class _NotyetState extends State<Notyet> {
                                                               Radius.circular(
                                                                   5)),
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          221,
-                                                          221,
-                                                          221)),
+                                                          255, 221, 221, 221)),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 5, right: 5),
@@ -230,8 +222,7 @@ class _NotyetState extends State<Notyet> {
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color:
-                                                              Colors.black),
+                                                          color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
@@ -261,10 +252,7 @@ class _NotyetState extends State<Notyet> {
                                                               Radius.circular(
                                                                   5)),
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          221,
-                                                          221,
-                                                          221)),
+                                                          255, 221, 221, 221)),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 5, right: 5),
@@ -274,8 +262,7 @@ class _NotyetState extends State<Notyet> {
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color:
-                                                              Colors.black),
+                                                          color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
@@ -301,10 +288,7 @@ class _NotyetState extends State<Notyet> {
                                                               Radius.circular(
                                                                   5)),
                                                       color: Color.fromARGB(
-                                                          255,
-                                                          221,
-                                                          221,
-                                                          221)),
+                                                          255, 221, 221, 221)),
                                                   child: Padding(
                                                     padding: EdgeInsets.only(
                                                         left: 5, right: 5),
@@ -314,19 +298,21 @@ class _NotyetState extends State<Notyet> {
                                                           fontSize: 13,
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color:
-                                                              Colors.black),
+                                                          color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 5,)
+                                            SizedBox(
+                                              height: 5,
+                                            )
                                           ],
                                         ),
                                       ),
                                       InkWell(
                                         onTap: (() {
+                                          print(user_id.toString());
                                           Navigator.push(
                                             context,
                                             PageTransition(
@@ -366,8 +352,7 @@ class _NotyetState extends State<Notyet> {
                                                 'จดมาตรวัดน้ำ',
                                                 style: TextStyle(
                                                     color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,
                                                     fontSize: 18),
                                               )
                                             ],

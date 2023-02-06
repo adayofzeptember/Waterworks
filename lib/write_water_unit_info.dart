@@ -5,7 +5,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/API/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/printable%20pages/invoice.dart';
-
 import 'API/get_user_consume.dart';
 
 class Water_Unit_Detail extends StatefulWidget {
@@ -70,11 +69,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               User_Consume_Data? data = snapshot.data;
-                              var meter_spare =
-                                  data!.customerWater!.meterNumber.toString();
-                              if (meter_spare == 'null') {
-                                meter_spare = '00';
-                              }
+
                               return Column(
                                 children: [
                                   Container(
@@ -93,7 +88,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            data.customerWater!.customer!.name
+                                            data!.customerWater!.name
                                                 .toString(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
@@ -143,7 +138,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: EdgeInsets.only(
                                                       left: 5, right: 5),
                                                   child: Text(
-                                                     meter_spare.toString(),
+                                                    data.customerWater!.meterNumber.toString(),
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -486,7 +481,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                 ),
                 onPressed: () {
                   write_unit(context, _writeUnit_Request);
-                      // Navigator.push(
+                  // Navigator.push(
                   //   context,
                   //   PageTransition(
                   //     duration: Duration(milliseconds: 250),

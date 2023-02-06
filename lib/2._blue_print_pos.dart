@@ -11,7 +11,6 @@ void main() {
   runApp(MyApp());
 }
 
-
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -87,7 +86,7 @@ class _MyAppState extends State<MyApp> {
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
-                                            Text(                                              
+                                            Text(
                                               _blueDevices[index].address,
                                               style: TextStyle(
                                                 color:
@@ -290,6 +289,8 @@ class _MyAppState extends State<MyApp> {
     // );
     receiptText.addSpacer(count: 2);
     await _bluePrintPos.printReceiptText(receiptText);
+
+    String l = 'test Thaai input';
 
     /// Text after QR
     // final ReceiptSectionText receiptSecondText = ReceiptSectionText();

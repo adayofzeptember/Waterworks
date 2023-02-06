@@ -13,6 +13,9 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
 
+
+
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -28,6 +31,7 @@ class Start_Page_Waterworks extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
+
         GlobalWidgetsLocalizations.delegate,
         DefaultCupertinoLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

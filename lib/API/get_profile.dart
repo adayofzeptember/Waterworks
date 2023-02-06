@@ -107,8 +107,15 @@ Future<Profile_Data> fetchProfile_Auth(String token) async {
   var k = jsonResponse['data']['id'];
   Profile_Data user_profileData = Profile_Data.fromJson(jsonCon);
   // print(k);
-  // print(response.body);
+  //print(response.body);
 
   return user_profileData;
+}
+
+
+
+
+void main(List<String> args) {
+ fetchProfile_Auth('283|yw3Wmw8dM3tyJsfaX5T5qWeFsNRJyOt5AV9ESxqO');
 }
 

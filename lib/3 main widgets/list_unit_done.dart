@@ -192,8 +192,8 @@ class _DoneState extends State<Done> {
                       }
 
                       final user_id = post['id'].toString();
-                      final user_name =
-                          post['customer_water']['customer']['name'];
+                      final user_name = post['customer_water']['name'];
+                      ;
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
@@ -475,7 +475,14 @@ class _DoneState extends State<Done> {
                           ],
                         ),
                       );
-                    } else {
+                    } 
+
+                    else if ( index == data.length){
+                      return Center(child: Text('...'));
+                    }
+                    
+                    
+                    else {
                       return Center(
                         child: CircularProgressIndicator(
                           color: Palette.thisGreen,
@@ -487,7 +494,7 @@ class _DoneState extends State<Done> {
           ),
         ));
   }
-  
+
   Future<void> fetch_unit_done() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
@@ -508,7 +515,6 @@ class _DoneState extends State<Done> {
       setState(() {
         data = data + jsonCon;
       });
-
       //print(data[1]['title']);
     } else {
       throw Exception("error...");
