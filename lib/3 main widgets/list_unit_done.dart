@@ -475,14 +475,9 @@ class _DoneState extends State<Done> {
                           ],
                         ),
                       );
-                    } 
-
-                    else if ( index == data.length){
+                    } else if (index == data.length) {
                       return Center(child: Text('...'));
-                    }
-                    
-                    
-                    else {
+                    } else {
                       return Center(
                         child: CircularProgressIndicator(
                           color: Palette.thisGreen,

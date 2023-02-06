@@ -98,8 +98,7 @@ class _NotyetState extends State<Notyet> {
                         meter_number = '00';
                       }
 
-                      return 
-                      Column(
+                      return Column(
                         children: [
                           ClipRRect(
                             borderRadius:
@@ -368,6 +367,8 @@ class _NotyetState extends State<Notyet> {
                           ),
                         ],
                       );
+                    } else if (index == data.length) {
+                      return Center(child: Text('...'));
                     } else {
                       return Center(
                         child: CircularProgressIndicator(
