@@ -244,7 +244,7 @@ class _MyAppState extends State<MyApp> {
     // );
 
     receiptText.addText(
-      '่กกกีกด่ีกดี',
+      'dfgdfgdfg',
       alignment: ReceiptAlignment.center,
       size: ReceiptTextSizeType.medium,
       style: ReceiptTextStyleType.bold,
