@@ -8,6 +8,7 @@ import 'package:waterworks/3%20main%20widgets/list_unit_notdone.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
+
 class Water_Unit_List extends StatefulWidget {
   Water_Unit_List({Key? key}) : super(key: key);
 
@@ -16,13 +17,9 @@ class Water_Unit_List extends StatefulWidget {
 }
 
 class _Water_Unit_ListState extends State<Water_Unit_List> {
-  List<String> districItems = [
-    'ในเมือง',
-    'เขตที่ 1 เมืองนครราชสีมา'
-        'นครราชสีมา',
-  ];
 
-  List<String> epItems = ['ตอน1', 'ตอน2', 'ตอน3'];
+
+
 
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
@@ -38,7 +35,6 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-     
         appBar: AppBar(
           bottom: TabBar(
             indicatorColor: Palette.thisGreen,

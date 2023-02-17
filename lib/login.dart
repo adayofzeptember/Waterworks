@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
                             height: 5,
                           ),
                           TextFormField(
-                            initialValue: 'watermeter1',
+                            initialValue: 'watermeter13',
                             textAlign: TextAlign.left,
                             autofocus: false,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -111,6 +111,7 @@ class _LoginState extends State<Login> {
                               }
                             },
                             keyboardType: TextInputType.text,
+
                             decoration: InputDecoration(
                               hintText: 'กรอกบัญชีผู้ใช้',
                               labelStyle: TextStyle(fontSize: 15),
@@ -175,13 +176,14 @@ class _LoginState extends State<Login> {
                             height: 60,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Palette.thisGreen,
+                                  primary: Color.fromARGB(255, 235, 88, 62),
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   )),
                               onPressed: () {
+                                
                                 setState(() {
                                   circleHUD = true;
                                 });
@@ -197,6 +199,7 @@ class _LoginState extends State<Login> {
                                 print(jsonEncode(_login_request));
                                 loginNormal(_login_request);
                               },
+                            
                               child: Padding(
                                 padding: EdgeInsets.all(15.0),
                                 child: Container(
@@ -247,6 +250,7 @@ class _LoginState extends State<Login> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
+      print(jsonRes['data']['access_token'].toString());
 
       Navigator.pushReplacement(
           context,

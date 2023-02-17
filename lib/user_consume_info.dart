@@ -289,7 +289,6 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                       ],
                     );
                   }
-
                   return Column(
                     children: [
                       SizedBox(

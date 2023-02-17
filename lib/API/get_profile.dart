@@ -56,9 +56,10 @@ class Profile_Data {
   String? name;
   String? email;
   String? active;
-  Null? positionId;
-  Null? createdAt;
-  Null? updatedAt;
+  String? positionId;
+  String? createdAt;
+  String? updatedAt;
+  List<Segmentations>? segmentations;
 
   Profile_Data(
       {this.id,
@@ -68,7 +69,8 @@ class Profile_Data {
       this.active,
       this.positionId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.segmentations});
 
   Profile_Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -79,6 +81,12 @@ class Profile_Data {
     positionId = json['position_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['segmentations'] != null) {
+      segmentations = <Segmentations>[];
+      json['segmentations'].forEach((v) {
+        segmentations!.add(new Segmentations.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -89,6 +97,55 @@ class Profile_Data {
     data['email'] = this.email;
     data['active'] = this.active;
     data['position_id'] = this.positionId;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.segmentations != null) {
+      data['segmentations'] =
+          this.segmentations!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class Segmentations {
+  int? id;
+  String? name;
+  String? userId;
+  String? assignDate;
+  String? status;
+  String? remark;
+  String? createdAt;
+  String? updatedAt;
+
+  Segmentations(
+      {this.id,
+      this.name,
+      this.userId,
+      this.assignDate,
+      this.status,
+      this.remark,
+      this.createdAt,
+      this.updatedAt});
+
+  Segmentations.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    userId = json['user_id'];
+    assignDate = json['assign_date'];
+    status = json['status'];
+    remark = json['remark'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['user_id'] = this.userId;
+    data['assign_date'] = this.assignDate;
+    data['status'] = this.status;
+    data['remark'] = this.remark;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;
@@ -106,16 +163,6 @@ Future<Profile_Data> fetchProfile_Auth(String token) async {
   var jsonCon = jsonResponse['data'];
   var k = jsonResponse['data']['id'];
   Profile_Data user_profileData = Profile_Data.fromJson(jsonCon);
-  // print(k);
-  //print(response.body);
 
   return user_profileData;
 }
-
-
-
-
-void main(List<String> args) {
- fetchProfile_Auth('283|yw3Wmw8dM3tyJsfaX5T5qWeFsNRJyOt5AV9ESxqO');
-}
-

@@ -12,6 +12,7 @@ import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
+import '../printable pages/invoice.dart';
 import '../write_water_unit_info.dart';
 
 class Done extends StatefulWidget {
@@ -70,112 +71,6 @@ class _DoneState extends State<Done> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     SizedBox(
-              //       width: 180,
-              //       child: DropdownButtonFormField2(
-              //         focusColor: Palette.thisGreen,
-              //         decoration: InputDecoration(
-              //           focusColor: Palette.thisGreen,
-              //           contentPadding: EdgeInsets.zero,
-              //           border: OutlineInputBorder(
-              //             borderRadius: BorderRadius.circular(30),
-              //           ),
-              //         ),
-              //         isExpanded: true,
-              //         hint: const Text(
-              //           'เขต',
-              //           style: TextStyle(fontSize: 20),
-              //         ),
-              //         icon: Icon(
-              //           Icons.arrow_drop_down,
-              //           color: Colors.black45,
-              //         ),
-              //         iconSize: 50,
-              //         buttonHeight: 60,
-              //         buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-              //         dropdownDecoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(15),
-              //         ),
-              //         items: districItems
-              //             .map((item) => DropdownMenuItem<String>(
-              //                   value: item,
-              //                   child: Text(
-              //                     item,
-              //                     style: const TextStyle(
-              //                       fontSize: 14,
-              //                     ),
-              //                   ),
-              //                 ))
-              //             .toList(),
-              //         validator: (value) {
-              //           if (value == null) {
-              //             return 'Please select gender.';
-              //           }
-              //         },
-              //         onChanged: (value) {},
-              //         onSaved: (value) {
-              //           selectedValue = value.toString();
-              //         },
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 10,
-              //     ),
-              //     SizedBox(
-              //       width: 180,
-              //       child: DropdownButtonFormField2(
-              //         iconEnabledColor: Palette.thisGreen,
-              //         decoration: InputDecoration(
-              //           focusColor: Palette.thisGreen,
-              //           fillColor: Palette.thisGreen,
-              //           hoverColor: Palette.thisGreen,
-              //           contentPadding: EdgeInsets.zero,
-              //           border: OutlineInputBorder(
-              //               borderRadius: BorderRadius.circular(30),
-              //               borderSide: BorderSide(color: Palette.thisGreen)),
-              //         ),
-              //         isExpanded: true,
-              //         focusColor: Palette.thisGreen,
-              //         hint: const Text(
-              //           'ตอน',
-              //           style: TextStyle(fontSize: 20),
-              //         ),
-              //         icon: Icon(
-              //           Icons.arrow_drop_down,
-              //           color: Colors.black45,
-              //         ),
-              //         iconSize: 50,
-              //         buttonHeight: 60,
-              //         buttonPadding: const EdgeInsets.only(left: 20, right: 10),
-              //         dropdownDecoration: BoxDecoration(
-              //           borderRadius: BorderRadius.circular(15),
-              //         ),
-              //         items: epItems
-              //             .map((item) => DropdownMenuItem<String>(
-              //                   value: item,
-              //                   child: Text(
-              //                     item,
-              //                     style: const TextStyle(
-              //                       fontSize: 14,
-              //                     ),
-              //                   ),
-              //                 ))
-              //             .toList(),
-              //         validator: (value) {
-              //           if (value == null) {}
-              //         },
-              //         onChanged: (value) {},
-              //         onSaved: (value) {
-              //           selectedValue = value.toString();
-              //         },
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
               ListView.builder(
                   shrinkWrap: true,
                   controller: scrollController,
@@ -197,26 +92,27 @@ class _DoneState extends State<Done> {
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
-                      return Container(
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(16.0)),
-                              child: InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   PageTransition(
-                                  //     duration: Duration(milliseconds: 250),
-                                  //     type: PageTransitionType.rightToLeft,
-                                  //     child: Use_Water_Info(
-                                  //       id: user_id,
-                                  //     ),
-                                  //   ),
-                                  // );
-                                  ;
-                                },
+                      String invoiceID = post['invoice']['id'].toString();
+                      return InkWell(
+                        onTap: () {
+                          print('invoice id: '+invoiceID);
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                                duration: Duration(milliseconds: 100),
+                                type: PageTransitionType.rightToLeft,
+                                child: Invoice_Page(
+                                  invoiceID:
+                                      invoiceID,
+                                )),
+                          );
+                        },
+                        child: Container(
+                          child: Column(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(16.0)),
                                 child: Container(
                                   height: 130,
                                   width: double.maxFinite,
@@ -226,7 +122,8 @@ class _DoneState extends State<Done> {
                                     border: Border(
                                       left: BorderSide(
                                           width: 15.0,
-                                          color: Palette.thisGreen),
+                                          color: Color.fromARGB(
+                                              255, 233, 233, 233)),
                                     ),
                                   ),
                                   child: Row(
@@ -264,9 +161,9 @@ class _DoneState extends State<Done> {
                                                                     5)),
                                                         color: Color.fromARGB(
                                                             255,
-                                                            221,
-                                                            221,
-                                                            221)),
+                                                            241,
+                                                            241,
+                                                            241)),
                                                     child: Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 5, right: 5),
@@ -328,9 +225,9 @@ class _DoneState extends State<Done> {
                                                                     5)),
                                                         color: Color.fromARGB(
                                                             255,
-                                                            221,
-                                                            221,
-                                                            221)),
+                                                            241,
+                                                            241,
+                                                            241)),
                                                     child: Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 5, right: 5),
@@ -372,9 +269,9 @@ class _DoneState extends State<Done> {
                                                                     5)),
                                                         color: Color.fromARGB(
                                                             255,
-                                                            221,
-                                                            221,
-                                                            221)),
+                                                            241,
+                                                            241,
+                                                            241)),
                                                     child: Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 5, right: 5),
@@ -412,9 +309,9 @@ class _DoneState extends State<Done> {
                                                                     5)),
                                                         color: Color.fromARGB(
                                                             255,
-                                                            221,
-                                                            221,
-                                                            221)),
+                                                            241,
+                                                            241,
+                                                            241)),
                                                     child: Padding(
                                                       padding: EdgeInsets.only(
                                                           left: 5, right: 5),
@@ -438,7 +335,8 @@ class _DoneState extends State<Done> {
                                           width: 115,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                              color: Palette.thisGreen,
+                                              color: Color.fromARGB(
+                                                  255, 241, 241, 241),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           child: Column(
@@ -450,7 +348,7 @@ class _DoneState extends State<Done> {
                                               Image.asset(
                                                 'assets/images/done_icon.png',
                                                 height: 50,
-                                                color: Colors.white,
+                                                color: Palette.thisGreen,
                                               ),
                                               SizedBox(
                                                 height: 8,
@@ -458,7 +356,7 @@ class _DoneState extends State<Done> {
                                               Text(
                                                 'จดมาตรวัดน้ำแล้ว',
                                                 style: TextStyle(
-                                                    color: Colors.white,
+                                                    color: Palette.thisGreen,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14),
                                               )
@@ -468,11 +366,11 @@ class _DoneState extends State<Done> {
                                       ]),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     } else if (index == data.length) {

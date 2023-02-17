@@ -48,5 +48,3 @@ class ProgressHUD extends StatelessWidget {
     );
   }
 }
-
-

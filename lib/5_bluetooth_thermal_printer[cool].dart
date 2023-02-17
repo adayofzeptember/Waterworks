@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bluetooth_thermal_printer/bluetooth_thermal_printer.dart';
 import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -55,7 +54,19 @@ class _MyAppState extends State<MyApp> {
     String? isConnected = await BluetoothThermalPrinter.connectionStatus;
     if (isConnected == "true") {
       List<int> bytes = await getGraphicsTicket();
-      final result = await BluetoothThermalPrinter.writeBytes(bytes);
+            String text = """"
+^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
+^XA
+^MMT
+^PW575
+^LL0400
+^LS0
+^FT7,275^A@N,283,146,angsana.fnt
+^FH\
+^FH\^CI17^F8^FDดห้หา:^FS^CI0
+^PQ1,0,1,Y^XZ
+""";
+      final result = await BluetoothThermalPrinter.writeText(text);
       print("Print $result");
     } else {
       //Hadnle Not Connected Senario

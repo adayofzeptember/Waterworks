@@ -1,11 +1,17 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/API/post_WRITEwaterUnit.dart';
+import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/printable%20pages/invoice.dart';
 import 'API/get_user_consume.dart';
+import 'ETC/progressHUD.dart';
 
 class Water_Unit_Detail extends StatefulWidget {
   String? id = '';
@@ -19,15 +25,25 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   var waterUnitController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   late WriteUnit_Request _writeUnit_Request;
+  bool circleHUD = false;
 
   @override
   void initState() {
+    circleHUD = false;
     _writeUnit_Request = WriteUnit_Request();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(
+        child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
+  }
+
+  @override
+  Widget _uiSetUp(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -138,7 +154,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: EdgeInsets.only(
                                                       left: 5, right: 5),
                                                   child: Text(
-                                                    data.customerWater!.meterNumber.toString(),
+                                                    data.customerWater!
+                                                        .meterNumber
+                                                        .toString(),
                                                     style: TextStyle(
                                                         fontSize: 15,
                                                         fontWeight:
@@ -221,113 +239,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                       ),
                                     ),
                                   ),
-                                  // SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // Container(
-                                  //   width: double.maxFinite,
-                                  //   padding: const EdgeInsets.all(5.0),
-                                  //   decoration: BoxDecoration(
-                                  //     border: Border(
-                                  //       left: BorderSide(
-                                  //           width: 5.0,
-                                  //           color: Palette.thisGreen),
-                                  //     ),
-                                  //   ),
-                                  //   child: Row(
-                                  //       mainAxisAlignment:
-                                  //           MainAxisAlignment.spaceBetween,
-                                  //       children: [
-                                  //         Padding(
-                                  //           padding: const EdgeInsets.only(
-                                  //               left: 5.0),
-                                  //           child: Text(
-                                  //             'ประวัติค้างชำระ',
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 color: Color.fromARGB(
-                                  //                     255, 101, 101, 101),
-                                  //                 fontSize: 20),
-                                  //           ),
-                                  //         ),
-                                  //       ]),
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 20,
-                                  // ),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //     color: Color.fromARGB(255, 237, 83, 83),
-                                  //     borderRadius: BorderRadius.only(
-                                  //         topLeft: Radius.circular(10),
-                                  //         topRight: Radius.circular(10)),
-                                  //   ),
-                                  //   child: Padding(
-                                  //     padding: const EdgeInsets.all(15.0),
-                                  //     child: Row(
-                                  //       mainAxisAlignment:
-                                  //           MainAxisAlignment.spaceBetween,
-                                  //       children: [
-                                  //         Text(
-                                  //           'เดือน',
-                                  //           style: TextStyle(
-                                  //               fontSize: 18,
-                                  //               color: Colors.white,
-                                  //               fontWeight: FontWeight.bold),
-                                  //         ),
-                                  //         Text('หน่วย',
-                                  //             style: TextStyle(
-                                  //                 fontSize: 18,
-                                  //                 color: Colors.white,
-                                  //                 fontWeight: FontWeight.bold)),
-                                  //         Text('จำนวนเงิน',
-                                  //             style: TextStyle(
-                                  //                 fontSize: 18,
-                                  //                 color: Colors.white,
-                                  //                 fontWeight: FontWeight.bold)),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  // Container(
-                                  //   decoration: BoxDecoration(
-                                  //     color: Colors.white,
-                                  //   ),
-                                  //   child: Padding(
-                                  //     padding: const EdgeInsets.all(10.0),
-                                  //     child: Row(
-                                  //       mainAxisAlignment:
-                                  //           MainAxisAlignment.spaceBetween,
-                                  //       children: [
-                                  //         Container(
-                                  //           color: Color.fromARGB(
-                                  //               255, 255, 232, 232),
-                                  //           child: Padding(
-                                  //             padding: const EdgeInsets.only(
-                                  //                 left: 3, right: 3),
-                                  //             child: Text(
-                                  //               '04/2565',
-                                  //               style: TextStyle(
-                                  //                   fontWeight: FontWeight.bold,
-                                  //                   color: Color.fromARGB(
-                                  //                       255, 233, 14, 14)),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //         Text('283',
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 color: Color.fromARGB(
-                                  //                     255, 233, 14, 14))),
-                                  //         Text('453.13',
-                                  //             style: TextStyle(
-                                  //                 fontWeight: FontWeight.bold,
-                                  //                 color: Color.fromARGB(
-                                  //                     255, 233, 14, 14))),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   SizedBox(
                                     height: 20,
                                   ),
@@ -387,18 +298,29 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       BorderRadius.circular(15),
                                                 )),
                                             onPressed: () {
+                                              setState(() {
+                                                circleHUD = true;
+                                              });
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
-
+                              
                                               if (formKey.currentState!
                                                   .validate()) {
                                                 formKey.currentState?.save();
-
+                              
                                                 _writeUnit_Request
                                                         .water_meter_record_id =
                                                     widget.id.toString();
-
-                                                showDialog();
+                              
+                                                // showDialog(_writeUnit_Request
+                                                //     .current_unit
+                                                //     .toString());
+                              
+                                                _showAlertDialog(
+                                                    _writeUnit_Request
+                                                        .current_unit
+                                                        .toString());
+                              
                                                 // print(jsonEncode(
                                                 //     _writeUnit_Request));
                                               }
@@ -421,7 +343,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                 ],
                               );
                             }
-
                             return Column(
                               children: [
                                 SizedBox(
@@ -447,52 +368,133 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
-  void showDialog() {
-    showCupertinoDialog(
+  Future<Data_writeUnit> write_unit(
+      WriteUnit_Request write_requestModel) async {
+    String urlPost = waterWork_domain + 'water_meter_record/update';
+
+    SharedPreferences prefs2 = await SharedPreferences.getInstance();
+    var getThatToken = prefs2.get('keyToken');
+
+    var body_unitWritten = json.encode(write_requestModel.toJson());
+    final response = await http.post(
+      Uri.parse(urlPost),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $getThatToken',
+      },
+      body: body_unitWritten,
+    );
+
+    String jsonsDataString = response.body;
+    var datax = json.decode(jsonsDataString);
+
+    if (response.statusCode == 200 || response.statusCode == 400) {
+      setState(() {
+        circleHUD = false;
+      });
+      print('----------- write water success -----------');
+      print('invoice id: ' + datax['data']['invoice']['id'].toString());
+
+      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+        backgroundColor: Color.fromARGB(255, 65, 158, 68),
+        elevation: 0,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'จดหน่วยน้ำเสร็จสิ้น ',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            Icon(
+              Icons.check,
+              color: Colors.white,
+            )
+          ],
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24),
+        ),
+        margin: EdgeInsets.only(
+            bottom: MediaQuery.of(context).size.height - 100,
+            right: 20,
+            left: 20),
+      ));
+      Navigator.push(
+        context,
+        PageTransition(
+            duration: Duration(milliseconds: 100),
+            type: PageTransitionType.rightToLeft,
+            child: Invoice_Page(
+              invoiceID: datax['data']['invoice']['id'].toString(),
+            )),
+      );
+
+      return Data_writeUnit.fromJson(json.decode(response.body));
+    } else {
+      setState(() {
+        circleHUD = false;
+      });
+      print('----------- write water failed -----------');
+      print(response.body);
+      throw Exception();
+    }
+  }
+
+  Future<void> _showAlertDialog(String newUnit) async {
+    return showDialog<void>(
       context: context,
-      builder: (context) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CupertinoAlertDialog(
-            title: Text(
-              "โปรดตรวจสอบความถูกต้องของมาตรวัดน้ำก่อนยืนยัน",
-            ),
-            content: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Text(
-                "ต้องการยืนยันใช่หรือไม่",
-                style: TextStyle(fontFamily: 'Kanit'),
-                textAlign: TextAlign.start,
-              ),
-            ),
-            actions: [
-              CupertinoDialogAction(
-                  child: Text(
-                    "ยกเลิก",
-                    style: TextStyle(fontFamily: 'Kanit', color: Colors.red),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  }),
-              CupertinoDialogAction(
-                child: Text(
-                  "ยืนยัน",
-                  style: TextStyle(fontFamily: 'Kanit'),
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // <-- SEE HERE
+          title: const Text('โปรดตรวจสอบความถูกต้อง'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10,
                 ),
-                onPressed: () {
-                  write_unit(context, _writeUnit_Request);
-                  // Navigator.push(
-                  //   context,
-                  //   PageTransition(
-                  //     duration: Duration(milliseconds: 250),
-                  //     type: PageTransitionType.rightToLeft,
-                  //     child: Recipt_Info(),
-                  //   ),
-                  // );
-                },
-              )
-            ],
+                Row(
+                  children: [
+                    Text(
+                      "เลขมาตรวัดน้ำ: ",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Text(
+                      "${newUnit}",
+                      style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                'ยกเลิก',
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {
+                setState(() {
+                  circleHUD = false;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('ยืนยัน'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                write_unit(_writeUnit_Request);
+              },
+            ),
+          ],
         );
       },
     );

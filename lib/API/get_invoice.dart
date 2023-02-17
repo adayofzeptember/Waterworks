@@ -6,8 +6,6 @@ import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:waterworks/ETC/api_domain_url.dart';
 
-
-
 class Invoice_Record {
   String? responseCode;
   String? responseStatus;
@@ -33,7 +31,8 @@ class Invoice_Record {
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data = json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
+    data =
+        json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -53,18 +52,23 @@ class Invoice_Record {
 
 class Invoice_Data {
   int? id;
-  Null? invoiceNumber;
+  String? invoiceNumber;
   String? waterMeterRecordId;
   String? userId;
-  Null? paymentType;
+  String? paymentType;
   String? userName;
   String? customerAddress;
   String? customerName;
   String? areaNumber;
   String? waterNumber;
+  String? sum_service;
   String? sum;
+  String? discount;
+  String? crossbank_number;
+  String? total;
   String? status;
-  Null? remark;
+  String? remark;
+  String? vat;
   String? issueDate;
   String? dueDate;
   String? createdAt;
@@ -74,18 +78,25 @@ class Invoice_Data {
   String? issueDateFormat;
   String? sumFormat;
 
+  WaterMeterRecord? waterMeterRecord;
+
   Invoice_Data(
       {this.id,
+      this.discount,
+      this.vat,
       this.invoiceNumber,
       this.waterMeterRecordId,
       this.userId,
       this.paymentType,
       this.userName,
+      this.sum_service,
       this.customerAddress,
       this.customerName,
+      this.crossbank_number,
       this.areaNumber,
       this.waterNumber,
       this.sum,
+      this.total,
       this.status,
       this.remark,
       this.issueDate,
@@ -95,7 +106,8 @@ class Invoice_Data {
       this.customerWaterId,
       this.dueDateFormat,
       this.issueDateFormat,
-      this.sumFormat});
+      this.sumFormat,
+      this.waterMeterRecord});
 
   Invoice_Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -109,9 +121,14 @@ class Invoice_Data {
     areaNumber = json['area_number'];
     waterNumber = json['water_number'];
     sum = json['sum'];
+    vat = json['vat'];
+    total = json['total'];
     status = json['status'];
+    discount = json['discount'];
+    sum_service = json['sum_service'];
     remark = json['remark'];
     issueDate = json['issue_date'];
+    crossbank_number = json['crossbank_number'];
     dueDate = json['due_date'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -119,6 +136,9 @@ class Invoice_Data {
     dueDateFormat = json['due_date_format'];
     issueDateFormat = json['issue_date_format'];
     sumFormat = json['sum_format'];
+    waterMeterRecord = json['water_meter_record'] != null
+        ? new WaterMeterRecord.fromJson(json['water_meter_record'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -133,7 +153,13 @@ class Invoice_Data {
     data['customer_name'] = this.customerName;
     data['area_number'] = this.areaNumber;
     data['water_number'] = this.waterNumber;
+    data['crossbank_number'] = this.crossbank_number;
+    data['vat'] = this.vat;
+    data['total'] = this.total;
+    data['sum_service'] = this.sum_service;
+
     data['sum'] = this.sum;
+    data['discount'] = this.discount;
     data['status'] = this.status;
     data['remark'] = this.remark;
     data['issue_date'] = this.issueDate;
@@ -144,13 +170,100 @@ class Invoice_Data {
     data['due_date_format'] = this.dueDateFormat;
     data['issue_date_format'] = this.issueDateFormat;
     data['sum_format'] = this.sumFormat;
+    if (this.waterMeterRecord != null) {
+      data['water_meter_record'] = this.waterMeterRecord!.toJson();
+    }
     return data;
   }
 }
 
+class WaterMeterRecord {
+  int? id;
+  String? customerWaterId;
+  String? userId;
+  String? waterMeterSegmentationId;
+  String? userName;
+  String? waterMeterSegmentation;
+  String? waterNumber;
+  String? areaNumber;
+  String? status;
+  String? respDate;
+  String? recordDate;
+  String? previousUnit;
+  String? currentUnit;
+  String? sumUnit;
+  String? createdAt;
+  String? updatedAt;
+  String? areaWaterNumber;
+  String? water_wrong;
+
+  WaterMeterRecord(
+      {this.id,
+      this.customerWaterId,
+      this.userId,
+      this.waterMeterSegmentationId,
+      this.userName,
+      this.waterMeterSegmentation,
+      this.waterNumber,
+      this.areaNumber,
+      this.status,
+      this.respDate,
+      this.recordDate,
+      this.previousUnit,
+      this.currentUnit,
+      this.sumUnit,
+      this.water_wrong,
+      this.createdAt,
+      this.updatedAt,
+      this.areaWaterNumber});
+
+  WaterMeterRecord.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    customerWaterId = json['customer_water_id'];
+    userId = json['user_id'];
+    waterMeterSegmentationId = json['water_meter_segmentation_id'];
+    userName = json['user_name'];
+    waterMeterSegmentation = json['water_meter_segmentation'];
+    waterNumber = json['water_number'];
+    areaNumber = json['area_number'];
+    status = json['status'];
+    respDate = json['resp_date'];
+    recordDate = json['record_date'];
+    previousUnit = json['previous_unit'];
+    currentUnit = json['current_unit'];
+    sumUnit = json['sum_unit'];
+    createdAt = json['created_at'];
+    water_wrong = json['water_wrong'];
+    updatedAt = json['updated_at'];
+    areaWaterNumber = json['area_water_number'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['customer_water_id'] = this.customerWaterId;
+    data['user_id'] = this.userId;
+    data['water_meter_segmentation_id'] = this.waterMeterSegmentationId;
+    data['user_name'] = this.userName;
+    data['water_meter_segmentation'] = this.waterMeterSegmentation;
+    data['water_number'] = this.waterNumber;
+    data['area_number'] = this.areaNumber;
+    data['status'] = this.status;
+    data['resp_date'] = this.respDate;
+    data['record_date'] = this.recordDate;
+    data['previous_unit'] = this.previousUnit;
+    data['current_unit'] = this.currentUnit;
+    data['water_wrong'] = this.water_wrong;
+    data['sum_unit'] = this.sumUnit;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    data['area_water_number'] = this.areaWaterNumber;
+    return data;
+  }
+}
 
 Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
-  var url = waterWork_domain + 'record/invoice/'+invoice_id.toString();
+  var url = waterWork_domain + 'record/invoice/' + invoice_id.toString();
   var response = await http.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -158,11 +271,12 @@ Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
   });
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
-  var k = jsonResponse['data']['customer_name'];
+  var k = jsonResponse['data']['id'];
   Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonCon);
-   //print(k);
-  // print(response.body);
 
   return invoice_Data;
 }
 
+void main(List<String> args) {
+  fetch_invoice('301|hJGSTDcgLRpzZXXSLJirggD3LehPbHcM0fthbTck', '205');
+}

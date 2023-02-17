@@ -8,10 +8,12 @@ import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
+import '3._print_bluetooth_thermal[cool].dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,8 +56,21 @@ class Load_Page extends StatefulWidget {
 class _Load_PageState extends State<Load_Page> {
   @override
   initState() {
+    grantBlue();
     _Load_And_Go();
     super.initState();
+  }
+
+  Future<void> grantBlue() async {
+    var statusLocation = Permission.location;
+    if (await statusLocation.isGranted != true) {
+      await Permission.location.request();
+      await Permission.bluetooth.request();
+      await Permission.nearbyWifiDevices.request();
+      await Permission.bluetoothScan.request();
+      await Permission.bluetoothAdvertise.request();
+      await Permission.bluetoothConnect.request();
+    }
   }
 
   Future _Load_And_Go() async {
@@ -134,6 +149,8 @@ class _Load_PageState extends State<Load_Page> {
   }
 }
 
+
+
 // Widget x() {
 //   return Container(
 //     child: Text('1'),
@@ -144,10 +161,6 @@ class _Load_PageState extends State<Load_Page> {
 //     child: Text('2'),
 //   );
 // }
-
-
-
-
 
 
 

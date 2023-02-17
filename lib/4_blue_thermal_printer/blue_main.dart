@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
@@ -17,100 +18,13 @@ class _MyAppState extends State<MyApp> {
 
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
+
   bool _connected = false;
   TestPrint testPrint = TestPrint();
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
-  }
-
-  Future<void> initPlatformState() async {
-    var statusLocation = Permission.location;
-    if (await statusLocation.isGranted != true) {
-      await Permission.location.request();
-      await Permission.bluetooth.request();
-     
-      //Permission.location.isGranted;
-    }
-    if (await statusLocation.isGranted) {
-      //Permission.location.isGranted;
-    } else {
-      //Permission.location.isGranted;
-    }
-    bool? isConnected = await bluetooth.isConnected;
-    List<BluetoothDevice> devices = [];
-    try {
-      devices = await bluetooth.getBondedDevices();
-    } on PlatformException {}
-
-    bluetooth.onStateChanged().listen((state) {
-      switch (state) {
-        case BlueThermalPrinter.CONNECTED:
-          setState(() {
-            _connected = true;
-            print("bluetooth device state: connected");
-          });
-          break;
-        case BlueThermalPrinter.DISCONNECTED:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: disconnected");
-          });
-          break;
-        case BlueThermalPrinter.DISCONNECT_REQUESTED:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: disconnect requested");
-          });
-          break;
-        case BlueThermalPrinter.STATE_TURNING_OFF:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: bluetooth turning off");
-          });
-          break;
-        case BlueThermalPrinter.STATE_OFF:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: bluetooth off");
-          });
-          break;
-        case BlueThermalPrinter.STATE_ON:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: bluetooth on");
-          });
-          break;
-        case BlueThermalPrinter.STATE_TURNING_ON:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: bluetooth turning on");
-          });
-          break;
-        case BlueThermalPrinter.ERROR:
-          setState(() {
-            _connected = false;
-            print("bluetooth device state: error");
-          });
-          break;
-        default:
-          print(state);
-          break;
-      }
-    });
-
-    if (!mounted) return;
-    setState(() {
-      _devices = devices;
-    });
-
-    if (isConnected == true) {
-      setState(() {
-        _connected = true;
-      });
-    }
   }
 
   @override
@@ -118,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Blue Thermal Printer'),
+          title: Text('เทอมอลปริน'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -151,16 +65,6 @@ class _MyAppState extends State<MyApp> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(primary: Colors.brown),
-                    onPressed: () {
-                      initPlatformState();
-                    },
-                    child: const Text(
-                      'Refresh',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
                   const SizedBox(width: 20),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -219,29 +123,11 @@ class _MyAppState extends State<MyApp> {
           setState(() => _connected = true);
         }
       });
-    } else {
-      show('No device selected.');
-    }
+    } else {}
   }
 
   void _disconnect() {
     bluetooth.disconnect();
     setState(() => _connected = false);
-  }
-
-  Future show(
-    String message, {
-    Duration duration: const Duration(seconds: 3),
-  }) async {
-    await new Future.delayed(new Duration(milliseconds: 100));
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: const TextStyle(color: Colors.white),
-        ),
-        duration: duration,
-      ),
-    );
   }
 }

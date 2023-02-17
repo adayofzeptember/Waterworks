@@ -68,9 +68,6 @@ class _NotyetState extends State<Notyet> {
       ));
     }
 
-
-  
-
     return Scaffold(
       body: SingleChildScrollView(
         controller: singleChildScrollController,
@@ -78,6 +75,8 @@ class _NotyetState extends State<Notyet> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
+
+              
               ListView.builder(
                   shrinkWrap: true,
                   controller: scrollController,
@@ -128,7 +127,7 @@ class _NotyetState extends State<Notyet> {
                                   color: Colors.white,
                                   border: Border(
                                     left: BorderSide(
-                                        width: 10.0, color: Colors.grey),
+                                        width: 10.0, color: Palette.thisGreen),
                                   ),
                                 ),
                                 child: Row(
@@ -146,18 +145,6 @@ class _NotyetState extends State<Notyet> {
                                           children: [
                                             Row(
                                               children: [
-                                                // Text(
-                                                //   'เลข ป.',
-                                                //   style: TextStyle(
-                                                //       fontSize: 20,
-                                                //       fontWeight:
-                                                //           FontWeight.bold,
-                                                //       color: Color.fromARGB(
-                                                //           255, 83, 83, 83)),
-                                                // ),
-                                                // SizedBox(
-                                                //   width: 5,
-                                                // ),
                                                 Container(
                                                   decoration: BoxDecoration(
                                                     borderRadius:
@@ -314,7 +301,8 @@ class _NotyetState extends State<Notyet> {
                                       ),
                                       InkWell(
                                         onTap: (() {
-                                          print(user_id.toString());
+                                          print("user water id: " +
+                                              user_id.toString());
                                           Navigator.push(
                                             context,
                                             PageTransition(
@@ -332,7 +320,7 @@ class _NotyetState extends State<Notyet> {
                                           width: 130,
                                           height: double.infinity,
                                           decoration: BoxDecoration(
-                                              color: Colors.grey,
+                                              color: Palette.thisGreen,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           child: Column(
@@ -341,12 +329,16 @@ class _NotyetState extends State<Notyet> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              SvgPicture.asset(
-                                                'assets/images/droplet.svg',
-                                                height: 50,
-                                                color: Color.fromARGB(
-                                                    255, 228, 228, 228),
+                                              Image.asset(
+                                                'assets/images/meter.png',
+                                                height: 75,
+                                                width: 75,
                                               ),
+
+                                              // SvgPicture.asset(
+                                              //   'assets/images/meter2.svg',
+                                              //   height: 50,
+                                              // ),
                                               SizedBox(
                                                 height: 8,
                                               ),
@@ -388,7 +380,6 @@ class _NotyetState extends State<Notyet> {
   }
 
   Future<void> fetch_unit_notDone() async {
-    
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
     final response = await http.get(
@@ -399,8 +390,12 @@ class _NotyetState extends State<Notyet> {
         'Authorization': 'Bearer $getThatToken',
       },
     );
-    var jsonResponse = json.decode(response.body);
-    final jsonCon = jsonResponse['data']['data'] as List;
+
+    String jsonsDataString = response.body;
+    var datax = json.decode(jsonsDataString);
+
+    // var jsonResponse = json.decode(response.body);  เอาตัวนีี้ไปแทน datax
+    final jsonCon = datax['data']['data'] as List;
     if (response.statusCode == 200) {
       //print(response.body);
 

@@ -19,48 +19,29 @@ class TestPrint {
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
-        bluetooth.printNewLine();
-        bluetooth.printCustom("HEADER", Size.boldMedium.val, Align.center.val);
-        bluetooth.printNewLine();
-        bluetooth.printNewLine();
-        bluetooth.printNewLine();
-        bluetooth.printImageBytes(imageBytesFromAsset); //image from Network
-        bluetooth.printNewLine();
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.medium.val);
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.bold.val);
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.bold.val,
-            format:
-                "%-15s %15s %n"); //15 is number off character from left or right
-        bluetooth.printNewLine();
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.boldMedium.val);
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.boldLarge.val);
-        bluetooth.printLeftRight("LEFT", "RIGHT", Size.extraLarge.val);
-        bluetooth.printNewLine();
-        bluetooth.print3Column("Col1", "Col2", "Col3", Size.bold.val);
-        bluetooth.print3Column("Col1", "Col2", "Col3", Size.bold.val,
-            format:
-                "%-10s %10s %10s %n"); //10 is number off character from left center and right
-        bluetooth.printNewLine();
-        bluetooth.print4Column("Col1", "Col2", "Col3", "Col4", Size.bold.val);
-        bluetooth.print4Column("Col1", "Col2", "Col3", "Col4", Size.bold.val,
-            format: "%-8s %7s %7s %7s %n");
-        bluetooth.printNewLine();
-        bluetooth.printCustom("čĆžŽšŠ-H-ščđ", Size.bold.val, Align.center.val,
-            charset: "windows-1250");
-        bluetooth.printLeftRight("Številka:", "18000001", Size.bold.val,
-            charset: "windows-1250");
-        bluetooth.printCustom("Body left", Size.bold.val, Align.left.val);
-        bluetooth.printCustom("Body right", Size.medium.val, Align.right.val);
-        bluetooth.printNewLine();
-        bluetooth.printCustom("Thank You", Size.bold.val, Align.center.val);
-        bluetooth.printNewLine();
-        bluetooth.printQRcode(
-            "Insert Your Own Text to Generate", 200, 200, Align.center.val);
-        bluetooth.printNewLine();
-        bluetooth.printNewLine();
+String x = 'หหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหหห';
+                    String text = """"
+
+^XA
+^MMT
+^PW575
+^LL0639
+^LS0
+^FO160,0^GFA,01920,01920,00020,:Z64:
+eJzt0D1qwzAUB3BJz5VdMDSjhpBAyAFeNw+hU+g5RLN20Jihg6El+Dg5goaic5hOGZ0LhOjDpKqtoUOhi/+DPn6gJz0RMuU/kiXsc0x0/Tsjp4Tt4w2GSbkBWr+eWxO2nnabvPO2ChZS4tiKhN0HW8hg/o7i6I331sSmI8vD2bs6lGqixz6Q6M29VT86xETXuAHGaEfbpV6Anm28PQPnXDCUapdJNDfLSoYa6YdEuFnBGdbi256swYGe54K+t71xd9aQx5WgtRzYy8DAzPBrYMQIfBtZiXJkPGEQW8Uhz60dne06b1sORVMb2jl7bWIj3vaxbYlypoJVy4utVwWTChJfPGXKlD/JFUqDSkc=:269D
+^FT117,250^A@N,28,26,angsana.fnt
+^FH\
+^FH\^CI17^F8^FDเทศบาลนครราชสีมา^FS^CI0
+^FT117,481^A@N,28,26,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${x}^FS^CI0
+^PQ1,0,1,Y^XZ
+""";
+       
+        bluetooth.printCustom(text, Size.boldMedium.val, Align.center.val);
+       
         bluetooth
-            .paperCut(); //some printer not supported (sometime making image not centered)
-        //bluetooth.drawerPin2(); // or you can use bluetooth.drawerPin5();
+            .paperCut(); 
       }
     });
   }

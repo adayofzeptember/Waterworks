@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:ui';
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,15 +11,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
-
+import 'package:http/http.dart' as http;
 import '../API/get_profile.dart';
 import '../ETC/progressHUD.dart';
 import '../main.dart';
 
 String theTokenOne = '';
+String count = '';
 
 class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
@@ -28,10 +32,12 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool circleHUD = false;
+  late Future<Profile_Data> futureProfile;
   @override
   void initState() {
-    getToken();
+    _getToken();
 
+    // fetchProfile_Authx(theTokenOne);
     super.initState();
     ;
   }
@@ -101,7 +107,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -109,55 +115,35 @@ class _ProfileState extends State<Profile> {
                                   Column(
                                     children: [
                                       Text(
-                                        '08',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Color.fromARGB(
-                                                255, 83, 83, 83)),
-                                      ),
-                                      Text(
-                                        'เขตงานที่รับผิดชอบ',
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 83, 83, 83)),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 25,
-                                      vertical: 8,
-                                    ),
-                                    child: Container(
-                                      height: 50,
-                                      width: 2,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        '1,2,4',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Color.fromARGB(
-                                                255, 83, 83, 83)),
-                                      ),
-                                      Text(
                                         'ตอนงานที่รับผิดชอบ',
                                         style: TextStyle(
+                                            fontWeight: FontWeight.bold,
                                             color: Color.fromARGB(
                                                 255, 83, 83, 83)),
                                       ),
                                     ],
                                   ),
                                 ],
+                              ),
+                              Container(
+                                height: 20,
+                                child: ListView.builder(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: data.segmentations?.length,
+                                    itemBuilder:
+                                        (BuildContext context, int indexEP) {
+                                      return Row(
+                                        children: [
+                                          Text(
+                                            data.segmentations![indexEP].name
+                                                    .toString() +
+                                                " | ",
+                                            style: TextStyle(fontSize: 17),
+                                          ),
+                                        ],
+                                      );
+                                    }),
                               ),
                               SizedBox(
                                 height: 20,
@@ -213,12 +199,10 @@ class _ProfileState extends State<Profile> {
                 }
 
                 return Column(
-
                   children: [
                     SizedBox(
                       height: 50,
                     ),
-
                     Center(
                         child: CircularProgressIndicator(
                       color: Colors.white,
@@ -233,13 +217,15 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Future getToken() async {
+  Future _getToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
 
     setState(() {
       theTokenOne = getThatToken.toString();
     });
+
+    print(theTokenOne);
   }
 
   Future logout_removeToken() async {
