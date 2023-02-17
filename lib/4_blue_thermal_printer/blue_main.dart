@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('เทอมอลปริน'),
+          title: Text('เทอdมอลปริน'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

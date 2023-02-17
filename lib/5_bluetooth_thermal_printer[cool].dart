@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     String? isConnected = await BluetoothThermalPrinter.connectionStatus;
     if (isConnected == "true") {
       List<int> bytes = await getGraphicsTicket();
-            String text = """"
+      String text = """"
 ^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
@@ -68,9 +68,7 @@ class _MyAppState extends State<MyApp> {
 """;
       final result = await BluetoothThermalPrinter.writeText(text);
       print("Print $result");
-    } else {
-      //Hadnle Not Connected Senario
-    }
+    } else {}
   }
 
   Future<List<int>> getGraphicsTicket() async {
