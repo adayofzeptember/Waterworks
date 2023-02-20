@@ -31,8 +31,7 @@ class Invoice_Record {
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data =
-        json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -55,48 +54,53 @@ class Invoice_Data {
   String? invoiceNumber;
   String? waterMeterRecordId;
   String? userId;
-  String? paymentType;
+  Null? paymentType;
   String? userName;
   String? customerAddress;
   String? customerName;
   String? areaNumber;
   String? waterNumber;
-  String? sum_service;
   String? sum;
-  String? discount;
-  String? crossbank_number;
-  String? total;
   String? status;
-  String? remark;
-  String? vat;
+  Null? remark;
   String? issueDate;
   String? dueDate;
   String? createdAt;
   String? updatedAt;
   String? customerWaterId;
+  String? vat;
+  String? total;
+  String? discount;
+  String? sumService;
+  String? crossbankNumber;
+  Null? userIncomeId;
+  Null? incomeSegmentationId;
+  Null? incomeSegmentation;
+  Null? userIncome;
+  Null? incomeDate;
+  Null? userInvoiceId;
+  Null? userInvoiceName;
+  Null? userInvoiceDate;
+  Null? billNo;
+  int? countInvoices;
+  String? sumTotal;
   String? dueDateFormat;
   String? issueDateFormat;
   String? sumFormat;
-
   WaterMeterRecord? waterMeterRecord;
 
   Invoice_Data(
       {this.id,
-      this.discount,
-      this.vat,
       this.invoiceNumber,
       this.waterMeterRecordId,
       this.userId,
       this.paymentType,
       this.userName,
-      this.sum_service,
       this.customerAddress,
       this.customerName,
-      this.crossbank_number,
       this.areaNumber,
       this.waterNumber,
       this.sum,
-      this.total,
       this.status,
       this.remark,
       this.issueDate,
@@ -104,6 +108,22 @@ class Invoice_Data {
       this.createdAt,
       this.updatedAt,
       this.customerWaterId,
+      this.vat,
+      this.total,
+      this.discount,
+      this.sumService,
+      this.crossbankNumber,
+      this.userIncomeId,
+      this.incomeSegmentationId,
+      this.incomeSegmentation,
+      this.userIncome,
+      this.incomeDate,
+      this.userInvoiceId,
+      this.userInvoiceName,
+      this.userInvoiceDate,
+      this.billNo,
+      this.countInvoices,
+      this.sumTotal,
       this.dueDateFormat,
       this.issueDateFormat,
       this.sumFormat,
@@ -121,18 +141,29 @@ class Invoice_Data {
     areaNumber = json['area_number'];
     waterNumber = json['water_number'];
     sum = json['sum'];
-    vat = json['vat'];
-    total = json['total'];
     status = json['status'];
-    discount = json['discount'];
-    sum_service = json['sum_service'];
     remark = json['remark'];
     issueDate = json['issue_date'];
-    crossbank_number = json['crossbank_number'];
     dueDate = json['due_date'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     customerWaterId = json['customer_water_id'];
+    vat = json['vat'];
+    total = json['total'];
+    discount = json['discount'];
+    sumService = json['sum_service'];
+    crossbankNumber = json['crossbank_number'];
+    userIncomeId = json['user_income_id'];
+    incomeSegmentationId = json['income_segmentation_id'];
+    incomeSegmentation = json['income_segmentation'];
+    userIncome = json['user_income'];
+    incomeDate = json['income_date'];
+    userInvoiceId = json['user_invoice_id'];
+    userInvoiceName = json['user_invoice_name'];
+    userInvoiceDate = json['user_invoice_date'];
+    billNo = json['bill_no'];
+    countInvoices = json['count_invoices'];
+    sumTotal = json['sum_total'];
     dueDateFormat = json['due_date_format'];
     issueDateFormat = json['issue_date_format'];
     sumFormat = json['sum_format'];
@@ -153,13 +184,7 @@ class Invoice_Data {
     data['customer_name'] = this.customerName;
     data['area_number'] = this.areaNumber;
     data['water_number'] = this.waterNumber;
-    data['crossbank_number'] = this.crossbank_number;
-    data['vat'] = this.vat;
-    data['total'] = this.total;
-    data['sum_service'] = this.sum_service;
-
     data['sum'] = this.sum;
-    data['discount'] = this.discount;
     data['status'] = this.status;
     data['remark'] = this.remark;
     data['issue_date'] = this.issueDate;
@@ -167,6 +192,22 @@ class Invoice_Data {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['customer_water_id'] = this.customerWaterId;
+    data['vat'] = this.vat;
+    data['total'] = this.total;
+    data['discount'] = this.discount;
+    data['sum_service'] = this.sumService;
+    data['crossbank_number'] = this.crossbankNumber;
+    data['user_income_id'] = this.userIncomeId;
+    data['income_segmentation_id'] = this.incomeSegmentationId;
+    data['income_segmentation'] = this.incomeSegmentation;
+    data['user_income'] = this.userIncome;
+    data['income_date'] = this.incomeDate;
+    data['user_invoice_id'] = this.userInvoiceId;
+    data['user_invoice_name'] = this.userInvoiceName;
+    data['user_invoice_date'] = this.userInvoiceDate;
+    data['bill_no'] = this.billNo;
+    data['count_invoices'] = this.countInvoices;
+    data['sum_total'] = this.sumTotal;
     data['due_date_format'] = this.dueDateFormat;
     data['issue_date_format'] = this.issueDateFormat;
     data['sum_format'] = this.sumFormat;
@@ -195,7 +236,7 @@ class WaterMeterRecord {
   String? createdAt;
   String? updatedAt;
   String? areaWaterNumber;
-  String? water_wrong;
+  String? waterWrong;
 
   WaterMeterRecord(
       {this.id,
@@ -212,10 +253,10 @@ class WaterMeterRecord {
       this.previousUnit,
       this.currentUnit,
       this.sumUnit,
-      this.water_wrong,
       this.createdAt,
       this.updatedAt,
-      this.areaWaterNumber});
+      this.areaWaterNumber,
+      this.waterWrong});
 
   WaterMeterRecord.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -233,9 +274,9 @@ class WaterMeterRecord {
     currentUnit = json['current_unit'];
     sumUnit = json['sum_unit'];
     createdAt = json['created_at'];
-    water_wrong = json['water_wrong'];
     updatedAt = json['updated_at'];
     areaWaterNumber = json['area_water_number'];
+    waterWrong = json['water_wrong'];
   }
 
   Map<String, dynamic> toJson() {
@@ -253,14 +294,15 @@ class WaterMeterRecord {
     data['record_date'] = this.recordDate;
     data['previous_unit'] = this.previousUnit;
     data['current_unit'] = this.currentUnit;
-    data['water_wrong'] = this.water_wrong;
     data['sum_unit'] = this.sumUnit;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['area_water_number'] = this.areaWaterNumber;
+    data['water_wrong'] = this.waterWrong;
     return data;
   }
 }
+
 
 Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
   var url = waterWork_domain + 'record/invoice/' + invoice_id.toString();
@@ -271,12 +313,12 @@ Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
   });
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
-  var k = jsonResponse['data']['id'];
+  var k = jsonResponse['data']['count_invoices'];
   Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonCon);
-
+  print(k);
   return invoice_Data;
 }
 
 void main(List<String> args) {
-  fetch_invoice('301|hJGSTDcgLRpzZXXSLJirggD3LehPbHcM0fthbTck', '205');
+  fetch_invoice('301|hJGSTDcgLRpzZXXSLJirggD3LehPbHcM0fthbTck', '98545');
 }

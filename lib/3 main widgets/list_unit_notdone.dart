@@ -75,8 +75,6 @@ class _NotyetState extends State<Notyet> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-
-              
               ListView.builder(
                   shrinkWrap: true,
                   controller: scrollController,
@@ -107,16 +105,17 @@ class _NotyetState extends State<Notyet> {
                                 const BorderRadius.all(Radius.circular(16.0)),
                             child: InkWell(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     duration: Duration(milliseconds: 250),
-                                //     type: PageTransitionType.rightToLeft,
-                                //     child: Use_Water_Info(
-                                //       id: user_id,
-                                //     ),
-                                //   ),
-                                // );
+                                print('user id: ' + user_id);
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    duration: Duration(milliseconds: 250),
+                                    type: PageTransitionType.rightToLeft,
+                                    child: Use_Water_Info(
+                                      id: user_id,
+                                    ),
+                                  ),
+                                );
                                 ;
                               },
                               child: Container(

@@ -56,9 +56,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
-              ),
+             
               FutureBuilder<User_Consume_Data>(
                 future: fetch_user_consume(widget.id.toString()),
                 builder: (context, snapshot) {
@@ -66,26 +64,24 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                     User_Consume_Data? data = snapshot.data;
                     return Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset('assets/images/alert.svg',
-                                color: Color.fromARGB(255, 255, 0, 0)),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'ผู้ใช้น้ำค้างชำระค่าน้ำประปา 1 เดือน',
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color.fromARGB(255, 188, 0, 0)),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     SvgPicture.asset('assets/images/alert.svg',
+                        //         color: Color.fromARGB(255, 255, 0, 0)),
+                        //     SizedBox(
+                        //       width: 10,
+                        //     ),
+                        //     Text(
+                        //       'ผู้ใช้น้ำค้างชำระค่าน้ำประปา 1 เดือน',
+                        //       style: TextStyle(
+                        //           fontSize: 20,
+                        //           fontWeight: FontWeight.bold,
+                        //           color: Color.fromARGB(255, 188, 0, 0)),
+                        //     )
+                        //   ],
+                        // ),
+                      
                         Container(
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 245, 245, 245),
@@ -99,7 +95,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  data!.userName.toString(),
+                                  data!.customerWater!.name.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -263,7 +259,6 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'เดือน',
@@ -272,11 +267,17 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
+                                SizedBox(
+                                  width: 120,
+                                ),
                                 Text('หน่วย',
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                  width: 65,
+                                ),
                                 Text('จำนวนเงิน',
                                     style: TextStyle(
                                         fontSize: 18,
@@ -286,6 +287,52 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                             ),
                           ),
                         ),
+                        //! list ตรงนี้
+                        // Text(data.historyWaters![1].id.toString())
+                        ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: data.historyWaters!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 233, 233, 233),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        data.historyWaters![index].respDate
+                                            .toString()
+                                            .substring(0, 10),
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: Palette.thisGreen,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      SizedBox(width: 60),
+                                      Text(
+                                          data.historyWaters![index].currentUnit
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Palette.thisGreen,
+                                              fontWeight: FontWeight.bold)),
+                                      SizedBox(width: 90),
+                                      Text(
+                                          data.historyWaters![index].sumUnit
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Palette.thisGreen,
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }),
                       ],
                     );
                   }

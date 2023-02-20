@@ -13,7 +13,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
-import '3._print_bluetooth_thermal[cool].dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -12,7 +12,7 @@ import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
-import '../printable pages/invoice.dart';
+import '../invoice.dart';
 import '../write_water_unit_info.dart';
 
 class Done extends StatefulWidget {
@@ -95,15 +95,15 @@ class _DoneState extends State<Done> {
                       String invoiceID = post['invoice']['id'].toString();
                       return InkWell(
                         onTap: () {
-                          print('invoice id: '+invoiceID);
+                          print('invoice id: ' + invoiceID);
+                          print(invoiceID);
                           Navigator.push(
                             context,
                             PageTransition(
                                 duration: Duration(milliseconds: 100),
                                 type: PageTransitionType.rightToLeft,
                                 child: Invoice_Page(
-                                  invoiceID:
-                                      invoiceID,
+                                  invoiceID: invoiceID,
                                 )),
                           );
                         },

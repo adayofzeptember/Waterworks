@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/API/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/printable%20pages/invoice.dart';
+import 'package:waterworks/invoice.dart';
 import 'API/get_user_consume.dart';
 import 'ETC/progressHUD.dart';
 
@@ -26,6 +26,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   final formKey = GlobalKey<FormState>();
   late WriteUnit_Request _writeUnit_Request;
   bool circleHUD = false;
+  bool checkDept = false;
 
   @override
   void initState() {
@@ -85,6 +86,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               User_Consume_Data? data = snapshot.data;
+                              var debtLength = data!.historyInvoices!.length;
+                              if (debtLength == 0) {
+                                checkDept = false;
+                              } else {
+                                checkDept = true;
+                              }
 
                               return Column(
                                 children: [
@@ -104,8 +111,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            data!.customerWater!.name
-                                                .toString(),
+                                            data.customerWater!.name.toString(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20),
@@ -242,6 +248,178 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                   SizedBox(
                                     height: 20,
                                   ),
+                                  checkDept
+                                      ? Column(
+                                          children: [
+                                            Container(
+                                              width: double.maxFinite,
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
+                                              decoration: BoxDecoration(
+                                                border: Border(
+                                                  left: BorderSide(
+                                                      width: 5.0,
+                                                      color: Palette.thisGreen),
+                                                ),
+                                              ),
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5.0),
+                                                      child: Text(
+                                                        'ประวัติค้างชำระ',
+                                                        style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    101,
+                                                                    101,
+                                                                    101),
+                                                            fontSize: 20),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: Color.fromARGB(
+                                                    255, 230, 95, 85),
+                                                borderRadius: BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(10),
+                                                    topRight:
+                                                        Radius.circular(10)),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      'เดือน',
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 140,
+                                                    ),
+                                                    Text('หน่วย',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                    SizedBox(
+                                                      width: 20,
+                                                    ),
+                                                    Text('จำนวนเงิน',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                itemCount: 2,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Color.fromARGB(
+                                                          255, 233, 233, 233),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              15.0),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            data
+                                                                .historyWaters![
+                                                                    index]
+                                                                .respDate
+                                                                .toString()
+                                                                .substring(
+                                                                    0, 10),
+                                                            style: TextStyle(
+                                                                fontSize: 18,
+                                                                color: Palette
+                                                                    .thisGreen,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Text(
+                                                              data
+                                                                  .historyWaters![
+                                                                      index]
+                                                                  .currentUnit
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color: Palette
+                                                                      .thisGreen,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                          Text(
+                                                              data
+                                                                  .historyWaters![
+                                                                      index]
+                                                                  .sumUnit
+                                                                  .toString(),
+                                                              style: TextStyle(
+                                                                  fontSize: 18,
+                                                                  color: Palette
+                                                                      .thisGreen,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                            SizedBox(
+                                              height: 30,
+                                            ),
+                                            Divider(
+                                                thickness: 3,
+                                                color: Color.fromARGB(
+                                                    255, 83, 83, 83)),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        )
+                                      : Container(),
                                   Form(
                                       key: formKey,
                                       child: Column(
@@ -303,24 +481,24 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               });
                                               FocusManager.instance.primaryFocus
                                                   ?.unfocus();
-                              
+
                                               if (formKey.currentState!
                                                   .validate()) {
                                                 formKey.currentState?.save();
-                              
+
                                                 _writeUnit_Request
                                                         .water_meter_record_id =
                                                     widget.id.toString();
-                              
+
                                                 // showDialog(_writeUnit_Request
                                                 //     .current_unit
                                                 //     .toString());
-                              
+
                                                 _showAlertDialog(
                                                     _writeUnit_Request
                                                         .current_unit
                                                         .toString());
-                              
+
                                                 // print(jsonEncode(
                                                 //     _writeUnit_Request));
                                               }
@@ -339,7 +517,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             ),
                                           ),
                                         ],
-                                      ))
+                                      )),
                                 ],
                               );
                             }

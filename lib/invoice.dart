@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/3._print_bluetooth_thermal%5Bcool%5D.dart';
 import 'package:waterworks/ETC/model.dart';
-import 'package:waterworks/printable%20pages/printer_select_commit.dart';
-import 'package:waterworks/printable%20pages/water_unit_irregular.dart';
+import 'package:waterworks/printer%20libs/6.esc_pos.dart';
+import 'package:waterworks/ETC/water_unit_irregular.dart';
 import 'package:waterworks/write_water_unit_info.dart';
-import '../API/get_invoice.dart';
-import '../ETC/color_green.dart';
-import '../First_Page_bottomBar.dart';
+import '4_blue_thermal_printer/blue_main.dart';
+import 'API/get_invoice.dart';
+import 'ETC/color_green.dart';
+import 'First_Page_bottomBar.dart';
 
 //!ใบแจ้งหนี้ไปหน้าปริ๊น
 
@@ -88,6 +88,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     toInvoiceModel.inv_number = data.invoiceNumber.toString();
                     toInvoiceModel.inv_user_number =
                         data.waterMeterRecord!.waterNumber.toString();
+
                     toInvoiceModel.inv_user_name = data.customerName.toString();
                     toInvoiceModel.inv_user_address =
                         data.customerAddress.toString();
@@ -99,18 +100,20 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         data.waterMeterRecord!.sumUnit.toString();
                     toInvoiceModel.inv_prapa_cost = data.sum.toString();
                     toInvoiceModel.inv_discount = data.discount.toString();
-                    toInvoiceModel.inv_service = data.sum_service.toString();
+                    toInvoiceModel.inv_service = data.sumService.toString();
                     toInvoiceModel.inv_vat = data.vat.toString();
-                    toInvoiceModel.inv_dueDate = data.dueDate.toString();
                     toInvoiceModel.inv_total = data.total.toString();
-                    toInvoiceModel.inv_barcode = data.id.toString() +
-                        "|" +
-                        data.waterMeterRecord!.areaNumber.toString() +
-                        "|" +
-                        data.waterMeterRecord!.waterNumber.toString();
+
+                    toInvoiceModel.inv_notPay = data.countInvoices.toString();
+                    toInvoiceModel.godTotal = data.sumTotal.toString();
+
+                    toInvoiceModel.inv_dueDate = data.dueDate.toString();
+
+                    toInvoiceModel.inv_barcode =
+                        data.crossbankNumber.toString();
                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     String irregular_Water =
-                        data.waterMeterRecord!.water_wrong.toString();
+                        data.waterMeterRecord!.waterWrong.toString();
                     if (irregular_Water == "2") {
                       //print('2');
                       checkWater = true;
@@ -118,7 +121,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                       checkWater = false;
                       // print('1');
                     }
-                    print(irregular_Water);
+                  
                     return Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -439,7 +442,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(data.sum_service.toString()),
+                                          Text(data.sumService.toString()),
                                           SizedBox(
                                             width: 10,
                                           ),
@@ -471,6 +474,33 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                             width: 10,
                                           ),
                                           Text('บาท',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('ค้างชำระ',
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 133, 133, 133),
+                                              fontWeight: FontWeight.bold)),
+                                      Row(
+                                        children: [
+                                          Text('0'),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Text('เดือน',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
@@ -521,7 +551,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(data.total.toString(),
+                                          Text(data.sumTotal.toString(),
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),
@@ -546,7 +576,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   BarcodeWidget(
                                       barcode:
                                           Barcode.code128(useCode128A: true),
-                                      data: data.crossbank_number.toString(),
+                                      data: data.crossbankNumber.toString(),
                                       width: 500,
                                       height: 50),
                                   SizedBox(
@@ -569,8 +599,9 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         PageTransition(
                                           duration: Duration(milliseconds: 250),
                                           type: PageTransitionType.rightToLeft,
-                                          child: MyApp_Printer(
+                                          child: MyApp(
                                             invoideModel: toInvoiceModel,
+                                            checkWaterWrong: '1',
                                           ),
                                         ),
                                       );
@@ -586,13 +617,11 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                       ),
                                     ),
                                   ),
-                                    SizedBox(
+                                  SizedBox(
                                     height: 10,
                                   ),
                                   checkWater
-                                      ? 
-                                  
-                                      ElevatedButton(
+                                      ? ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: Color.fromARGB(
                                                   255, 247, 113, 60),
@@ -606,17 +635,17 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                                 ?.unfocus();
 
                                             Navigator.push(
-                                              context,
-                                              PageTransition(
-                                                duration:
-                                                    Duration(milliseconds: 250),
-                                                type: PageTransitionType
-                                                    .rightToLeft,
-                                                child: MyApp_Printer(
-                                                  invoideModel: toInvoiceModel,
-                                                ),
-                                              ),
-                                            );
+                                                context,
+                                                PageTransition(
+                                                    duration: Duration(
+                                                        milliseconds: 250),
+                                                    type: PageTransitionType
+                                                        .rightToLeft,
+                                                    child: MyApp(
+                                                      invoideModel:
+                                                          toInvoiceModel,
+                                                      checkWaterWrong: '2',
+                                                    )));
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(20.0),
@@ -727,7 +756,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
   Future getToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
-
+    print('---------------' + getThatToken.toString());
     setState(() {
       theTokenOne = getThatToken.toString();
     });
