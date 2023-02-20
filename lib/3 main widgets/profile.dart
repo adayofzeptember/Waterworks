@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,8 @@ import 'package:http/http.dart' as http;
 import '../API/get_profile.dart';
 import '../ETC/progressHUD.dart';
 import '../main.dart';
+import '../offline/office_route.dart';
+import '../offline/utils.dart';
 
 String theTokenOne = '';
 String count = '';
@@ -36,10 +39,32 @@ class _ProfileState extends State<Profile> {
   @override
   void initState() {
     _getToken();
+    check();
 
     // fetchProfile_Authx(theTokenOne);
     super.initState();
     ;
+  }
+
+  void check() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        _getToken();
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      showMyDialog(
+        context,
+        () {
+          Navigator.pop(context);
+          loadingInternet();
+          Future.delayed(const Duration(seconds: 3), () {
+            checkInternet(context);
+          });
+        },
+      );
+    }
   }
 
   @override
@@ -147,6 +172,33 @@ class _ProfileState extends State<Profile> {
                               ),
                               SizedBox(
                                 height: 20,
+                              ),
+                          
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      elevation: 0,
+                                      side: BorderSide(color: Colors.grey),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      )),
+                                  onPressed: () {
+                                    Navigator.push(context, pageOffice());
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.all(15.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "ใช้งานแบบออฟไลน์",
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 15),
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),

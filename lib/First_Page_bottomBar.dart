@@ -18,17 +18,6 @@ class Menu_Page extends StatefulWidget {
 }
 
 class _Menu_PageState extends State<Menu_Page> {
-  List<String> districItems = [
-    'ในเมือง',
-    'นครราชสีมา',
-  ];
-  List<String> epItems = ['ตอน 1', 'ตอน 2', 'ตอน 3'];
-
-  var _bottomNavIndex = 0;
-  final iconList = <IconData>[
-    Icons.brightness_5,
-    Icons.brightness_4,
-  ];
   List<Widget> _widgetsPages = [Water_Unit_List(), Search_Page(), Profile()];
   int _index = 0;
   void _onItemTapped(int index2) {
@@ -37,10 +26,6 @@ class _Menu_PageState extends State<Menu_Page> {
     });
   }
 
-  String? selectedValue;
-
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,7 +92,6 @@ class _Menu_PageState extends State<Menu_Page> {
                 label: 'บัญชี')
           ],
         ),
-        
       ),
     );
   }

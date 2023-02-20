@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +11,7 @@ import 'package:waterworks/API/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/invoice.dart';
+import 'package:waterworks/offline/utils.dart';
 import 'API/get_user_consume.dart';
 import 'ETC/progressHUD.dart';
 
@@ -30,6 +32,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   void initState() {
+     checkInternet(context);
     circleHUD = false;
     _writeUnit_Request = WriteUnit_Request();
     super.initState();
@@ -476,11 +479,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       BorderRadius.circular(15),
                                                 )),
                                             onPressed: () {
-                                              setState(() {
-                                                circleHUD = true;
-                                              });
-                                              FocusManager.instance.primaryFocus
-                                                  ?.unfocus();
+                                                        if (waterUnitController.text.isNotEmpty) {
+                                       
+                                                checkInternet(context);
+                                      
+                                                setState(() {
+                                                  circleHUD = true;
+                                                });
+                                                FocusManager.instance.primaryFocus?.unfocus();
+                                              }
+                                     
 
                                               if (formKey.currentState!
                                                   .validate()) {
@@ -667,9 +675,27 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
             ),
             TextButton(
               child: const Text('ยืนยัน'),
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop();
-                write_unit(_writeUnit_Request);
+                              try {
+                  final result = await InternetAddress.lookup('google.com');
+                  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+                    print('connected');
+                    write_unit(_writeUnit_Request); //original
+                  }
+                } on SocketException catch (_) {
+                  print('not connected');
+                  showMyDialog(
+                    context,
+                    () {
+                      Navigator.pop(context);
+                      loadingInternet();
+                      Future.delayed(const Duration(seconds: 3), () {
+                        checkInternet(context);
+                      });
+                    },
+                  );
+                }
               },
             ),
           ],

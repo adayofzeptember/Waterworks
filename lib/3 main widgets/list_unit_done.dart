@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -13,6 +15,7 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/user_consume_info.dart';
 import 'package:waterworks/write_water_unit_info.dart';
 import '../invoice.dart';
+import '../offline/utils.dart';
 import '../write_water_unit_info.dart';
 
 class Done extends StatefulWidget {
@@ -45,10 +48,33 @@ class _DoneState extends State<Done> {
   bool isLoadingMore = false;
   @override
   void initState() {
-    fetch_unit_done();
+      checkInternet(context);
+    //fetch_unit_done();
     scrollController.addListener(_scrollListener);
     singleChildScrollController.addListener(_scrollListener);
     super.initState();
+  }
+
+
+    void check() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        fetch_unit_done();
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      showMyDialog(
+        context,
+        () {
+          Navigator.pop(context);
+          loadingInternet();
+          Future.delayed(const Duration(seconds: 3), () {
+            checkInternet(context);
+          });
+        },
+      );
+    }
   }
 
   @override

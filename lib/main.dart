@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
+import 'offline/utils.dart';
 
 void main() {
+  Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -56,7 +60,8 @@ class _Load_PageState extends State<Load_Page> {
   @override
   initState() {
     grantBlue();
-    _Load_And_Go();
+    // _Load_And_Go();
+     check();
     super.initState();
   }
 
@@ -69,6 +74,29 @@ class _Load_PageState extends State<Load_Page> {
       await Permission.bluetoothScan.request();
       await Permission.bluetoothAdvertise.request();
       await Permission.bluetoothConnect.request();
+    }
+  }
+
+  Future<void> check() async {
+    try {
+      final result = await InternetAddress.lookup('www.google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        print('connected');
+        _Load_And_Go();
+      }
+    } on SocketException catch (_) {
+      print('not connected');
+      showMyDialog(
+        context,
+        () {
+          Navigator.pop(context);
+          loadingInternet();
+          Future.delayed(const Duration(seconds: 3), () {
+            check();
+          });
+          setState(() {});
+        },
+      );
     }
   }
 

@@ -29,20 +29,3 @@ class Login_Request {
 
 
 
-// Future<Login> loginNormal(Login_Request requestModel) async {
-//   String urlPost = waterWork_domain + 'login';
-//   var body_Login = json.encode(requestModel.toJson());
-//   final response = await http.post(
-//     Uri.parse(urlPost),
-//     headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
-//     body: body_Login,
-//   );
-//   var jsonRes = json.decode(response.body);
-//   if (response.statusCode == 400 || response.statusCode == 200) 
-//   print(jsonDecode(response.body.toString()));
-//     print(response.body);
-//     return Login.fromJson(json.decode(response.body));
-//   } else {
-//     throw Exception("error");
-//   }
-// }
