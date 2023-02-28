@@ -11,10 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
+import 'package:waterworks/provider_profile/ProfileProvider.dart';
+import 'API/get_user_consume.dart';
 import 'offline/utils.dart';
 
 void main() {
@@ -61,7 +64,7 @@ class _Load_PageState extends State<Load_Page> {
   initState() {
     grantBlue();
     // _Load_And_Go();
-     check();
+    check();
     super.initState();
   }
 

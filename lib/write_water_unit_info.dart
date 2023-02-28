@@ -32,7 +32,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   void initState() {
-     checkInternet(context);
+    checkInternet(context);
     circleHUD = false;
     _writeUnit_Request = WriteUnit_Request();
     super.initState();
@@ -327,7 +327,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                 FontWeight
                                                                     .bold)),
                                                     SizedBox(
-                                                      width: 20,
+                                                      width: 40,
                                                     ),
                                                     Text('จำนวนเงิน',
                                                         style: TextStyle(
@@ -414,7 +414,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               height: 30,
                                             ),
                                             Divider(
-                                                thickness: 3,
+                                                thickness: 1,
                                                 color: Color.fromARGB(
                                                     255, 83, 83, 83)),
                                             SizedBox(
@@ -479,16 +479,17 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       BorderRadius.circular(15),
                                                 )),
                                             onPressed: () {
-                                                        if (waterUnitController.text.isNotEmpty) {
-                                       
+                                              if (waterUnitController
+                                                  .text.isNotEmpty) {
                                                 checkInternet(context);
-                                      
+
                                                 setState(() {
                                                   circleHUD = true;
                                                 });
-                                                FocusManager.instance.primaryFocus?.unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
                                               }
-                                     
 
                                               if (formKey.currentState!
                                                   .validate()) {
@@ -677,7 +678,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
               child: const Text('ยืนยัน'),
               onPressed: () async {
                 Navigator.of(context).pop();
-                              try {
+                try {
                   final result = await InternetAddress.lookup('google.com');
                   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
                     print('connected');

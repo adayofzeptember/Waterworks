@@ -48,15 +48,14 @@ class _DoneState extends State<Done> {
   bool isLoadingMore = false;
   @override
   void initState() {
-      checkInternet(context);
+    check();
     //fetch_unit_done();
     scrollController.addListener(_scrollListener);
     singleChildScrollController.addListener(_scrollListener);
     super.initState();
   }
 
-
-    void check() async {
+  void check() async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -112,7 +111,7 @@ class _DoneState extends State<Done> {
                         meter_number = '00';
                       }
 
-                      final user_id = post['id'].toString();
+                      // final user_id = post['id'].toString();
                       final user_name = post['customer_water']['name'];
                       ;
                       final water_number = post['water_number'];
@@ -121,8 +120,8 @@ class _DoneState extends State<Done> {
                       String invoiceID = post['invoice']['id'].toString();
                       return InkWell(
                         onTap: () {
-                          print('invoice id: ' + invoiceID);
-                          print(invoiceID);
+                         print('invoice id: ' + invoiceID);
+                         print(invoiceID);
                           Navigator.push(
                             context,
                             PageTransition(

@@ -172,36 +172,36 @@ class Record {
 class CustomerWater {
   int? id;
   String? customerId;
-  Null? petitionId;
+  String? petitionId;
   String? waterNumber;
   String? areaNumber;
   String? meterNumber;
   String? address;
-  Null? subDistrict;
-  Null? district;
-  Null? province;
-  Null? zipcode;
+  String? subDistrict;
+  String? district;
+  String? province;
+  String? zipcode;
   String? status;
-  Null? installationType;
+  String? installationType;
   String? remark;
-  Null? createdAt;
-  Null? updatedAt;
+  String? createdAt;
+  String? updatedAt;
   String? segmentationId;
   String? waterMeterFeeId;
-  Null? meterBrandName;
+  String? meterBrandName;
   String? typeId;
   String? condition;
-  Null? incomeSegmentationId;
-  Null? bankPaymentAuto;
-  Null? bankAccount;
+  String? incomeSegmentationId;
+  String? bankPaymentAuto;
+  String? bankAccount;
   String? name;
   String? statusDebtor;
   String? statusDiscount;
   String? road;
-  Null? latitude;
-  Null? longitude;
-  Null? installationDate;
-  Null? manufactureDate;
+  String? latitude;
+  String? longitude;
+  String? installationDate;
+  String? manufactureDate;
   String? segmentationOrder;
   String? formatSegmentation;
   String? fullAddress;
@@ -521,7 +521,6 @@ class Invoice {
   }
 }
 
-
 class WriteUnit_Request {
   String? current_unit;
   String? water_meter_record_id;
@@ -536,5 +535,3 @@ class WriteUnit_Request {
     return data;
   }
 }
-
-

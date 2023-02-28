@@ -133,16 +133,16 @@ class _NotyetState extends State<Notyet> {
                             child: InkWell(
                               onTap: () {
                                 print('user id: ' + user_id);
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    duration: Duration(milliseconds: 250),
-                                    type: PageTransitionType.rightToLeft,
-                                    child: Use_Water_Info(
-                                      id: user_id,
-                                    ),
-                                  ),
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   PageTransition(
+                                //     duration: Duration(milliseconds: 250),
+                                //     type: PageTransitionType.rightToLeft,
+                                //     child: Use_Water_Info(
+                                //       id: user_id,
+                                //     ),
+                                //   ),
+                                // );
                                 ;
                               },
                               child: Container(

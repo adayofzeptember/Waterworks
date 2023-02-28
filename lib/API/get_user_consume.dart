@@ -126,7 +126,7 @@ class User_Consume_Data {
         historyWaters!.add(new HistoryWaters.fromJson(v));
       });
     }
-        if (json['history_invoices'] != null) {
+    if (json['history_invoices'] != null) {
       historyInvoices = <HistoryInvoices>[];
       json['history_invoices'].forEach((v) {
         historyInvoices!.add(new HistoryInvoices.fromJson(v));
@@ -160,7 +160,7 @@ class User_Consume_Data {
       data['history_waters'] =
           this.historyWaters!.map((v) => v.toJson()).toList();
     }
-      if (this.historyInvoices != null) {
+    if (this.historyInvoices != null) {
       data['history_invoices'] =
           this.historyInvoices!.map((v) => v.toJson()).toList();
     }
@@ -170,38 +170,38 @@ class User_Consume_Data {
 
 class HistoryInvoices {
   int? id;
-  Null? invoiceNumber;
-  Null? waterMeterRecordId;
-  Null? userId;
-  Null? paymentType;
-  Null? userName;
-  Null? customerAddress;
+  String? invoiceNumber;
+  String? waterMeterRecordId;
+  String? userId;
+  String? paymentType;
+  String? userName;
+  String? customerAddress;
   String? customerName;
   String? areaNumber;
   String? waterNumber;
   String? sum;
   String? status;
-  Null? remark;
+  String? remark;
   String? issueDate;
-  Null? dueDate;
-  Null? createdAt;
-  Null? updatedAt;
-  Null? customerWaterId;
+  String? dueDate;
+  String? createdAt;
+  String? updatedAt;
+  String? customerWaterId;
   String? vat;
   String? total;
-  Null? discount;
+  String? discount;
   String? sumService;
-  Null? crossbankNumber;
-  Null? userIncomeId;
-  Null? incomeSegmentationId;
-  Null? incomeSegmentation;
-  Null? userIncome;
-  Null? incomeDate;
-  Null? userInvoiceId;
-  Null? userInvoiceName;
-  Null? userInvoiceDate;
+  String? crossbankNumber;
+  String? userIncomeId;
+  String? incomeSegmentationId;
+  String? incomeSegmentation;
+  String? userIncome;
+  String? incomeDate;
+  String? userInvoiceId;
+  String? userInvoiceName;
+  String? userInvoiceDate;
   String? billNo;
-  Null? dueDateFormat;
+  String? dueDateFormat;
   String? issueDateFormat;
   String? sumFormat;
 
@@ -324,22 +324,22 @@ class HistoryInvoices {
 class HistoryWaters {
   int? id;
   String? customerWaterId;
-  Null? userId;
-  Null? waterMeterSegmentationId;
-  Null? userName;
-  Null? waterMeterSegmentation;
+  String? userId;
+  String? waterMeterSegmentationId;
+  String? userName;
+  String? waterMeterSegmentation;
   String? waterNumber;
   String? areaNumber;
   String? status;
   String? respDate;
   String? recordDate;
-  Null? previousUnit;
+  String? previousUnit;
   String? currentUnit;
-  Null? sumUnit;
-  Null? createdAt;
+  String? sumUnit;
+  String? createdAt;
   String? updatedAt;
-  Null? areaWaterNumber;
-  Null? waterWrong;
+  String? areaWaterNumber;
+  String? waterWrong;
 
   HistoryWaters(
       {this.id,
@@ -409,36 +409,36 @@ class HistoryWaters {
 class CustomerWater {
   int? id;
   String? customerId;
-  Null? petitionId;
+  String? petitionId;
   String? waterNumber;
   String? areaNumber;
   String? meterNumber;
   String? address;
-  Null? subDistrict;
-  Null? district;
-  Null? province;
-  Null? zipcode;
+  String? subDistrict;
+  String? district;
+  String? province;
+  String? zipcode;
   String? status;
-  Null? installationType;
+  String? installationType;
   String? remark;
-  Null? createdAt;
+  String? createdAt;
   String? updatedAt;
   String? segmentationId;
   String? waterMeterFeeId;
-  Null? meterBrandName;
+  String? meterBrandName;
   String? typeId;
   String? condition;
-  Null? incomeSegmentationId;
-  Null? bankPaymentAuto;
-  Null? bankAccount;
+  String? incomeSegmentationId;
+  String? bankPaymentAuto;
+  String? bankAccount;
   String? name;
   String? statusDebtor;
   String? statusDiscount;
   String? road;
-  Null? latitude;
-  Null? longitude;
-  Null? installationDate;
-  Null? manufactureDate;
+  String? latitude;
+  String? longitude;
+  String? installationDate;
+  String? manufactureDate;
   String? segmentationOrder;
   String? formatSegmentation;
   String? fullAddress;
@@ -627,15 +627,10 @@ Future<User_Consume_Data> fetch_user_consume(String recordID) async {
   var k = jsonResponse['data']['customer_water']['name'];
   User_Consume_Data water_user_use = User_Consume_Data.fromJson(jsonCon);
   if (response.statusCode == 200) {
+    //   print(response.body);
   } else {
-    print(response.body);
+    //print(response.body);
   }
 
-  // print(k);
-
   return water_user_use;
-}
-
-void main(List<String> args) {
-  fetch_user_consume('1171730');
 }
