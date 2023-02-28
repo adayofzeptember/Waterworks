@@ -16,7 +16,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
-import 'package:waterworks/provider_profile/ProfileProvider.dart';
 import 'API/get_user_consume.dart';
 import 'offline/utils.dart';
 
