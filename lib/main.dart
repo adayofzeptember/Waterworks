@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -62,6 +63,7 @@ class _Load_PageState extends State<Load_Page> {
   @override
   initState() {
     grantBlue();
+    //testDIO();
     // _Load_And_Go();
     check();
     super.initState();
@@ -101,6 +103,12 @@ class _Load_PageState extends State<Load_Page> {
       );
     }
   }
+
+  // void testDIO() async {
+  //   final dio = Dio();
+  //   final response = await dio.get('https://reqres.in/api/users?page=2');
+  //   print(response.data['data'][0]['id']);
+  // }
 
   Future _Load_And_Go() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();

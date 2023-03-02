@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -28,27 +28,23 @@ class Water_Unit_List extends StatefulWidget {
 }
 
 class _Water_Unit_ListState extends State<Water_Unit_List> {
-
-
-
-
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
   ];
 
- late CustomersDatabase _db;
+  late CustomersDatabase _db;
   late HisInvoicesDatabase _dbInvoices;
   late HisWaterDatabase _dbWater;
   late Future<List<Customers>> customers;
   late Future<List<HisInvoices>> hisInvoices;
   late Future<List<HisWater>> hisWater;
+
+  double downloadPer = 0.0;
   Future<void> downloadUsers() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
-    print(getThatToken.toString());
-
     final response = await http.get(
       Uri.parse(waterWork_domain + 'water_meter_record/index/all'),
       headers: {
@@ -61,13 +57,15 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
       _dbInvoices.deleteAllHisInvoices();
       _dbWater.deleteAllHisWater();
       Map<String, dynamic> resDecode = jsonDecode(response.body);
+      int countData = resDecode['data'].length;
+      int i = 0;
       for (var el in resDecode['data']) {
         Customers customers = Customers(
           id: null,
           data_id: el['id'].toString(),
           customer_id: el['customer_water']['customer_id'],
-          water_number: el['customer_water']['water_number'],
-          area_number: el['customer_water']['area_number'],
+          water_number: el['water_number'],
+          area_number: el['area_number'],
           meter_number: el['customer_water']['meter_number'],
           address: el['customer_water']['address'],
           type_id: el['customer_water']['type_id'],
@@ -77,11 +75,13 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           road: el['customer_water']['road'],
         );
         Customers newWater = await _db.createCustomer(customers);
-        print('customer success');
+        // print('customer success');
         for (var invoice in el['history_invoices']) {
           HisInvoices hisInvoices = HisInvoices(
               data_id: invoice['id'].toString(),
-              customer_water_id: (invoice['customer_water_id'] != null) ? invoice['customer_water_id'] : "",
+              customer_water_id: (invoice['customer_water_id'] != null)
+                  ? invoice['customer_water_id']
+                  : "",
               customer_name: invoice['customer_name'],
               water_number: invoice['water_number'],
               area_number: invoice['area_number'],
@@ -92,8 +92,9 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
               total: invoice['total'],
               sum_service: invoice['sum_service'],
               bill_no: (invoice['bill_no'] != null) ? invoice['bill_no'] : "");
-          HisInvoices newInvoices = await _dbInvoices.createHisInvoices(hisInvoices);
-          print('his invoices success');
+          HisInvoices newInvoices =
+              await _dbInvoices.createHisInvoices(hisInvoices);
+          // print('his invoices success');
         }
         for (var water in el['history_waters']) {
           HisWater hisWater = HisWater(
@@ -105,10 +106,20 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
             current_unit: water['current_unit'],
           );
           HisWater newWater = await _dbWater.createHisWater(hisWater);
-
-          print('his water success');
+          // print('his water success');
         }
+        i++;
+        downloadPer = (i / countData) * 100;
+        setState(() {});
       }
+      Fluttertoast.showToast(
+          msg: 'ดาวน์โหลดสำเร็จ',
+          backgroundColor: Palette.thisGreen,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.TOP,
+          timeInSecForIosWeb: 1,
+          textColor: Colors.white,
+          fontSize: 16.0);
     } else {
       throw Exception("error...");
     }
@@ -145,7 +156,6 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -174,16 +184,30 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
               style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
             ),
           ),
-                  actions: [
-            IconButton(
-              onPressed: () {
-                downloadUsers();
-              },
-              icon: const Icon(
-                Icons.download_for_offline_rounded,
-                color: Palette.thisGreen,
-              ),
-            ),
+          actions: [
+            (downloadPer != 0.0 && downloadPer != 100.0)
+                ? Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Text(
+                        downloadPer.toStringAsFixed(1) + "%",
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      downloadUsers();
+                      // downloadAll();
+                    },
+                    icon: const Icon(
+                      Icons.download_for_offline_rounded,
+                      color: Palette.thisGreen,
+                    ),
+                  ),
           ],
         ),
         body: TabBarView(

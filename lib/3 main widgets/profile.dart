@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> {
               future: fetchProfile_Auth(theTokenOne),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  Profile_Data? data = snapshot.data;
+                  Profile_Data? data = snapshot.data; 
                   return Stack(
                     alignment: Alignment.topCenter,
                     children: [
@@ -173,7 +173,6 @@ class _ProfileState extends State<Profile> {
                               SizedBox(
                                 height: 20,
                               ),
-                          
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(
@@ -194,7 +193,10 @@ class _ProfileState extends State<Profile> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         "ใช้งานแบบออฟไลน์",
-                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 15),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.grey,
+                                            fontSize: 15),
                                       ),
                                     ),
                                   ),

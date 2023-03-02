@@ -16,11 +16,7 @@ class DetailCustomer extends StatefulWidget {
     required this.address,
     required this.matWater,
   }) : super(key: key);
-  String cus_name = "",
-      water_number = "",
-      area_number = "",
-      address = "",
-      matWater = "";
+  String cus_name = "", water_number = "", area_number = "", address = "", matWater = "";
 
   @override
   _DetailCustomerState createState() => _DetailCustomerState();
@@ -49,9 +45,9 @@ class _DetailCustomerState extends State<DetailCustomer> {
     hisInvoices.then(
       (value) {
         for (var el in value) {
-          print(el.area_number);
-          if (el.water_number == widget.water_number &&
-              el.area_number == widget.area_number + ".0") {
+          // print(el.area_number);
+          // print(el.data_id);
+          if (el.water_number == widget.water_number && el.area_number == widget.area_number) {
             invoices.add({
               "date": el.issue_date_format,
               "total": el.total,
@@ -65,8 +61,8 @@ class _DetailCustomerState extends State<DetailCustomer> {
       (value) async {
         print(value.length);
         for (var el in value) {
-          if (el.water_number == widget.water_number &&
-              el.area_number == widget.area_number) {
+          print(el.data_id);
+          if (el.water_number == widget.water_number && el.area_number == widget.area_number) {
             List datetime = el.record_date!.split(' ');
             waterData.add({'month': datetime[0], 'unit': el.current_unit});
             setState(() {});
@@ -191,8 +187,7 @@ class TableData extends StatelessWidget {
     return mockup
         .map(
           (el) => DataRow(
-            color: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
+            color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
               if (mockup.indexOf(el).isEven) {
                 return const Color.fromARGB(255, 242, 242, 242);
               } else {
@@ -246,8 +241,7 @@ class TableDataInvoices extends StatelessWidget {
     return mockup
         .map(
           (el) => DataRow(
-            color: MaterialStateProperty.resolveWith<Color?>(
-                (Set<MaterialState> states) {
+            color: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
               if (mockup.indexOf(el).isEven) {
                 return const Color.fromARGB(255, 242, 242, 242);
               } else {

@@ -423,6 +423,31 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                           ],
                                         )
                                       : Container(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'เลขมาตรวัดน้ำที่แล้ว: ',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17
+                                            ),
+                                      ),
+                                      Text(
+                                        data.previous_unit_format.toString(),
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                            fontWeight: FontWeight.bold,
+                                                   fontSize: 17
+                                            
+                                            ),
+                                            
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
                                   Form(
                                       key: formKey,
                                       child: Column(
@@ -443,7 +468,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             },
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                              labelText: 'กรอกเลขมาตรวัดน้ำ',
+                                              labelText: 'กรอกเลขมาตรวัดน้ำปัจจุบัน',
                                               focusedBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Colors.grey),

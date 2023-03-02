@@ -58,8 +58,7 @@ class _NotyetState extends State<Notyet> {
     super.initState();
   }
 
-
-    void check() async {
+  void check() async {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -79,8 +78,6 @@ class _NotyetState extends State<Notyet> {
       );
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -329,6 +326,7 @@ class _NotyetState extends State<Notyet> {
                                         onTap: (() {
                                           print("user water id: " +
                                               user_id.toString());
+                                              
                                           Navigator.push(
                                             context,
                                             PageTransition(

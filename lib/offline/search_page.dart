@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/offline/detail_customer.dart';
 import 'package:waterworks/offline/models/customer_waterModel.dart';
+import 'package:waterworks/offline/office_route.dart';
 import 'package:waterworks/offline/service/customers_db.dart';
 
 class SearchPage extends StatefulWidget {
@@ -42,12 +43,17 @@ class _SearchPageState extends State<SearchPage> {
   void searchFilter(text) {
     if (text != "") {
       users = usersData
-          .where((user) => user['name'].toLowerCase().contains(text.toLowerCase()) ||
-                  user['water_number'].toLowerCase().contains(text.toLowerCase()) ||
-                  user['area_number'].toLowerCase().contains(text.toLowerCase()) ||
-                  user['address'].toLowerCase().contains(text.toLowerCase())
-              ? true
-              : false)
+          .where((user) =>
+              user['name'].toLowerCase().contains(text.toLowerCase()) ||
+                      user['water_number']
+                          .toLowerCase()
+                          .contains(text.toLowerCase()) ||
+                      user['area_number']
+                          .toLowerCase()
+                          .contains(text.toLowerCase()) ||
+                      user['address'].toLowerCase().contains(text.toLowerCase())
+                  ? true
+                  : false)
           .toList();
     } else {
       users = usersData;
@@ -57,9 +63,8 @@ class _SearchPageState extends State<SearchPage> {
 
   Future<void> deleteAll() async {
     await _db.deleteAllCustomers(); // ทำคำสั่งลบข้อมูลทั้งหมด
-    setState(() {
-      getUser();
-    });
+    getUser();
+    setState(() {});
   }
 
   // sqlite
@@ -119,7 +124,7 @@ class _SearchPageState extends State<SearchPage> {
                       Navigator.push(
                         context,
                         PageTransition(
-                            duration: Duration(milliseconds: 100),
+                            duration: Duration(milliseconds: 300),
                             type: PageTransitionType.rightToLeft,
                             child: DetailCustomer(
                               cus_name: user['name'],
@@ -158,6 +163,7 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           deleteAll();
+          Navigator.push(context, pageOffice());
         },
         label: Text('ลบข้อมูลทั้งหมด'),
         backgroundColor: Colors.red,

@@ -84,6 +84,12 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     String add = data!.customerAddress.toString();
                     var newString = add.substring(0, 6);
+                    String dis = '0';
+                    if (data.discount.toString() == 'null') {
+                      dis = '0';
+                    } else {
+                      dis = data.discount.toString();
+                    }
 
                     toInvoiceModel.inv_number = data.invoiceNumber.toString();
                     toInvoiceModel.inv_user_number =
@@ -99,7 +105,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     toInvoiceModel.inv_unit_use =
                         data.waterMeterRecord!.sumUnit.toString();
                     toInvoiceModel.inv_prapa_cost = data.sum.toString();
-                    toInvoiceModel.inv_discount = data.discount.toString();
+                    toInvoiceModel.inv_discount = dis.toString();
                     toInvoiceModel.inv_service = data.sumService.toString();
                     toInvoiceModel.inv_vat = data.vat.toString();
                     toInvoiceModel.inv_total = data.total.toString();
@@ -121,7 +127,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                       checkWater = false;
                       // print('1');
                     }
-                  
+
                     return Container(
                       width: double.infinity,
                       decoration: BoxDecoration(

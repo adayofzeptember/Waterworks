@@ -79,7 +79,7 @@ class _Search_PageState extends State<Search_Page> {
                     }
                   }),
                   decoration: InputDecoration(
-                      labelText: "ค้นหาด้วยที่อยู่, บ้านเลขที่",
+                      labelText: "ค้นหาด้วยเลข ป. ",
                       // hintText: "ค้นหาด้วยที่อยู่, บ้านเลขที่",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
@@ -141,7 +141,7 @@ class _Search_PageState extends State<Search_Page> {
                                     ),
                                   ),
                                 );
-                                          ;
+                                         
                                         },
                                         child: Container(
                                           height: 150,

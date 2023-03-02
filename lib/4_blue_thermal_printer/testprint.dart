@@ -19,10 +19,7 @@ class PrintHereFucker {
           text = """
 CT~~CD,~CC^~CT~
 ^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
-^
-
-
-17
+^XA
 ^MMT
 ^PW575
 ^LL1840

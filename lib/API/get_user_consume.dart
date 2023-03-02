@@ -72,6 +72,7 @@ class User_Consume_Data {
   String? createdAt;
   String? updatedAt;
   String? areaWaterNumber;
+  String? previous_unit_format;
   CustomerWater? customerWater;
   List<HistoryWaters>? historyWaters;
   List<HistoryInvoices>? historyInvoices;
@@ -95,6 +96,7 @@ class User_Consume_Data {
       this.historyWaters,
       this.historyInvoices,
       this.updatedAt,
+      this.previous_unit_format,
       this.areaWaterNumber,
       this.customerWater});
 
@@ -115,6 +117,7 @@ class User_Consume_Data {
     sumUnit = json['sum_unit'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    previous_unit_format = json['previous_unit_format'];
     areaWaterNumber = json['area_water_number'];
     customerWater = json['customer_water'] != null
         ? new CustomerWater.fromJson(json['customer_water'])
@@ -152,6 +155,7 @@ class User_Consume_Data {
     data['sum_unit'] = this.sumUnit;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['previous_unit_format'] = this.previous_unit_format;
     data['area_water_number'] = this.areaWaterNumber;
     if (this.customerWater != null) {
       data['customer_water'] = this.customerWater!.toJson();
@@ -613,8 +617,10 @@ class Segmentation {
 }
 
 Future<User_Consume_Data> fetch_user_consume(String recordID) async {
+
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var getThatToken = prefs2.get('keyToken');
+
 
   var url = waterWork_domain + 'water_meter_record/show/' + recordID;
   var response = await http.get(Uri.parse(url), headers: {

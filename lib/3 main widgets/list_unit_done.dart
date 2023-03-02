@@ -120,8 +120,8 @@ class _DoneState extends State<Done> {
                       String invoiceID = post['invoice']['id'].toString();
                       return InkWell(
                         onTap: () {
-                         print('invoice id: ' + invoiceID);
-                         print(invoiceID);
+                          print('invoice id: ' + invoiceID);
+
                           Navigator.push(
                             context,
                             PageTransition(

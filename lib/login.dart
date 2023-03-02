@@ -111,7 +111,6 @@ class _LoginState extends State<Login> {
                               }
                             },
                             keyboardType: TextInputType.text,
-
                             decoration: InputDecoration(
                               hintText: 'กรอกบัญชีผู้ใช้',
                               labelStyle: TextStyle(fontSize: 15),
@@ -183,7 +182,6 @@ class _LoginState extends State<Login> {
                                     borderRadius: BorderRadius.circular(10),
                                   )),
                               onPressed: () {
-                                
                                 setState(() {
                                   circleHUD = true;
                                 });
@@ -199,7 +197,6 @@ class _LoginState extends State<Login> {
                                 print(jsonEncode(_login_request));
                                 loginNormal(_login_request);
                               },
-                            
                               child: Padding(
                                 padding: EdgeInsets.all(15.0),
                                 child: Container(
