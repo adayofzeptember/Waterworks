@@ -83,7 +83,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     Invoice_Data? data = snapshot.data;
                     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     String add = data!.customerAddress.toString();
-                    var newString = add.substring(0, 6);
+                    var newAddress = add.substring(0, 6);
                     String dis = '0';
                     if (data.discount.toString() == 'null') {
                       dis = '0';
@@ -173,7 +173,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   children: [
                                     Text('บ้านเลขที่',
                                         style: TextStyle(color: Colors.grey)),
-                                    Text(newString,
+                                    Text(newAddress,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold))
                                   ],
@@ -232,67 +232,16 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      'กุมภาพันธ์ 2566',
+                                      data.issueDate.toString(),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ],
                                 ),
-                                // Text(
-                                //   '100.00 ฿',
-                                //   style: TextStyle(
-                                //       color: Palette.thisGreen,
-                                //       fontWeight: FontWeight.bold),
-                                // )
+                           
                               ],
                             ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     Row(
-                            //       children: [
-                            //         Text(
-                            //           'ค่าน้ำประจำเดือน: ',
-                            //           style: TextStyle(
-                            //               color: Color.fromARGB(
-                            //                   255, 133, 133, 133),
-                            //               fontWeight: FontWeight.bold),
-                            //         ),
-                            //         Text(
-                            //           'ตุลาคม 2560',
-                            //           style: TextStyle(
-                            //               fontWeight: FontWeight.bold),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     Text(
-                            //       '100.00 ฿',
-                            //       style: TextStyle(
-                            //           color: Palette.thisGreen,
-                            //           fontWeight: FontWeight.bold),
-                            //     )
-                            //   ],
-                            // ),
-                            // SizedBox(
-                            //   height: 15,
-                            // ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.end,
-                            //   children: [
-                            //     Text(
-                            //       'รวมเป็นเงิน: ',
-                            //       style: TextStyle(
-                            //           color: Color.fromARGB(255, 133, 133, 133),
-                            //           fontWeight: FontWeight.bold),
-                            //     ),
-                            //     Text(
-                            //       data.sum.toString() + ' ฿',
-                            //       style: TextStyle(
-                            //           color: Palette.thisGreen,
-                            //           fontWeight: FontWeight.bold),
-                            //     )
-                            //   ],
-                            // ),
+                          
                             SizedBox(
                               height: 10,
                             ),

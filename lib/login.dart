@@ -100,7 +100,7 @@ class _LoginState extends State<Login> {
                             height: 5,
                           ),
                           TextFormField(
-                            initialValue: 'watermeter13',
+                          //  initialValue: 'watermeter13',
                             textAlign: TextAlign.left,
                             autofocus: false,
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -135,7 +135,7 @@ class _LoginState extends State<Login> {
                             height: 10,
                           ),
                           TextFormField(
-                            initialValue: 'password',
+                            // initialValue: 'password',
                             obscureText: true,
                             textAlign: TextAlign.left,
                             autofocus: false,
