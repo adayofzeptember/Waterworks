@@ -617,10 +617,8 @@ class Segmentation {
 }
 
 Future<User_Consume_Data> fetch_user_consume(String recordID) async {
-
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var getThatToken = prefs2.get('keyToken');
-
 
   var url = waterWork_domain + 'water_meter_record/show/' + recordID;
   var response = await http.get(Uri.parse(url), headers: {

@@ -326,7 +326,7 @@ class _NotyetState extends State<Notyet> {
                                         onTap: (() {
                                           print("user water id: " +
                                               user_id.toString());
-                                              
+
                                           Navigator.push(
                                             context,
                                             PageTransition(

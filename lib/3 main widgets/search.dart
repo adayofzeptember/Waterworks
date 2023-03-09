@@ -80,7 +80,6 @@ class _Search_PageState extends State<Search_Page> {
                   }),
                   decoration: InputDecoration(
                       labelText: "ค้นหาด้วยเลข ป. ",
-                      // hintText: "ค้นหาด้วยที่อยู่, บ้านเลขที่",
                       prefixIcon: Icon(Icons.search),
                       border: OutlineInputBorder(
                           borderRadius:
@@ -108,7 +107,6 @@ class _Search_PageState extends State<Search_Page> {
                             ) {
                               if (index < data.length) {
                                 final post = data[index];
-
                                 final user_id = post['id'].toString();
                                 final user_name =
                                     post['customer_water']['name'];
@@ -131,17 +129,18 @@ class _Search_PageState extends State<Search_Page> {
                                           Radius.circular(16.0)),
                                       child: InkWell(
                                         onTap: () {
-                                        Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    duration: Duration(milliseconds: 250),
-                                    type: PageTransitionType.rightToLeft,
-                                    child: Use_Water_Info(
-                                      id: user_id,
-                                    ),
-                                  ),
-                                );
-                                         
+                                          Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              duration:
+                                                  Duration(milliseconds: 250),
+                                              type: PageTransitionType
+                                                  .rightToLeft,
+                                              child: Use_Water_Info(
+                                                id: user_id,
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: Container(
                                           height: 150,
@@ -478,6 +477,7 @@ class _Search_PageState extends State<Search_Page> {
 
   Future<void> fetch_unit_searched() async {
     data.clear();
+    print('on call');
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
 
@@ -490,6 +490,7 @@ class _Search_PageState extends State<Search_Page> {
       },
     );
     var jsonResponse = json.decode(response.body);
+    print(jsonResponse.toString());
     final jsonCon = jsonResponse['data']['data'] as List;
     if (response.statusCode == 200) {
       setState(() {

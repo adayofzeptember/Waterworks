@@ -40,8 +40,6 @@ class _ProfileState extends State<Profile> {
   void initState() {
     _getToken();
     check();
-
-    // fetchProfile_Authx(theTokenOne);
     super.initState();
     ;
   }
@@ -103,7 +101,7 @@ class _ProfileState extends State<Profile> {
               future: fetchProfile_Auth(theTokenOne),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  Profile_Data? data = snapshot.data; 
+                  Profile_Data? data = snapshot.data;
                   return Stack(
                     alignment: Alignment.topCenter,
                     children: [
@@ -151,7 +149,7 @@ class _ProfileState extends State<Profile> {
                                 ],
                               ),
                               Container(
-                                height: 20,
+                                height: 30,
                                 child: ListView.builder(
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
@@ -162,9 +160,18 @@ class _ProfileState extends State<Profile> {
                                         children: [
                                           Text(
                                             data.segmentations![indexEP].name
-                                                    .toString() +
-                                                " | ",
+                                                .toString(),
                                             style: TextStyle(fontSize: 17),
+                                          ),
+                                          Text(
+                                            " | ",
+                                            style: TextStyle(
+
+                                              
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold,
+                                                color: Color.fromARGB(
+                                                    255, 177, 165, 165)),
                                           ),
                                         ],
                                       );

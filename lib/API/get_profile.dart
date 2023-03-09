@@ -159,10 +159,11 @@ Future<Profile_Data> fetchProfile_Auth(String token) async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   });
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data'];
-  var k = jsonResponse['data']['id'];
-  Profile_Data user_profileData = Profile_Data.fromJson(jsonCon);
+
+  var jsonResponse = json.decode(response.body)['data'];
+  // var jsonCon = jsonResponse['data'];   
+  // var k = jsonResponse['data']['id'];
+  Profile_Data user_profileData = Profile_Data.fromJson(jsonResponse);
 
   return user_profileData;
 }

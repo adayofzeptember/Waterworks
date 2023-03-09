@@ -430,18 +430,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                         'เลขมาตรวัดน้ำที่แล้ว: ',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 17
-                                            ),
+                                            fontSize: 17),
                                       ),
                                       Text(
                                         data.previous_unit_format.toString(),
                                         style: TextStyle(
-                                          color: Colors.red,
+                                            color: Colors.red,
                                             fontWeight: FontWeight.bold,
-                                                   fontSize: 17
-                                            
-                                            ),
-                                            
+                                            fontSize: 17),
                                       ),
                                     ],
                                   ),
@@ -468,7 +464,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             },
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                              labelText: 'กรอกเลขมาตรวัดน้ำปัจจุบัน',
+                                              labelText:
+                                                  'กรอกเลขมาตรวัดน้ำปัจจุบัน',
                                               focusedBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Colors.grey),
@@ -523,10 +520,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 _writeUnit_Request
                                                         .water_meter_record_id =
                                                     widget.id.toString();
-
-                                                // showDialog(_writeUnit_Request
-                                                //     .current_unit
-                                                //     .toString());
 
                                                 _showAlertDialog(
                                                     _writeUnit_Request
@@ -606,7 +599,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
         circleHUD = false;
       });
       print('----------- write water success -----------');
-      print('invoice id: ' + datax['data']['invoice']['id'].toString());
 
       ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
         backgroundColor: Color.fromARGB(255, 65, 158, 68),
@@ -660,7 +652,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          // <-- SEE HERE
           title: const Text('โปรดตรวจสอบความถูกต้อง'),
           content: SingleChildScrollView(
             child: Column(

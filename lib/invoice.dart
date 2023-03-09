@@ -356,33 +356,33 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                       )
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('ส่วนลด',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 133, 133, 133),
-                                              fontWeight: FontWeight.bold)),
-                                      Row(
-                                        children: [
-                                          Text(data.discount.toString()),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('บาท',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 133, 133, 133),
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Text('ส่วนลด',
+                                  //         style: TextStyle(
+                                  //             color: Color.fromARGB(
+                                  //                 255, 133, 133, 133),
+                                  //             fontWeight: FontWeight.bold)),
+                                  //     Row(
+                                  //       children: [
+                                  //         Text(data.discount.toString()),
+                                  //         SizedBox(
+                                  //           width: 10,
+                                  //         ),
+                                  //         Text('บาท',
+                                  //             style: TextStyle(
+                                  //                 color: Color.fromARGB(
+                                  //                     255, 133, 133, 133),
+                                  //                 fontWeight: FontWeight.bold))
+                                  //       ],
+                                  //     )
+                                  //   ],
+                                  // ),
                                   SizedBox(
                                     height: 5,
                                   ),
@@ -440,33 +440,33 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   SizedBox(
                                     height: 5,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('ค้างชำระ',
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 133, 133, 133),
-                                              fontWeight: FontWeight.bold)),
-                                      Row(
-                                        children: [
-                                          Text('0'),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Text('เดือน',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 133, 133, 133),
-                                                  fontWeight: FontWeight.bold))
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: [
+                                  //     Text('ค้างชำระ',
+                                  //         style: TextStyle(
+                                  //             color: Color.fromARGB(
+                                  //                 255, 133, 133, 133),
+                                  //             fontWeight: FontWeight.bold)),
+                                  //     Row(
+                                  //       children: [
+                                  //         Text('0'),
+                                  //         SizedBox(
+                                  //           width: 10,
+                                  //         ),
+                                  //         Text('เดือน',
+                                  //             style: TextStyle(
+                                  //                 color: Color.fromARGB(
+                                  //                     255, 133, 133, 133),
+                                  //                 fontWeight: FontWeight.bold))
+                                  //       ],
+                                  //     )
+                                  //   ],
+                                  // ),
+                                  // SizedBox(
+                                  //   height: 5,
+                                  // ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
