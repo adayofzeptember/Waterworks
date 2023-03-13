@@ -243,6 +243,7 @@ class _DoneState extends State<Done> {
                                                     width: 3,
                                                   ),
                                                   Container(
+                                                    width: 200,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.all(
@@ -258,6 +259,8 @@ class _DoneState extends State<Done> {
                                                           left: 5, right: 5),
                                                       child: Text(
                                                         address,
+                                                         overflow:
+                                                          TextOverflow.ellipsis,
                                                         style: TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:

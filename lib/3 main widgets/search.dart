@@ -92,7 +92,13 @@ class _Search_PageState extends State<Search_Page> {
                     ? Padding(
                         padding: const EdgeInsets.only(top: 50),
                         child: Center(
-                          child: CircularProgressIndicator(),
+                          child: Text(
+                            '.....'.toString(),
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Palette.thisGreen),
+                          ),
                         ),
                       )
                     : haveSearched
@@ -106,6 +112,7 @@ class _Search_PageState extends State<Search_Page> {
                               index,
                             ) {
                               if (index < data.length) {
+                                bool statusCheck = true;
                                 final post = data[index];
                                 final user_id = post['id'].toString();
                                 final user_name =
@@ -114,12 +121,18 @@ class _Search_PageState extends State<Search_Page> {
                                 final area_number = post['area_number'];
                                 final address =
                                     post['customer_water']['address'];
+                                var status =
+                                    post['customer_water']['status'].toString();
+
                                 var meter_number = post['customer_water']
                                         ['meter_number']
                                     .toString();
 
                                 if (meter_number == 'null') {
                                   meter_number = '00';
+                                }
+                                if (status == "Normal") {
+                                  statusCheck = false;
                                 }
 
                                 return Column(
@@ -198,6 +211,51 @@ class _Search_PageState extends State<Search_Page> {
                                                                           27)),
                                                             ),
                                                           ),
+                                                          statusCheck
+                                                              ? Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 10),
+                                                                  child:
+                                                                      Container(
+                                                                    decoration: BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(
+                                                                                5)),
+                                                                        color: Color.fromARGB(
+                                                                            255,
+                                                                            230,
+                                                                            87,
+                                                                            87)),
+                                                                    child: Padding(
+                                                                        padding: EdgeInsets.only(left: 5, right: 5),
+                                                                        child: Row(
+                                                                          children: [
+                                                                            Text(
+                                                                              'ตัดมาตร',
+                                                                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                                            ),
+                                                                            Icon(
+                                                                              Icons.close,
+                                                                              color: Colors.white,
+                                                                            ),
+                                                                          ],
+                                                                        )
+
+                                                                        // Text(
+                                                                        //   'โดนปิด',
+                                                                        //   style: TextStyle(
+                                                                        //       fontSize: 13,
+                                                                        //       fontWeight:
+                                                                        //           FontWeight
+                                                                        //               .bold,
+                                                                        //       color: Colors
+                                                                        //           .black),
+                                                                        // ),
+                                                                        ),
+                                                                  ),
+                                                                )
+                                                              : Container()
                                                         ],
                                                       ),
                                                       Container(
@@ -244,6 +302,7 @@ class _Search_PageState extends State<Search_Page> {
                                                             width: 3,
                                                           ),
                                                           Container(
+                                                            width: 200,
                                                             decoration: BoxDecoration(
                                                                 borderRadius: BorderRadius
                                                                     .all(Radius
@@ -262,9 +321,13 @@ class _Search_PageState extends State<Search_Page> {
                                                                       right: 5),
                                                               child: Text(
                                                                 address,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         13,
+                                                                        
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold,

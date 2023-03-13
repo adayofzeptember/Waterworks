@@ -98,7 +98,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     toInvoiceModel.inv_user_name = data.customerName.toString();
                     toInvoiceModel.inv_user_address =
                         data.customerAddress.toString();
-                    //?-------------------------------
+                    //?---------------------------------------------------------
+                    //get data
                     toInvoiceModel.inv_date = data.issueDate.toString();
                     toInvoiceModel.inv_matr_number =
                         data.waterMeterRecord!.currentUnit.toString();
@@ -238,10 +239,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                     ),
                                   ],
                                 ),
-                           
                               ],
                             ),
-                          
                             SizedBox(
                               height: 10,
                             ),
@@ -467,6 +466,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   // SizedBox(
                                   //   height: 5,
                                   // ),
+
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -496,7 +496,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   ),
                                   Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween, 
                                     children: [
                                       Text('รวมเงินที่ต้องชำระทั้งสิ้น',
                                           style: TextStyle(
@@ -621,6 +621,19 @@ class _Invoice_PageState extends State<Invoice_Page> {
                           ],
                         ),
                       ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Center(
+                            child: Text(
+                          snapshot.error.toString() + ' ' + snapshot.toString(),
+                          style: TextStyle(color: Colors.black),
+                        )),
+                      ],
                     );
                   }
 

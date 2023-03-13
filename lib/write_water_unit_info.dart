@@ -430,19 +430,19 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                         'เลขมาตรวัดน้ำที่แล้ว: ',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 17),
+                                            fontSize: 19),
                                       ),
                                       Text(
                                         data.previous_unit_format.toString(),
                                         style: TextStyle(
                                             color: Colors.red,
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 17),
+                                            fontSize: 19),
                                       ),
                                     ],
                                   ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 15,
                                   ),
                                   Form(
                                       key: formKey,
@@ -464,8 +464,10 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             },
                                             keyboardType: TextInputType.number,
                                             decoration: InputDecoration(
-                                              labelText:
-                                                  'กรอกเลขมาตรวัดน้ำปัจจุบัน',
+                                              hintText:
+                                                  'กรอกมาตรวัดน้ำปัจจุบัน',
+                                              hintStyle:
+                                                  TextStyle(color: Colors.grey),
                                               focusedBorder: OutlineInputBorder(
                                                   borderSide: BorderSide(
                                                       color: Colors.grey),
@@ -547,7 +549,21 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                       )),
                                 ],
                               );
+                            } else if (snapshot.hasError) {
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Center(
+                                      child: Text(
+                                    snapshot.error.toString(),
+                                    style: TextStyle(color: Colors.black),
+                                  )),
+                                ],
+                              );
                             }
+
                             return Column(
                               children: [
                                 SizedBox(
@@ -600,31 +616,31 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       });
       print('----------- write water success -----------');
 
-      ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-        backgroundColor: Color.fromARGB(255, 65, 158, 68),
-        elevation: 0,
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'จดหน่วยน้ำเสร็จสิ้น ',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-            Icon(
-              Icons.check,
-              color: Colors.white,
-            )
-          ],
-        ),
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).size.height - 100,
-            right: 20,
-            left: 20),
-      ));
+      // ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
+      //   backgroundColor: Color.fromARGB(255, 65, 158, 68),
+      //   elevation: 0,
+      //   content: Row(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     children: [
+      //       Text(
+      //         'จดหน่วยน้ำเสร็จสิ้น ',
+      //         style: TextStyle(color: Colors.white, fontSize: 18),
+      //       ),
+      //       Icon(
+      //         Icons.check,
+      //         color: Colors.white,
+      //       )
+      //     ],
+      //   ),
+      //   behavior: SnackBarBehavior.floating,
+      //   shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.circular(24),
+      //   ),
+      //   margin: EdgeInsets.only(
+      //       bottom: MediaQuery.of(context).size.height - 100,
+      //       right: 20,
+      //       left: 20),
+      // ));
       Navigator.push(
         context,
         PageTransition(

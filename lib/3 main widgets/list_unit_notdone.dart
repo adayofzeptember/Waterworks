@@ -109,17 +109,22 @@ class _NotyetState extends State<Notyet> {
                   ) {
                     if (index < data.length) {
                       final post = data[index];
-
                       final user_id = post['id'].toString();
                       final user_name = post['customer_water']['name'];
                       final water_number = post['water_number'];
                       final area_number = post['area_number'];
                       final address = post['customer_water']['address'];
+                      bool statusCheck = true;
+                      var status = post['customer_water']['status'].toString();
+
                       var meter_number =
                           post['customer_water']['meter_number'].toString();
 
                       if (meter_number == 'null') {
                         meter_number = '00';
+                      }
+                      if (status == "Normal") {
+                        statusCheck = false;
                       }
 
                       return Column(
@@ -130,16 +135,16 @@ class _NotyetState extends State<Notyet> {
                             child: InkWell(
                               onTap: () {
                                 print('user id: ' + user_id);
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     duration: Duration(milliseconds: 250),
-                                //     type: PageTransitionType.rightToLeft,
-                                //     child: Use_Water_Info(
-                                //       id: user_id,
-                                //     ),
-                                //   ),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    duration: Duration(milliseconds: 250),
+                                    type: PageTransitionType.rightToLeft,
+                                    child: Use_Water_Info(
+                                      id: user_id,
+                                    ),
+                                  ),
+                                );
                                 ;
                               },
                               child: Container(
@@ -184,6 +189,61 @@ class _NotyetState extends State<Notyet> {
                                                             255, 240, 41, 27)),
                                                   ),
                                                 ),
+                                                statusCheck
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 10),
+                                                        child: Container(
+                                                          decoration: BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              5)),
+                                                              color: Color
+                                                                  .fromARGB(
+                                                                      255,
+                                                                      230,
+                                                                      87,
+                                                                      87)),
+                                                          child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .only(
+                                                                      left: 5,
+                                                                      right: 5),
+                                                              child: Row(
+                                                                children: [
+                                                                  Text(
+                                                                    'ตัดมาตร',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white,
+                                                                        fontWeight:
+                                                                            FontWeight.bold),
+                                                                  ),
+                                                                  Icon(
+                                                                    Icons.close,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ],
+                                                              )
+
+                                                              // Text(
+                                                              //   'โดนปิด',
+                                                              //   style: TextStyle(
+                                                              //       fontSize: 13,
+                                                              //       fontWeight:
+                                                              //           FontWeight
+                                                              //               .bold,
+                                                              //       color: Colors
+                                                              //           .black),
+                                                              // ),
+                                                              ),
+                                                        ),
+                                                      )
+                                                    : Container()
                                               ],
                                             ),
                                             Container(
@@ -218,6 +278,7 @@ class _NotyetState extends State<Notyet> {
                                                   width: 3,
                                                 ),
                                                 Container(
+                                                  width: 200,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.all(
@@ -230,6 +291,8 @@ class _NotyetState extends State<Notyet> {
                                                         left: 5, right: 5),
                                                     child: Text(
                                                       address,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyle(
                                                           fontSize: 13,
                                                           fontWeight:
