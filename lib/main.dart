@@ -20,7 +20,6 @@ import 'package:waterworks/login.dart';
 import 'API/get_user_consume.dart';
 import 'offline/utils.dart';
 
-
 void main() {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();

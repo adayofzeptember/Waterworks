@@ -11,7 +11,8 @@ class MyApp extends StatefulWidget {
   @override
   final ToInvoice invoideModel;
   String checkWaterWrong;
-  MyApp({Key? key, required this.invoideModel,required this.checkWaterWrong}) : super(key: key);
+  MyApp({Key? key, required this.invoideModel, required this.checkWaterWrong})
+      : super(key: key);
   _MyAppState createState() => new _MyAppState();
 }
 
@@ -20,13 +21,12 @@ class _MyAppState extends State<MyApp> {
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
 
-
   bool _connected = false;
   PrintHereFucker toPrint = PrintHereFucker();
 
   @override
   void initState() {
-    print('ความปกติ: '+widget.checkWaterWrong);
+    print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
 
     super.initState();
@@ -186,35 +186,33 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ),
                     SizedBox(width: 10),
-                  
                   ],
                 ),
                 SizedBox(height: 10),
               ],
             ),
-              ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.blue),
-                      onPressed: () {
-                        initPlatformState();
-                      },
-                      child: const Text(
-                        'Refresh',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.blue),
+              onPressed: () {
+                initPlatformState();
+              },
+              child: const Text(
+                'Refresh',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 10.0, right: 10.0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.brown),
                 onPressed: () {
-                   toPrint.printInvoice_Now(widget.invoideModel, widget.checkWaterWrong.toString());
+                  toPrint.printInvoice_Now(
+                      widget.invoideModel, widget.checkWaterWrong.toString());
                 },
                 child: const Text('พิมพ์เอกสาร',
                     style: TextStyle(color: Colors.white)),
               ),
             ),
-            
-            
           ],
         ),
       ),

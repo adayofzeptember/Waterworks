@@ -32,13 +32,13 @@ class _NotyetState extends State<Notyet> {
   ];
 
   List<String> epItems = ['ตอน 1', 'ตอน 2', 'ตอน 3'];
-//!----------------------------------
+//!-----------------------------------------------------
   var _bottomNavIndex = 0;
   final iconList = <IconData>[
     Icons.brightness_5,
     Icons.brightness_4,
   ];
-//!----------------------------------
+//!------------------------------------------------------
 
   List data = [];
   ScrollController _scrollController = ScrollController();
@@ -116,7 +116,6 @@ class _NotyetState extends State<Notyet> {
                       final address = post['customer_water']['address'];
                       bool statusCheck = true;
                       var status = post['customer_water']['status'].toString();
-
                       var meter_number =
                           post['customer_water']['meter_number'].toString();
 
@@ -278,7 +277,6 @@ class _NotyetState extends State<Notyet> {
                                                   width: 3,
                                                 ),
                                                 Container(
-                                                  width: 200,
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.all(
@@ -480,12 +478,10 @@ class _NotyetState extends State<Notyet> {
 
     String jsonsDataString = response.body;
     var datax = json.decode(jsonsDataString);
-
     // var jsonResponse = json.decode(response.body);  เอาตัวนีี้ไปแทน datax
     final jsonCon = datax['data']['data'] as List;
     if (response.statusCode == 200) {
       //print(response.body);
-
       if (this.mounted) {
         setState(() {
           data = data + jsonCon;
@@ -502,16 +498,13 @@ class _NotyetState extends State<Notyet> {
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       singleChildScrollController.addListener(_scrollListener);
-
       if (this.mounted) {
         setState(() {
           isLoadingMore = true;
         });
       }
       page = page + 1;
-
       await fetch_unit_notDone();
-
       if (this.mounted) {
         setState(() {
           isLoadingMore = false;
