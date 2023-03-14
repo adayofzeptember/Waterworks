@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,9 +46,7 @@ class _DoneState extends State<Done> {
   void check() async {
     try {
       final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        
-      }
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
     } on SocketException catch (_) {
       print('not connected');
       showMyDialog(
@@ -67,7 +64,6 @@ class _DoneState extends State<Done> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: BlocBuilder<DoneBloc, DoneState>(
         builder: (context, state) {
@@ -196,7 +192,7 @@ class _DoneState extends State<Done> {
                                             Text(
                                               'ที่อยู่:',
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.bold,
                                                   color: Color.fromARGB(
                                                       255, 83, 83, 83)),
@@ -207,11 +203,9 @@ class _DoneState extends State<Done> {
                                             Container(
                                               width: 200,
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(5)),
-                                                  color: Color.fromARGB(
-                                                      255, 241, 241, 241)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5)),
+                                              ),
                                               child: Padding(
                                                 padding: EdgeInsets.only(
                                                     left: 5, right: 5),
@@ -222,7 +216,7 @@ class _DoneState extends State<Done> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(
-                                                      fontSize: 13,
+                                                      fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.bold,
                                                       color: Colors.black),

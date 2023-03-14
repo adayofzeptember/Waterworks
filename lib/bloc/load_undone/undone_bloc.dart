@@ -15,7 +15,7 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           isLoading: true,
         )) {
     
-    on<LoadData>((event, emit) async {
+    on<Load_unDoneData >((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       try {

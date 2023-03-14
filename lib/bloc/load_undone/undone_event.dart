@@ -7,5 +7,5 @@ abstract class NotWriteEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadData extends NotWriteEvent {}
+class Load_unDoneData extends NotWriteEvent {}
 

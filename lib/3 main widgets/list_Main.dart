@@ -19,7 +19,7 @@ import '../offline/models/history_waterModel.dart';
 import '../offline/service/customers_db.dart';
 import '../offline/service/hisinvoices_db.dart';
 import '../offline/service/hiswater_db .dart';
-import 'ld2.dart';
+
 
 
 class Water_Unit_List extends StatefulWidget {
@@ -30,11 +30,6 @@ class Water_Unit_List extends StatefulWidget {
 }
 
 class _Water_Unit_ListState extends State<Water_Unit_List> {
-  var _bottomNavIndex = 0;
-  final iconList = <IconData>[
-    Icons.brightness_5,
-    Icons.brightness_4,
-  ];
 
   late CustomersDatabase _db;
   late HisInvoicesDatabase _dbInvoices;

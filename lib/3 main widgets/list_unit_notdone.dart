@@ -31,11 +31,11 @@ class _NotyetState extends State<Notyet> {
   @override
   void initState() {
     super.initState();
-    context.read<NotWriteBloc>().add(LoadData());
+    context.read<NotWriteBloc>().add(Load_unDoneData ());
     scController.addListener(() {
       if (scController.position.pixels ==
           scController.position.maxScrollExtent) {
-        context.read<NotWriteBloc>().add(LoadData());
+        context.read<NotWriteBloc>().add(Load_unDoneData ());
       }
     });
   }
@@ -204,7 +204,7 @@ class _NotyetState extends State<Notyet> {
                                         Text(
                                           'ที่อยู่:',
                                           style: TextStyle(
-                                              fontSize: 13,
+                                              fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Color.fromARGB(
                                                   255, 83, 83, 83)),
@@ -213,11 +213,11 @@ class _NotyetState extends State<Notyet> {
                                           width: 3,
                                         ),
                                         Container(
+                                          width: 200,
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(5)),
-                                              color: Color.fromARGB(
-                                                  255, 221, 221, 221)),
+                                             ),
                                           child: Padding(
                                             padding: EdgeInsets.only(
                                                 left: 5, right: 5),
@@ -226,7 +226,7 @@ class _NotyetState extends State<Notyet> {
                                                   .customerAddress,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                  fontSize: 13,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.bold,
                                                   color: Colors.black),
                                             ),
