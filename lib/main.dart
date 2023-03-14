@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,9 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:waterworks/login.dart';
 import 'API/get_user_consume.dart';
+
+import 'bloc/load_done/bloc/done_bloc.dart';
+import 'bloc/load_undone/undone_bloc.dart';
 import 'offline/utils.dart';
 
 void main() {
@@ -32,22 +36,28 @@ class Start_Page_Waterworks extends StatelessWidget {
   Start_Page_Waterworks({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        DefaultCupertinoLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => NotWriteBloc()),
+        BlocProvider(create: (context) => DoneBloc()),
       ],
-      supportedLocales: [
-        Locale('th', 'TH'),
-      ],
-      theme: ThemeData(
-        primarySwatch: Palette.thisGreen,
-        fontFamily: 'Kanit',
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('th', 'TH'),
+        ],
+        theme: ThemeData(
+          primarySwatch: Palette.thisGreen,
+          fontFamily: 'Kanit',
+        ),
+        home: Load_Page(),
       ),
-      home: Load_Page(),
     );
   }
 }
@@ -63,8 +73,6 @@ class _Load_PageState extends State<Load_Page> {
   @override
   initState() {
     grantBlue();
-    //testDIO();
-    // _Load_And_Go();
     check();
     super.initState();
   }
@@ -103,12 +111,6 @@ class _Load_PageState extends State<Load_Page> {
       );
     }
   }
-
-  // void testDIO() async {
-  //   final dio = Dio();
-  //   final response = await dio.get('https://reqres.in/api/users?page=2');
-  //   print(response.data['data'][0]['id']);
-  // }
 
   Future _Load_And_Go() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();

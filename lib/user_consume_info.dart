@@ -37,15 +37,15 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: SizedBox(
+                  child: const SizedBox(
                       width: 50,
                       height: 50,
                       child: Icon(Icons.arrow_back_ios_new,
                           color: Palette.thisGreen))),
-              SizedBox(
+              const SizedBox(
                 width: 70,
               ),
-              Text(
+              const Text(
                 'ข้อมูลผู้ใช้น้ำ',
                 style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
               ),
@@ -83,7 +83,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                         // ),
                       
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Color.fromARGB(255, 245, 245, 245),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5))),
@@ -96,29 +96,29 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                               children: [
                                 Text(
                                   data!.customerWater!.name.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
-                                SizedBox(
+                               const SizedBox(
                                   height: 15,
                                 ),
                                 Text(
                                   'บ้านเลขที่ ' +
                                       data.customerWater!.address.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                       color: Color.fromARGB(255, 83, 83, 83)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'มาตรวัดน้ำ:',
                                       style: TextStyle(
                                           fontSize: 15,
@@ -126,32 +126,32 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                           color:
                                               Color.fromARGB(255, 83, 83, 83)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5)),
                                           color: Color.fromARGB(
                                               255, 221, 221, 221)),
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.only(left: 5, right: 5),
+                                            const EdgeInsets.only(left: 5, right: 5),
                                         child: Text(
                                           data.customerWater!.meterNumber
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
-                                    Text(
+                                    const Text(
                                       'เลข ป:',
                                       style: TextStyle(
                                           fontSize: 15,
@@ -159,31 +159,31 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                           color:
                                               Color.fromARGB(255, 83, 83, 83)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5)),
                                           color: Color.fromARGB(
                                               255, 221, 221, 221)),
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.only(left: 5, right: 5),
+                                            const EdgeInsets.only(left: 5, right: 5),
                                         child: Text(
                                           data.waterNumber.toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
                                         ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
-                                    Text(
+                                    const Text(
                                       'เขต:',
                                       style: TextStyle(
                                           fontSize: 15,
@@ -191,21 +191,21 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                           color:
                                               Color.fromARGB(255, 83, 83, 83)),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     Container(
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(5)),
                                           color: Color.fromARGB(
                                               255, 221, 221, 221)),
                                       child: Padding(
                                         padding:
-                                            EdgeInsets.only(left: 5, right: 5),
+                                            const EdgeInsets.only(left: 5, right: 5),
                                         child: Text(
                                           data.areaNumber.toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.black),
@@ -218,13 +218,13 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
                           width: double.maxFinite,
                           padding: const EdgeInsets.all(5.0),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             border: Border(
                               left: BorderSide(
                                   width: 5.0, color: Palette.thisGreen),
@@ -232,9 +232,9 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                           ),
                           child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
+                              children: const [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 5.0),
+                                  padding: EdgeInsets.only(left: 5.0),
                                   child: Text(
                                     'ประวัติการใช้น้ำ',
                                     style: TextStyle(
@@ -246,11 +246,11 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                 ),
                               ]),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Palette.thisGreen,
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
@@ -259,26 +259,26 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Row(
-                              children: [
-                                Text(
+                              children: const [
+                                 Text(
                                   'เดือน',
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 120,
                                 ),
-                                Text('หน่วย',
+                                const Text('หน่วย',
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold)),
-                                SizedBox(
+                                const SizedBox(
                                   width: 65,
                                 ),
-                                Text('จำนวนเงิน',
+                                const Text('จำนวนเงิน',
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Colors.white,
@@ -292,11 +292,11 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                         ListView.builder(
                             scrollDirection: Axis.vertical,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemCount: data.historyWaters!.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Color.fromARGB(255, 233, 233, 233),
                                 ),
                                 child: Padding(
@@ -307,24 +307,24 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                         data.historyWaters![index].respDate
                                             .toString()
                                             .substring(0, 10),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
                                             color: Palette.thisGreen,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(width: 60),
+                                      const SizedBox(width: 60),
                                       Text(
                                           data.historyWaters![index].currentUnit
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 18,
                                               color: Palette.thisGreen,
                                               fontWeight: FontWeight.bold)),
-                                      SizedBox(width: 90),
+                                      const SizedBox(width: 90),
                                       Text(
                                           data.historyWaters![index].sumUnit
                                               .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 18,
                                               color: Palette.thisGreen,
                                               fontWeight: FontWeight.bold)),
@@ -338,10 +338,10 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                   }
                   return Column(
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
-                      Center(
+                      const Center(
                           child: CircularProgressIndicator(
                         color: Palette.thisGreen,
                       )),
