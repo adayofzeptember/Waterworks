@@ -13,13 +13,14 @@ import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/API/post_login.dart';
+import 'package:waterworks/ETC/progressHUD.dart';
+import 'package:waterworks/service/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/First_Page_bottomBar.dart';
 import 'package:http/http.dart' as http;
 
-import 'ETC/progressHUD.dart';
+import 'First_Page_bottomBar.dart';
+
 
 String deviceDetail = '';
 String storedToken = '';

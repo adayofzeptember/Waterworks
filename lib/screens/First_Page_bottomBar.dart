@@ -1,14 +1,16 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:waterworks/3%20main%20widgets/profile.dart';
-import 'package:waterworks/3%20main%20widgets/search.dart';
+import 'package:waterworks/screens/3%20main%20screens/profile.dart';
+import 'package:waterworks/screens/3%20main%20screens/search.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/write_water_unit_info.dart';
-import '3 main widgets/list_Main.dart';
+import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
+import 'package:waterworks/bloc/search/search_bloc.dart';
+import '3 main screens/list_Main.dart';
+
 
 class Menu_Page extends StatefulWidget {
   Menu_Page({Key? key}) : super(key: key);
@@ -23,6 +25,10 @@ class _Menu_PageState extends State<Menu_Page> {
   void _onItemTapped(int index2) {
     setState(() {
       _index = index2;
+      if (_index == 1) {
+        context.read<SearchBloc>().add(ClearSearch());
+      }
+      context.read<NotWriteBloc>().add(Load_unDoneData());
     });
   }
 

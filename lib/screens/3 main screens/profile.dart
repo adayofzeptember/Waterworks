@@ -14,14 +14,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/First_Page_bottomBar.dart';
-import 'package:waterworks/login.dart';
 import 'package:http/http.dart' as http;
-import '../API/get_profile.dart';
-import '../ETC/progressHUD.dart';
-import '../main.dart';
-import '../offline/office_route.dart';
-import '../offline/utils.dart';
+import '../../main.dart';
+import '../../service/get_profile.dart';
+import '../../ETC/progressHUD.dart';
+import '../../offline/office_route.dart';
+import '../../offline/utils.dart';
 
 String theTokenOne = '';
 String count = '';
@@ -130,7 +128,7 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 30,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -148,6 +146,9 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ],
                               ),
+                                  SizedBox(
+                                height: 5,
+                              ),
                               Container(
                                 height: 30,
                                 child: ListView.builder(
@@ -164,10 +165,8 @@ class _ProfileState extends State<Profile> {
                                             style: TextStyle(fontSize: 17),
                                           ),
                                           Text(
-                                            " | ",
+                                            " , ",
                                             style: TextStyle(
-
-                                              
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.bold,
                                                 color: Color.fromARGB(
@@ -256,6 +255,28 @@ class _ProfileState extends State<Profile> {
                         ),
                       )
                     ],
+                  );
+                }
+                if (snapshot.hasError) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            'ตรวจสอบสัญญาณเครือข่าย!',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          Text(snapshot.error.toString()),
+                        ],
+                      ),
+                    ),
                   );
                 }
 

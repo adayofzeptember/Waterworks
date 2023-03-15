@@ -4,8 +4,8 @@ import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:waterworks/4_blue_thermal_printer/testprint.dart';
-import '../ETC/model.dart';
+import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
+import '../models/invoice_model.dart';
 
 class MyApp extends StatefulWidget {
   @override

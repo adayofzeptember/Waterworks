@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/ETC/model.dart';
-import 'package:waterworks/printer%20libs/6.esc_pos.dart';
+import 'package:waterworks/models/invoice_model.dart';
+import 'package:waterworks/ETC/printer%20libs/6.esc_pos.dart';
 import 'package:waterworks/ETC/water_unit_irregular.dart';
-import 'package:waterworks/write_water_unit_info.dart';
-import '4_blue_thermal_printer/blue_main.dart';
-import 'API/get_invoice.dart';
-import 'ETC/color_green.dart';
+import 'package:waterworks/service/get_invoice.dart';
+import '../ETC/color_green.dart';
+import '../blue_thermal_printer/print_page.dart';
 import 'First_Page_bottomBar.dart';
 
 //!ใบแจ้งหนี้ไปหน้าปริ๊น
@@ -125,7 +124,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                       toInvoiceModel.inv_total = data.total.toString();
 
                       toInvoiceModel.inv_notPay = data.countInvoices.toString();
-                      toInvoiceModel.godTotal = data.sumTotal.toString();
+                       toInvoiceModel.godTotal = data.sumTotal.toString();
 
                       toInvoiceModel.inv_dueDate = data.dueDate.toString();
 
@@ -649,19 +648,20 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         ),
                       );
                     } else if (snapshot.hasError) {
-                      return Column(
-                        children: [
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Center(
-                              child: Text(
-                            snapshot.error.toString() +
-                                ' ' +
-                                snapshot.toString(),
-                            style: const TextStyle(color: Colors.black),
-                          )),
-                        ],
+                      return Center(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            Text(
+                              snapshot.error.toString() ,
+                    
+                     
+                              style: const TextStyle(color: Colors.red),
+                            ),
+                          ],
+                        ),
                       );
                     }
 

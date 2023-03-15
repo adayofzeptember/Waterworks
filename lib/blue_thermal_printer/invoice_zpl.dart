@@ -4,8 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:waterworks/4_blue_thermal_printer/enum.dart';
-import 'package:waterworks/ETC/model.dart';
+import 'package:waterworks/blue_thermal_printer/print_format.dart';
+import 'package:waterworks/models/invoice_model.dart';
 
 class PrintHereFucker {
   printInvoice_Now(ToInvoice thisInvoice, String check) async {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/write_water_unit_info.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
-import 'API/get_user_consume.dart';
-import 'ETC/api_domain_url.dart';
-import 'ETC/color_green.dart';
+
+import '../ETC/color_green.dart';
+import '../service/get_user_consume.dart';
+
 
 class Use_Water_Info extends StatefulWidget {
   String? id = '';

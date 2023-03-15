@@ -16,15 +16,16 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/First_Page_bottomBar.dart';
-import 'package:waterworks/login.dart';
-import 'API/get_user_consume.dart';
-
-import 'bloc/load_done/bloc/done_bloc.dart';
-import 'bloc/load_undone/undone_bloc.dart';
+import 'package:waterworks/bloc/load_done/done_bloc.dart';
+import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
+import 'package:waterworks/bloc/search/search_bloc.dart';
+import 'package:waterworks/screens/First_Page_bottomBar.dart';
+import 'package:waterworks/screens/login.dart';
 import 'offline/utils.dart';
 
+
 void main() {
+  
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
   SystemUiOverlayStyle(statusBarColor: Colors.transparent);
@@ -40,6 +41,7 @@ class Start_Page_Waterworks extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => NotWriteBloc()),
         BlocProvider(create: (context) => DoneBloc()),
+        BlocProvider(create: (context) => SearchBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

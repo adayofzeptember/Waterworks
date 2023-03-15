@@ -6,19 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/3%20main%20widgets/list_unit_done.dart';
-import 'package:waterworks/3%20main%20widgets/list_unit_notdone.dart';
+import 'package:waterworks/screens/3%20main%20screens/list_unit_done.dart';
+import 'package:waterworks/screens/3%20main%20screens/list_unit_notdone.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/write_water_unit_info.dart';
 import 'package:http/http.dart' as http;
-import '../offline/models/customer_waterModel.dart';
-import '../offline/models/history_invoicesModel.dart';
-import '../offline/models/history_waterModel.dart';
-import '../offline/service/customers_db.dart';
-import '../offline/service/hisinvoices_db.dart';
-import '../offline/service/hiswater_db .dart';
+import '../../offline/models/customer_waterModel.dart';
+import '../../offline/models/history_invoicesModel.dart';
+import '../../offline/models/history_waterModel.dart';
+import '../../offline/service/customers_db.dart';
+import '../../offline/service/hisinvoices_db.dart';
+import '../../offline/service/hiswater_db .dart';
 
 
 
@@ -132,21 +130,21 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     customers = _db.selectAllCustomers();
     customers.then(
       (value) {
-        print(value.length);
+       // print(value.length);
       },
     );
 
     hisInvoices = _dbInvoices.selectAllHisInvoices();
     hisInvoices.then(
       (value) {
-        print(value.length);
+        //print(value.length);
       },
     );
 
     hisWater = _dbWater.selectAllHisWater();
     hisWater.then(
       (value) {
-        print(value.length);
+        // print(value.length);
       },
     );
 

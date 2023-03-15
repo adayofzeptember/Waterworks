@@ -5,7 +5,11 @@ class Done_Model {
       required this.waterNumber,
       required this.areaNumber,
       required this.customerAddress,
-      required this.meterNumber});
+      required this.meterNumber,
+      required this.invoiceID
+      
+      
+      });
 
   int id;
   String customerName;
@@ -13,4 +17,5 @@ class Done_Model {
   String areaNumber;
   String customerAddress;
   String meterNumber;
+  int invoiceID;
 }

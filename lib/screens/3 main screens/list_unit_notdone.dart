@@ -12,11 +12,12 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/write_water_unit_info.dart';
-import '../bloc/load_undone/undone_bloc.dart';
-import '../offline/utils.dart';
+
+import '../../bloc/load_undone/undone_bloc.dart';
+import '../../offline/utils.dart';
+import '../user_consume_info.dart';
 import '../write_water_unit_info.dart';
+
 
 class Notyet extends StatefulWidget {
   Notyet({Key? key}) : super(key: key);
@@ -30,12 +31,13 @@ class _NotyetState extends State<Notyet> {
 
   @override
   void initState() {
+    check();
     super.initState();
-    context.read<NotWriteBloc>().add(Load_unDoneData ());
+    context.read<NotWriteBloc>().add(Load_unDoneData());
     scController.addListener(() {
       if (scController.position.pixels ==
           scController.position.maxScrollExtent) {
-        context.read<NotWriteBloc>().add(Load_unDoneData ());
+        context.read<NotWriteBloc>().add(Load_unDoneData());
       }
     });
   }
@@ -44,7 +46,7 @@ class _NotyetState extends State<Notyet> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('not connected');
+            context.read<NotWriteBloc>().add(Load_unDoneData());
       }
     } on SocketException catch (_) {
       print('not connected');
@@ -65,9 +67,7 @@ class _NotyetState extends State<Notyet> {
   Widget build(BuildContext context) {
     return Scaffold(body: BlocBuilder<NotWriteBloc, NotWriteState>(
       builder: (context, state) {
-        return 
-        
-        Padding(
+        return Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView.builder(
             controller: scController,
@@ -84,6 +84,7 @@ class _NotyetState extends State<Notyet> {
                           : const CupertinoActivityIndicator()),
                 );
               }
+
               return Column(
                 children: [
                   ClipRRect(
@@ -215,9 +216,9 @@ class _NotyetState extends State<Notyet> {
                                         Container(
                                           width: 200,
                                           decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(5)),
-                                             ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                          ),
                                           child: Padding(
                                             padding: EdgeInsets.only(
                                                 left: 5, right: 5),

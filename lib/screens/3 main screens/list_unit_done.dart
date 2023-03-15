@@ -13,12 +13,10 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/bloc/load_done/bloc/done_bloc.dart';
-import 'package:waterworks/user_consume_info.dart';
-import 'package:waterworks/write_water_unit_info.dart';
+import 'package:waterworks/bloc/load_done/done_bloc.dart';
+import '../../offline/utils.dart';
 import '../invoice.dart';
-import '../offline/utils.dart';
-import '../write_water_unit_info.dart';
+
 
 class Done extends StatefulWidget {
   Done({Key? key}) : super(key: key);
@@ -84,9 +82,11 @@ class _DoneState extends State<Done> {
                             : const CupertinoActivityIndicator()),
                   );
                 }
+               
                 return InkWell(
                   onTap: () {
-                    print('invoice id: ' + state.written[index].id.toString());
+                    print('invoice id: ' +
+                        state.written[index].invoiceID.toString());
 
                     Navigator.push(
                       context,
@@ -94,7 +94,7 @@ class _DoneState extends State<Done> {
                           duration: Duration(milliseconds: 100),
                           type: PageTransitionType.rightToLeft,
                           child: Invoice_Page(
-                            invoiceID: state.written[index].id.toString(),
+                            invoiceID: state.written[index].invoiceID.toString(),
                           )),
                     );
                   },

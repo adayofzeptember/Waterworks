@@ -6,4 +6,5 @@ abstract class DoneEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 class Load_DoneData extends DoneEvent {}

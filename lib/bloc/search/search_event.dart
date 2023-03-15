@@ -17,6 +17,6 @@ class SearchNumber extends SearchEvent {
 }
 
 class ClearSearch extends SearchEvent {
-  var context;
-  ClearSearch({required context});
+  // var context;
+  ClearSearch();
 }

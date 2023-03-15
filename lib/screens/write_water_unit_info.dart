@@ -7,14 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/API/post_WRITEwaterUnit.dart';
+import 'package:waterworks/service/post_WRITEwaterUnit.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/invoice.dart';
 import 'package:waterworks/offline/utils.dart';
-import 'API/get_user_consume.dart';
-import 'ETC/progressHUD.dart';
+import '../ETC/progressHUD.dart';
+import '../service/get_user_consume.dart';
+import 'invoice.dart';
 
+
+//! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
   String? id = '';
   Water_Unit_Detail({Key? key, this.id}) : super(key: key);
@@ -89,7 +91,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               User_Consume_Data? data = snapshot.data;
-                              var debtLength = data!.historyInvoices!.length;
+                              var debtLength = data!.historyWaters!.length;
+                              // print("-------------------- ไอดี -------------------: "+data.id.toString());
+                              // print("-------------------- หนี้ -------------------: "+debtLength.toString());
                               if (debtLength == 0) {
                                 checkDept = false;
                               } else {
@@ -345,7 +349,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 shrinkWrap: true,
                                                 physics:
                                                     NeverScrollableScrollPhysics(),
-                                                itemCount: 2,
+                                                itemCount:
+                                                    data.historyWaters!.length,
                                                 itemBuilder:
                                                     (BuildContext context,
                                                         int index) {
@@ -413,10 +418,10 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             SizedBox(
                                               height: 30,
                                             ),
-                                            Divider(
-                                                thickness: 1,
-                                                color: Color.fromARGB(
-                                                    255, 83, 83, 83)),
+                                            // Divider(
+                                            //     thickness: 1,
+                                            //     color: Color.fromARGB(
+                                            //         255, 83, 83, 83)),
                                             SizedBox(
                                               height: 20,
                                             ),
@@ -589,6 +594,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
+
+
+
   Future<Data_writeUnit> write_unit(
       WriteUnit_Request write_requestModel) async {
     String urlPost = waterWork_domain + 'water_meter_record/update';
@@ -614,33 +622,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       setState(() {
         circleHUD = false;
       });
-      print('----------- write water success -----------');
+      print('----------- write water success, invoice id: '+datax['data']['invoice']['id'].toString());
 
-      // ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
-      //   backgroundColor: Color.fromARGB(255, 65, 158, 68),
-      //   elevation: 0,
-      //   content: Row(
-      //     mainAxisAlignment: MainAxisAlignment.center,
-      //     children: [
-      //       Text(
-      //         'จดหน่วยน้ำเสร็จสิ้น ',
-      //         style: TextStyle(color: Colors.white, fontSize: 18),
-      //       ),
-      //       Icon(
-      //         Icons.check,
-      //         color: Colors.white,
-      //       )
-      //     ],
-      //   ),
-      //   behavior: SnackBarBehavior.floating,
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.circular(24),
-      //   ),
-      //   margin: EdgeInsets.only(
-      //       bottom: MediaQuery.of(context).size.height - 100,
-      //       right: 20,
-      //       left: 20),
-      // ));
       Navigator.push(
         context,
         PageTransition(
