@@ -5,7 +5,7 @@ import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
-import '../models/invoice_model.dart';
+import '../models/invoice_to_printer.dart';
 
 class MyApp extends StatefulWidget {
   @override
@@ -131,15 +131,15 @@ class _MyAppState extends State<MyApp> {
                   _disconnect();
                   Navigator.pop(context);
                 },
-                child: SizedBox(
+                child: const SizedBox(
                     width: 50,
                     height: 50,
                     child:
                         Icon(Icons.arrow_back_ios_new, color: Colors.white))),
-            SizedBox(
+            const SizedBox(
               width: 55,
             ),
-            Text(
+            const Text(
               'เลือกเครื่องพิมพ์',
               style: TextStyle(color: Colors.white),
             ),
@@ -164,7 +164,7 @@ class _MyAppState extends State<MyApp> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     DropdownButton(
                       items: _getDeviceItems(),
                       onChanged: (BluetoothDevice? value) {
@@ -175,20 +175,20 @@ class _MyAppState extends State<MyApp> {
                       },
                       value: _device,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: _connected ? Colors.red : Colors.green),
                       onPressed: _connected ? _disconnect : _connect,
                       child: Text(
                         _connected ? 'Disconnect' : 'เชื่อมต่อ',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
               ],
             ),
             ElevatedButton(
@@ -222,7 +222,7 @@ class _MyAppState extends State<MyApp> {
   List<DropdownMenuItem<BluetoothDevice>> _getDeviceItems() {
     List<DropdownMenuItem<BluetoothDevice>> items = [];
     if (_devices.isEmpty) {
-      items.add(DropdownMenuItem(
+      items.add(const DropdownMenuItem(
         child: Text('ยังไม่ได้จับคู่อุปกรณ์'),
       ));
     } else {

@@ -15,8 +15,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (event.searchNumber == "") {
         emit(state.copyWith(statusSearch: "1"));
       } else {
-        //* status 0 ระหว่างรอมันโหลด
+        //! status 0 ระหว่างรอมันโหลด
         emit(state.copyWith(statusSearch: "0"));
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
         try {
@@ -32,6 +33,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           var dataSearchRes = [];
           if (response.statusCode == 400 || response.statusCode == 200) {
             if (response.data['data']['data'].length == 0) {
+               //! พอโหลดเสร็จจะไม่ใช่เลข 0 แล้ว
               emit(state.copyWith(statusSearch: 'ไม่พบข้อมูล'));
             } else {
               emit(state.copyWith(statusSearch: ''));
@@ -60,7 +62,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           }
         } on Exception catch (e) {
           print("Exception $e");
-           emit(state.copyWith(statusSearch: "2", error: e.toString()));
+          emit(state.copyWith(statusSearch: "2", error: e.toString()));
         }
       }
     });

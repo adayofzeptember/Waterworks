@@ -4,8 +4,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:waterworks/blue_thermal_printer/print_format.dart';
-import 'package:waterworks/models/invoice_model.dart';
+import 'package:waterworks/blue_thermal_printer/print_setting.dart';
+import 'package:waterworks/models/invoice_to_printer.dart';
 
 class PrintHereFucker {
   printInvoice_Now(ToInvoice thisInvoice, String check) async {
@@ -14,9 +14,9 @@ class PrintHereFucker {
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
-        String text = "";
+        String zplToPrinter = "";
         if (check == "1") {
-          text = """
+          zplToPrinter = """
 CT~~CD,~CC^~CT~
 ^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
@@ -155,7 +155,7 @@ eJxjYBgcgLEBgampdrADAJ3SAwc=:D973
 ^PQ1,0,1,Y^XZ
 """;
         } else {
-          text = """ 
+          zplToPrinter = """ 
           CT~~CD,~CC^~CT~
 ^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
@@ -224,7 +224,8 @@ eJzt0EEJADAMBMHYqNR6CbVXG7WQRyAUZtj3PS4CAOAP657dUHbtTP8BAFD1AA52Xt0=:F586
           """;
         }
 
-        bluetooth.printCustom(text, Size.boldMedium.val, Align.center.val);
+        bluetooth.printCustom(
+            zplToPrinter, Size.boldMedium.val, Align.center.val);
 
         bluetooth.paperCut();
       }

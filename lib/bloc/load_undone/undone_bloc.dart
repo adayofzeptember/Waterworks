@@ -57,5 +57,8 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
         emit(state.copyWith(error: e.toString()));
       }
     });
+    on<Reload_Undone>((event, emit) {
+      emit(state.copyWith(notWrite: [], page: 1));
+    });
   }
 }

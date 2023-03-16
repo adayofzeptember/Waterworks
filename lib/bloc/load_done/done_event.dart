@@ -8,3 +8,8 @@ abstract class DoneEvent extends Equatable {
 }
 
 class Load_DoneData extends DoneEvent {}
+
+class Reload_Done extends DoneEvent {
+  var context;
+  Reload_Done(this.context);
+}

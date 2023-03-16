@@ -3,7 +3,6 @@ class ToInvoice {
   String? inv_user_number;
   String? inv_user_name;
   String? inv_user_address;
-//--------------------------------------------
   String? inv_date;
   String? inv_matr_number;
   String? inv_unit_use;

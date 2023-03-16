@@ -16,7 +16,7 @@ class NotWriteState extends Equatable {
     List? notWrite,
     int? page,
     bool? isLoading,
-    String? error
+    String? error,
   }) {
     return NotWriteState(
       notWrite: notWrite ?? this.notWrite,

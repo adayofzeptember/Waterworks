@@ -24,15 +24,15 @@ class _Irregular_WaterState extends State<Irregular_Water> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: SizedBox(
+                child: const SizedBox(
                     width: 50,
                     height: 50,
                     child: Icon(Icons.arrow_back_ios_new,
                         color: Palette.thisGreen))),
-            SizedBox(
+            const SizedBox(
               width: 50,
             ),
-            Text(
+            const Text(
               'ใบแจ้งหน่วยน้ำผิดปกติ',
               style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
             ),
@@ -49,7 +49,7 @@ class _Irregular_WaterState extends State<Irregular_Water> {
                   'assets/images/irr.svg',
                   fit: BoxFit.cover,
                 )),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             ElevatedButton(
@@ -66,7 +66,7 @@ class _Irregular_WaterState extends State<Irregular_Water> {
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     "สั่งพิมพ์",
                     style: TextStyle(color: Colors.white),
                   ),

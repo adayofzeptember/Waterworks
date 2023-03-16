@@ -23,8 +23,3 @@ class Login_Request {
     return data;
   }
 }
-
-
-
-
-

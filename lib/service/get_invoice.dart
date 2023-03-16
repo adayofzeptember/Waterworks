@@ -314,7 +314,7 @@ Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
   //var k = jsonResponse['data']['count_invoices'];
-  print(response.body);
+
   Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonCon);
   return invoice_Data;
 }

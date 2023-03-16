@@ -23,12 +23,10 @@ import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
 import 'offline/utils.dart';
 
-
 void main() {
-  
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
-  SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+  const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(Start_Page_Waterworks()));
 }
@@ -44,6 +42,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => SearchBloc()),
       ],
       child: MaterialApp(
+        
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,
@@ -52,13 +51,13 @@ class Start_Page_Waterworks extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: [
-          Locale('th', 'TH'),
+          const Locale('th', 'TH'),
         ],
         theme: ThemeData(
           primarySwatch: Palette.thisGreen,
           fontFamily: 'Kanit',
         ),
-        home: Load_Page(),
+        home: const Load_Page(),
       ),
     );
   }
@@ -123,7 +122,7 @@ class _Load_PageState extends State<Load_Page> {
         Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: Duration(milliseconds: 820),
+              duration: const Duration(milliseconds: 820),
               type: PageTransitionType.bottomToTop,
               child: Login()),
         );
@@ -133,7 +132,7 @@ class _Load_PageState extends State<Load_Page> {
         Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: Duration(milliseconds: 820),
+              duration: const Duration(milliseconds: 820),
               type: PageTransitionType.bottomToTop,
               child: Menu_Page()),
         );
@@ -143,7 +142,7 @@ class _Load_PageState extends State<Load_Page> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
 
@@ -161,20 +160,20 @@ class _Load_PageState extends State<Load_Page> {
             Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 100),
+                  padding: const EdgeInsets.only(top: 100),
                   child: Image.asset('assets/images/badge.png'),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   'การประปาเทศบาลนคร',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
                 ),
-                Text(
+                const Text(
                   'นครราชสีมา',
                   style: TextStyle(
                       color: Colors.white,

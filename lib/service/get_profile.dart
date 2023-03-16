@@ -51,7 +51,7 @@ class Profile {
 }
 
 class Profile_Data {
-  int? id;
+  // int? id;
   String? username;
   String? name;
   String? email;
@@ -62,7 +62,9 @@ class Profile_Data {
   List<Segmentations>? segmentations;
 
   Profile_Data(
-      {this.id,
+      {
+        
+        // this.id,
       this.username,
       this.name,
       this.email,
@@ -73,7 +75,7 @@ class Profile_Data {
       this.segmentations});
 
   Profile_Data.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    // id = json['id'];
     username = json['username'];
     name = json['name'];
     email = json['email'];
@@ -91,7 +93,7 @@ class Profile_Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    // data['id'] = this.id;
     data['username'] = this.username;
     data['name'] = this.name;
     data['email'] = this.email;

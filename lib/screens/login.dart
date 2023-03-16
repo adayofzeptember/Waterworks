@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return ProgressHUD(
         child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
@@ -75,20 +75,20 @@ class _LoginState extends State<Login> {
               Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 100),
+                    padding: const EdgeInsets.only(top: 100),
                     child: Image.asset('assets/images/badge.png'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     'เข้าสู่ระบบ',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   Form(
@@ -97,14 +97,14 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           TextFormField(
                           //  initialValue: 'watermeter13',
                             textAlign: TextAlign.left,
                             autofocus: false,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                             onSaved: (input) => userName = input.toString(),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -114,25 +114,25 @@ class _LoginState extends State<Login> {
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               hintText: 'กรอกบัญชีผู้ใช้',
-                              labelStyle: TextStyle(fontSize: 15),
+                              labelStyle: const TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: Colors.transparent),
+                                      const BorderSide(color: Colors.transparent),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: Color.fromARGB(255, 238, 238, 238),
+                              fillColor: const Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
+                                borderSide: const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Colors.white, width: 0),
+                                    const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           TextFormField(
@@ -140,7 +140,7 @@ class _LoginState extends State<Login> {
                             obscureText: true,
                             textAlign: TextAlign.left,
                             autofocus: false,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                             onSaved: (input) => passWord = input.toString(),
                             validator: (value) {
                               if (value!.isEmpty) {
@@ -150,33 +150,33 @@ class _LoginState extends State<Login> {
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                               hintText: 'กรอกรหัสผ่าน',
-                              labelStyle: TextStyle(fontSize: 15),
+                              labelStyle: const TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
                                   borderSide:
-                                      BorderSide(color: Colors.white, width: 0),
+                                      const BorderSide(color: Colors.white, width: 0),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: Color.fromARGB(255, 238, 238, 238),
+                              fillColor: const Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Colors.white, width: 0),
+                                    const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide:
-                                    BorderSide(color: Colors.white, width: 0),
+                                    const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 25,
                           ),
                           SizedBox(
                             height: 60,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: Color.fromARGB(255, 235, 88, 62),
+                                  primary: const Color.fromARGB(255, 235, 88, 62),
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),
                                   shape: RoundedRectangleBorder(
@@ -199,11 +199,11 @@ class _LoginState extends State<Login> {
                                 loginNormal(_login_request);
                               },
                               child: Padding(
-                                padding: EdgeInsets.all(15.0),
+                                padding: const EdgeInsets.all(15.0),
                                 child: Container(
                                   width: double.infinity,
                                   alignment: Alignment.center,
-                                  child: Text(
+                                  child: const Text(
                                     "เข้าสู่ระบบ",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -253,7 +253,7 @@ class _LoginState extends State<Login> {
       Navigator.pushReplacement(
           context,
           PageTransition(
-              duration: Duration(milliseconds: 500),
+              duration: const Duration(milliseconds: 500),
               type: PageTransitionType.rightToLeft,
               child: Menu_Page()));
     } else {
@@ -263,7 +263,7 @@ class _LoginState extends State<Login> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
         backgroundColor: Colors.red[400],
-        content: Text(
+        content: const Text(
           'บัญชีหรือรหัสผ่านไม่ถูกต้อง',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
