@@ -15,7 +15,7 @@ import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
 import '../../offline/utils.dart';
-import '../invoice.dart';
+import '../invoice_page.dart';
 
 class Done extends StatefulWidget {
   Done({Key? key}) : super(key: key);
@@ -103,7 +103,7 @@ class _DoneState extends State<Done> {
                               type: PageTransitionType.rightToLeft,
                               child: Invoice_Page(
                                 invoiceID:
-                                    state.written[index].invoiceID.toString(),
+                                    state.written[index].invoiceID.toString(), ckeckWidget: 'from_list',
                               )),
                         );
                       },

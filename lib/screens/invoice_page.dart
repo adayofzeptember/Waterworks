@@ -20,7 +20,8 @@ String theTokenOne = '';
 
 class Invoice_Page extends StatefulWidget {
   String? invoiceID = '';
-  Invoice_Page({Key? key, this.invoiceID}) : super(key: key);
+  String? ckeckWidget = '';
+  Invoice_Page({Key? key, this.invoiceID, this.ckeckWidget}) : super(key: key);
 
   @override
   State<Invoice_Page> createState() => _Invoice_PageState();
@@ -31,6 +32,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
   ToInvoice toInvoiceModel = ToInvoice();
   bool checkWater = false;
   void initState() {
+    print(widget.ckeckWidget);
     getToken();
     super.initState();
   }
@@ -58,15 +60,27 @@ class _Invoice_PageState extends State<Invoice_Page> {
             children: [
               InkWell(
                   onTap: () {
-                   
-                    Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                        duration: const Duration(milliseconds: 250),
-                        type: PageTransitionType.rightToLeft,
-                        child: Menu_Page(),
-                      ),
-                    );
+                    if (widget.ckeckWidget == 'from_list') {
+                      Navigator.pop(context);
+                    } else {
+                      Navigator.pushReplacement(
+                        context,
+                        PageTransition(
+                          duration: const Duration(milliseconds: 250),
+                          type: PageTransitionType.rightToLeft,
+                          child: Menu_Page(),
+                        ),
+                      );
+                    }
+
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   PageTransition(
+                    //     duration: const Duration(milliseconds: 250),
+                    //     type: PageTransitionType.rightToLeft,
+                    //     child: Menu_Page(),
+                    //   ),
+                    // );
                   },
                   child: const SizedBox(
                       width: 50,
@@ -770,7 +784,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
   Future getToken() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
-  
+
     setState(() {
       theTokenOne = getThatToken.toString();
     });
