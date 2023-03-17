@@ -16,6 +16,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/bloc/checkbox/checkbox_bloc.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
 import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
 import 'package:waterworks/bloc/search/search_bloc.dart';
@@ -40,9 +41,9 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => NotWriteBloc()),
         BlocProvider(create: (context) => DoneBloc()),
         BlocProvider(create: (context) => SearchBloc()),
+        BlocProvider(create: (context) => CheckboxBloc()),
       ],
       child: MaterialApp(
-        
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
           GlobalMaterialLocalizations.delegate,

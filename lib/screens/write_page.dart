@@ -14,6 +14,7 @@ import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/offline/utils.dart';
 import '../ETC/progressHUD.dart';
+import '../bloc/checkbox/checkbox_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
@@ -22,6 +23,7 @@ import 'invoice_page.dart';
 class Water_Unit_Detail extends StatefulWidget {
   String? id = '';
   String? porNumber = '';
+
   Water_Unit_Detail({Key? key, this.id, this.porNumber}) : super(key: key);
 
   @override
@@ -35,6 +37,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   bool circleHUD = false;
   bool checkDept = false;
   late final Future<User_Consume_Data> futureUser;
+  bool isChecked = false;
 
   @override
   void initState() {
@@ -55,6 +58,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   Widget _uiSetUp(BuildContext context) {
+    print('load');
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -65,6 +69,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
+                  context.read<CheckboxBloc>().add(ClearCheck());
                 },
                 child: const SizedBox(
                     width: 50,
@@ -552,76 +557,154 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(
-                                              height: 20,
+                                            SizedBox(
+                                              height: 5,
                                             ),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  primary: Palette.thisGreen,
-                                                  elevation: 0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15),
-                                                  )),
-                                              onPressed: () {
-                                                if (waterUnitController
-                                                    .text.isNotEmpty) {
-                                                  checkInternet(context);
+                                            BlocBuilder<CheckboxBloc,
+                                                CheckboxState>(
+                                              builder: (context, state) {
+                                                return Column(
+                                                  children: [
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        SizedBox(
+                                                          height: 24.0,
+                                                          width: 24.0,
+                                                          child: Checkbox(
+                                                            focusColor:
+                                                                Colors.white,
+                                                            activeColor: Palette
+                                                                .thisGreen,
+                                                            checkColor:
+                                                                Colors.white,
+                                                            value: state
+                                                                .isCheckbloc,
+                                                            onChanged:
+                                                                (bool? value) {
+                                                              context
+                                                                  .read<
+                                                                      CheckboxBloc>()
+                                                                  .add(CheckThisShit(
+                                                                      checkkamic:
+                                                                          value!));
+                                                            },
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        const Text(
+                                                          'รอบใหม่',
+                                                          style: TextStyle(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                              primary: Palette
+                                                                  .thisGreen,
+                                                              elevation: 0,
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15),
+                                                              )),
+                                                      onPressed: () {
+                                                        if (waterUnitController
+                                                            .text.isNotEmpty) {
+                                                          checkInternet(
+                                                              context);
 
-                                                  setState(() {
-                                                    circleHUD = true;
-                                                  });
-                                                  FocusManager
-                                                      .instance.primaryFocus
-                                                      ?.unfocus();
-                                                }
+                                                          setState(() {
+                                                            circleHUD = true;
+                                                          });
+                                                          FocusManager.instance
+                                                              .primaryFocus
+                                                              ?.unfocus();
+                                                        }
 
-                                                if (formKey.currentState!
-                                                    .validate()) {
-                                                  formKey.currentState?.save();
+                                                        if (formKey
+                                                            .currentState!
+                                                            .validate()) {
+                                                          formKey.currentState
+                                                              ?.save();
 
-                                                  if (int.parse(data
-                                                          .previous_unit_format
-                                                          .toString()) >
-                                                      int.parse(
-                                                          _writeUnit_Request
-                                                              .current_unit
-                                                              .toString())) {
-                                                    _showAlertError();
-                                                  } else if (widget.porNumber
-                                                          .toString() ==
-                                                      _writeUnit_Request
-                                                          .current_unit
-                                                          .toString()) {
-                                                    _showAlertWaterNumber(
-                                                        _writeUnit_Request
-                                                            .current_unit
-                                                            .toString());
-                                                  } else {
-                                                    _writeUnit_Request
-                                                            .water_meter_record_id =
-                                                        widget.id.toString();
+                                                          print(state
+                                                              .isCheckbloc);
 
-                                                    _showAlertDialog(
-                                                        _writeUnit_Request
-                                                            .current_unit
-                                                            .toString());
-                                                  }
-                                                }
+                                                          if (int.parse(data
+                                                                  .previous_unit_format
+                                                                  .toString()) >
+                                                              int.parse(_writeUnit_Request
+                                                                  .current_unit
+                                                                  .toString())) {
+                                                            if (state
+                                                                .isCheckbloc) {
+                                                              _writeUnit_Request
+                                                                      .water_meter_record_id =
+                                                                  widget.id
+                                                                      .toString();
+
+                                                              _showAlertDialog(
+                                                                  _writeUnit_Request
+                                                                      .current_unit
+                                                                      .toString(),
+                                                                  '*หมายเหตุ เริ่มรอบใหม่');
+                                                            } else {
+                                                              _showAlertError();
+                                                            }
+                                                          } else if (widget
+                                                                  .porNumber
+                                                                  .toString() ==
+                                                              _writeUnit_Request
+                                                                  .current_unit
+                                                                  .toString()) {
+                                                            _showAlertWaterNumber(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString());
+                                                          } else {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+
+                                                            _showAlertDialog(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString(),
+                                                                '');
+                                                          }
+                                                        }
+                                                      },
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(20.0),
+                                                        child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: const Text(
+                                                            "ยืนยัน",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                );
                                               },
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(20.0),
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  child: const Text(
-                                                    "ยืนยัน",
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                  ),
-                                                ),
-                                              ),
                                             ),
                                           ],
                                         )),
@@ -697,6 +780,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
           datax['data']['invoice']['id'].toString());
       context.read<NotWriteBloc>().add(Reload_Undone(context));
       context.read<DoneBloc>().add(Reload_Done(context));
+      context.read<CheckboxBloc>().add(ClearCheck());
       Navigator.push(
         context,
         PageTransition(
@@ -741,7 +825,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                    const Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
                   ],
                 ),
                 const SizedBox(
@@ -788,12 +872,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "เลขมาตรวัดน้ำปัจจุบันน้อยกว่าครั้งก่อน",
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                    const Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
                   ],
                 ),
                 const SizedBox(
@@ -804,9 +888,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
           ),
           actions: <Widget>[
             ElevatedButton(
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: const Text(
+              child: const Padding(
+                padding: EdgeInsets.all(3.0),
+                child: Text(
                   'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -824,7 +908,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
-  Future<void> _showAlertDialog(String newUnit) async {
+  Future<void> _showAlertDialog(String newUnit, String newRound) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -837,19 +921,30 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
-                      "เลขมาตรวัดน้ำ: ",
-                      style: TextStyle(fontSize: 20),
+                    Row(
+                      children: [
+                        const Text(
+                          "เลขมาตรวัดน้ำ: ",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Text(
+                          "${newUnit}",
+                          style: const TextStyle(
+                              fontSize: 25,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                     Text(
-                      "${newUnit}",
-                      style: const TextStyle(
-                          fontSize: 25,
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold),
-                    ),
+                      newRound,
+                      style:
+                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ],

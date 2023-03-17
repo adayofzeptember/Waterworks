@@ -2,15 +2,15 @@ part of 'search_bloc.dart';
 
 // เก็บค่าไว้เปลี่ยนแปลง
 class SearchState extends Equatable {
+  List searchResult;
+  bool isLoading;
+  String statusSearch;
+  String error;
   SearchState(
       {required this.searchResult,
       required this.isLoading,
       required this.statusSearch,
       required this.error});
-  List searchResult;
-  bool isLoading;
-  String statusSearch;
-  String error;
 
   SearchState copyWith(
       {List? searchResult,
