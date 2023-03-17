@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 
 class Invoice_Record {
@@ -167,9 +168,7 @@ class Invoice_Data {
     dueDateFormat = json['due_date_format'];
     issueDateFormat = json['issue_date_format'];
     sumFormat = json['sum_format'];
-    waterMeterRecord = json['water_meter_record'] != null
-        ? new WaterMeterRecord.fromJson(json['water_meter_record'])
-        : null;
+    waterMeterRecord = json['water_meter_record'] != null ? new WaterMeterRecord.fromJson(json['water_meter_record']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -303,18 +302,20 @@ class WaterMeterRecord {
   }
 }
 
-
-Future<Invoice_Data> fetch_invoice(String token, String invoice_id) async {
+Future<Invoice_Data> fetch_invoice(String invoice_id) async {
+  print('fetch_invoice');
+  SharedPreferences prefs2 = await SharedPreferences.getInstance();
+  var token = prefs2.get('keyToken');
   var url = waterWork_domain + 'record/invoice/' + invoice_id.toString();
   var response = await http.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   });
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data'];
-  //var k = jsonResponse['data']['count_invoices'];
+  var jsonResponse = json.decode(response.body)['data'];
+  // var jsonCon = jsonResponse['data'];
+  // var k = jsonResponse['data']['count_invoices'];
 
-  Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonCon);
+  Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonResponse);
   return invoice_Data;
 }

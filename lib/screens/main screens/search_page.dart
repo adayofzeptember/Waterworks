@@ -40,18 +40,14 @@ class Search_Page extends StatelessWidget {
                 height: 10,
               ),
               TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 onSubmitted: ((value) {
-                  context
-                      .read<SearchBloc>()
-                      .add(SearchNumber(searchNumber: value));
+                  context.read<SearchBloc>().add(SearchNumber(searchNumber: value));
                 }),
                 decoration: const InputDecoration(
                     labelText: "ค้นหาด้วยเลข ป. ",
                     prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.all(Radius.circular(230.0)))),
+                    border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(230.0)))),
               ),
               const SizedBox(
                 height: 15,
@@ -108,8 +104,7 @@ class Search_Page extends StatelessWidget {
                           return Column(
                             children: [
                               ClipRRect(
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(16.0)),
+                                borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                 child: InkWell(
                                   onTap: () {
                                     print(
@@ -118,12 +113,10 @@ class Search_Page extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       PageTransition(
-                                        duration:
-                                            const Duration(milliseconds: 250),
+                                        duration: const Duration(milliseconds: 250),
                                         type: PageTransitionType.rightToLeft,
                                         child: Use_Water_Info(
-                                          id: state.searchResult[index].id
-                                              .toString(),
+                                          id: state.searchResult[index].id.toString(),
                                         ),
                                       ),
                                     );
@@ -136,337 +129,209 @@ class Search_Page extends StatelessWidget {
                                     decoration: const BoxDecoration(
                                       color: Colors.white,
                                       border: Border(
-                                        left: BorderSide(
-                                            width: 10.0,
-                                            color: Palette.thisGreen),
+                                        left: BorderSide(width: 10.0, color: Palette.thisGreen),
                                       ),
                                     ),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Row(
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5)),
-                                                      ),
-                                                      child: Text(
-                                                        'เลข ป. ' +
-                                                            state
-                                                                .searchResult[
-                                                                    index]
-                                                                .waterNumber
-                                                                .toString(),
-                                                        style: const TextStyle(
-                                                            fontSize: 25,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    240,
-                                                                    41,
-                                                                    27)),
-                                                      ),
-                                                    ),
-                                                    state.searchResult[index]
-                                                                .status !=
-                                                            true
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 10),
-                                                            child: Container(
-                                                              decoration: const BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              5)),
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          230,
-                                                                          87,
-                                                                          87)),
-                                                              child: Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 5,
-                                                                      right: 5),
-                                                                  child: Row(
-                                                                    children: [
-                                                                      const Text(
-                                                                        'ตัดมาตร',
-                                                                        style: TextStyle(
-                                                                            color:
-                                                                                Colors.white,
-                                                                            fontWeight: FontWeight.bold),
-                                                                      ),
-                                                                      const Icon(
-                                                                        Icons
-                                                                            .close,
-                                                                        color: Colors
-                                                                            .white,
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                            ),
-                                                          )
-                                                        : Container()
-                                                  ],
-                                                ),
                                                 Container(
-                                                  width: 200,
+                                                  decoration: const BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                  ),
                                                   child: Text(
-                                                    state.searchResult[index]
-                                                        .customerName,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    softWrap: false,
+                                                    'เลข ป. ' + state.searchResult[index].waterNumber.toString(),
                                                     style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 83, 83, 83),
-                                                        fontSize: 18),
+                                                        fontSize: 25,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Color.fromARGB(255, 240, 41, 27)),
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      'ที่อยู่:',
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Color.fromARGB(
-                                                              255, 83, 83, 83)),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 3,
-                                                    ),
-                                                    Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    5)),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 5,
-                                                                right: 5),
-                                                        child: Text(
-                                                          state
-                                                              .searchResult[
-                                                                  index]
-                                                              .customerAddress,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 15,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .black),
+                                                state.searchResult[index].status != true
+                                                    ? Padding(
+                                                        padding: const EdgeInsets.only(left: 10),
+                                                        child: Container(
+                                                          decoration: const BoxDecoration(
+                                                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                              color: Color.fromARGB(255, 230, 87, 87)),
+                                                          child: Padding(
+                                                              padding: const EdgeInsets.only(left: 5, right: 5),
+                                                              child: Row(
+                                                                children: [
+                                                                  const Text(
+                                                                    'ตัดมาตร',
+                                                                    style:
+                                                                        TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                                                                  ),
+                                                                  const Icon(
+                                                                    Icons.close,
+                                                                    color: Colors.white,
+                                                                  ),
+                                                                ],
+                                                              )),
                                                         ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 8,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    const Text(
-                                                      'มาตรวัดน้ำ:',
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Color.fromARGB(
-                                                              255, 83, 83, 83)),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 3,
-                                                    ),
-                                                    Container(
-                                                      decoration: const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5)),
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              221,
-                                                              221,
-                                                              221)),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 5,
-                                                                right: 5),
-                                                        child: Text(
-                                                          state
-                                                              .searchResult[
-                                                                  index]
-                                                              .meterNumber,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .black),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 5,
-                                                    ),
-                                                    const Text(
-                                                      'เขต',
-                                                      style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Color.fromARGB(
-                                                              255, 83, 83, 83)),
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 3,
-                                                    ),
-                                                    Container(
-                                                      decoration: const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5)),
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              221,
-                                                              221,
-                                                              221)),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .only(
-                                                                left: 5,
-                                                                right: 5),
-                                                        child: Text(
-                                                          state
-                                                              .searchResult[
-                                                                  index]
-                                                              .areaNumber,
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 13,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  color: Colors
-                                                                      .black),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                )
+                                                      )
+                                                    : Container()
                                               ],
                                             ),
-                                          ),
-                                          InkWell(
-                                            onTap: (() {
-                                              print(state.searchResult[index].id
-                                                  .toString());
-
-                                              Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                  duration: const Duration(
-                                                      milliseconds: 250),
-                                                  type: PageTransitionType
-                                                      .rightToLeft,
-                                                  child: Water_Unit_Detail(
-                                                    id: state
-                                                        .searchResult[index].id
-                                                        .toString(),
-                                                  ),
-                                                ),
-                                              );
-                                            }),
-                                            child: Container(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  20, 15, 20, 15),
-                                              height: double.infinity,
-                                              decoration: const BoxDecoration(
-                                                  color: Palette.thisGreen,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10))),
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/images/meter.png',
-                                                    height: 75,
-                                                    width: 75,
-                                                  ),
-
-                                                  // SvgPicture.asset(
-                                                  //   'assets/images/meter2.svg',
-                                                  //   height: 50,
-                                                  // ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  const Text(
-                                                    'จด',
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 18),
-                                                  )
-                                                ],
+                                            Container(
+                                              width: 200,
+                                              child: Text(
+                                                state.searchResult[index].customerName,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                softWrap: false,
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromARGB(255, 83, 83, 83),
+                                                    fontSize: 18),
                                               ),
                                             ),
-                                          )
-                                        ]),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text(
+                                                  'ที่อยู่:',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
+                                                ),
+                                                const SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Container(
+                                                  decoration: const BoxDecoration(
+                                                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
+                                                    child: Text(
+                                                      state.searchResult[index].customerAddress,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text(
+                                                  'มาตรวัดน้ำ:',
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
+                                                ),
+                                                const SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Container(
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                      color: Color.fromARGB(255, 221, 221, 221)),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
+                                                    child: Text(
+                                                      state.searchResult[index].meterNumber,
+                                                      style: const TextStyle(
+                                                          fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 5,
+                                                ),
+                                                const Text(
+                                                  'เขต',
+                                                  style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
+                                                ),
+                                                const SizedBox(
+                                                  width: 3,
+                                                ),
+                                                Container(
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                      color: Color.fromARGB(255, 221, 221, 221)),
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
+                                                    child: Text(
+                                                      state.searchResult[index].areaNumber,
+                                                      style: const TextStyle(
+                                                          fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: (() {
+                                          print(state.searchResult[index].id.toString());
+
+                                          Navigator.push(
+                                            context,
+                                            PageTransition(
+                                              duration: const Duration(milliseconds: 250),
+                                              type: PageTransitionType.rightToLeft,
+                                              child: Water_Unit_Detail(
+                                                id: state.searchResult[index].id.toString(),
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                        child: Container(
+                                          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                          height: double.infinity,
+                                          decoration: const BoxDecoration(
+                                              color: Palette.thisGreen, borderRadius: BorderRadius.all(Radius.circular(10))),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/meter.png',
+                                                height: 75,
+                                                width: 75,
+                                              ),
+
+                                              // SvgPicture.asset(
+                                              //   'assets/images/meter2.svg',
+                                              //   height: 50,
+                                              // ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              const Text(
+                                                'จด',
+                                                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ]),
                                   ),
                                 ),
                               ),

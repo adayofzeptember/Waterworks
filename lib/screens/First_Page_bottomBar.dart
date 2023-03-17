@@ -11,7 +11,6 @@ import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
 import 'package:waterworks/bloc/search/search_bloc.dart';
 import 'main screens/list_Main.dart';
 
-
 class Menu_Page extends StatefulWidget {
   Menu_Page({Key? key}) : super(key: key);
 
@@ -37,16 +36,11 @@ class _Menu_PageState extends State<Menu_Page> {
     return Scaffold(
       body: _widgetsPages.elementAt(_index),
       bottomNavigationBar: Container(
-        height: 80,
+        // height: 80,
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+          borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
           boxShadow: [
-            BoxShadow(
-                color: Colors.black38,
-                spreadRadius: 0,
-                blurRadius: 0,
-                offset: Offset.zero),
+            BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 0, offset: Offset.zero),
           ],
         ),
         child: BottomNavigationBar(
