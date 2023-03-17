@@ -14,7 +14,7 @@ import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/offline/utils.dart';
 import '../ETC/progressHUD.dart';
-import '../bloc/checkbox/checkbox_bloc.dart';
+import '../bloc/checkbox_newround/checkbox_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
@@ -58,7 +58,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   Widget _uiSetUp(BuildContext context) {
-    print('load');
+    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -576,8 +576,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           child: Checkbox(
                                                             focusColor:
                                                                 Colors.white,
-                                                            activeColor: Palette
-                                                                .thisGreen,
+                                                            activeColor: Colors.red,
                                                             checkColor:
                                                                 Colors.white,
                                                             value: state
@@ -598,7 +597,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                         ),
                                                         const Text(
                                                           'รอบใหม่',
-                                                          style: TextStyle(),
+                                                          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 18),
                                                         ),
                                                       ],
                                                     ),
@@ -734,7 +733,10 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                   const Center(
                                       child: CircularProgressIndicator(
                                     color: Colors.white,
-                                  )),
+                                  )
+                                  
+                                  
+                                  ),
                                 ],
                               );
                             },

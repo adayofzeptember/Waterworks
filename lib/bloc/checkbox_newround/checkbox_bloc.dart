@@ -8,7 +8,7 @@ class CheckboxBloc extends Bloc<CheckboxEvent, CheckboxState> {
   CheckboxBloc() : super(CheckboxState(isCheckbloc: false)) {
     on<CheckThisShit>((event, emit) {
       emit(state.copyWith(isCheckbloc: event.checkkamic));
-      print('bloc-----' + state.isCheckbloc.toString());
+      // print('bloc-----' + state.isCheckbloc.toString());
     });
 
     on<ClearCheck>(

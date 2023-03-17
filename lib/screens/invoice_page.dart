@@ -272,6 +272,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                 const SizedBox(
                                   height: 5,
                                 ),
+                                
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -290,6 +291,10 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
+                                        SizedBox(width: 5,),
+                                        checkWater
+                                        ? Text('(น้ำผิดปกติ)', style: TextStyle(color: Colors.amber),)
+                                        :Text('(น้ำปกติ)', style: TextStyle(color: Palette.thisGreen),)
                                       ],
                                     ),
                                   ],

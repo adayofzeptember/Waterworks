@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
