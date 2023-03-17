@@ -306,6 +306,7 @@ Future<Invoice_Data> fetch_invoice(String invoice_id) async {
   print('fetch_invoice');
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var token = prefs2.get('keyToken');
+
   var url = waterWork_domain + 'record/invoice/' + invoice_id.toString();
   var response = await http.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',

@@ -397,12 +397,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 if (formKey.currentState!.validate()) {
                                                   formKey.currentState?.save();
 
-                                                  _writeUnit_Request.water_meter_record_id = widget.id.toString();
+                                                  if (int.parse(data.previous_unit_format.toString()) >
+                                                      int.parse(_writeUnit_Request.current_unit.toString())) {
+                                                    print('น้อยกว่า');
+                                                  } else {
+                                                    _writeUnit_Request.water_meter_record_id = widget.id.toString();
 
-                                                  _showAlertDialog(_writeUnit_Request.current_unit.toString());
-
-                                                  // print(jsonEncode(
-                                                  //     _writeUnit_Request));
+                                                    _showAlertDialog(_writeUnit_Request.current_unit.toString());
+                                                  }
                                                 }
                                               },
                                               child: Padding(

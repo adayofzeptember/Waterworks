@@ -1,10 +1,15 @@
-part of 'profile_bloc.dart';
+// part of 'profile_bloc.dart';
 
-class ProfileState extends Equatable {
-  const ProfileState();
+// class ProfileState extends Equatable {
+//   String name;
+//   List segs;
+//   bool isLoading;
+//   // String error;
 
-  @override
-  List<Object> get props => [];
-}
+//   ProfileState({required this.name, required this.segs, required this.isLoading});
 
-class ProfileInitial extends ProfileState {}
+//   @override
+//   List<Object> get props => [];
+// }
+
+// //class ProfileInitial extends ProfileState {}

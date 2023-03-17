@@ -51,38 +51,15 @@ class Profile {
 }
 
 class Profile_Data {
-  // int? id;
-  String? username;
   String? name;
-  String? email;
-  String? active;
-  String? positionId;
-  String? createdAt;
-  String? updatedAt;
   List<Segmentations>? segmentations;
 
-  Profile_Data(
-      {
-        
-        // this.id,
-      this.username,
-      this.name,
-      this.email,
-      this.active,
-      this.positionId,
-      this.createdAt,
-      this.updatedAt,
-      this.segmentations});
+  Profile_Data({this.name, this.segmentations});
+
 
   Profile_Data.fromJson(Map<String, dynamic> json) {
-    // id = json['id'];
-    username = json['username'];
     name = json['name'];
-    email = json['email'];
-    active = json['active'];
-    positionId = json['position_id'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+
     if (json['segmentations'] != null) {
       segmentations = <Segmentations>[];
       json['segmentations'].forEach((v) {
@@ -93,14 +70,9 @@ class Profile_Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    // data['id'] = this.id;
-    data['username'] = this.username;
+
     data['name'] = this.name;
-    data['email'] = this.email;
-    data['active'] = this.active;
-    data['position_id'] = this.positionId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+
     if (this.segmentations != null) {
       data['segmentations'] =
           this.segmentations!.map((v) => v.toJson()).toList();
@@ -112,44 +84,26 @@ class Profile_Data {
 class Segmentations {
   int? id;
   String? name;
-  String? userId;
-  String? assignDate;
-  String? status;
-  String? remark;
-  String? createdAt;
-  String? updatedAt;
+
 
   Segmentations(
       {this.id,
       this.name,
-      this.userId,
-      this.assignDate,
-      this.status,
-      this.remark,
-      this.createdAt,
-      this.updatedAt});
+
+      
+      });
 
   Segmentations.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    userId = json['user_id'];
-    assignDate = json['assign_date'];
-    status = json['status'];
-    remark = json['remark'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['user_id'] = this.userId;
-    data['assign_date'] = this.assignDate;
-    data['status'] = this.status;
-    data['remark'] = this.remark;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+
     return data;
   }
 }
@@ -163,8 +117,7 @@ Future<Profile_Data> fetchProfile_Auth(String token) async {
   });
 
   var jsonResponse = json.decode(response.body)['data'];
-  // var jsonCon = jsonResponse['data'];   
-  // var k = jsonResponse['data']['id'];
+
   Profile_Data user_profileData = Profile_Data.fromJson(jsonResponse);
 
   return user_profileData;

@@ -25,6 +25,8 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           }),
         );
         var dataAllStore = (state.notWrite != []) ? state.notWrite : [];
+        var dad;
+        
         if (response.data['responseStatus'].toString() == "true") {
           for (var el in response.data['data']['data']) {
             dataAllStore.add(

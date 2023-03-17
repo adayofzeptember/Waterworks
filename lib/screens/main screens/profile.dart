@@ -90,9 +90,9 @@ class _ProfileState extends State<Profile> {
       ),
       backgroundColor: Palette.thisGreen,
       body: MediaQuery(
-          data: MediaQuery.of(context).copyWith(
-            textScaleFactor: 1.0,
-          ),
+        data: MediaQuery.of(context).copyWith(
+          textScaleFactor: 1.0,
+        ),
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
           child: Column(
@@ -171,7 +171,7 @@ class _ProfileState extends State<Profile> {
                                                   const TextStyle(fontSize: 17),
                                             ),
                                             const Text(
-                                              " , ",
+                                              " ,  ",
                                               style: TextStyle(
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.bold,
@@ -191,10 +191,11 @@ class _ProfileState extends State<Profile> {
                                     style: ElevatedButton.styleFrom(
                                         primary: Colors.white,
                                         elevation: 0,
-                                        side:
-                                            const BorderSide(color: Colors.grey),
+                                        side: const BorderSide(
+                                            color: Colors.grey),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         )),
                                     onPressed: () {
                                       Navigator.push(context, pageOffice());
@@ -224,7 +225,8 @@ class _ProfileState extends State<Profile> {
                                         side: const BorderSide(
                                             color: Palette.thisGreen),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         )),
                                     onPressed: () {
                                       setState(() {
@@ -286,7 +288,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     );
                   }
-      
+
                   return Column(
                     children: [
                       const SizedBox(
@@ -314,8 +316,6 @@ class _ProfileState extends State<Profile> {
     setState(() {
       theTokenOne = getThatToken.toString();
     });
-
-    
   }
 
   Future logout_removeToken() async {

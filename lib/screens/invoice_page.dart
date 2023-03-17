@@ -1,20 +1,13 @@
-import 'dart:convert';
+// ignore_for_file: deprecated_member_use
+
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/models/invoice_to_printer.dart';
-import 'package:waterworks/ETC/printer%20libs/6.esc_pos.dart';
-import 'package:waterworks/ETC/water_unit_irregular.dart';
 import 'package:waterworks/service/get_invoice.dart';
 import '../ETC/color_green.dart';
-import '../bloc/load_undone/undone_bloc.dart';
 import '../blue_thermal_printer/print_page.dart';
 import 'First_Page_bottomBar.dart';
-import 'package:http/http.dart' as http;
 //!ใบแจ้งหนี้ไปหน้าปริ๊น
 
 String theTokenOne = '';
@@ -30,13 +23,13 @@ class Invoice_Page extends StatefulWidget {
 
 class _Invoice_PageState extends State<Invoice_Page> {
   @override
+  late Future<Invoice_Data> futureINV;
   ToInvoice toInvoiceModel = ToInvoice();
-  var invoice;
   bool checkWater = false;
   void initState() {
     print(widget.ckeckWidget);
-    getToken();
-    invoice = fetch_invoice(widget.invoiceID.toString());
+    // print(widget.ckeckWidget);
+    futureINV = fetch_invoice(widget.invoiceID.toString());
     super.initState();
   }
 
@@ -106,10 +99,11 @@ class _Invoice_PageState extends State<Invoice_Page> {
               child: Column(
                 children: [
                   FutureBuilder<Invoice_Data>(
-                    future: invoice,
+                    future: futureINV,
                     builder: (context, snapshot) {
                       print('ffffff');
                       if (snapshot.hasData) {
+                        print('call');
                         Invoice_Data? data = snapshot.data;
                         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         String add = data!.customerAddress.toString();
@@ -170,6 +164,9 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   height: 80,
                                   width: 80,
                                 )),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 const Center(
                                     child: Text(
                                   'ใบแจ้งหนี้ค่าน้ำประปา',
@@ -486,7 +483,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 50,
+                                        height: 30,
                                       ),
                                       BarcodeWidget(
                                           barcode: Barcode.code128(useCode128A: true),
@@ -672,14 +669,5 @@ class _Invoice_PageState extends State<Invoice_Page> {
         ),
       ),
     );
-  }
-
-  Future getToken() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var getThatToken = prefs2.get('keyToken');
-
-    setState(() {
-      theTokenOne = getThatToken.toString();
-    });
   }
 }
