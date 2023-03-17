@@ -171,7 +171,7 @@ class _ProfileState extends State<Profile> {
                                                   const TextStyle(fontSize: 17),
                                             ),
                                             const Text(
-                                              " , ",
+                                              " ,  ",
                                               style: TextStyle(
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.bold,
