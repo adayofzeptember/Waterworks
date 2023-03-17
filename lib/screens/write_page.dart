@@ -588,18 +588,15 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               .toString())) {
                                                     print('น้อยกว่า');
                                                   } else {
-                                                    print('ปกติ');
+                                                    _writeUnit_Request
+                                                            .water_meter_record_id =
+                                                        widget.id.toString();
+
+                                                    _showAlertDialog(
+                                                        _writeUnit_Request
+                                                            .current_unit
+                                                            .toString());
                                                   }
-
-                                                  // _writeUnit_Request
-                                                  //         .water_meter_record_id =
-                                                  //     widget.id.toString();
-
-                                                  // _showAlertDialog(
-                                                  //     _writeUnit_Request
-                                                  //         .current_unit
-                                                  //         .toString());
-
                                                 }
                                               },
                                               child: Padding(
