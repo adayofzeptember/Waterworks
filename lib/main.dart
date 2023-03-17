@@ -94,7 +94,7 @@ class _Load_PageState extends State<Load_Page> {
     try {
       final result = await InternetAddress.lookup('www.google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
+        //print('connected');
         _Load_And_Go();
       }
     } on SocketException catch (_) {

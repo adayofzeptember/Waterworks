@@ -12,6 +12,7 @@ import 'package:waterworks/ETC/printer%20libs/6.esc_pos.dart';
 import 'package:waterworks/ETC/water_unit_irregular.dart';
 import 'package:waterworks/service/get_invoice.dart';
 import '../ETC/color_green.dart';
+import '../ETC/month_thai_covert.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../blue_thermal_printer/print_page.dart';
 import 'First_Page_bottomBar.dart';
@@ -32,6 +33,7 @@ class Invoice_Page extends StatefulWidget {
 class _Invoice_PageState extends State<Invoice_Page> {
   @override
   late Future<Invoice_Data> futureINV;
+  MonthTH m = MonthTH();
   ToInvoice toInvoiceModel = ToInvoice();
   bool checkWater = false;
   void initState() {
@@ -113,17 +115,19 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     future: futureINV,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        print('call');
                         Invoice_Data? data = snapshot.data;
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
                         String add = data!.customerAddress.toString();
-                        var newAddress = add.substring(0, 6);
+                        String newAddress = add.substring(0, 6);
                         String dis = '0';
                         if (data.discount.toString() == 'null') {
                           dis = '0';
                         } else {
                           dis = data.discount.toString();
                         }
+
+                        String month = data.issueDate.toString();
+                        String monthThai = month.substring(5, 7);
 
                         toInvoiceModel.inv_number =
                             data.invoiceNumber.toString();
@@ -136,7 +140,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
                             data.customerAddress.toString();
                         //?---------------------------------------------------------
                         //get data
-                        toInvoiceModel.inv_date = data.issueDate.toString();
+                        toInvoiceModel.inv_date =
+                            m.convertMonth(monthThai).toString();
                         toInvoiceModel.inv_matr_number =
                             data.waterMeterRecord!.currentUnit.toString();
                         toInvoiceModel.inv_unit_use =
@@ -165,6 +170,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
                           checkWater = false;
                           // print('1');
                         }
+
+                        print('น้ำปกติ: ' + irregular_Water);
 
                         return Container(
                           width: double.infinity,
@@ -279,7 +286,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          data.issueDate.toString(),
+                                          m.convertMonth(monthThai).toString(),
                                           style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),

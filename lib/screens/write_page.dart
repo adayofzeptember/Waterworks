@@ -34,13 +34,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   late WriteUnit_Request _writeUnit_Request;
   bool circleHUD = false;
   bool checkDept = false;
+  late final Future<User_Consume_Data> futureUser;
 
   @override
   void initState() {
-    print(widget.porNumber);
     checkInternet(context);
     circleHUD = false;
     _writeUnit_Request = WriteUnit_Request();
+    futureUser = fetch_user_consume(widget.id.toString());
     super.initState();
   }
 
@@ -95,13 +96,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                       child: Column(
                         children: [
                           FutureBuilder<User_Consume_Data>(
-                            future: fetch_user_consume(widget.id.toString()),
+                            future: futureUser,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 User_Consume_Data? data = snapshot.data;
                                 var debtLength = data!.historyWaters!.length;
-                                // print("-------------------- ไอดี -------------------: "+data.id.toString());
-                                // print("-------------------- หนี้ -------------------: "+debtLength.toString());
+
                                 if (debtLength == 0) {
                                   checkDept = false;
                                 } else {
@@ -580,7 +580,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 if (formKey.currentState!
                                                     .validate()) {
                                                   formKey.currentState?.save();
-                                              
+
                                                   if (int.parse(data
                                                           .previous_unit_format
                                                           .toString()) >
@@ -589,15 +589,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               .current_unit
                                                               .toString())) {
                                                     _showAlertError();
-                                                  } 
-
-                                                  else if (widget.porNumber.toString() == _writeUnit_Request.current_unit.toString()){
-                                                    _showAlertWaterNumber(_writeUnit_Request
-                                                              .current_unit
-                                                              .toString());
-                                                  }
-                                                  
-                                                  else {
+                                                  } else if (widget.porNumber
+                                                          .toString() ==
+                                                      _writeUnit_Request
+                                                          .current_unit
+                                                          .toString()) {
+                                                    _showAlertWaterNumber(
+                                                        _writeUnit_Request
+                                                            .current_unit
+                                                            .toString());
+                                                  } else {
                                                     _writeUnit_Request
                                                             .water_meter_record_id =
                                                         widget.id.toString();
@@ -668,8 +669,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
-  Future<Data_writeUnit> write_unit(
-      WriteUnit_Request write_requestModel) async {
+  Future<void> write_unit(WriteUnit_Request write_requestModel) async {
     String urlPost = waterWork_domain + 'water_meter_record/update';
 
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
@@ -693,7 +693,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       setState(() {
         circleHUD = false;
       });
-      print('----------- write water success, invoice id: ' +
+      print('----------- write success, invoice id: ' +
           datax['data']['invoice']['id'].toString());
       context.read<NotWriteBloc>().add(Reload_Undone(context));
       context.read<DoneBloc>().add(Reload_Done(context));
@@ -706,19 +706,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
               invoiceID: datax['data']['invoice']['id'].toString(),
             )),
       );
-
-      return Data_writeUnit.fromJson(json.decode(response.body));
     } else {
       setState(() {
         circleHUD = false;
       });
       print('----------- write water failed -----------');
       print(response.body);
-      throw Exception();
     }
   }
 
-    Future<void> _showAlertWaterNumber(String por) async {
+  Future<void> _showAlertWaterNumber(String por) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -738,7 +735,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "เลข "+por.toString()+" ที่จดเป็นเลข ป. ไม่ใช่หน่วยน้ำ",
+                      "เลข " +
+                          por.toString() +
+                          " ที่จดเป็นเลข ป. ไม่ใช่หน่วยน้ำ",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -876,7 +875,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                 try {
                   final result = await InternetAddress.lookup('google.com');
                   if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-                    print('connected');
+                    //print('connected');
                     write_unit(_writeUnit_Request); //original
                   }
                 } on SocketException catch (_) {

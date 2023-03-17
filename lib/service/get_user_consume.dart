@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'dart:async';
@@ -628,13 +630,12 @@ Future<User_Consume_Data> fetch_user_consume(String recordID) async {
   });
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
-  var k = jsonResponse['data']['customer_water']['name'];
+  //var k = jsonResponse['data']['customer_water']['name'];
   User_Consume_Data water_user_use = User_Consume_Data.fromJson(jsonCon);
   if (response.statusCode == 200) {
-    //   print(response.body);
+    return water_user_use;
   } else {
-    //print(response.body);
+    print(response.body);
+    throw e;
   }
-
-  return water_user_use;
 }
