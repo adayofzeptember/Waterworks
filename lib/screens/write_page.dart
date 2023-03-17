@@ -21,7 +21,8 @@ import 'invoice_page.dart';
 //! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
   String? id = '';
-  Water_Unit_Detail({Key? key, this.id}) : super(key: key);
+  String? porNumber = '';
+  Water_Unit_Detail({Key? key, this.id, this.porNumber}) : super(key: key);
 
   @override
   State<Water_Unit_Detail> createState() => _Water_Unit_DetailState();
@@ -36,6 +37,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   void initState() {
+    print(widget.porNumber);
     checkInternet(context);
     circleHUD = false;
     _writeUnit_Request = WriteUnit_Request();
@@ -578,7 +580,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 if (formKey.currentState!
                                                     .validate()) {
                                                   formKey.currentState?.save();
-
+                                              
                                                   if (int.parse(data
                                                           .previous_unit_format
                                                           .toString()) >
@@ -586,8 +588,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           _writeUnit_Request
                                                               .current_unit
                                                               .toString())) {
-                                                    print('น้อยกว่า');
-                                                  } else {
+                                                    _showAlertError();
+                                                  } 
+
+                                                  else if (widget.porNumber.toString() == _writeUnit_Request.current_unit.toString()){
+                                                    _showAlertWaterNumber(_writeUnit_Request
+                                                              .current_unit
+                                                              .toString());
+                                                  }
+                                                  
+                                                  else {
                                                     _writeUnit_Request
                                                             .water_meter_record_id =
                                                         widget.id.toString();
@@ -706,6 +716,113 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       print(response.body);
       throw Exception();
     }
+  }
+
+    Future<void> _showAlertWaterNumber(String por) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('คุณกำลังเอาเลข ป. ไปจด !',
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "เลข "+por.toString()+" ที่จดเป็นเลข ป. ไม่ใช่หน่วยน้ำ",
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text(
+                'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {
+                setState(() {
+                  circleHUD = false;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> _showAlertError() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('ไม่สามารถจดหน่วยน้ำได้ !',
+              style: const TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold)),
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "เลขมาตรวัดน้ำปัจจุบันน้อยกว่าครั้งก่อน",
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: const Text(
+                  'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              onPressed: () {
+                setState(() {
+                  circleHUD = false;
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> _showAlertDialog(String newUnit) async {

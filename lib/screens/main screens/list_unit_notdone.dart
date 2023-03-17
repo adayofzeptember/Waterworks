@@ -109,6 +109,7 @@ class _NotyetState extends State<Notyet> {
                                 type: PageTransitionType.rightToLeft,
                                 child: Use_Water_Info(
                                   id: state.notWrite[index].id.toString(),
+                                  
                                 ),
                               ),
                             );
@@ -349,6 +350,8 @@ class _NotyetState extends State<Notyet> {
                                           child: Water_Unit_Detail(
                                             id: state.notWrite[index].id
                                                 .toString(),
+                                                porNumber: state.notWrite[index].waterNumber.toString(),
+                                            
                                           ),
                                         ),
                                       );
