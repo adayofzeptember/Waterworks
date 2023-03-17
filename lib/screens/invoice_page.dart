@@ -37,7 +37,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
   void initState() {
     // print(widget.ckeckWidget);
     futureINV = fetch_invoice(widget.invoiceID.toString());
-
     super.initState();
   }
 
