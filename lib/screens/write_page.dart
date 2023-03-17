@@ -579,12 +579,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                     .validate()) {
                                                   formKey.currentState?.save();
 
-                                                  if (int.parse(data.previous_unit_format.toString()) > int.parse(_writeUnit_Request
-                                                      .current_unit.toString())) {
-                                                        print('น้อยกว่า');
-                                                  }
-                                                  else{
-                                                    
+                                                  if (int.parse(data
+                                                          .previous_unit_format
+                                                          .toString()) >
+                                                      int.parse(
+                                                          _writeUnit_Request
+                                                              .current_unit
+                                                              .toString())) {
+                                                    print('น้อยกว่า');
+                                                  } else {
+                                                    print('ปกติ');
                                                   }
 
                                                   // _writeUnit_Request
@@ -596,7 +600,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   //         .current_unit
                                                   //         .toString());
 
-                                               
                                                 }
                                               },
                                               child: Padding(
