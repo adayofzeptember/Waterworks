@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:convert';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,11 +31,13 @@ class Invoice_Page extends StatefulWidget {
 
 class _Invoice_PageState extends State<Invoice_Page> {
   @override
+  late Future<Invoice_Data> futureINV;
   ToInvoice toInvoiceModel = ToInvoice();
   bool checkWater = false;
   void initState() {
-    print(widget.ckeckWidget);
-    getToken();
+    // print(widget.ckeckWidget);
+    futureINV = fetch_invoice(widget.invoiceID.toString());
+
     super.initState();
   }
 
@@ -107,10 +111,10 @@ class _Invoice_PageState extends State<Invoice_Page> {
               child: Column(
                 children: [
                   FutureBuilder<Invoice_Data>(
-                    future: fetch_invoice(
-                        theTokenOne.toString(), widget.invoiceID.toString()),
+                    future: futureINV,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
+                        print('call');
                         Invoice_Data? data = snapshot.data;
                         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         String add = data!.customerAddress.toString();
@@ -180,6 +184,9 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                   height: 80,
                                   width: 80,
                                 )),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 const Center(
                                     child: Text(
                                   'ใบแจ้งหนี้ค่าน้ำประปา',
@@ -266,7 +273,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                     Row(
                                       children: [
                                         const Text(
-                                          'ค่าน้ำประจำเดือน: ',
+                                          'ค่าน้ำประจำเดือน : ',
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 133, 133, 133),
@@ -575,7 +582,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 50,
+                                        height: 30,
                                       ),
                                       BarcodeWidget(
                                           barcode: Barcode.code128(
@@ -779,14 +786,5 @@ class _Invoice_PageState extends State<Invoice_Page> {
         ),
       ),
     );
-  }
-
-  Future getToken() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var getThatToken = prefs2.get('keyToken');
-
-    setState(() {
-      theTokenOne = getThatToken.toString();
-    });
   }
 }
