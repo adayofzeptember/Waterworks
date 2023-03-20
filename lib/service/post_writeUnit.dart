@@ -522,12 +522,15 @@ class Invoice {
 class WriteUnit_Request {
   String? current_unit;
   String? water_meter_record_id;
+  String? new_Round;
 
-  WriteUnit_Request({this.current_unit, this.water_meter_record_id});
+  WriteUnit_Request(
+      {this.current_unit, this.water_meter_record_id, this.new_Round});
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['current_unit'] = this.current_unit;
     data['water_meter_record_id'] = this.water_meter_record_id;
+    data['new_round'] = this.new_Round;
     return data;
   }
 }

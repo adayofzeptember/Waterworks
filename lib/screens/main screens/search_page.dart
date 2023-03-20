@@ -278,6 +278,7 @@ class Search_Page extends StatelessWidget {
                                                             width: 3,
                                                           ),
                                                           Container(
+                                                          width: 150,
                                                             decoration:
                                                                 const BoxDecoration(
                                                               borderRadius:

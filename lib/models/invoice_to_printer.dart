@@ -3,11 +3,14 @@ class ToInvoice {
   String? inv_user_number;
   String? inv_user_name;
   String? inv_user_address;
-  String? inv_date;
+
+  String? inv_record_date;
   String? inv_matr_number;
+  String? inv_matr_previous_number;
+
   String? inv_unit_use;
   String? inv_prapa_cost;
-  String? inv_discount;
+
   String? inv_service;
   String? inv_vat;
   String? inv_total;
@@ -21,11 +24,13 @@ class ToInvoice {
       this.inv_user_number,
       this.inv_user_name,
       this.inv_user_address,
-      this.inv_date,
+      this.inv_record_date,
       this.inv_matr_number,
+      this.inv_matr_previous_number,
+
       this.inv_unit_use,
       this.inv_prapa_cost,
-      this.inv_discount,
+
       this.inv_service,
       this.inv_vat,
       this.inv_total,

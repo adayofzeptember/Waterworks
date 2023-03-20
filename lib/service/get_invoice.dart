@@ -65,7 +65,7 @@ class Invoice_Data {
   String? status;
   Null? remark;
   String? issueDate;
-  String? dueDate;
+  String? due_date_format;
   String? createdAt;
   String? updatedAt;
   String? customerWaterId;
@@ -105,7 +105,7 @@ class Invoice_Data {
       this.status,
       this.remark,
       this.issueDate,
-      this.dueDate,
+      this.due_date_format,
       this.createdAt,
       this.updatedAt,
       this.customerWaterId,
@@ -145,7 +145,7 @@ class Invoice_Data {
     status = json['status'];
     remark = json['remark'];
     issueDate = json['issue_date'];
-    dueDate = json['due_date'];
+    due_date_format = json['due_date_format'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     customerWaterId = json['customer_water_id'];
@@ -187,7 +187,7 @@ class Invoice_Data {
     data['status'] = this.status;
     data['remark'] = this.remark;
     data['issue_date'] = this.issueDate;
-    data['due_date'] = this.dueDate;
+    data['due_date_format'] = this.due_date_format;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['customer_water_id'] = this.customerWaterId;
@@ -236,6 +236,7 @@ class WaterMeterRecord {
   String? updatedAt;
   String? areaWaterNumber;
   String? waterWrong;
+  String? record_date_format;
 
   WaterMeterRecord(
       {this.id,
@@ -255,7 +256,11 @@ class WaterMeterRecord {
       this.createdAt,
       this.updatedAt,
       this.areaWaterNumber,
-      this.waterWrong});
+      this.waterWrong,
+      this.record_date_format
+      
+      
+      });
 
   WaterMeterRecord.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -276,6 +281,7 @@ class WaterMeterRecord {
     updatedAt = json['updated_at'];
     areaWaterNumber = json['area_water_number'];
     waterWrong = json['water_wrong'];
+    record_date_format = json['record_date_format'];
   }
 
   Map<String, dynamic> toJson() {
@@ -298,6 +304,7 @@ class WaterMeterRecord {
     data['updated_at'] = this.updatedAt;
     data['area_water_number'] = this.areaWaterNumber;
     data['water_wrong'] = this.waterWrong;
+    data['record_date_format'] = this.record_date_format;
     return data;
   }
 }
