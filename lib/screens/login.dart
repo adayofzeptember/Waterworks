@@ -10,17 +10,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/progressHUD.dart';
+import 'package:waterworks/bloc/profile/profile_bloc.dart';
 import 'package:waterworks/service/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:http/http.dart' as http;
 
 import 'First_Page_bottomBar.dart';
-
 
 String deviceDetail = '';
 String storedToken = '';
@@ -52,10 +53,8 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ProgressHUD(
-        child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
   @override
@@ -65,9 +64,7 @@ class _LoginState extends State<Login> {
       child: Stack(
         children: <Widget>[
           Image.asset('assets/images/background_green.png',
-              width: MediaQuery.of(context).size.width * 1,
-              height: MediaQuery.of(context).size.height * 1,
-              fit: BoxFit.fill),
+              width: MediaQuery.of(context).size.width * 1, height: MediaQuery.of(context).size.height * 1, fit: BoxFit.fill),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,10 +80,7 @@ class _LoginState extends State<Login> {
                   ),
                   const Text(
                     'เข้าสู่ระบบ',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 30,
@@ -101,7 +95,7 @@ class _LoginState extends State<Login> {
                             height: 5,
                           ),
                           TextFormField(
-                          //  initialValue: 'watermeter13',
+                            //  initialValue: 'watermeter13',
                             textAlign: TextAlign.left,
                             autofocus: false,
                             style: const TextStyle(fontWeight: FontWeight.bold),
@@ -116,9 +110,7 @@ class _LoginState extends State<Login> {
                               hintText: 'กรอกบัญชีผู้ใช้',
                               labelStyle: const TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.transparent),
-                                  borderRadius: BorderRadius.circular(10)),
+                                  borderSide: const BorderSide(color: Colors.transparent), borderRadius: BorderRadius.circular(10)),
                               filled: true,
                               fillColor: const Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
@@ -126,8 +118,7 @@ class _LoginState extends State<Login> {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white, width: 0),
+                                borderSide: const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
@@ -152,19 +143,16 @@ class _LoginState extends State<Login> {
                               hintText: 'กรอกรหัสผ่าน',
                               labelStyle: const TextStyle(fontSize: 15),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      const BorderSide(color: Colors.white, width: 0),
+                                  borderSide: const BorderSide(color: Colors.white, width: 0),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
                               fillColor: const Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white, width: 0),
+                                borderSide: const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide:
-                                    const BorderSide(color: Colors.white, width: 0),
+                                borderSide: const BorderSide(color: Colors.white, width: 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
@@ -193,8 +181,7 @@ class _LoginState extends State<Login> {
 
                                 _login_request.username = userName;
                                 _login_request.password = passWord;
-                                _login_request.device_name =
-                                    deviceDetail.toString().toUpperCase();
+                                _login_request.device_name = deviceDetail.toString().toUpperCase();
                                 print(jsonEncode(_login_request));
                                 loginNormal(_login_request);
                               },
@@ -205,10 +192,7 @@ class _LoginState extends State<Login> {
                                   alignment: Alignment.center,
                                   child: const Text(
                                     "เข้าสู่ระบบ",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 15),
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 15),
                                   ),
                                 ),
                               ),
@@ -233,10 +217,7 @@ class _LoginState extends State<Login> {
     var body_Login = json.encode(requestModel.toJson());
     final response = await http.post(
       Uri.parse(urlPost),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
       body: body_Login,
     );
     //print(jsonDecode(response.body.toString()));
@@ -249,13 +230,9 @@ class _LoginState extends State<Login> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('keyToken', jsonRes['data']['access_token'].toString());
       print(jsonRes['data']['access_token'].toString());
-
-      Navigator.pushReplacement(
-          context,
-          PageTransition(
-              duration: const Duration(milliseconds: 500),
-              type: PageTransitionType.rightToLeft,
-              child: Menu_Page()));
+      context.read<ProfileBloc>().add(LoadProfile());
+      Navigator.pushReplacement(context,
+          PageTransition(duration: const Duration(milliseconds: 500), type: PageTransitionType.rightToLeft, child: Menu_Page()));
     } else {
       setState(() {
         circleHUD = false;
@@ -286,14 +263,13 @@ class _LoginState extends State<Login> {
         deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
       }
     } on PlatformException {
-      deviceData = <String, dynamic>{
-        'Error:': 'Failed to get platform version.'
-      };
+      deviceData = <String, dynamic>{'Error:': 'Failed to get platform version.'};
     }
 
     setState(() {
       _deviceData = deviceData;
-      deviceDetail = deviceData['brand'] + '-' + deviceData['model'];
+
+      deviceDetail = (deviceData['brand'] == null) ? "IPHONE" : deviceData['brand'] + '-' + deviceData['model'];
     });
     print(deviceDetail);
   }
