@@ -58,7 +58,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   Widget _uiSetUp(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -576,7 +575,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           child: Checkbox(
                                                             focusColor:
                                                                 Colors.white,
-                                                            activeColor: Colors.red,
+                                                            activeColor:
+                                                                Colors.red,
                                                             checkColor:
                                                                 Colors.white,
                                                             value: state
@@ -597,7 +597,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                         ),
                                                         const Text(
                                                           'รอบใหม่',
-                                                          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 18),
+                                                          style: TextStyle(
+                                                              color: Colors.red,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 18),
                                                         ),
                                                       ],
                                                     ),
@@ -733,10 +738,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                   const Center(
                                       child: CircularProgressIndicator(
                                     color: Colors.white,
-                                  )
-                                  
-                                  
-                                  ),
+                                  )),
                                 ],
                               );
                             },
@@ -780,9 +782,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       });
       print('----------- write success, invoice id: ' +
           datax['data']['invoice']['id'].toString());
+      //? bloc funtion clear
       context.read<NotWriteBloc>().add(Reload_Undone(context));
       context.read<DoneBloc>().add(Reload_Done(context));
       context.read<CheckboxBloc>().add(ClearCheck());
+
       Navigator.push(
         context,
         PageTransition(
