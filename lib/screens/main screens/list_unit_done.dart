@@ -91,7 +91,9 @@ class _DoneState extends State<Done> {
                       );
                     }
 
-                    return InkWell(
+                    return 
+                    
+                    InkWell(
                       onTap: () {
                         print('invoice id: ' +
                             state.written[index].invoiceID.toString());

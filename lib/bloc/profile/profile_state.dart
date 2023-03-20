@@ -1,15 +1,25 @@
-// part of 'profile_bloc.dart';
+part of 'profile_bloc.dart';
 
-// class ProfileState extends Equatable {
-//   String name;
-//   List segs;
-//   bool isLoading;
-//   // String error;
+class ProfileState extends Equatable {
+  String name;
+  List segs, idSegs;
 
-//   ProfileState({required this.name, required this.segs, required this.isLoading});
+  ProfileState({required this.name, required this.segs, required this.idSegs});
 
-//   @override
-//   List<Object> get props => [];
-// }
+  ProfileState copyWith({
+    String? name,
+    List? segs,
+    List? idSegs,
+  }) {
+    return ProfileState(
+      name: name ?? this.name,
+      segs: segs ?? this.segs,
+      idSegs: idSegs ?? this.idSegs,
+    );
+  }
 
-// //class ProfileInitial extends ProfileState {}
+  @override
+  List<Object> get props => [name, segs, idSegs];
+}
+
+//class ProfileInitial extends ProfileState {}

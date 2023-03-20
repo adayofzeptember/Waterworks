@@ -32,8 +32,7 @@ class Invoice_Record {
     sessionID = json['sessionID'];
     serverDateTimeMS = json['serverDateTimeMS'];
     serverDatetime = json['serverDatetime'];
-    data =
-        json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? new Invoice_Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -169,9 +168,7 @@ class Invoice_Data {
     dueDateFormat = json['due_date_format'];
     issueDateFormat = json['issue_date_format'];
     sumFormat = json['sum_format'];
-    waterMeterRecord = json['water_meter_record'] != null
-        ? new WaterMeterRecord.fromJson(json['water_meter_record'])
-        : null;
+    waterMeterRecord = json['water_meter_record'] != null ? new WaterMeterRecord.fromJson(json['water_meter_record']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -306,6 +303,7 @@ class WaterMeterRecord {
 }
 
 Future<Invoice_Data> fetch_invoice(String invoice_id) async {
+  print('fetch_invoice');
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var token = prefs2.get('keyToken');
 
@@ -315,9 +313,10 @@ Future<Invoice_Data> fetch_invoice(String invoice_id) async {
     'Accept': 'application/json',
     'Authorization': 'Bearer $token',
   });
-  var jsonResponse = json.decode(response.body);
-  var jsonCon = jsonResponse['data'];
+  var jsonResponse = json.decode(response.body)['data'];
+  // var jsonCon = jsonResponse['data'];
+  // var k = jsonResponse['data']['count_invoices'];
 
-  Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonCon);
+  Invoice_Data invoice_Data = Invoice_Data.fromJson(jsonResponse);
   return invoice_Data;
 }

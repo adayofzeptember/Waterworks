@@ -22,14 +22,14 @@ import 'package:waterworks/bloc/search/search_bloc.dart';
 import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/checkbox_newround/checkbox_bloc.dart';
+import 'bloc/profile/profile_bloc.dart';
 import 'offline/utils.dart';
 
 void main() {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(Start_Page_Waterworks()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(Start_Page_Waterworks()));
 }
 
 class Start_Page_Waterworks extends StatelessWidget {
@@ -42,17 +42,18 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => DoneBloc()),
         BlocProvider(create: (context) => SearchBloc()),
         BlocProvider(create: (context) => CheckboxBloc()),
+        BlocProvider(create: (context) => ProfileBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        localizationsDelegates: [
+        localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           DefaultCupertinoLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: [
-          const Locale('th', 'TH'),
+        supportedLocales: const [
+          Locale('th', 'TH'),
         ],
         theme: ThemeData(
           primarySwatch: Palette.thisGreen,
@@ -97,6 +98,9 @@ class _Load_PageState extends State<Load_Page> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         //print('connected');
         _Load_And_Go();
+        print('connected');
+        context.read<ProfileBloc>().add(LoadProfile());
+        await _Load_And_Go();
       }
     } on SocketException catch (_) {
       print('not connected');
@@ -122,20 +126,14 @@ class _Load_PageState extends State<Load_Page> {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(
-              duration: const Duration(milliseconds: 820),
-              type: PageTransitionType.bottomToTop,
-              child: Login()),
+          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Login()),
         );
       });
     } else {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(
-              duration: const Duration(milliseconds: 820),
-              type: PageTransitionType.bottomToTop,
-              child: Menu_Page()),
+          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Menu_Page()),
         );
       });
     }
@@ -151,9 +149,7 @@ class _Load_PageState extends State<Load_Page> {
         body: Stack(
       children: <Widget>[
         Image.asset('assets/images/background_green.png',
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.height * 1,
-            fit: BoxFit.fill),
+            width: MediaQuery.of(context).size.width * 1, height: MediaQuery.of(context).size.height * 1, fit: BoxFit.fill),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -169,17 +165,11 @@ class _Load_PageState extends State<Load_Page> {
                 ),
                 const Text(
                   'การประปาเทศบาลนคร',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   'นครราชสีมา',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

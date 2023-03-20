@@ -24,7 +24,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           final dio = Dio();
           final response = await dio.get(
             waterWork_domain +
-                'water_meter_record/index?per_page=10&status=pending&search=${event.searchNumber}',
+                'water_meter_record/index?per_page=10&search=${event.searchNumber}',
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $token",
@@ -33,7 +33,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           var dataSearchRes = [];
           if (response.statusCode == 400 || response.statusCode == 200) {
             if (response.data['data']['data'].length == 0) {
-               //! พอโหลดเสร็จจะไม่ใช่เลข 0 แล้ว
+              //! พอโหลดเสร็จจะไม่ใช่เลข 0 แล้ว
               emit(state.copyWith(statusSearch: 'ไม่พบข้อมูล'));
             } else {
               emit(state.copyWith(statusSearch: ''));
@@ -41,17 +41,24 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
             for (var el in response.data['data']['data']) {
               dataSearchRes.add(
                 NotWrite_Model(
-                    id: await el['id'],
-                    customerName: await el['customer_water']['name'],
-                    waterNumber: await el['water_number'],
-                    areaNumber: await el['area_number'],
-                    customerAddress: await el['customer_water']['address'],
-                    meterNumber: (el['customer_water']['meter_number'] != "")
-                        ? await el['customer_water']['meter_number']
-                        : "0",
-                    status: await (el['customer_water']['status'] == "Normal")
-                        ? true
-                        : false),
+                  id: await el['id'],
+                  invoiceID: await (el['invoice'] != null)
+                      ? await el['invoice']['id']
+                      : 0,
+                  customerName: await el['customer_water']['name'],
+                  waterNumber: await el['water_number'],
+                  areaNumber: await el['area_number'],
+                  customerAddress: await el['customer_water']['address'],
+                  meterNumber: (el['customer_water']['meter_number'] != "")
+                      ? await el['customer_water']['meter_number']
+                      : "0",
+                  status: await (el['customer_water']['status'] == "Normal")
+                      ? true
+                      : false,
+                  statusSearchCheck: await (el['status'] == "pending") //*จดแล้ว
+                      ? true
+                      : false,
+                ),
               );
             }
 

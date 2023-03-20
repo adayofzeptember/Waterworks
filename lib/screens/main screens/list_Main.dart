@@ -18,8 +18,6 @@ import '../../offline/service/customers_db.dart';
 import '../../offline/service/hisinvoices_db.dart';
 import '../../offline/service/hiswater_db .dart';
 
-
-
 class Water_Unit_List extends StatefulWidget {
   Water_Unit_List({Key? key}) : super(key: key);
 
@@ -28,7 +26,6 @@ class Water_Unit_List extends StatefulWidget {
 }
 
 class _Water_Unit_ListState extends State<Water_Unit_List> {
-
   late CustomersDatabase _db;
   late HisInvoicesDatabase _dbInvoices;
   late HisWaterDatabase _dbWater;
@@ -74,9 +71,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
         for (var invoice in el['history_invoices']) {
           HisInvoices hisInvoices = HisInvoices(
               data_id: invoice['id'].toString(),
-              customer_water_id: (invoice['customer_water_id'] != null)
-                  ? invoice['customer_water_id']
-                  : "",
+              customer_water_id: (invoice['customer_water_id'] != null) ? invoice['customer_water_id'] : "",
               customer_name: invoice['customer_name'],
               water_number: invoice['water_number'],
               area_number: invoice['area_number'],
@@ -87,8 +82,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
               total: invoice['total'],
               sum_service: invoice['sum_service'],
               bill_no: (invoice['bill_no'] != null) ? invoice['bill_no'] : "");
-          HisInvoices newInvoices =
-              await _dbInvoices.createHisInvoices(hisInvoices);
+          HisInvoices newInvoices = await _dbInvoices.createHisInvoices(hisInvoices);
           // print('his invoices success');
         }
         for (var water in el['history_waters']) {
@@ -130,7 +124,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     customers = _db.selectAllCustomers();
     customers.then(
       (value) {
-       // print(value.length);
+        // print(value.length);
       },
     );
 
