@@ -26,4 +26,3 @@ class MonthTH {
     return 'ธันวาคม';
   }
 }
-
