@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/models/invoice_to_printer.dart';
 import 'package:waterworks/service/get_invoice.dart';
@@ -57,11 +58,13 @@ class _Invoice_PageState extends State<Invoice_Page> {
           title: Row(
             children: [
               InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if (widget.ckeckWidget == 'from_list') {
                       Navigator.pop(context);
                     } else {
-                      Navigator.pushReplacement(
+                      print('1');
+                      context.read<NotWriteBloc>().add(BackMenu());
+                      await Navigator.pushReplacement(
                         context,
                         PageTransition(
                           duration: const Duration(milliseconds: 250),
@@ -70,15 +73,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         ),
                       );
                     }
-
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   PageTransition(
-                    //     duration: const Duration(milliseconds: 250),
-                    //     type: PageTransitionType.rightToLeft,
-                    //     child: Menu_Page(),
-                    //   ),
-                    // );
                   },
                   child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new, color: Palette.thisGreen))),
               const SizedBox(
@@ -119,21 +113,16 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         String month = data.issueDate.toString();
                         String monthThai = month.substring(5, 7);
 
-                        toInvoiceModel.inv_number =
-                            data.invoiceNumber.toString();
-                        toInvoiceModel.inv_user_number =
-                            data.waterMeterRecord!.waterNumber.toString();
+                        toInvoiceModel.inv_number = data.invoiceNumber.toString();
+                        toInvoiceModel.inv_user_number = data.waterMeterRecord!.waterNumber.toString();
 
                         toInvoiceModel.inv_user_name = data.customerName.toString();
                         toInvoiceModel.inv_user_address = data.customerAddress.toString();
                         //?---------------------------------------------------------
                         //get data
-                        toInvoiceModel.inv_date =
-                            m.convertMonth(monthThai).toString();
-                        toInvoiceModel.inv_matr_number =
-                            data.waterMeterRecord!.currentUnit.toString();
-                        toInvoiceModel.inv_unit_use =
-                            data.waterMeterRecord!.sumUnit.toString();
+                        toInvoiceModel.inv_date = m.convertMonth(monthThai).toString();
+                        toInvoiceModel.inv_matr_number = data.waterMeterRecord!.currentUnit.toString();
+                        toInvoiceModel.inv_unit_use = data.waterMeterRecord!.sumUnit.toString();
                         toInvoiceModel.inv_prapa_cost = data.sum.toString();
                         toInvoiceModel.inv_discount = dis.toString();
                         toInvoiceModel.inv_service = data.sumService.toString();
@@ -233,7 +222,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                 const SizedBox(
                                   height: 5,
                                 ),
-                                
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -245,13 +233,20 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ),
                                         Text(
                                           m.convertMonth(monthThai).toString(),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                          style: const TextStyle(fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(width: 5,),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
                                         checkWater
-                                        ? Text('(น้ำผิดปกติ)', style: TextStyle(color: Colors.amber),)
-                                        :Text('(น้ำปกติ)', style: TextStyle(color: Palette.thisGreen),)
+                                            ? Text(
+                                                '(น้ำผิดปกติ)',
+                                                style: TextStyle(color: Colors.amber),
+                                              )
+                                            : Text(
+                                                '(น้ำปกติ)',
+                                                style: TextStyle(color: Palette.thisGreen),
+                                              )
                                       ],
                                     ),
                                   ],

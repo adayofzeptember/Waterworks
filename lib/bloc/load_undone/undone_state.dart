@@ -6,6 +6,7 @@ class NotWriteState extends Equatable {
   bool isLoading, stopLoad;
   String error;
   int segmentActive;
+  String filterId;
 
   NotWriteState({
     required this.notWrite,
@@ -14,6 +15,7 @@ class NotWriteState extends Equatable {
     required this.error,
     required this.segmentActive,
     required this.stopLoad,
+    required this.filterId,
   });
 
   NotWriteState copyWith({
@@ -23,6 +25,7 @@ class NotWriteState extends Equatable {
     String? error,
     int? segmentActive,
     bool? stopLoad,
+    String? filterId,
   }) {
     return NotWriteState(
       notWrite: notWrite ?? this.notWrite,
@@ -31,9 +34,18 @@ class NotWriteState extends Equatable {
       error: error ?? this.error,
       segmentActive: segmentActive ?? this.segmentActive,
       stopLoad: stopLoad ?? this.stopLoad,
+      filterId: filterId ?? this.filterId,
     );
   }
 
   @override
-  List<Object> get props => [notWrite, page, isLoading, error, segmentActive, stopLoad];
+  List<Object> get props => [
+        notWrite,
+        page,
+        isLoading,
+        error,
+        segmentActive,
+        stopLoad,
+        filterId,
+      ];
 }
