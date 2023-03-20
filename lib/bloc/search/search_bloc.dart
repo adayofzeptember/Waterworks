@@ -42,6 +42,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
               dataSearchRes.add(
                 NotWrite_Model(
                   id: await el['id'],
+                  //sdfg
                   invoiceID: await (el['invoice'] != null)
                       ? await el['invoice']['id']
                       : 0,
