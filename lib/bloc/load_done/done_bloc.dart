@@ -106,7 +106,6 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
                 ),
               );
             }
-            print(response.data['data']);
             emit(state.copyWith(written: dataAllStore));
             emit(state.copyWith(error: dataAllStore.length == 0 ? 'not' : ''));
             // emit(state.copyWith(page: state.page + 1));
