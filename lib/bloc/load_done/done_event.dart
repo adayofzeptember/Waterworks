@@ -13,3 +13,10 @@ class Reload_Done extends DoneEvent {
   var context;
   Reload_Done(this.context);
 }
+
+class FilterData extends DoneEvent {
+  String id;
+  int segmentActive;
+  bool stopLoad;
+  FilterData({required this.id, required this.segmentActive, required this.stopLoad});
+}
