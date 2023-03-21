@@ -1,23 +1,30 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:group_radio_button/group_radio_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:waterworks/ETC/shapes_painter.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
 import 'package:waterworks/service/post_writeUnit.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/offline/utils.dart';
+import '../ETC/month_thai_covert.dart';
 import '../ETC/progressHUD.dart';
 import '../bloc/checkbox_newround/checkbox_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
+import '../bloc/radio_butts/radio_check_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
+
+enum Gdcg { lafayette, jefferson }
 
 //! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
@@ -38,6 +45,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   bool checkDept = false;
   late final Future<User_Consume_Data> futureUser;
   bool isChecked = false;
+  MonthTH m = MonthTH();
+  final _statusRadio = ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"];
 
   @override
   void initState() {
@@ -68,7 +77,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  context.read<CheckboxBloc>().add(ClearCheck());
+                  context.read<RadioCheckBloc>().add(ClearRadioDefault());
                 },
                 child: const SizedBox(
                     width: 50,
@@ -366,7 +375,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                     .bold),
                                                       ),
                                                       const SizedBox(
-                                                        width: 140,
+                                                        width: 120,
                                                       ),
                                                       const Text('หน่วย',
                                                           style: TextStyle(
@@ -392,11 +401,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 ),
                                               ),
                                               ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.vertical,
+                                                  padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
-                                                  physics:
-                                                      const NeverScrollableScrollPhysics(),
                                                   itemCount: data
                                                       .historyWaters!.length,
                                                   itemBuilder:
@@ -406,7 +412,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       decoration:
                                                           const BoxDecoration(
                                                         color: Color.fromARGB(
-                                                            255, 233, 233, 233),
+                                                            255, 245, 245, 245),
                                                       ),
                                                       child: Padding(
                                                         padding:
@@ -418,13 +424,13 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                   .spaceBetween,
                                                           children: [
                                                             Text(
-                                                              data
+                                                              m.convertMonth(data
                                                                   .historyWaters![
                                                                       index]
                                                                   .respDate
                                                                   .toString()
                                                                   .substring(
-                                                                      0, 10),
+                                                                      5, 7)),
                                                               style: const TextStyle(
                                                                   fontSize: 18,
                                                                   color: Palette
@@ -467,14 +473,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                     );
                                                   }),
                                               const SizedBox(
-                                                height: 30,
-                                              ),
-                                              // Divider(
-                                              //     thickness: 1,
-                                              //     color: Color.fromARGB(
-                                              //         255, 83, 83, 83)),
-                                              const SizedBox(
-                                                height: 20,
+                                                height: 40,
                                               ),
                                             ],
                                           )
@@ -557,54 +556,63 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               ),
                                             ),
                                             SizedBox(
-                                              height: 5,
+                                              height: 15,
                                             ),
-                                            BlocBuilder<CheckboxBloc,
-                                                CheckboxState>(
+                                            BlocBuilder<RadioCheckBloc,
+                                                RadioCheckState>(
                                               builder: (context, state) {
                                                 return Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
                                                       children: [
-                                                        SizedBox(
-                                                          height: 24.0,
-                                                          width: 24.0,
-                                                          child: Checkbox(
-                                                            focusColor:
-                                                                Colors.white,
-                                                            activeColor:
-                                                                Colors.red,
-                                                            checkColor:
-                                                                Colors.white,
-                                                            value: state
-                                                                .isCheckbloc,
-                                                            onChanged:
-                                                                (bool? value) {
-                                                              context
-                                                                  .read<
-                                                                      CheckboxBloc>()
-                                                                  .add(CheckThisShit(
-                                                                      checkkamic:
-                                                                          value!));
-                                                            },
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 5,
-                                                        ),
-                                                        const Text(
-                                                          'รอบใหม่',
+                                                        Text(
+                                                          'เลือกสถานะมาตร : ',
                                                           style: TextStyle(
-                                                              color: Colors.red,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        Text(
+                                                          state.writeCondition,
+                                                          style: TextStyle(
+                                                              fontSize: 20,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
-                                                              fontSize: 18),
+                                                              color: state
+                                                                      .colorCondition
+                                                                  ? Palette
+                                                                      .thisGreen
+                                                                  : Colors.red),
                                                         ),
                                                       ],
+                                                    ),
+                                                    RadioGroup<String>.builder(
+                                                      textStyle: TextStyle(
+                                                          fontSize: 20),
+                                                      groupValue:
+                                                          state.writeCondition,
+                                                      onChanged: (value) {
+                                                        context
+                                                            .read<
+                                                                RadioCheckBloc>()
+                                                            .add(CheckThisBro(
+                                                                getCondiotionRadio:
+                                                                    value
+                                                                        .toString()));
+                                                      },
+                                                      items: _statusRadio,
+                                                      itemBuilder: (item) =>
+                                                          RadioButtonBuilder(
+                                                        item,
+                                                      ),
+                                                      fillColor:
+                                                          Palette.thisGreen,
                                                     ),
                                                     const SizedBox(
                                                       height: 20,
@@ -623,6 +631,50 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                             15),
                                                               )),
                                                       onPressed: () {
+                                                        if (state
+                                                                .writeCondition ==
+                                                            "ปกติ") {
+                                                          _writeUnit_Request
+                                                                  .water_meter_record_id =
+                                                              widget.id
+                                                                  .toString();
+                                                          _writeUnit_Request
+                                                                  .writeStatus =
+                                                              "1";
+                                                        } else if (state
+                                                                .writeCondition ==
+                                                            "รอบใหม่") {
+                                                          _writeUnit_Request
+                                                                  .water_meter_record_id =
+                                                              widget.id
+                                                                  .toString();
+                                                          _writeUnit_Request
+                                                                  .writeStatus =
+                                                              "2";
+                                                        } else if (state
+                                                                .writeCondition ==
+                                                            "เปลี่ยนมาตร") {
+                                                          _writeUnit_Request
+                                                                  .water_meter_record_id =
+                                                              widget.id
+                                                                  .toString();
+                                                          _writeUnit_Request
+                                                                  .writeStatus =
+                                                              "3";
+                                                        } else {
+                                                          _writeUnit_Request
+                                                                  .water_meter_record_id =
+                                                              widget.id
+                                                                  .toString();
+                                                          _writeUnit_Request
+                                                                  .writeStatus =
+                                                              "4";
+                                                        }
+                                                        print(jsonEncode(
+                                                            _writeUnit_Request));
+
+//*----------------------------------------------------------------------------------------
+
                                                         if (waterUnitController
                                                             .text.isNotEmpty) {
                                                           checkInternet(
@@ -642,8 +694,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           formKey.currentState
                                                               ?.save();
 
-                                                          print(state
-                                                              .isCheckbloc);
+                                                          // print(state
+                                                          //     .isCheckbloc);
 
                                                           if (int.parse(data
                                                                   .previous_unit_format
@@ -651,39 +703,38 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               int.parse(_writeUnit_Request
                                                                   .current_unit
                                                                   .toString())) {
-                                                            if (state
-                                                                .isCheckbloc) {
-                                                              //!
-                                                              _writeUnit_Request
-                                                                      .water_meter_record_id =
-                                                                  widget.id
-                                                                      .toString();
+                                                            // if (state
+                                                            //     .isCheckbloc) {
+                                                            //   //!
+                                                            //   _writeUnit_Request
+                                                            //           .water_meter_record_id =
+                                                            //       widget.id
+                                                            //           .toString();
 
-                                                              _writeUnit_Request
-                                                                      .new_Round =
-                                                                  '1';
+                                                            //   _writeUnit_Request
+                                                            //           .new_Round =
+                                                            //       '1';
 
-                                                              print(jsonEncode(
-                                                                  _writeUnit_Request));
+                                                            //   print(jsonEncode(
+                                                            //       _writeUnit_Request));
 
-                                                              _showAlertDialog(
-                                                                  _writeUnit_Request
-                                                                      .current_unit
-                                                                      .toString(),
-                                                                  '*หมายเหตุ เริ่มรอบใหม่');
-                                                            } else {
-                                                              _showAlertError();
-                                                            }
+                                                            //   _showAlertDialog(
+                                                            //       _writeUnit_Request
+                                                            //           .current_unit
+                                                            //           .toString(),
+                                                            //       '*หมายเหตุ เริ่มรอบใหม่');
+                                                            // }
+                                                            // else {
+                                                            //   _showAlertError();
+                                                            // }
                                                           } else if (widget
                                                                   .porNumber
                                                                   .toString() ==
                                                               _writeUnit_Request
                                                                   .current_unit
                                                                   .toString()) {
-                                                            _showAlertWaterNumber(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString());
+                                                            //! เลข ป.
+
                                                           } else {
                                                             //!
                                                             _writeUnit_Request
@@ -692,11 +743,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                     .toString();
 
                                                             _writeUnit_Request
-                                                                    .new_Round =
+                                                                    .writeStatus =
                                                                 '0';
                                                             print(jsonEncode(
                                                                 _writeUnit_Request));
-                                                            _showAlertDialog(
+                                                            _showAlertWrite_OK(
                                                                 _writeUnit_Request
                                                                     .current_unit
                                                                     .toString(),
@@ -796,10 +847,11 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       });
       print('----------- write success, invoice id: ' +
           datax['data']['invoice']['id'].toString());
-      //? bloc funtion clear
+      //! bloc funtion clear
       context.read<NotWriteBloc>().add(Reload_Undone(context));
       context.read<DoneBloc>().add(Reload_Done(context));
       context.read<CheckboxBloc>().add(ClearCheck());
+      context.read<RadioCheckBloc>().add(ClearRadioDefault());
 
       Navigator.push(
         context,
@@ -819,61 +871,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     }
   }
 
-  Future<void> _showAlertWaterNumber(String por) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('คุณกำลังเอาเลข ป. ไปจด !',
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold)),
-          content: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "เลข " +
-                          por.toString() +
-                          " ที่จดเป็นเลข ป. ไม่ใช่หน่วยน้ำ",
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    const Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text(
-                'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {
-                setState(() {
-                  circleHUD = false;
-                });
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> _showAlertError() async {
+  Future<void> _showAlertWrite_ERROR() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -928,7 +926,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
-  Future<void> _showAlertDialog(String newUnit, String newRound) async {
+  Future<void> _showAlertWrite_OK(String newUnit, String newRound) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -1012,26 +1010,5 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
         );
       },
     );
-  }
-}
-
-const double _kCurveHeight = 50;
-
-class ShapesPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final p = Path();
-    final path = Path();
-    p.lineTo(0, size.height - _kCurveHeight);
-    p.relativeQuadraticBezierTo(
-        size.width / 2, 2 * _kCurveHeight, size.width, 0);
-    p.lineTo(size.width, 0);
-    p.close();
-    canvas.drawPath(p, Paint()..color = Palette.thisGreen);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

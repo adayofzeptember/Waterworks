@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 part 'checkbox_event.dart';
 part 'checkbox_state.dart';
 

@@ -31,7 +31,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
   bool checkWater = false;
   void initState() {
     print(widget.ckeckWidget);
-    // print(widget.ckeckWidget);
+
     futureINV = fetch_invoice(widget.invoiceID.toString());
     super.initState();
   }
@@ -62,7 +62,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
                     if (widget.ckeckWidget == 'from_list') {
                       Navigator.pop(context);
                     } else {
-                      print('1');
                       context.read<NotWriteBloc>().add(BackMenu());
                       await Navigator.pushReplacement(
                         context,
@@ -116,8 +115,10 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         String month = data.issueDate.toString();
                         String monthThai = month.substring(5, 7);
 
-                        toInvoiceModel.inv_number = data.invoiceNumber.toString();
-                        toInvoiceModel.inv_user_number = data.waterMeterRecord!.waterNumber.toString();
+                        toInvoiceModel.inv_number =
+                            data.invoiceNumber.toString();
+                        toInvoiceModel.inv_user_number =
+                            data.waterMeterRecord!.waterNumber.toString();
 
                         toInvoiceModel.inv_user_name =
                             data.customerName.toString();
@@ -281,21 +282,22 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ),
                                         Text(
                                           m.convertMonth(monthThai).toString(),
-                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
                                         checkWater
-                                            ? Text(
+                                            ? const Text(
                                                 '(น้ำผิดปกติ)',
                                                 style: TextStyle(
                                                     color: Colors.amber),
                                               )
-                                            : Text(
+                                            : const Text(
                                                 '(น้ำปกติ)',
                                                 style: TextStyle(
                                                     color: Palette.thisGreen),
@@ -341,7 +343,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('เลขในมาตรน้ำ',
+                                        const Text('เลขในมาตรน้ำ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),

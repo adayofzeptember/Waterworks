@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:waterworks/bloc/search/search_bloc.dart';
 import '../invoice_page.dart';
+import 'dart:io';
 import '../user_consume_info.dart';
 import '../write_page.dart';
 
@@ -41,7 +42,7 @@ class Search_Page extends StatelessWidget {
                 height: 10,
               ),
               TextField(
-                keyboardType: TextInputType.text,
+                keyboardType: (Platform.isAndroid) ? TextInputType.number : TextInputType.text,
                 onSubmitted: ((value) {
                   context
                       .read<SearchBloc>()

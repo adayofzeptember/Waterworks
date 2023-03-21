@@ -23,6 +23,7 @@ import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/checkbox_newround/checkbox_bloc.dart';
 import 'bloc/profile/profile_bloc.dart';
+import 'bloc/radio_butts/radio_check_bloc.dart';
 import 'offline/utils.dart';
 
 void main() {
@@ -43,6 +44,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => SearchBloc()),
         BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
+         BlocProvider(create: (context) => RadioCheckBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
