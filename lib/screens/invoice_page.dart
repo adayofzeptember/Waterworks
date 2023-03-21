@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/models/invoice_to_printer.dart';
 import 'package:waterworks/service/get_invoice.dart';
@@ -57,11 +58,13 @@ class _Invoice_PageState extends State<Invoice_Page> {
           title: Row(
             children: [
               InkWell(
-                  onTap: () {
+                  onTap: () async {
                     if (widget.ckeckWidget == 'from_list') {
                       Navigator.pop(context);
                     } else {
-                      Navigator.pushReplacement(
+                      print('1');
+                      context.read<NotWriteBloc>().add(BackMenu());
+                      await Navigator.pushReplacement(
                         context,
                         PageTransition(
                           duration: const Duration(milliseconds: 250),
@@ -113,10 +116,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         String month = data.issueDate.toString();
                         String monthThai = month.substring(5, 7);
 
-                        toInvoiceModel.inv_number =
-                            data.invoiceNumber.toString();
-                        toInvoiceModel.inv_user_number =
-                            data.waterMeterRecord!.waterNumber.toString();
+                        toInvoiceModel.inv_number = data.invoiceNumber.toString();
+                        toInvoiceModel.inv_user_number = data.waterMeterRecord!.waterNumber.toString();
 
                         toInvoiceModel.inv_user_name =
                             data.customerName.toString();
@@ -280,8 +281,10 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ),
                                         Text(
                                           m.convertMonth(monthThai).toString(),
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
+                                          style: const TextStyle(fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
                                         ),
                                         SizedBox(
                                           width: 5,

@@ -20,3 +20,5 @@ class FilterData extends NotWriteEvent {
   bool stopLoad;
   FilterData({required this.id, required this.segmentActive, required this.stopLoad});
 }
+
+class BackMenu extends NotWriteEvent {}

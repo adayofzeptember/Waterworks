@@ -167,11 +167,10 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           elevation: 0,
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
-          title: const Center(
-            child: Text(
-              'รายการจดหน่วยน้ำ',
-              style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
-            ),
+          centerTitle: true,
+          title: const Text(
+            'รายการจดหน่วยน้ำ',
+            style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
           ),
           actions: [
             (downloadPer != 0.0 && downloadPer != 100.0)

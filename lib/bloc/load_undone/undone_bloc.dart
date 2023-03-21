@@ -17,11 +17,10 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           error: '',
           segmentActive: 0,
           stopLoad: false,
+          filterId: '',
         )) {
     on<Load_unDoneData>((event, emit) async {
-     
       if (state.stopLoad == false) {
-      
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
         try {
@@ -80,13 +79,14 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           page: 1,
           segmentActive: event.segmentActive,
           stopLoad: event.stopLoad,
+          filterId: event.id,
         ));
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
         try {
           final dio = Dio();
           final response = await dio.get(
-            waterWork_domain + "water_meter_record/index?per_page=8&status=pending&water_meter_segmentation_id=${event.id}",
+            waterWork_domain + "water_meter_record/index?per_page=8&status=pending&water_meter_segmentation_id=${state.filterId}",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $token",
@@ -119,6 +119,13 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           emit(state.copyWith(error: e.toString()));
         }
       }
+    });
+    on<BackMenu>((event, emit) async {
+      add(FilterData(
+        id: state.filterId,
+        segmentActive: state.segmentActive,
+        stopLoad: state.stopLoad,
+      ));
     });
   }
 }
