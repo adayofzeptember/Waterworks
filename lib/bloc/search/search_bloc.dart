@@ -15,7 +15,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       if (event.searchNumber == "") {
         emit(state.copyWith(statusSearch: "1"));
       } else {
-        //! status 0 ระหว่างรอมันโหลด
+        //! status 0 ระหว่างรอมันโหลด ไปใส่ if mี่ wiget ว่า state.status = 0 ให้มัน Circle
         emit(state.copyWith(statusSearch: "0"));
 
         SharedPreferences prefs = await SharedPreferences.getInstance();

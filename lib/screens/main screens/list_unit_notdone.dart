@@ -249,6 +249,7 @@ class _NotyetState extends State<Notyet> {
                                                   width: 3,
                                                 ),
                                                 Container(
+                                                  width: 150,
                                                   decoration: const BoxDecoration(
                                                     borderRadius: BorderRadius.all(Radius.circular(5)),
                                                   ),
