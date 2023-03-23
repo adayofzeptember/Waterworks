@@ -84,6 +84,7 @@ class Invoice_Data {
   Null? userInvoiceDate;
   Null? billNo;
   int? countInvoices;
+  String? sumInvoice;
   String? sumTotal;
   String? dueDateFormat;
   String? issueDateFormat;
@@ -103,6 +104,7 @@ class Invoice_Data {
       this.waterNumber,
       this.sum,
       this.status,
+      this.sumInvoice,
       this.remark,
       this.issueDate,
       this.due_date_format,
@@ -146,6 +148,7 @@ class Invoice_Data {
     remark = json['remark'];
     issueDate = json['issue_date'];
     due_date_format = json['due_date_format'];
+    sumInvoice = json['sum_invoice'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     customerWaterId = json['customer_water_id'];
@@ -185,6 +188,7 @@ class Invoice_Data {
     data['water_number'] = this.waterNumber;
     data['sum'] = this.sum;
     data['status'] = this.status;
+    data['sum_invoice'] = this.sumInvoice;
     data['remark'] = this.remark;
     data['issue_date'] = this.issueDate;
     data['due_date_format'] = this.due_date_format;
