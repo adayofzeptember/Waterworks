@@ -15,6 +15,9 @@ class ToInvoice {
   String? inv_vat;
   String? inv_total;
   String? inv_notPay;
+  String? inv_notPay_cost;
+
+
   String? inv_dueDate;
   String? inv_barcode;
   String? godTotal;
@@ -30,7 +33,7 @@ class ToInvoice {
 
       this.inv_unit_use,
       this.inv_prapa_cost,
-
+      this.inv_notPay_cost,
       this.inv_service,
       this.inv_vat,
       this.inv_total,

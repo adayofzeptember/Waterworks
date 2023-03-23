@@ -84,6 +84,7 @@ class Invoice_Data {
   Null? userInvoiceDate;
   Null? billNo;
   int? countInvoices;
+  String? sum_invoice;
   String? sumTotal;
   String? dueDateFormat;
   String? issueDateFormat;
@@ -118,6 +119,7 @@ class Invoice_Data {
       this.incomeSegmentationId,
       this.incomeSegmentation,
       this.userIncome,
+      this.sum_invoice,
       this.incomeDate,
       this.userInvoiceId,
       this.userInvoiceName,
@@ -163,6 +165,7 @@ class Invoice_Data {
     userInvoiceName = json['user_invoice_name'];
     userInvoiceDate = json['user_invoice_date'];
     billNo = json['bill_no'];
+    sum_invoice = json['sum_invoice'];
     countInvoices = json['count_invoices'];
     sumTotal = json['sum_total'];
     dueDateFormat = json['due_date_format'];
@@ -185,6 +188,7 @@ class Invoice_Data {
     data['water_number'] = this.waterNumber;
     data['sum'] = this.sum;
     data['status'] = this.status;
+    data['sum_invoice'] = this.sum_invoice;
     data['remark'] = this.remark;
     data['issue_date'] = this.issueDate;
     data['due_date_format'] = this.due_date_format;
@@ -310,7 +314,7 @@ class WaterMeterRecord {
 }
 
 Future<Invoice_Data> fetch_invoice(String invoice_id) async {
-  print('fetch_invoice');
+
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var token = prefs2.get('keyToken');
 
