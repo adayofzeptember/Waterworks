@@ -404,7 +404,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
                                                   itemCount: data
-                                                      .historyWaters!.length,
+                                                      .historyInvoices!.length,
                                                   itemBuilder:
                                                       (BuildContext context,
                                                           int index) {

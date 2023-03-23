@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 import 'package:barcode_widget/barcode_widget.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
@@ -105,10 +103,6 @@ class _ProfileState extends State<Profile> {
               const SizedBox(
                 height: 15,
               ),
-              ExpandableNotifier(
-                  child: Column(
-                children: [Text('data'), Text('data')],
-              )),
               BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, state) {
                   return Stack(
