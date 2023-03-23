@@ -40,8 +40,8 @@ class _ProfileState extends State<Profile> {
   late Future<Profile_Data> futureProfile;
   @override
   void initState() {
-    _getToken();
-    //logout_removeToken();
+    
+    //logoutgetToken();_removeToken();
     check();
     super.initState();
     ;
@@ -51,7 +51,7 @@ class _ProfileState extends State<Profile> {
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        _getToken();
+    
       }
     } on SocketException catch (_) {
       print('not connected');
@@ -288,14 +288,6 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Future _getToken() async {
-    SharedPreferences prefs2 = await SharedPreferences.getInstance();
-    var getThatToken = prefs2.get('keyToken');
-
-    setState(() {
-      theTokenOne = getThatToken.toString();
-    });
-  }
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

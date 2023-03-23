@@ -17,10 +17,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
-
   bool _connected = false;
   PrintHereFucker toPrint = PrintHereFucker();
 
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     try {
       devices = await bluetooth.getBondedDevices();
     } on PlatformException {}
-
+    
     bluetooth.onStateChanged().listen((state) {
       switch (state) {
         case BlueThermalPrinter.CONNECTED:
