@@ -147,9 +147,7 @@ class _NotyetState extends State<Notyet> {
                                 borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                 child: InkWell(
                                   onTap: () {
-                                    print(
-                                      'เลข ป.${state.notWrite[index].waterNumber}',
-                                    );
+                                                print("id: " + state.notWrite[index].id.toString());
                                     Navigator.push(
                                       context,
                                       PageTransition(

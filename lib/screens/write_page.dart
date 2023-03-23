@@ -8,6 +8,7 @@ import 'package:group_radio_button/group_radio_button.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/shapes_painter.dart';
@@ -24,7 +25,7 @@ import '../bloc/radio_butts/radio_check_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
 
-enum Gdcg { lafayette, jefferson }
+  var formatter = NumberFormat('#,##,000');
 
 //! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
@@ -108,12 +109,14 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                     child: Center(
                       child: Column(
                         children: [
+
                           FutureBuilder<User_Consume_Data>(
                             future: futureUser,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 User_Consume_Data? data = snapshot.data;
-                                var debtLength = data!.historyWaters!.length;
+                                var debtLength = data!.historyInvoices!.length;
+                                
 
                                 if (debtLength == 0) {
                                   checkDept = false;
@@ -364,6 +367,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: const EdgeInsets.all(
                                                       15.0),
                                                   child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       const Text(
                                                         'เดือน',
@@ -374,9 +378,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                 FontWeight
                                                                     .bold),
                                                       ),
-                                                      const SizedBox(
-                                                        width: 120,
-                                                      ),
+                                                      
                                                       const Text('หน่วย',
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -385,9 +387,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
-                                                      const SizedBox(
-                                                        width: 40,
-                                                      ),
+                                                      
                                                       const Text('จำนวนเงิน',
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -419,54 +419,72 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                             const EdgeInsets
                                                                 .all(15.0),
                                                         child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
+                                                     
                                                           children: [
-                                                            Text(
-                                                              m.convertMonth(data
-                                                                  .historyWaters![
-                                                                      index]
-                                                                  .respDate
-                                                                  .toString()
-                                                                  .substring(
-                                                                      5, 7)),
-                                                              style: const TextStyle(
-                                                                  fontSize: 18,
-                                                                  color: Palette
-                                                                      .thisGreen,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
+                                                            Container(
+                                                              width: 110,
+                                                              child: Text(
+                                                                data.historyInvoices![index].water_meter_record !=
+                                                                        null
+                                                                    ? 
+                                                                    
+                                                                    data
+                                                                        .historyInvoices![
+                                                                            index]
+                                                                        .water_meter_record!
+                                                                        .recordDateFormat
+                                                                        .toString()
+                                                                    : '-',
+                                                                style: const TextStyle(
+                                                                    fontSize: 18,
+                                                                    color: Palette
+                                                                        .thisGreen,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
                                                             ),
-                                                            Text(
-                                                                data
-                                                                    .historyWaters![
-                                                                        index]
-                                                                    .currentUnit
-                                                                    .toString(),
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    color: Palette
-                                                                        .thisGreen,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)),
-                                                            Text(
-                                                                data
-                                                                    .historyWaters![
-                                                                        index]
-                                                                    .sumUnit
-                                                                    .toString(),
-                                                                style: const TextStyle(
-                                                                    fontSize:
-                                                                        18,
-                                                                    color: Palette
-                                                                        .thisGreen,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)),
+           const SizedBox(width: 20,),
+                                                            Container(
+                                                              width: 75,
+                                                              child: Text(
+                                                                    data.historyInvoices![index].water_meter_record !=
+                                                                        null
+                                                                    ? data
+                                                                        .historyInvoices![
+                                                                            index]
+                                                                        .water_meter_record!
+                                                                        .sumUnit
+                                                                        .toString()
+                                                                    : '-',
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                      color: Palette
+                                                                          .thisGreen,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
+                                                            const SizedBox(width: 50,),
+                                                            Container(
+                                                              
+                                                              child: Text(
+                                                                  data
+                                                                      .historyInvoices![
+                                                                          index]
+                                                                      .total
+                                                                      .toString(),
+                                                                      textAlign: TextAlign.end,
+                                                                  style: const TextStyle(
+                                                                      fontSize:
+                                                                          18,
+                                                                      color: Palette
+                                                                          .thisGreen,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold)),
+                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -482,7 +500,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                        const Text(
+                                const Text(
                                           'เลขมาตรวัดน้ำที่แล้ว: ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -555,7 +573,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 15,
                                             ),
                                             BlocBuilder<RadioCheckBloc,
@@ -569,7 +587,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   children: [
                                                     Row(
                                                       children: [
-                                                        Text(
+                                                        const Text(
                                                           'เลือกสถานะมาตร : ',
                                                           style: TextStyle(
                                                               fontSize: 20,
@@ -593,7 +611,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       ],
                                                     ),
                                                     RadioGroup<String>.builder(
-                                                      textStyle: TextStyle(
+                                                      textStyle: const TextStyle(
                                                           fontSize: 20),
                                                       groupValue:
                                                           state.writeCondition,
@@ -631,55 +649,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                             15),
                                                               )),
                                                       onPressed: () {
-                                                        if (state
-                                                                .writeCondition ==
-                                                            "ปกติ") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "1";
-                                                        } else if (state
-                                                                .writeCondition ==
-                                                            "รอบใหม่") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "2";
-                                                        } else if (state
-                                                                .writeCondition ==
-                                                            "เปลี่ยนมาตร") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "3";
-                                                        } else {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "4";
-                                                        }
-                                                        print(jsonEncode(
-                                                            _writeUnit_Request));
-
-//*----------------------------------------------------------------------------------------
+//*---------------------------------------------------------------------------------------------------------------------------
 
                                                         if (waterUnitController
                                                             .text.isNotEmpty) {
                                                           checkInternet(
                                                               context);
-
                                                           setState(() {
                                                             circleHUD = true;
                                                           });
@@ -687,71 +662,86 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               .primaryFocus
                                                               ?.unfocus();
                                                         }
-
                                                         if (formKey
                                                             .currentState!
                                                             .validate()) {
                                                           formKey.currentState
                                                               ?.save();
-
-                                                          // print(state
-                                                          //     .isCheckbloc);
-
-                                                          if (int.parse(data
-                                                                  .previous_unit_format
-                                                                  .toString()) >
-                                                              int.parse(_writeUnit_Request
-                                                                  .current_unit
-                                                                  .toString())) {
-                                                            // if (state
-                                                            //     .isCheckbloc) {
-                                                            //   //!
-                                                            //   _writeUnit_Request
-                                                            //           .water_meter_record_id =
-                                                            //       widget.id
-                                                            //           .toString();
-
-                                                            //   _writeUnit_Request
-                                                            //           .new_Round =
-                                                            //       '1';
-
-                                                            //   print(jsonEncode(
-                                                            //       _writeUnit_Request));
-
-                                                            //   _showAlertDialog(
-                                                            //       _writeUnit_Request
-                                                            //           .current_unit
-                                                            //           .toString(),
-                                                            //       '*หมายเหตุ เริ่มรอบใหม่');
-                                                            // }
-                                                            // else {
-                                                            //   _showAlertError();
-                                                            // }
-                                                          } else if (widget
-                                                                  .porNumber
-                                                                  .toString() ==
+                                                          if (state
+                                                                  .writeCondition ==
+                                                              "ปกติ") {
+                                                            if (int.parse(data
+                                                                    .previous_unit_format
+                                                                    .toString()) >
+                                                                int.parse(_writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString())) {
+                                                              _showAlertWrite_ERROR();
+                                                            } else {
                                                               _writeUnit_Request
-                                                                  .current_unit
-                                                                  .toString()) {
-                                                            //! เลข ป.
+                                                                      .water_meter_record_id =
+                                                                  widget.id
+                                                                      .toString();
+                                                              _writeUnit_Request
+                                                                      .writeStatus =
+                                                                  "0";
+                                                            }
 
-                                                          } else {
-                                                            //!
-                                                            _writeUnit_Request
-                                                                    .water_meter_record_id =
-                                                                widget.id
-                                                                    .toString();
-
-                                                            _writeUnit_Request
-                                                                    .writeStatus =
-                                                                '0';
-                                                            print(jsonEncode(
-                                                                _writeUnit_Request));
                                                             _showAlertWrite_OK(
                                                                 _writeUnit_Request
                                                                     .current_unit
                                                                     .toString(),
-                                                                '');
+                                                                state
+                                                                    .writeCondition);
+                                                          } else if (state
+                                                                  .writeCondition ==
+                                                              "รอบใหม่") {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+                                                            _writeUnit_Request
+                                                                    .writeStatus =
+                                                                "1";
+
+                                                            _showAlertWrite_OK(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString(),
+                                                                state
+                                                                    .writeCondition);
+                                                          } else if (state
+                                                                  .writeCondition ==
+                                                              "มาตรใหม่") {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+                                                            _writeUnit_Request
+                                                                    .writeStatus =
+                                                                "2";
+
+                                                            _showAlertWrite_OK(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString(),
+                                                                state
+                                                                    .writeCondition);
+                                                          } else {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+                                                            _writeUnit_Request
+                                                                    .writeStatus =
+                                                                "3";
+
+                                                            _showAlertWrite_OK(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString(),
+                                                                state
+                                                                    .writeCondition);
                                                           }
                                                         }
                                                       },
@@ -926,7 +916,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
     );
   }
 
-  Future<void> _showAlertWrite_OK(String newUnit, String newRound) async {
+  Future<void> _showAlertWrite_OK(String newUnit, String newStatus) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -959,9 +949,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                       ],
                     ),
                     Text(
-                      newRound,
+                      newStatus,
                       style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),

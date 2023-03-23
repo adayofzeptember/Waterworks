@@ -235,7 +235,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                     ),
                                     Column(
                                       children: [
-                                        const Text('เลชที่ผู้ใช้น้ำ',
+                                        const Text('เลขที่ผู้ใช้น้ำ',
                                             style:
                                                 TextStyle(color: Colors.grey)),
                                         Text(
@@ -324,14 +324,14 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('วันที่อ่านค่า',
+                                          const Text('วันที่อ่านมาตร',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
                                                   fontWeight: FontWeight.bold)),
                                           Row(
                                             children: [
-                                              Text(data.issueDate.toString()),
+                                              Text(data.issueDateFormat.toString()),
                                             ],
                                           )
                                         ],
@@ -343,7 +343,36 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                        const Text('เลขในมาตรน้ำ',
+                                          const Text('เลขมาตรครั้งก่อน',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                  fontWeight: FontWeight.bold)),
+                                          Row(
+                                            children: [
+                                              Text(data.waterMeterRecord!
+                                                  .previousUnit
+                                                  .toString()),
+                                              const SizedBox(
+                                                width: 10,
+                                              ),
+                                              const Text(
+                                                'หน่วย',
+                                                style: TextStyle(
+                                                    color: Colors.transparent),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Text('เลขมาตรครั้งนี้',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
@@ -509,39 +538,12 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                       const SizedBox(
                                         height: 5,
                                       ),
-                                      // Row(
-                                      //   mainAxisAlignment:
-                                      //       MainAxisAlignment.spaceBetween,
-                                      //   children: [
-                                      //     Text('ค้างชำระ',
-                                      //         style: TextStyle(
-                                      //             color: Color.fromARGB(
-                                      //                 255, 133, 133, 133),
-                                      //             fontWeight: FontWeight.bold)),
-                                      //     Row(
-                                      //       children: [
-                                      //         Text('0'),
-                                      //         SizedBox(
-                                      //           width: 10,
-                                      //         ),
-                                      //         Text('เดือน',
-                                      //             style: TextStyle(
-                                      //                 color: Color.fromARGB(
-                                      //                     255, 133, 133, 133),
-                                      //                 fontWeight: FontWeight.bold))
-                                      //       ],
-                                      //     )
-                                      //   ],
-                                      // ),
-                                      // SizedBox(
-                                      //   height: 5,
-                                      // ),
 
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('รวมเป็น',
+                                          const Text('รวมเป็นเงิน',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
@@ -553,6 +555,64 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                                 width: 10,
                                               ),
                                               const Text('บาท',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 133, 133, 133),
+                                                      fontWeight:
+                                                          FontWeight.bold))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('ค้างชำระ',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                  fontWeight: FontWeight.bold)),
+                                          Row(
+                                            children: [
+                                              Text(data.countInvoices
+                                                  .toString()),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text('เดือน',
+                                                  style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          255, 133, 133, 133),
+                                                      fontWeight:
+                                                          FontWeight.bold))
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                         const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('จำนวนเงินที่ค้างชำระ',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 133, 133, 133),
+                                                  fontWeight: FontWeight.bold)),
+                                          Row(
+                                            children: [
+                                              Text(data.sumInvoice
+                                                  .toString()),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
+                                              Text('บาท',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 133, 133, 133),

@@ -45,27 +45,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                 child:
                     Icon(Icons.arrow_back_ios_new, color: Palette.thisGreen))),
 
-        // Row(
-        //   children: [
-        //     InkWell(
-        //         onTap: () {
-        //           Navigator.pop(context);
-        //         },
-        //         child: const SizedBox(
-        //             width: 50,
-        //             height: 50,
-        //             child: Icon(Icons.arrow_back_ios_new,
-        //                 color: Palette.thisGreen))),
-        //     const Text(
-        //       'ข้อมูลผู้ใช้น้ำ',
-        //       style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
-        //     ),
-
-        //        const SizedBox(
-        //       width: 70,
-        //     ),
-        //   ],
-        // )
+      
       ),
       body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
@@ -83,24 +63,6 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                       User_Consume_Data? data = snapshot.data;
                       return Column(
                         children: [
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: [
-                          //     SvgPicture.asset('assets/images/alert.svg',
-                          //         color: Color.fromARGB(255, 255, 0, 0)),
-                          //     SizedBox(
-                          //       width: 10,
-                          //     ),
-                          //     Text(
-                          //       'ผู้ใช้น้ำค้างชำระค่าน้ำประปา 1 เดือน',
-                          //       style: TextStyle(
-                          //           fontSize: 20,
-                          //           fontWeight: FontWeight.bold,
-                          //           color: Color.fromARGB(255, 188, 0, 0)),
-                          //     )
-                          //   ],
-                          // ),
-
                           Container(
                             decoration: const BoxDecoration(
                                 color: Color.fromARGB(255, 245, 245, 245),
@@ -317,6 +279,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: data.historyWaters!.length,
                               itemBuilder: (BuildContext context, int index) {
+                              
                                 return Container(
                                   decoration: const BoxDecoration(
                                     color: Color.fromARGB(255, 233, 233, 233),
@@ -326,9 +289,7 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          data.historyWaters![index].respDate
-                                              .toString()
-                                              .substring(0, 10),
+                                          data.historyWaters![index].recordDate.toString(),
                                           style: const TextStyle(
                                               fontSize: 18,
                                               color: Palette.thisGreen,
