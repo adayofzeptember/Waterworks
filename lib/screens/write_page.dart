@@ -39,15 +39,17 @@ class Water_Unit_Detail extends StatefulWidget {
 }
 
 class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
-  var waterUnitController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
   late WriteUnit_Request _writeUnit_Request;
-  bool circleHUD = false;
-  bool checkDept = false;
+  final _statusRadio = ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"];
   late final Future<User_Consume_Data> futureUser;
   bool isChecked = false;
   MonthTH m = MonthTH();
-  final _statusRadio = ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"];
+  bool circleHUD = false;
+  bool checkDept = false;
+  var waterUnitController = TextEditingController();
+
 
   @override
   void initState() {
