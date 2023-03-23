@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
 import 'package:waterworks/screens/main%20screens/list_unit_done.dart';
 import 'package:waterworks/screens/main%20screens/list_unit_notdone.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
@@ -55,17 +57,18 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
         Customers customers = Customers(
           id: null,
           data_id: el['id'].toString(),
-          customer_id: el['customer_water']['customer_id'],
-          water_number: el['water_number'],
-          area_number: el['area_number'],
-          meter_number: el['customer_water']['meter_number'],
-          address: el['customer_water']['address'],
-          type_id: el['customer_water']['type_id'],
-          name: el['customer_water']['name'],
-          status_debtor: el['customer_water']['status_debtor'],
-          status_discount: el['customer_water']['status_discount'],
-          road: el['customer_water']['road'],
+          customer_id: (el['customer_water']['customer_id'] != null) ? el['customer_water']['customer_id'] : "",
+          water_number: (el['water_number'] != null) ? el['water_number'] : "",
+          area_number: (el['area_number'] != null) ? el['area_number'] : "",
+          meter_number: (el['customer_water']['meter_number'] != null) ? el['customer_water']['meter_number'] : "",
+          address: (el['customer_water']['address'] != null) ? el['customer_water']['address'] : "",
+          type_id: (el['customer_water']['type_id'] != null) ? el['customer_water']['type_id'] : "",
+          name: (el['customer_water']['name'] != null) ? el['customer_water']['name'] : "",
+          status_debtor: (el['customer_water']['status_debtor'] != null) ? el['customer_water']['status_debtor'] : "",
+          status_discount: (el['customer_water']['status_discount'] != null) ? el['customer_water']['status_discount'] : "",
+          road: (el['customer_water']['road'] != null) ? el['customer_water']['road'] : "",
         );
+        print('1');
         Customers newWater = await _db.createCustomer(customers);
         // print('customer success');
         for (var invoice in el['history_invoices']) {
@@ -168,6 +171,42 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           centerTitle: true,
+          leading: BlocBuilder<NotWriteBloc, NotWriteState>(
+            builder: (context, state) {
+              return PopupMenuButton(
+                icon: const Icon(
+                  Icons.filter_alt_sharp,
+                  color: Palette.thisGreen,
+                ),
+                surfaceTintColor: Colors.black,
+                itemBuilder: (context) {
+                  return [
+                    PopupMenuItem<int>(
+                      value: (state.hiddenMeter == '0') ? 1 : 0,
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: (state.hiddenMeter == '1') ? true : false,
+                            onChanged: null,
+                          ),
+                          const Text("ปิดการแสดงผลตัดมาตร"),
+                        ],
+                      ),
+                    ),
+                  ];
+                },
+                onSelected: (value) async {
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('hiddenMater', value.toString());
+                  context.read<NotWriteBloc>().add(FilterData(
+                        id: '-1',
+                        segmentActive: 0,
+                        stopLoad: true,
+                      ));
+                },
+              );
+            },
+          ),
           title: const Text(
             'รายการจดหน่วยน้ำ',
             style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),

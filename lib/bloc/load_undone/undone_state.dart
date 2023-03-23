@@ -6,7 +6,7 @@ class NotWriteState extends Equatable {
   bool isLoading, stopLoad;
   String error;
   int segmentActive;
-  String filterId;
+  String filterId, hiddenMeter;
 
   NotWriteState({
     required this.notWrite,
@@ -16,6 +16,7 @@ class NotWriteState extends Equatable {
     required this.segmentActive,
     required this.stopLoad,
     required this.filterId,
+    required this.hiddenMeter,
   });
 
   NotWriteState copyWith({
@@ -26,6 +27,7 @@ class NotWriteState extends Equatable {
     int? segmentActive,
     bool? stopLoad,
     String? filterId,
+    String? hiddenMeter,
   }) {
     return NotWriteState(
       notWrite: notWrite ?? this.notWrite,
@@ -35,6 +37,7 @@ class NotWriteState extends Equatable {
       segmentActive: segmentActive ?? this.segmentActive,
       stopLoad: stopLoad ?? this.stopLoad,
       filterId: filterId ?? this.filterId,
+      hiddenMeter: hiddenMeter ?? this.hiddenMeter,
     );
   }
 
@@ -47,5 +50,6 @@ class NotWriteState extends Equatable {
         segmentActive,
         stopLoad,
         filterId,
+        hiddenMeter,
       ];
 }
