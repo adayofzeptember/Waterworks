@@ -21,8 +21,6 @@ class PrintHereFucker {
                
         bluetooth.printCustom(
             zplToPrinter, Size.boldMedium.val, Align.center.val);
-        
-        
         bluetooth.paperCut();
       }
     });
