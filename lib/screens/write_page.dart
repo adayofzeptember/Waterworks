@@ -631,47 +631,60 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                             15),
                                                               )),
                                                       onPressed: () {
-                                                        if (state
-                                                                .writeCondition ==
-                                                            "ปกติ") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "1";
-                                                        } else if (state
-                                                                .writeCondition ==
-                                                            "รอบใหม่") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "2";
-                                                        } else if (state
-                                                                .writeCondition ==
-                                                            "เปลี่ยนมาตร") {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "3";
-                                                        } else {
-                                                          _writeUnit_Request
-                                                                  .water_meter_record_id =
-                                                              widget.id
-                                                                  .toString();
-                                                          _writeUnit_Request
-                                                                  .writeStatus =
-                                                              "4";
-                                                        }
-                                                        print(jsonEncode(
-                                                            _writeUnit_Request));
+                                                        // if (state
+                                                        //         .writeCondition ==
+                                                        //     "ปกติ") {
+                                                        //   _writeUnit_Request
+                                                        //           .water_meter_record_id =
+                                                        //       widget.id
+                                                        //           .toString();
+                                                        //   _writeUnit_Request
+                                                        //           .writeStatus =
+                                                        //       "1";
+                                                        //   _writeUnit_Request
+                                                        //       .current_unit
+                                                        //       .toString();
+                                                        // } else if (state
+                                                        //         .writeCondition ==
+                                                        //     "รอบใหม่") {
+                                                        //   _writeUnit_Request
+                                                        //           .water_meter_record_id =
+                                                        //       widget.id
+                                                        //           .toString();
+                                                        //   _writeUnit_Request
+                                                        //           .writeStatus =
+                                                        //       "2";
+                                                        //   _writeUnit_Request
+                                                        //       .current_unit
+                                                        //       .toString();
+                                                        // } else if (state
+                                                        //         .writeCondition ==
+                                                        //     "มาตรใหม่") {
+                                                        //   _writeUnit_Request
+                                                        //           .water_meter_record_id =
+                                                        //       widget.id
+                                                        //           .toString();
+                                                        //   _writeUnit_Request
+                                                        //           .writeStatus =
+                                                        //       "3";
+                                                        //   _writeUnit_Request
+                                                        //       .current_unit
+                                                        //       .toString();
+                                                        // } else {
+                                                        // _writeUnit_Request
+                                                        //         .water_meter_record_id =
+                                                        //     widget.id
+                                                        //         .toString();
+                                                        // _writeUnit_Request
+                                                        //         .writeStatus =
+                                                        //     "4";
+
+                                                        // _writeUnit_Request
+                                                        //     .current_unit
+                                                        //     .toString();
+                                                        // }
+                                                        // print(jsonEncode(
+                                                        //     _writeUnit_Request));
 
 //*----------------------------------------------------------------------------------------
 
@@ -680,9 +693,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           checkInternet(
                                                               context);
 
-                                                          setState(() {
-                                                            circleHUD = true;
-                                                          });
+                                                          // setState(() {
+                                                          //   circleHUD = true;
+                                                          // });
                                                           FocusManager.instance
                                                               .primaryFocus
                                                               ?.unfocus();
@@ -694,65 +707,99 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                           formKey.currentState
                                                               ?.save();
 
-                                                          // print(state
-                                                          //     .isCheckbloc);
+                                                          if (state
+                                                                  .writeCondition ==
+                                                              "ปกติ") {
+                                                            if (int.parse(data
+                                                                    .previous_unit_format
+                                                                    .toString()) >
+                                                                int.parse(_writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString())) {
+                                                              //! show error dialog
+                                                              _showAlertWrite_ERROR();
+                                                            } else {
+                                                              _writeUnit_Request
+                                                                      .water_meter_record_id =
+                                                                  widget.id
+                                                                      .toString();
+                                                              _writeUnit_Request
+                                                                  .writeStatus = "";
 
-                                                          if (int.parse(data
-                                                                  .previous_unit_format
-                                                                  .toString()) >
-                                                              int.parse(_writeUnit_Request
-                                                                  .current_unit
-                                                                  .toString())) {
-                                                            // if (state
-                                                            //     .isCheckbloc) {
-                                                            //   //!
-                                                            //   _writeUnit_Request
-                                                            //           .water_meter_record_id =
-                                                            //       widget.id
-                                                            //           .toString();
-
-                                                            //   _writeUnit_Request
-                                                            //           .new_Round =
-                                                            //       '1';
-
-                                                            //   print(jsonEncode(
-                                                            //       _writeUnit_Request));
-
-                                                            //   _showAlertDialog(
-                                                            //       _writeUnit_Request
-                                                            //           .current_unit
-                                                            //           .toString(),
-                                                            //       '*หมายเหตุ เริ่มรอบใหม่');
-                                                            // }
-                                                            // else {
-                                                            //   _showAlertError();
-                                                            // }
-                                                          } else if (widget
-                                                                  .porNumber
-                                                                  .toString() ==
                                                               _writeUnit_Request
                                                                   .current_unit
-                                                                  .toString()) {
-                                                            //! เลข ป.
+                                                                  .toString();
 
-                                                          } else {
-                                                            //!
+                                                              _showAlertWrite_OK(
+                                                                  _writeUnit_Request
+                                                                      .current_unit
+                                                                      .toString(),
+                                                                  "");
+                                                            }
+                                                          } else if (state
+                                                                  .writeCondition ==
+                                                              "รอบใหม่") {
                                                             _writeUnit_Request
                                                                     .water_meter_record_id =
                                                                 widget.id
                                                                     .toString();
-
                                                             _writeUnit_Request
                                                                     .writeStatus =
-                                                                '0';
-                                                            print(jsonEncode(
-                                                                _writeUnit_Request));
+                                                                "1";
+
+                                                            _writeUnit_Request
+                                                                .current_unit
+                                                                .toString();
+
                                                             _showAlertWrite_OK(
                                                                 _writeUnit_Request
                                                                     .current_unit
                                                                     .toString(),
-                                                                '');
+                                                                "เลขรอบใหม่");
+                                                          } else if (state
+                                                                  .writeCondition ==
+                                                              "มาตรใหม่") {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+                                                            _writeUnit_Request
+                                                                    .writeStatus =
+                                                                "2";
+
+                                                            _writeUnit_Request
+                                                                .current_unit
+                                                                .toString();
+
+                                                            _showAlertWrite_OK(
+                                                                _writeUnit_Request
+                                                                    .current_unit
+                                                                    .toString(),
+                                                                "มาตรใหม่");
+                                                          } else {
+                                                            _writeUnit_Request
+                                                                    .water_meter_record_id =
+                                                                widget.id
+                                                                    .toString();
+                                                            _writeUnit_Request
+                                                                    .writeStatus =
+                                                                "3";
+
+                                                            _writeUnit_Request
+                                                                .current_unit
+                                                                .toString();
+
+                                                                 _showAlertWrite_OK(
+                                                              _writeUnit_Request
+                                                                  .current_unit
+                                                                  .toString(),
+                                                              "มาตรชำรุด");
                                                           }
+
+                                                         
+
+                                                          print(jsonEncode(
+                                                              _writeUnit_Request));
                                                         }
                                                       },
                                                       child: Padding(
@@ -929,7 +976,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   Future<void> _showAlertWrite_OK(String newUnit, String newRound) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('โปรดตรวจสอบความถูกต้อง'),
