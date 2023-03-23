@@ -18,23 +18,25 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           segmentActive: 0,
           stopLoad: false,
           filterId: '',
+          hiddenMeter: '',
         )) {
     on<Load_unDoneData>((event, emit) async {
       if (state.stopLoad == false) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
+        emit(state.copyWith(hiddenMeter: (prefs.getString('hiddenMater') != null) ? prefs.getString('hiddenMater') : '0'));
+        String? hiddenMeter =
+            (state.hiddenMeter != '' && state.hiddenMeter != '0') ? "customer_water_status=${state.hiddenMeter}" : "";
         try {
           final dio = Dio();
           final response = await dio.get(
-            waterWork_domain + "water_meter_record/index?per_page=8&status=pending&page=${state.page}",
+            waterWork_domain + "water_meter_record/index?per_page=8&status=pending&page=${state.page}&$hiddenMeter",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $token",
             }),
           );
           var dataAllStore = (state.notWrite != []) ? state.notWrite : [];
-          var dad;
-
           if (response.data['responseStatus'].toString() == "true") {
             for (var el in response.data['data']['data']) {
               dataAllStore.add(
@@ -71,6 +73,7 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           error: '',
           notWrite: [],
           segmentActive: event.segmentActive,
+          page: 1,
         ));
         add(Load_unDoneData());
       } else {
@@ -83,10 +86,13 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
         ));
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
+        String? hiddenMeter =
+            (state.hiddenMeter != '' && state.hiddenMeter != '0') ? "customer_water_status=${state.hiddenMeter}" : "";
         try {
           final dio = Dio();
           final response = await dio.get(
-            waterWork_domain + "water_meter_record/index?per_page=8&status=pending&water_meter_segmentation_id=${state.filterId}",
+            waterWork_domain +
+                "water_meter_record/index?per_page=8&status=pending&water_meter_segmentation_id=${state.filterId}&$hiddenMeter",
             options: Options(headers: {
               "Content-Type": "application/json",
               "Authorization": "Bearer $token",

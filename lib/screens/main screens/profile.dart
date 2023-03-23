@@ -69,10 +69,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ProgressHUD(
-        child: _uiLogOut(context), inAsyncCall: circleHUD, opacity: 0.3);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(child: _uiLogOut(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
   @override
@@ -142,10 +140,7 @@ class _ProfileState extends State<Profile> {
                                     children: const [
                                       Text(
                                         'ตอนงานที่รับผิดชอบ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Color.fromARGB(
-                                                255, 83, 83, 83)),
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
                                       ),
                                     ],
                                   ),
@@ -160,29 +155,17 @@ class _ProfileState extends State<Profile> {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemCount: state.idSegs.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
+                                    itemBuilder: (BuildContext context, int index) {
                                       return Row(
                                         children: [
                                           Text(
-                                            (state.idSegs[index] != -1)
-                                                ? "${state.segs[index]}, "
-                                                : '',
-                                            style:
-                                                const TextStyle(fontSize: 17),
+                                            (state.idSegs[index] != -1) ? "${state.segs[index]}, " : '',
+                                            style: const TextStyle(fontSize: 17),
                                           ),
                                           Text(
-                                            (state.idSegs[index] != -1 &&
-                                                    index ==
-                                                        (state.idSegs.length +
-                                                            1))
-                                                ? ", "
-                                                : "",
+                                            (state.idSegs[index] != -1 && index == (state.idSegs.length + 1)) ? ", " : "",
                                             style: const TextStyle(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.bold,
-                                                color: Color.fromARGB(
-                                                    255, 177, 165, 165)),
+                                                fontSize: 17, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 177, 165, 165)),
                                           ),
                                         ],
                                       );
@@ -197,8 +180,7 @@ class _ProfileState extends State<Profile> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
                                       elevation: 0,
-                                      side:
-                                          const BorderSide(color: Colors.grey),
+                                      side: const BorderSide(color: Colors.grey),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       )),
@@ -212,10 +194,7 @@ class _ProfileState extends State<Profile> {
                                       alignment: Alignment.center,
                                       child: const Text(
                                         "ใช้งานแบบออฟไลน์",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey,
-                                            fontSize: 15),
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey, fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -227,8 +206,7 @@ class _ProfileState extends State<Profile> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
                                       elevation: 0,
-                                      side: BorderSide(
-                                          color: Colors.red.shade900),
+                                      side: BorderSide(color: Colors.red.shade900),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       )),
@@ -251,10 +229,7 @@ class _ProfileState extends State<Profile> {
                                       alignment: Alignment.center,
                                       child: Text(
                                         "อัปเดต",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.red.shade900,
-                                            fontSize: 15),
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red.shade900, fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -266,8 +241,7 @@ class _ProfileState extends State<Profile> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.white,
                                       elevation: 0,
-                                      side: const BorderSide(
-                                          color: Palette.thisGreen),
+                                      side: const BorderSide(color: Palette.thisGreen),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       )),
@@ -284,10 +258,7 @@ class _ProfileState extends State<Profile> {
                                       alignment: Alignment.center,
                                       child: const Text(
                                         "ออกจากระบบ",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Palette.thisGreen,
-                                            fontSize: 15),
+                                        style: TextStyle(fontWeight: FontWeight.bold, color: Palette.thisGreen, fontSize: 15),
                                       ),
                                     ),
                                   ),
@@ -302,8 +273,7 @@ class _ProfileState extends State<Profile> {
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
                           radius: 80,
-                          backgroundImage:
-                              AssetImage('assets/images/person.png'),
+                          backgroundImage: AssetImage('assets/images/person.png'),
                         ),
                       )
                     ],
@@ -324,8 +294,6 @@ class _ProfileState extends State<Profile> {
     setState(() {
       theTokenOne = getThatToken.toString();
     });
-
-    print(getThatToken);
   }
 
   Future logout_removeToken() async {

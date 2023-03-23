@@ -148,9 +148,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         toInvoiceModel.inv_notPay =
                             data.countInvoices.toString();
 
-                             toInvoiceModel.inv_notPay =
-                            data.sum_invoice.toString();
-
                         toInvoiceModel.godTotal = data.sumTotal.toString();
 
                         toInvoiceModel.inv_dueDate =
@@ -162,11 +159,11 @@ class _Invoice_PageState extends State<Invoice_Page> {
                         String irregular_Water =
                             data.waterMeterRecord!.waterWrong.toString();
                         if (irregular_Water == "2") {
-              
+                          //print('2');
                           checkWater = true;
                         } else {
                           checkWater = false;
-                          
+                          // print('1');
                         }
 
                         print('น้ำปกติ: ' + irregular_Water);
@@ -210,7 +207,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                             color: Color.fromARGB(
                                                 255, 100, 100, 100)))),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 15,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -238,7 +235,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                     ),
                                     Column(
                                       children: [
-                                        const Text('เลขที่ผู้ใช้น้ำ',
+                                        const Text('เลชที่ผู้ใช้น้ำ',
                                             style:
                                                 TextStyle(color: Colors.grey)),
                                         Text(
@@ -327,16 +324,14 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('วันที่อ่านมาตร',
+                                          const Text('วันที่อ่านค่า',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
                                                   fontWeight: FontWeight.bold)),
                                           Row(
                                             children: [
-                                              Text(data.waterMeterRecord!
-                                                  .record_date_format
-                                                  .toString()),
+                                              Text(data.issueDate.toString()),
                                             ],
                                           )
                                         ],
@@ -348,36 +343,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('เลขมาตรครั้งก่อน',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 133, 133, 133),
-                                                  fontWeight: FontWeight.bold)),
-                                          Row(
-                                            children: [
-                                              Text(data.waterMeterRecord!
-                                                  .previousUnit
-                                                  .toString()),
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              const Text(
-                                                'หน่วย',
-                                                style: TextStyle(
-                                                    color: Colors.transparent),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Text('เลขมาตรครั้งนี้',
+                                        const Text('เลขในมาตรน้ำ',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
@@ -457,6 +423,33 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                           )
                                         ],
                                       ),
+                                      // SizedBox(
+                                      //   height: 5,
+                                      // ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.spaceBetween,
+                                      //   children: [
+                                      //     Text('ส่วนลด',
+                                      //         style: TextStyle(
+                                      //             color: Color.fromARGB(
+                                      //                 255, 133, 133, 133),
+                                      //             fontWeight: FontWeight.bold)),
+                                      //     Row(
+                                      //       children: [
+                                      //         Text(data.discount.toString()),
+                                      //         SizedBox(
+                                      //           width: 10,
+                                      //         ),
+                                      //         Text('บาท',
+                                      //             style: TextStyle(
+                                      //                 color: Color.fromARGB(
+                                      //                     255, 133, 133, 133),
+                                      //                 fontWeight: FontWeight.bold))
+                                      //       ],
+                                      //     )
+                                      //   ],
+                                      // ),
                                       const SizedBox(
                                         height: 5,
                                       ),
@@ -516,11 +509,39 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                       const SizedBox(
                                         height: 5,
                                       ),
+                                      // Row(
+                                      //   mainAxisAlignment:
+                                      //       MainAxisAlignment.spaceBetween,
+                                      //   children: [
+                                      //     Text('ค้างชำระ',
+                                      //         style: TextStyle(
+                                      //             color: Color.fromARGB(
+                                      //                 255, 133, 133, 133),
+                                      //             fontWeight: FontWeight.bold)),
+                                      //     Row(
+                                      //       children: [
+                                      //         Text('0'),
+                                      //         SizedBox(
+                                      //           width: 10,
+                                      //         ),
+                                      //         Text('เดือน',
+                                      //             style: TextStyle(
+                                      //                 color: Color.fromARGB(
+                                      //                     255, 133, 133, 133),
+                                      //                 fontWeight: FontWeight.bold))
+                                      //       ],
+                                      //     )
+                                      //   ],
+                                      // ),
+                                      // SizedBox(
+                                      //   height: 5,
+                                      // ),
+
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('รวมเป็นเงิน',
+                                          const Text('รวมเป็น',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 133, 133, 133),
@@ -542,70 +563,14 @@ class _Invoice_PageState extends State<Invoice_Page> {
                                         ],
                                       ),
                                       const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('ค้างชำระ',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 133, 133, 133),
-                                                  fontWeight: FontWeight.bold)),
-                                          Row(
-                                            children: [
-                                              Text(data.countInvoices
-                                                  .toString()),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text('เดือน',
-                                                  style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 133, 133, 133),
-                                                      fontWeight:
-                                                          FontWeight.bold))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                            Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('จำนวนเงินที่ค้างชำระ',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 133, 133, 133),
-                                                  fontWeight: FontWeight.bold)),
-                                          Row(
-                                            children: [
-                                              Text(data.sum_invoice.toString()),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text('บาท',
-                                                  style: TextStyle(
-                                                      color: Color.fromARGB(
-                                                          255, 133, 133, 133),
-                                                      fontWeight:
-                                                          FontWeight.bold))
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      const SizedBox(
                                         height: 15,
                                       ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          const Text('รวมเงินที่ต้องชำระ',
+                                          const Text(
+                                              'รวมเงินที่ต้องชำระทั้งสิ้น',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),
