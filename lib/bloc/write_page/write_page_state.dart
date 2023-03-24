@@ -1,10 +1,10 @@
-part of 'write_page_bloc.dart';
+// part of 'write_page_bloc.dart';
 
-abstract class WritePageState extends Equatable {
-  const WritePageState();
+// abstract class WritePageState extends Equatable {
+//   const WritePageState();
   
-  @override
-  List<Object> get props => [];
-}
+//   @override
+//   List<Object> get props => [];
+// }
 
-class WritePageInitial extends WritePageState {}
+// class WritePageInitial extends WritePageState {}
