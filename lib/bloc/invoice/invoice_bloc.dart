@@ -17,13 +17,10 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
       : super(InvoiceState(invoice_data: '', loading: true, whatPage: '')) {
     on<Load_Invoice>((event, emit) async {
       emit(state.copyWith(loading: true, whatPage: event.whatPage));
-      
-
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       try {
-        print('fgggg');
         final response = await dio.get(
           waterWork_domain + "record/invoice/" + event.id,
           options: Options(headers: {

@@ -8,6 +8,8 @@ abstract class InvoiceEvent extends Equatable {
 }
 
 
+
+// เรียกใช้ตเงอใส่ parameter ให้ครบ
 class Load_Invoice extends InvoiceEvent{
   String id;
   var context;
