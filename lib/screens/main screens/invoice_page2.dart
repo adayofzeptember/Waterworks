@@ -1,16 +1,15 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../ETC/color_green.dart';
 import '../../ETC/month_thai_covert.dart';
 import '../../bloc/invoice/invoice_bloc.dart';
 
 class InvoicePage2 extends StatelessWidget {
-const InvoicePage2({ Key? key }) : super(key: key);
+  const InvoicePage2({Key? key}) : super(key: key);
 
   @override
- Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     MonthTH m = MonthTH();
     return Scaffold(
         appBar: AppBar(
@@ -19,19 +18,17 @@ const InvoicePage2({ Key? key }) : super(key: key);
           backgroundColor: Colors.white,
           title: Row(
             children: [
-               BlocBuilder<InvoiceBloc, InvoiceState>(
-                    builder: (context, state) {
-                  return InkWell(
-                      onTap: () async {
-                        print(state.whatPage);
-                      },
-                      child: const SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: Icon(Icons.arrow_back_ios_new,
-                              color: Palette.thisGreen)));
-                }
-              ),
+              BlocBuilder<InvoiceBloc, InvoiceState>(builder: (context, state) {
+                return InkWell(
+                    onTap: () async {
+                      print(state.whatPage);
+                    },
+                    child: const SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Icon(Icons.arrow_back_ios_new,
+                            color: Palette.thisGreen)));
+              }),
               const SizedBox(
                 width: 90,
               ),
@@ -42,8 +39,7 @@ const InvoicePage2({ Key? key }) : super(key: key);
             ],
           ),
         ),
-        body: 
-        MediaQuery(
+        body: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               textScaleFactor: 1.0,
             ),
@@ -133,7 +129,7 @@ const InvoicePage2({ Key? key }) : super(key: key);
                                           .toString(),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold))
-                                ],
+                                ], 
                               ),
                               Column(
                                 children: [
@@ -181,7 +177,7 @@ const InvoicePage2({ Key? key }) : super(key: key);
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    m.convertMonth(monthThai).toString(),
+                                    state.invoice_data.write_date.toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -619,8 +615,6 @@ const InvoicePage2({ Key? key }) : super(key: key);
                   ),
                 );
               }
-            })))
-            
-            );
+            }))));
   }
 }
