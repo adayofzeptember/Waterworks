@@ -6,3 +6,27 @@ abstract class WritePageEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ToPageWrite extends WritePageEvent {
+  var context;
+  String id;
+  ToPageWrite({required this.context, required this.id});
+}
+
+class CheckCurrentUnit extends WritePageEvent {
+  String currentUnit;
+  CheckCurrentUnit({
+    required this.currentUnit,
+  });
+}
+
+class ConfirmWriteUnit extends WritePageEvent {
+  var context;
+  String statusMeter;
+  String currentUnit;
+  ConfirmWriteUnit({
+    required this.context,
+    required this.statusMeter,
+    required this.currentUnit,
+  });
+}
