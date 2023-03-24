@@ -64,6 +64,7 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
       }
     });
     on<Reload_Undone>((event, emit) {
+      print('ssss');
       emit(state.copyWith(notWrite: [], page: 1));
     });
     on<FilterData>((event, emit) async {
@@ -84,6 +85,7 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
           stopLoad: event.stopLoad,
           filterId: event.id,
         ));
+        print(state.filterId);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
         String? hiddenMeter =

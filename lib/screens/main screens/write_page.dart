@@ -6,6 +6,10 @@ import 'package:group_radio_button/group_radio_button.dart';
 
 import '../../ETC/color_green.dart';
 import '../../ETC/shapes_painter.dart';
+import '../../bloc/checkbox_newround/checkbox_bloc.dart';
+import '../../bloc/invoice/invoice_bloc.dart';
+import '../../bloc/load_done/done_bloc.dart';
+import '../../bloc/load_undone/undone_bloc.dart';
 import '../../bloc/radio_butts/radio_check_bloc.dart';
 import '../../bloc/write_page/write_page_bloc.dart';
 import '../../offline/utils.dart';
@@ -228,22 +232,51 @@ class WritePage extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(15),
                                       )),
                                   onPressed: () {
-                                    print(waterUnitController.text);
                                     context.read<WritePageBloc>().add(CheckCurrentUnit(currentUnit: waterUnitController.text));
                                     if (waterUnitController.text != "") {
-                                      if (state.writeCondition == "ปกติ") {
-                                        if (int.parse(writeState.previousUnitFormat) > int.parse(waterUnitController.text)) {
-                                          showAlertWriteERROR(context);
-                                        } else {
-                                          showAlertWriteOK(context, waterUnitController.text, 'ปกติ', '0');
-                                        }
-                                      } else if (state.writeCondition == "รอบใหม่") {
-                                        showAlertWriteOK(context, waterUnitController.text, 'รอบใหม่', '1');
-                                      } else if (state.writeCondition == "มาตรใหม่") {
-                                        showAlertWriteOK(context, waterUnitController.text, 'มาตรใหม่', '2');
-                                      } else {
-                                        showAlertWriteOK(context, waterUnitController.text, 'มาตรชำรุด', '3');
-                                      }
+                                      context.read<WritePageBloc>().add(ConfirmWriteUnit(
+                                            context: context,
+                                            statusMeter: '0',
+                                            currentUnit: waterUnitController.text,
+                                            id: writeState.writeRecordId,
+                                          ));
+                                      // if (state.writeCondition == "ปกติ") {
+                                      //   if (int.parse(writeState.previousUnitFormat) > int.parse(waterUnitController.text)) {
+                                      //     showAlertWriteERROR(context);
+                                      //   } else {
+                                      //     showAlertWriteOK(
+                                      //       context,
+                                      //       waterUnitController.text,
+                                      //       'ปกติ',
+                                      //       '0',
+                                      //       writeState.writeRecordId,
+                                      //     );
+                                      //   }
+                                      // } else if (state.writeCondition == "รอบใหม่") {
+                                      //   showAlertWriteOK(
+                                      //     context,
+                                      //     waterUnitController.text,
+                                      //     'รอบใหม่',
+                                      //     '1',
+                                      //     writeState.writeRecordId,
+                                      //   );
+                                      // } else if (state.writeCondition == "มาตรใหม่") {
+                                      //   showAlertWriteOK(
+                                      //     context,
+                                      //     waterUnitController.text,
+                                      //     'มาตรใหม่',
+                                      //     '2',
+                                      //     writeState.writeRecordId,
+                                      //   );
+                                      // } else {
+                                      //   showAlertWriteOK(
+                                      //     context,
+                                      //     waterUnitController.text,
+                                      //     'มาตรชำรุด',
+                                      //     '3',
+                                      //     writeState.writeRecordId,
+                                      //   );
+                                      // }
                                     }
                                   },
                                   child: Container(
@@ -317,7 +350,7 @@ Future<void> showAlertWriteERROR(var context) async {
   );
 }
 
-Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, String statusMeter) async {
+Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, String statusMeter, String writeRecordId) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -374,7 +407,20 @@ Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, Str
                         context: context,
                         statusMeter: statusMeter,
                         currentUnit: newUnit,
+                        id: writeRecordId,
                       ));
+
+                  // context.read<InvoiceBloc>().add(
+                  //       Load_Invoice(
+                  //         id: writeRecordId,
+                  //         context: context,
+                  //         whatPage: "listUnDone",
+                  //       ),
+                  //     );
+                  // context.read<NotWriteBloc>().add(Reload_Undone());
+                  // context.read<DoneBloc>().add(Reload_Done());
+                  // context.read<CheckboxBloc>().add(ClearCheck());
+                  // context.read<RadioCheckBloc>().add(ClearRadioDefault());
                 }
               } on SocketException catch (_) {
                 print('not connected');

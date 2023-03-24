@@ -22,11 +22,13 @@ class CheckCurrentUnit extends WritePageEvent {
 
 class ConfirmWriteUnit extends WritePageEvent {
   var context;
+  String id;
   String statusMeter;
   String currentUnit;
   ConfirmWriteUnit({
     required this.context,
     required this.statusMeter,
     required this.currentUnit,
+    required this.id,
   });
 }
