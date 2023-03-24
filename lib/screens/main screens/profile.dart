@@ -36,7 +36,6 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool circleHUD = false;
-  late Future<Profile_Data> futureProfile;
   @override
   void initState() {
     

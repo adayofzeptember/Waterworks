@@ -686,15 +686,19 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                       .toString();
                                                               _writeUnit_Request
                                                                       .writeStatus =
+                                                                      
                                                                   "0";
-                                                            }
 
-                                                            _showAlertWrite_OK(
+
+                                                                    _showAlertWrite_OK(
                                                                 _writeUnit_Request
                                                                     .current_unit
                                                                     .toString(),
                                                                 state
                                                                     .writeCondition);
+                                                            }
+
+                                                          
                                                           } else if (state
                                                                   .writeCondition ==
                                                               "รอบใหม่") {
