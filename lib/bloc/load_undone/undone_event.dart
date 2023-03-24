@@ -9,10 +9,7 @@ abstract class NotWriteEvent extends Equatable {
 
 class Load_unDoneData extends NotWriteEvent {}
 
-class Reload_Undone extends NotWriteEvent {
-  var context;
-  Reload_Undone(this.context);
-}
+class Reload_Undone extends NotWriteEvent {}
 
 class FilterData extends NotWriteEvent {
   String id;

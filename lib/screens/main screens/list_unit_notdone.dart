@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
+import 'package:waterworks/screens/main%20screens/write_page.dart';
 import '../../bloc/load_undone/undone_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../offline/utils.dart';
@@ -148,7 +150,6 @@ class _NotyetState extends State<Notyet> {
                                 child: InkWell(
                                   onTap: () {
                                     print("id: " + state.notWrite[index].id.toString());
-                          
                                     Navigator.push(
                                       context,
                                       PageTransition(
@@ -159,7 +160,6 @@ class _NotyetState extends State<Notyet> {
                                         ),
                                       ),
                                     );
-                                    ;
                                   },
                                   child: Container(
                                     height: 150,
@@ -329,19 +329,23 @@ class _NotyetState extends State<Notyet> {
                                       InkWell(
                                         onTap: (() {
                                           print("id: " + state.notWrite[index].id.toString());
-                                          Navigator.push(
-                                            context,
-                                            PageTransition(
-                                              duration: const Duration(milliseconds: 250),
-                                              type: PageTransitionType.rightToLeft,
-                                              child: Water_Unit_Detail(
-                                                id: state.notWrite[index].id.toString(),
-                                              ),
-                                            ),
-                                          );
+                                          // Navigator.push(
+                                          //   context,
+                                          //   PageTransition(
+                                          //     duration: const Duration(milliseconds: 250),
+                                          //     type: PageTransitionType.rightToLeft,
+                                          //     child: Water_Unit_Detail(
+                                          //       id: state.notWrite[index].id.toString(),
+                                          //     ),
+                                          //   ),
+                                          // );
+                                          context.read<WritePageBloc>().add(ToPageWrite(
+                                                context: context,
+                                                id: "${state.notWrite[index].id}",
+                                              ));
                                         }),
                                         child: Container(
-                                          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                                          padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                                           height: double.infinity,
                                           decoration: const BoxDecoration(
                                               color: Palette.thisGreen, borderRadius: BorderRadius.all(Radius.circular(10))),

@@ -25,7 +25,7 @@ import '../bloc/radio_butts/radio_check_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
 
-  var formatter = NumberFormat('#,##,000');
+var formatter = NumberFormat('#,##,000');
 
 //! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
@@ -39,7 +39,6 @@ class Water_Unit_Detail extends StatefulWidget {
 }
 
 class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
-
   final formKey = GlobalKey<FormState>();
   late WriteUnit_Request _writeUnit_Request;
   final _statusRadio = ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"];
@@ -49,7 +48,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   bool circleHUD = false;
   bool checkDept = false;
   var waterUnitController = TextEditingController();
-
 
   @override
   void initState() {
@@ -62,10 +60,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
-    return ProgressHUD(
-        child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    return ProgressHUD(child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
   @override
@@ -82,10 +78,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   Navigator.pop(context);
                   context.read<RadioCheckBloc>().add(ClearRadioDefault());
                 },
-                child: const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Icon(Icons.arrow_back_ios_new))),
+                child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new))),
             const SizedBox(
               width: 70,
             ),
@@ -111,14 +104,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                     child: Center(
                       child: Column(
                         children: [
-
                           FutureBuilder<User_Consume_Data>(
                             future: futureUser,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 User_Consume_Data? data = snapshot.data;
                                 var debtLength = data!.historyInvoices!.length;
-                                
 
                                 if (debtLength == 0) {
                                   checkDept = false;
@@ -130,86 +121,54 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                   children: [
                                     Container(
                                       decoration: const BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 245, 245, 245),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5))),
+                                          color: Color.fromARGB(255, 245, 245, 245),
+                                          borderRadius: BorderRadius.all(Radius.circular(5))),
                                       width: double.infinity,
                                       child: Padding(
                                         padding: const EdgeInsets.all(15),
                                         child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             Text(
-                                              data.customerWater!.name
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20),
+                                              data.customerWater!.name.toString(),
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                                             ),
                                             const SizedBox(
                                               height: 15,
                                             ),
                                             Text(
-                                              'บ้านเลขที่ ' +
-                                                  data.customerWater!.address
-                                                      .toString(),
+                                              'บ้านเลขที่ ' + data.customerWater!.address.toString(),
                                               style: const TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20,
-                                                  color: Color.fromARGB(
-                                                      255, 83, 83, 83)),
+                                                  fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 83, 83, 83)),
                                             ),
                                             const SizedBox(
                                               height: 15,
                                             ),
                                             Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
                                               children: [
                                                 const Text(
                                                   'มาตรวัดน้ำ:',
                                                   style: TextStyle(
                                                       fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color.fromARGB(
-                                                          255, 83, 83, 83)),
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
                                                 ),
                                                 const SizedBox(
                                                   width: 3,
                                                 ),
                                                 Container(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5)),
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              221,
-                                                              221,
-                                                              221)),
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                      color: Color.fromARGB(255, 221, 221, 221)),
                                                   child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5, right: 5),
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
                                                     child: Text(
-                                                      data.customerWater!
-                                                          .meterNumber
-                                                          .toString(),
+                                                      data.customerWater!.meterNumber.toString(),
                                                       style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
+                                                          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
@@ -220,39 +179,22 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   'เลข ป:',
                                                   style: TextStyle(
                                                       fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color.fromARGB(
-                                                          255, 83, 83, 83)),
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
                                                 ),
                                                 const SizedBox(
                                                   width: 3,
                                                 ),
                                                 Container(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5)),
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              221,
-                                                              221,
-                                                              221)),
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                      color: Color.fromARGB(255, 221, 221, 221)),
                                                   child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5, right: 5),
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
                                                     child: Text(
-                                                      data.waterNumber
-                                                          .toString(),
+                                                      data.waterNumber.toString(),
                                                       style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
+                                                          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
@@ -263,39 +205,22 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   'เขต:',
                                                   style: TextStyle(
                                                       fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color.fromARGB(
-                                                          255, 83, 83, 83)),
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Color.fromARGB(255, 83, 83, 83)),
                                                 ),
                                                 const SizedBox(
                                                   width: 3,
                                                 ),
                                                 Container(
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius
-                                                                      .circular(
-                                                                          5)),
-                                                          color: Color.fromARGB(
-                                                              255,
-                                                              221,
-                                                              221,
-                                                              221)),
+                                                  decoration: const BoxDecoration(
+                                                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                                                      color: Color.fromARGB(255, 221, 221, 221)),
                                                   child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5, right: 5),
+                                                    padding: const EdgeInsets.only(left: 5, right: 5),
                                                     child: Text(
-                                                      data.areaNumber
-                                                          .toString(),
+                                                      data.areaNumber.toString(),
                                                       style: const TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          color: Colors.black),
+                                                          fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
                                                     ),
                                                   ),
                                                 ),
@@ -313,91 +238,50 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                             children: [
                                               Container(
                                                 width: double.maxFinite,
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
+                                                padding: const EdgeInsets.all(5.0),
                                                 decoration: const BoxDecoration(
                                                   border: Border(
-                                                    left: BorderSide(
-                                                        width: 5.0,
-                                                        color:
-                                                            Palette.thisGreen),
+                                                    left: BorderSide(width: 5.0, color: Palette.thisGreen),
                                                   ),
                                                 ),
-                                                child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      const Padding(
-                                                        padding:
-                                                            EdgeInsets.only(
-                                                                left: 5.0),
-                                                        child: Text(
-                                                          'ประวัติค้างชำระ',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      101,
-                                                                      101,
-                                                                      101),
-                                                              fontSize: 20),
-                                                        ),
-                                                      ),
-                                                    ]),
+                                                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                                  const Padding(
+                                                    padding: EdgeInsets.only(left: 5.0),
+                                                    child: Text(
+                                                      'ประวัติค้างชำระ',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Color.fromARGB(255, 101, 101, 101),
+                                                          fontSize: 20),
+                                                    ),
+                                                  ),
+                                                ]),
                                               ),
                                               const SizedBox(
                                                 height: 20,
                                               ),
                                               Container(
                                                 decoration: const BoxDecoration(
-                                                  color: Color.fromARGB(
-                                                      255, 230, 95, 85),
+                                                  color: Color.fromARGB(255, 230, 95, 85),
                                                   borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  10),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  10)),
+                                                      BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
+                                                  padding: const EdgeInsets.all(15.0),
                                                   child: Row(
                                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                     children: [
                                                       const Text(
                                                         'เดือน',
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
+                                                        style:
+                                                            TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
                                                       ),
-                                                      
                                                       const Text('หน่วย',
                                                           style: TextStyle(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                      
+                                                              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
                                                       const Text('จำนวนเงิน',
                                                           style: TextStyle(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
+                                                              fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold)),
                                                     ],
                                                   ),
                                                 ),
@@ -405,87 +289,55 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   shrinkWrap: true,
-                                                  itemCount: data
-                                                      .historyInvoices!.length,
-                                                  itemBuilder:
-                                                      (BuildContext context,
-                                                          int index) {
+                                                  itemCount: data.historyInvoices!.length,
+                                                  itemBuilder: (BuildContext context, int index) {
                                                     return Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        color: Color.fromARGB(
-                                                            255, 245, 245, 245),
+                                                      decoration: const BoxDecoration(
+                                                        color: Color.fromARGB(255, 245, 245, 245),
                                                       ),
                                                       child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(15.0),
+                                                        padding: const EdgeInsets.all(15.0),
                                                         child: Row(
-                                                     
                                                           children: [
                                                             Container(
                                                               width: 110,
                                                               child: Text(
-                                                                data.historyInvoices![index].water_meter_record !=
-                                                                        null
-                                                                    ? 
-                                                                    
-                                                                    data
-                                                                        .historyInvoices![
-                                                                            index]
-                                                                        .water_meter_record!
-                                                                        .recordDateFormat
+                                                                data.historyInvoices![index].water_meter_record != null
+                                                                    ? data
+                                                                        .historyInvoices![index].water_meter_record!.recordDateFormat
                                                                         .toString()
                                                                     : '-',
                                                                 style: const TextStyle(
                                                                     fontSize: 18,
-                                                                    color: Palette
-                                                                        .thisGreen,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
+                                                                    color: Palette.thisGreen,
+                                                                    fontWeight: FontWeight.bold),
                                                               ),
                                                             ),
-           const SizedBox(width: 20,),
+                                                            const SizedBox(
+                                                              width: 20,
+                                                            ),
                                                             Container(
                                                               width: 75,
                                                               child: Text(
-                                                                    data.historyInvoices![index].water_meter_record !=
-                                                                        null
-                                                                    ? data
-                                                                        .historyInvoices![
-                                                                            index]
-                                                                        .water_meter_record!
-                                                                        .sumUnit
-                                                                        .toString()
-                                                                    : '-',
+                                                                  data.historyInvoices![index].water_meter_record != null
+                                                                      ? data.historyInvoices![index].water_meter_record!.sumUnit
+                                                                          .toString()
+                                                                      : '-',
                                                                   style: const TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Palette
-                                                                          .thisGreen,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
+                                                                      fontSize: 18,
+                                                                      color: Palette.thisGreen,
+                                                                      fontWeight: FontWeight.bold)),
                                                             ),
-                                                            const SizedBox(width: 50,),
+                                                            const SizedBox(
+                                                              width: 50,
+                                                            ),
                                                             Container(
-                                                              
-                                                              child: Text(
-                                                                  data
-                                                                      .historyInvoices![
-                                                                          index]
-                                                                      .total
-                                                                      .toString(),
-                                                                      textAlign: TextAlign.end,
+                                                              child: Text(data.historyInvoices![index].total.toString(),
+                                                                  textAlign: TextAlign.end,
                                                                   style: const TextStyle(
-                                                                      fontSize:
-                                                                          18,
-                                                                      color: Palette
-                                                                          .thisGreen,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold)),
+                                                                      fontSize: 18,
+                                                                      color: Palette.thisGreen,
+                                                                      fontWeight: FontWeight.bold)),
                                                             ),
                                                           ],
                                                         ),
@@ -499,21 +351,15 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                           )
                                         : Container(),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                const Text(
+                                        const Text(
                                           'เลขมาตรวัดน้ำที่แล้ว: ',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 19),
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                                         ),
                                         Text(
                                           data.previous_unit_format.toString(),
-                                          style: const TextStyle(
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 19),
+                                          style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 19),
                                         ),
                                       ],
                                     ),
@@ -528,241 +374,130 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                               controller: waterUnitController,
                                               textAlign: TextAlign.left,
                                               autofocus: false,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                              onSaved: (input) =>
-                                                  _writeUnit_Request
-                                                      .current_unit = input,
+                                              style: const TextStyle(fontWeight: FontWeight.bold),
+                                              onSaved: (input) => _writeUnit_Request.current_unit = input,
                                               validator: (value) {
                                                 if (value!.isEmpty) {
                                                   return 'โปรดกรอกเลขมาตรวัดน้ำก่อนการยืนยัน';
                                                 }
                                               },
-                                              keyboardType:
-                                                  TextInputType.number,
+                                              keyboardType: TextInputType.number,
                                               decoration: InputDecoration(
-                                                hintText:
-                                                    'กรอกมาตรวัดน้ำปัจจุบัน',
-                                                hintStyle: const TextStyle(
-                                                    color: Colors.grey),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide:
-                                                            const BorderSide(
-                                                                color: Colors
-                                                                    .grey),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide:
-                                                            const BorderSide(
-                                                                color: Colors
-                                                                    .grey),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10)),
+                                                hintText: 'กรอกมาตรวัดน้ำปัจจุบัน',
+                                                hintStyle: const TextStyle(color: Colors.grey),
+                                                focusedBorder: OutlineInputBorder(
+                                                    borderSide: const BorderSide(color: Colors.grey),
+                                                    borderRadius: BorderRadius.circular(10)),
+                                                enabledBorder: OutlineInputBorder(
+                                                    borderSide: const BorderSide(color: Colors.grey),
+                                                    borderRadius: BorderRadius.circular(10)),
                                                 filled: true,
-                                                fillColor: const Color.fromARGB(
-                                                    255, 238, 238, 238),
+                                                fillColor: const Color.fromARGB(255, 238, 238, 238),
                                                 border: OutlineInputBorder(
-                                                  borderSide: const BorderSide(
-                                                      color: Colors.white),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.0),
+                                                  borderSide: const BorderSide(color: Colors.white),
+                                                  borderRadius: BorderRadius.circular(20.0),
                                                 ),
                                               ),
                                             ),
                                             const SizedBox(
                                               height: 15,
                                             ),
-                                            BlocBuilder<RadioCheckBloc,
-                                                RadioCheckState>(
+                                            BlocBuilder<RadioCheckBloc, RadioCheckState>(
                                               builder: (context, state) {
                                                 return Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Row(
                                                       children: [
                                                         const Text(
                                                           'เลือกสถานะมาตร : ',
-                                                          style: TextStyle(
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                                         ),
                                                         Text(
                                                           state.writeCondition,
                                                           style: TextStyle(
                                                               fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: state
-                                                                      .colorCondition
-                                                                  ? Palette
-                                                                      .thisGreen
-                                                                  : Colors.red),
+                                                              fontWeight: FontWeight.bold,
+                                                              color: state.colorCondition ? Palette.thisGreen : Colors.red),
                                                         ),
                                                       ],
                                                     ),
                                                     RadioGroup<String>.builder(
-                                                      textStyle: const TextStyle(
-                                                          fontSize: 20),
-                                                      groupValue:
-                                                          state.writeCondition,
+                                                      textStyle: const TextStyle(fontSize: 20),
+                                                      groupValue: state.writeCondition,
                                                       onChanged: (value) {
                                                         context
-                                                            .read<
-                                                                RadioCheckBloc>()
-                                                            .add(CheckThisBro(
-                                                                getCondiotionRadio:
-                                                                    value
-                                                                        .toString()));
+                                                            .read<RadioCheckBloc>()
+                                                            .add(CheckThisBro(getCondiotionRadio: value.toString()));
                                                       },
                                                       items: _statusRadio,
-                                                      itemBuilder: (item) =>
-                                                          RadioButtonBuilder(
+                                                      itemBuilder: (item) => RadioButtonBuilder(
                                                         item,
                                                       ),
-                                                      fillColor:
-                                                          Palette.thisGreen,
+                                                      fillColor: Palette.thisGreen,
                                                     ),
                                                     const SizedBox(
                                                       height: 20,
                                                     ),
                                                     ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                              primary: Palette
-                                                                  .thisGreen,
-                                                              elevation: 0,
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15),
-                                                              )),
+                                                      style: ElevatedButton.styleFrom(
+                                                          primary: Palette.thisGreen,
+                                                          elevation: 0,
+                                                          shape: RoundedRectangleBorder(
+                                                            borderRadius: BorderRadius.circular(15),
+                                                          )),
                                                       onPressed: () {
 //*---------------------------------------------------------------------------------------------------------------------------
 
-                                                        if (waterUnitController
-                                                            .text.isNotEmpty) {
-                                                          checkInternet(
-                                                              context);
+                                                        if (waterUnitController.text.isNotEmpty) {
+                                                          checkInternet(context);
                                                           setState(() {
                                                             circleHUD = true;
                                                           });
-                                                          FocusManager.instance
-                                                              .primaryFocus
-                                                              ?.unfocus();
+                                                          FocusManager.instance.primaryFocus?.unfocus();
                                                         }
-                                                        if (formKey
-                                                            .currentState!
-                                                            .validate()) {
-                                                          formKey.currentState
-                                                              ?.save();
-                                                          if (state
-                                                                  .writeCondition ==
-                                                              "ปกติ") {
-                                                            if (int.parse(data
-                                                                    .previous_unit_format
-                                                                    .toString()) >
-                                                                int.parse(_writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString())) {
+                                                        if (formKey.currentState!.validate()) {
+                                                          formKey.currentState?.save();
+                                                          if (state.writeCondition == "ปกติ") {
+                                                            if (int.parse(data.previous_unit_format.toString()) >
+                                                                int.parse(_writeUnit_Request.current_unit.toString())) {
                                                               _showAlertWrite_ERROR();
                                                             } else {
-                                                              _writeUnit_Request
-                                                                      .water_meter_record_id =
-                                                                  widget.id
-                                                                      .toString();
-                                                              _writeUnit_Request
-                                                                      .writeStatus =
-                                                                      
-                                                                  "0";
-
-
-                                                                    _showAlertWrite_OK(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString(),
-                                                                state
-                                                                    .writeCondition);
+                                                              _writeUnit_Request.water_meter_record_id = widget.id.toString();
+                                                              _writeUnit_Request.writeStatus = "0";
                                                             }
 
-                                                          
-                                                          } else if (state
-                                                                  .writeCondition ==
-                                                              "รอบใหม่") {
-                                                            _writeUnit_Request
-                                                                    .water_meter_record_id =
-                                                                widget.id
-                                                                    .toString();
-                                                            _writeUnit_Request
-                                                                    .writeStatus =
-                                                                "1";
+                                                            _showAlertWrite_OK(
+                                                                _writeUnit_Request.current_unit.toString(), state.writeCondition);
+                                                          } else if (state.writeCondition == "รอบใหม่") {
+                                                            _writeUnit_Request.water_meter_record_id = widget.id.toString();
+                                                            _writeUnit_Request.writeStatus = "1";
 
                                                             _showAlertWrite_OK(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString(),
-                                                                state
-                                                                    .writeCondition);
-                                                          } else if (state
-                                                                  .writeCondition ==
-                                                              "มาตรใหม่") {
-                                                            _writeUnit_Request
-                                                                    .water_meter_record_id =
-                                                                widget.id
-                                                                    .toString();
-                                                            _writeUnit_Request
-                                                                    .writeStatus =
-                                                                "2";
+                                                                _writeUnit_Request.current_unit.toString(), state.writeCondition);
+                                                          } else if (state.writeCondition == "มาตรใหม่") {
+                                                            _writeUnit_Request.water_meter_record_id = widget.id.toString();
+                                                            _writeUnit_Request.writeStatus = "2";
 
                                                             _showAlertWrite_OK(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString(),
-                                                                state
-                                                                    .writeCondition);
+                                                                _writeUnit_Request.current_unit.toString(), state.writeCondition);
                                                           } else {
-                                                            _writeUnit_Request
-                                                                    .water_meter_record_id =
-                                                                widget.id
-                                                                    .toString();
-                                                            _writeUnit_Request
-                                                                    .writeStatus =
-                                                                "3";
+                                                            _writeUnit_Request.water_meter_record_id = widget.id.toString();
+                                                            _writeUnit_Request.writeStatus = "3";
 
                                                             _showAlertWrite_OK(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString(),
-                                                                state
-                                                                    .writeCondition);
+                                                                _writeUnit_Request.current_unit.toString(), state.writeCondition);
                                                           }
                                                         }
                                                       },
                                                       child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(20.0),
+                                                        padding: const EdgeInsets.all(20.0),
                                                         child: Container(
-                                                          alignment:
-                                                              Alignment.center,
+                                                          alignment: Alignment.center,
                                                           child: const Text(
                                                             "ยืนยัน",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
+                                                            style: TextStyle(color: Colors.white),
                                                           ),
                                                         ),
                                                       ),
@@ -784,8 +519,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                     Center(
                                         child: Text(
                                       snapshot.error.toString(),
-                                      style:
-                                          const TextStyle(color: Colors.black),
+                                      style: const TextStyle(color: Colors.black),
                                     )),
                                   ],
                                 );
@@ -841,11 +575,10 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       setState(() {
         circleHUD = false;
       });
-      print('----------- write success, invoice id: ' +
-          datax['data']['invoice']['id'].toString());
+      print('----------- write success, invoice id: ' + datax['data']['invoice']['id'].toString());
       //! bloc funtion clear
-      context.read<NotWriteBloc>().add(Reload_Undone(context));
-      context.read<DoneBloc>().add(Reload_Done(context));
+      context.read<NotWriteBloc>().add(Reload_Undone());
+      context.read<DoneBloc>().add(Reload_Done());
       context.read<CheckboxBloc>().add(ClearCheck());
       context.read<RadioCheckBloc>().add(ClearRadioDefault());
 
@@ -873,9 +606,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('ไม่สามารถจดหน่วยน้ำได้ !',
-              style: const TextStyle(
-                  color: Colors.red, fontWeight: FontWeight.bold)),
+          title: const Text('ไม่สามารถจดหน่วยน้ำได้ !', style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -888,8 +619,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                   children: [
                     const Text(
                       "เลขมาตรวัดน้ำปัจจุบันน้อยกว่าครั้งก่อน",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     const Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
                   ],
@@ -947,17 +677,13 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                         ),
                         Text(
                           "${newUnit}",
-                          style: const TextStyle(
-                              fontSize: 25,
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 25, color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
                     Text(
                       newStatus,
-                      style:
-                          const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),

@@ -30,8 +30,8 @@ class _Invoice_PageState extends State<Invoice_Page> {
   ToInvoice toInvoiceModel = ToInvoice();
   bool checkWater = false;
   void initState() {
-    
     print(widget.ckeckWidget);
+
     futureINV = fetch_invoice(widget.invoiceID.toString());
     super.initState();
   }
@@ -88,8 +88,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
             ],
           ),
         ),
-        body: 
-        MediaQuery(
+        body: MediaQuery(
           data: MediaQuery.of(context).copyWith(
             textScaleFactor: 1.0,
           ),
@@ -118,7 +117,6 @@ class _Invoice_PageState extends State<Invoice_Page> {
 
                         toInvoiceModel.inv_number =
                             data.invoiceNumber.toString();
-
                         toInvoiceModel.inv_user_number =
                             data.waterMeterRecord!.waterNumber.toString();
 
@@ -170,9 +168,7 @@ class _Invoice_PageState extends State<Invoice_Page> {
 
                         print('น้ำปกติ: ' + irregular_Water);
 
-                        return 
-                        
-                        Container(
+                        return Container(
                           width: double.infinity,
                           decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 241, 241, 241),
