@@ -1,19 +1,14 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
@@ -24,14 +19,19 @@ import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/checkbox_newround/checkbox_bloc.dart';
 import 'bloc/profile/profile_bloc.dart';
-import 'bloc/radio_butts/radio_check_bloc.dart';
 import 'offline/utils.dart';
 
 void main() {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((value) => runApp(Start_Page_Waterworks()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (value) => runApp(
+      Phoenix(
+        child: Start_Page_Waterworks(),
+      ),
+    ),
+  );
 }
 
 class Start_Page_Waterworks extends StatelessWidget {
@@ -45,7 +45,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => SearchBloc()),
         BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
-        BlocProvider(create: (context) => RadioCheckBloc()),
+        // BlocProvider(create: (context) => RadioCheckBloc()),
         BlocProvider(create: (context) => WritePageBloc()),
       ],
       child: MaterialApp(
@@ -183,19 +183,3 @@ class _Load_PageState extends State<Load_Page> {
     ));
   }
 }
-
-
-
-// Widget x() {
-//   return Container(
-//     child: Text('1'),
-//   );
-// }
-// Widget y() {
-//   return Container(
-//     child: Text('2'),
-//   );
-// }
-
-
-

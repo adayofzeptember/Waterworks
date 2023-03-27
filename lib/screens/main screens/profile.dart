@@ -1,27 +1,18 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
-import 'dart:ui';
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:http/http.dart' as http;
+import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
+import '../../offline/office_route.dart';
 import '../../service/get_profile.dart';
 import '../../ETC/progressHUD.dart';
-import '../../offline/office_route.dart';
 import '../../offline/utils.dart';
 
 String theTokenOne = '';
@@ -39,19 +30,15 @@ class _ProfileState extends State<Profile> {
   late Future<Profile_Data> futureProfile;
   @override
   void initState() {
-    
     //logoutgetToken();_removeToken();
     check();
     super.initState();
-    ;
   }
 
   void check() async {
     try {
       final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-    
-      }
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
     } on SocketException catch (_) {
       print('not connected');
       showMyDialog(
@@ -80,14 +67,8 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Palette.thisGreen,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text(''),
-            Text('ข้อมูลผู้จดหน่วยวัดน้ำ'),
-            Text(''),
-          ],
-        ),
+        title: const Text('ข้อมูลผู้จดหน่วยวัดน้ำ'),
+        centerTitle: true,
       ),
       backgroundColor: Palette.thisGreen,
       body: MediaQuery(
@@ -286,7 +267,6 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
-
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

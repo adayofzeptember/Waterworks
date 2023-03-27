@@ -2,6 +2,7 @@ part of 'write_page_bloc.dart';
 
 class WritePageState extends Equatable {
   WritePageState({
+    required this.countForReset,
     required this.writeRecordId,
     required this.customerName,
     required this.address,
@@ -14,17 +15,20 @@ class WritePageState extends Equatable {
     required this.invoice_data,
     required this.loading,
     required this.whatPage,
+    required this.writeCondition,
   });
+  int countForReset;
   String writeRecordId;
   String customerName, address, waterNumber, areaNumber, meterNumber;
   String previousUnitFormat;
   dynamic invoices;
   dynamic invoice_data;
   bool loading;
-  String whatPage;
+  String whatPage, writeCondition;
 
   bool checkCurrentUnit;
   WritePageState copyWith({
+    int? countForReset,
     String? writeRecordId,
     String? customerName,
     String? address,
@@ -38,8 +42,10 @@ class WritePageState extends Equatable {
     dynamic? invoice_data,
     bool? loading,
     String? whatPage,
+    String? writeCondition,
   }) {
     return WritePageState(
+      countForReset: countForReset ?? this.countForReset,
       writeRecordId: writeRecordId ?? this.writeRecordId,
       customerName: customerName ?? this.customerName,
       address: address ?? this.address,
@@ -52,11 +58,13 @@ class WritePageState extends Equatable {
       invoice_data: invoice_data ?? this.invoice_data,
       loading: loading ?? this.loading,
       whatPage: whatPage ?? this.whatPage,
+      writeCondition: writeCondition ?? this.writeCondition,
     );
   }
 
   @override
   List<Object> get props => [
+        countForReset,
         writeRecordId,
         customerName,
         address,
@@ -69,5 +77,6 @@ class WritePageState extends Equatable {
         invoice_data,
         loading,
         whatPage,
+        writeCondition,
       ];
 }

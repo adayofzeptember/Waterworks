@@ -33,6 +33,9 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
 
   double downloadPer = 0.0;
   Future<void> downloadUsers() async {
+    _db = CustomersDatabase.instance;
+    _dbInvoices = HisInvoicesDatabase.instance;
+    _dbWater = HisWaterDatabase.instance;
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
     final response = await http.get(
@@ -114,37 +117,6 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
   }
 
   @override
-  void initState() {
-    _db = CustomersDatabase.instance;
-    _dbInvoices = HisInvoicesDatabase.instance;
-    _dbWater = HisWaterDatabase.instance;
-    // TODO: implement initState
-
-    customers = _db.selectAllCustomers();
-    customers.then(
-      (value) {
-        // print(value.length);
-      },
-    );
-
-    hisInvoices = _dbInvoices.selectAllHisInvoices();
-    hisInvoices.then(
-      (value) {
-        //print(value.length);
-      },
-    );
-
-    hisWater = _dbWater.selectAllHisWater();
-    hisWater.then(
-      (value) {
-        // print(value.length);
-      },
-    );
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
@@ -197,7 +169,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
                   context.read<NotWriteBloc>().add(FilterData(
                         id: '-1',
                         segmentActive: 0,
-                        stopLoad: true,
+                        // stopLoad: true,
                       ));
                 },
               );

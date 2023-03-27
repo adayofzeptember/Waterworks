@@ -6,32 +6,32 @@ class DoneState extends Equatable {
     required this.written,
     required this.page,
     required this.isLoading,
-    required this.stopLoad,
     required this.error,
     required this.segmentActive,
+    required this.filterId,
   });
 
   List written;
   int page;
-  bool isLoading, stopLoad;
+  bool isLoading;
   String error;
   int segmentActive;
-
+  String filterId;
   DoneState copyWith({
     List? written,
     int? page,
     bool? isLoading,
-    bool? stopLoad,
     String? error,
     int? segmentActive,
+    String? filterId,
   }) {
     return DoneState(
       written: written ?? this.written,
       page: page ?? this.page,
       isLoading: isLoading ?? this.isLoading,
-      stopLoad: stopLoad ?? this.stopLoad,
       error: error ?? this.error,
       segmentActive: segmentActive ?? this.segmentActive,
+      filterId: filterId ?? this.filterId,
     );
   }
 
@@ -40,8 +40,8 @@ class DoneState extends Equatable {
         written,
         page,
         isLoading,
-        stopLoad,
         error,
         segmentActive,
+        filterId,
       ];
 }

@@ -7,10 +7,9 @@ import 'package:group_radio_button/group_radio_button.dart';
 import '../../ETC/color_green.dart';
 import '../../ETC/shapes_painter.dart';
 import '../../bloc/checkbox_newround/checkbox_bloc.dart';
-import '../../bloc/invoice/invoice_bloc.dart';
 import '../../bloc/load_done/done_bloc.dart';
 import '../../bloc/load_undone/undone_bloc.dart';
-import '../../bloc/radio_butts/radio_check_bloc.dart';
+import '../../bloc/search/search_bloc.dart';
 import '../../bloc/write_page/write_page_bloc.dart';
 import '../../offline/utils.dart';
 
@@ -30,7 +29,7 @@ class WritePage extends StatelessWidget {
             InkWell(
                 onTap: () {
                   Navigator.pop(context);
-                  context.read<RadioCheckBloc>().add(ClearRadioDefault());
+                  // context.read<RadioCheckBloc>().add(ClearRadioDefault());
                 },
                 child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new))),
             const SizedBox(width: 70),
@@ -42,263 +41,257 @@ class WritePage extends StatelessWidget {
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
         ),
-        child: SingleChildScrollView(
-          child: Stack(
-            children: [
-              CustomPaint(
-                painter: ShapesPainter(),
-                child: Container(height: 150),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
+        child: BlocBuilder<WritePageBloc, WritePageState>(
+          builder: (context, state) {
+            if (state.loading == true) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red,
+                ),
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Stack(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(15),
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 245, 245, 245), borderRadius: BorderRadius.all(Radius.circular(5))),
-                      width: double.infinity,
-                      child: BlocBuilder<WritePageBloc, WritePageState>(
-                        builder: (context, state) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                state.customerName,
-                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                              const SizedBox(height: 15),
-                              Text(
-                                'บ้านเลขที่ ' + state.address,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 83, 83, 83)),
-                              ),
-                              const SizedBox(height: 15),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'มาตรวัดน้ำ:',
-                                    style:
-                                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
-                                  ),
-                                  const SizedBox(width: 3),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                                        color: Color.fromARGB(255, 221, 221, 221)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 5, right: 5),
-                                      child: Text(
-                                        state.meterNumber,
-                                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 3),
-                                  const Text(
-                                    'เลข ป:',
-                                    style:
-                                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
-                                  ),
-                                  const SizedBox(width: 3),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                                        color: Color.fromARGB(255, 221, 221, 221)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 5, right: 5),
-                                      child: Text(
-                                        state.waterNumber,
-                                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 3),
-                                  const Text(
-                                    'เขต:',
-                                    style:
-                                        TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
-                                  ),
-                                  const SizedBox(width: 3),
-                                  Container(
-                                    decoration: const BoxDecoration(
-                                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                                        color: Color.fromARGB(255, 221, 221, 221)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 5, right: 5),
-                                      child: Text(
-                                        state.areaNumber,
-                                        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                    CustomPaint(
+                      painter: ShapesPainter(),
+                      child: Container(height: 150),
                     ),
-                    const SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'เลขมาตรวัดน้ำที่แล้ว: ',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
-                        ),
-                        BlocBuilder<WritePageBloc, WritePageState>(
-                          builder: (context, state) {
-                            return Text(
-                              state.previousUnitFormat,
-                              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 19),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
-                    BlocBuilder<WritePageBloc, WritePageState>(
-                      builder: (context, state) {
-                        return TextField(
-                          controller: waterUnitController,
-                          autofocus: false,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            hintText: (state.checkCurrentUnit) ? '*กรอกมาตรวัดน้ำปัจจุบัน' : 'กรอกมาตรวัดน้ำปัจจุบัน',
-                            hintStyle: TextStyle(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
-                                borderRadius: BorderRadius.circular(10)),
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
-                                borderRadius: BorderRadius.circular(10)),
-                            filled: true,
-                            fillColor: const Color.fromARGB(255, 238, 238, 238),
-                            border: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Colors.white),
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    BlocBuilder<RadioCheckBloc, RadioCheckState>(
-                      builder: (context, state) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 245, 245, 245), borderRadius: BorderRadius.all(Radius.circular(5))),
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'เลือกสถานะมาตร : ',
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                                ),
                                 Text(
-                                  state.writeCondition,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: state.colorCondition ? Palette.thisGreen : Colors.red),
+                                  state.customerName,
+                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                ),
+                                const SizedBox(height: 15),
+                                Text(
+                                  'บ้านเลขที่ ' + state.address,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 83, 83, 83)),
+                                ),
+                                const SizedBox(height: 15),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      'มาตรวัดน้ำ:',
+                                      style: TextStyle(
+                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        child: Text(
+                                          state.meterNumber,
+                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    const Text(
+                                      'เลข ป:',
+                                      style: TextStyle(
+                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        child: Text(
+                                          state.waterNumber,
+                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    const Text(
+                                      'เขต:',
+                                      style: TextStyle(
+                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        child: Text(
+                                          state.areaNumber,
+                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            RadioGroup<String>.builder(
-                              textStyle: const TextStyle(fontSize: 20),
-                              groupValue: state.writeCondition,
-                              onChanged: (value) {
-                                context.read<RadioCheckBloc>().add(CheckThisBro(getCondiotionRadio: value.toString()));
-                              },
-                              items: const ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"],
-                              itemBuilder: (item) => RadioButtonBuilder(
-                                item,
+                          ),
+                          const SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'เลขมาตรวัดน้ำที่แล้ว: ',
+                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
                               ),
-                              fillColor: Palette.thisGreen,
+                              Text(
+                                state.previousUnitFormat,
+                                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 19),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          TextField(
+                            controller: waterUnitController,
+                            autofocus: false,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              hintText: (state.checkCurrentUnit) ? '*กรอกมาตรวัดน้ำปัจจุบัน' : 'กรอกมาตรวัดน้ำปัจจุบัน',
+                              hintStyle: TextStyle(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                                  borderRadius: BorderRadius.circular(10)),
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                                  borderRadius: BorderRadius.circular(10)),
+                              filled: true,
+                              fillColor: const Color.fromARGB(255, 238, 238, 238),
+                              border: OutlineInputBorder(
+                                borderSide: const BorderSide(color: Colors.white),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
                             ),
-                            const SizedBox(height: 20),
-                            BlocBuilder<WritePageBloc, WritePageState>(
-                              builder: (context, writeState) {
-                                return ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Palette.thisGreen,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(15),
-                                      )),
-                                  onPressed: () {
-                                    context.read<WritePageBloc>().add(CheckCurrentUnit(currentUnit: waterUnitController.text));
-                                    if (waterUnitController.text != "") {
-                                      context.read<WritePageBloc>().add(ConfirmWriteUnit(
-                                            context: context,
-                                            statusMeter: '0',
-                                            currentUnit: waterUnitController.text,
-                                            id: writeState.writeRecordId,
-                                          ));
-                                      // if (state.writeCondition == "ปกติ") {
-                                      //   if (int.parse(writeState.previousUnitFormat) > int.parse(waterUnitController.text)) {
-                                      //     showAlertWriteERROR(context);
-                                      //   } else {
-                                      //     showAlertWriteOK(
-                                      //       context,
-                                      //       waterUnitController.text,
-                                      //       'ปกติ',
-                                      //       '0',
-                                      //       writeState.writeRecordId,
-                                      //     );
-                                      //   }
-                                      // } else if (state.writeCondition == "รอบใหม่") {
-                                      //   showAlertWriteOK(
-                                      //     context,
-                                      //     waterUnitController.text,
-                                      //     'รอบใหม่',
-                                      //     '1',
-                                      //     writeState.writeRecordId,
-                                      //   );
-                                      // } else if (state.writeCondition == "มาตรใหม่") {
-                                      //   showAlertWriteOK(
-                                      //     context,
-                                      //     waterUnitController.text,
-                                      //     'มาตรใหม่',
-                                      //     '2',
-                                      //     writeState.writeRecordId,
-                                      //   );
-                                      // } else {
-                                      //   showAlertWriteOK(
-                                      //     context,
-                                      //     waterUnitController.text,
-                                      //     'มาตรชำรุด',
-                                      //     '3',
-                                      //     writeState.writeRecordId,
-                                      //   );
-                                      // }
-                                    }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    padding: const EdgeInsets.all(20),
-                                    child: const Text(
-                                      "ยืนยัน",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                          ),
+                          const SizedBox(height: 15),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    'เลือกสถานะมาตร : ',
+                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                   ),
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      },
+                                  Text(
+                                    state.writeCondition,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: state.writeCondition == "ปกติ" ? Palette.thisGreen : Colors.red),
+                                  ),
+                                ],
+                              ),
+                              RadioGroup<String>.builder(
+                                textStyle: const TextStyle(fontSize: 20),
+                                groupValue: state.writeCondition,
+                                onChanged: (value) {
+                                  context.read<WritePageBloc>().add(CheckThisBro(getCondiotionRadio: value.toString()));
+                                },
+                                items: const ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"],
+                                itemBuilder: (item) => RadioButtonBuilder(
+                                  item,
+                                ),
+                                fillColor: Palette.thisGreen,
+                              ),
+                              const SizedBox(height: 20),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Palette.thisGreen,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                    )),
+                                onPressed: () {
+                                  context.read<WritePageBloc>().add(CheckCurrentUnit(
+                                        currentUnit: waterUnitController.text,
+                                      ));
+                                  if (waterUnitController.text != "") {
+                                    // context.read<WritePageBloc>().add(ConfirmWriteUnit(
+                                    //       context: context,
+                                    //       statusMeter: '0',
+                                    //       currentUnit: waterUnitController.text,
+                                    //       id: writeState.writeRecordId,
+                                    //     ));
+                                    if (state.writeCondition == "ปกติ") {
+                                      if (int.parse(state.previousUnitFormat) > int.parse(waterUnitController.text)) {
+                                        showAlertWriteERROR(context);
+                                      } else {
+                                        showAlertWriteOK(
+                                          context,
+                                          waterUnitController.text,
+                                          'ปกติ',
+                                          '0',
+                                          state.writeRecordId,
+                                        );
+                                      }
+                                    } else if (state.writeCondition == "รอบใหม่") {
+                                      showAlertWriteOK(
+                                        context,
+                                        waterUnitController.text,
+                                        'รอบใหม่',
+                                        '1',
+                                        state.writeRecordId,
+                                      );
+                                    } else if (state.writeCondition == "มาตรใหม่") {
+                                      showAlertWriteOK(
+                                        context,
+                                        waterUnitController.text,
+                                        'มาตรใหม่',
+                                        '2',
+                                        state.writeRecordId,
+                                      );
+                                    } else {
+                                      showAlertWriteOK(
+                                        context,
+                                        waterUnitController.text,
+                                        'มาตรชำรุด',
+                                        '3',
+                                        state.writeRecordId,
+                                      );
+                                    }
+                                  }
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(20),
+                                  child: const Text(
+                                    "ยืนยัน",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              );
+            }
+          },
         ),
       ),
     );
@@ -309,7 +302,7 @@ Future<void> showAlertWriteERROR(var context) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: const Text('ไม่สามารถจดหน่วยน้ำได้ !', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
         content: SingleChildScrollView(
@@ -350,11 +343,17 @@ Future<void> showAlertWriteERROR(var context) async {
   );
 }
 
-Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, String statusMeter, String writeRecordId) async {
+Future<void> showAlertWriteOK(
+  var context,
+  String newUnit,
+  String newStatus,
+  String statusMeter,
+  String writeRecordId,
+) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
-    builder: (BuildContext context) {
+    builder: (context) {
       return AlertDialog(
         title: const Text('โปรดตรวจสอบความถูกต้อง'),
         content: SingleChildScrollView(
@@ -399,7 +398,6 @@ Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, Str
           TextButton(
             child: const Text('ยืนยัน'),
             onPressed: () async {
-              Navigator.of(context).pop();
               try {
                 final result = await InternetAddress.lookup('google.com');
                 if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -409,18 +407,12 @@ Future<void> showAlertWriteOK(var context, String newUnit, String newStatus, Str
                         currentUnit: newUnit,
                         id: writeRecordId,
                       ));
-
-                  // context.read<InvoiceBloc>().add(
-                  //       Load_Invoice(
-                  //         id: writeRecordId,
-                  //         context: context,
-                  //         whatPage: "listUnDone",
-                  //       ),
-                  //     );
-                  // context.read<NotWriteBloc>().add(Reload_Undone());
-                  // context.read<DoneBloc>().add(Reload_Done());
-                  // context.read<CheckboxBloc>().add(ClearCheck());
-                  // context.read<RadioCheckBloc>().add(ClearRadioDefault());
+                  context.read<NotWriteBloc>().add(BackMenu());
+                  context.read<NotWriteBloc>().add(Reload_Undone());
+                  context.read<DoneBloc>().add(Reload_Done());
+                  context.read<CheckboxBloc>().add(ClearCheck());
+                  context.read<WritePageBloc>().add(ClearRadioDefault());
+                  context.read<SearchBloc>().add(ClearSearch());
                 }
               } on SocketException catch (_) {
                 print('not connected');

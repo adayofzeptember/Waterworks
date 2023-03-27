@@ -13,6 +13,11 @@ class ToPageWrite extends WritePageEvent {
   ToPageWrite({required this.context, required this.id});
 }
 
+class CheckThisBro extends WritePageEvent {
+  String getCondiotionRadio;
+  CheckThisBro({required this.getCondiotionRadio});
+}
+
 class CheckCurrentUnit extends WritePageEvent {
   String currentUnit;
   CheckCurrentUnit({
@@ -32,3 +37,15 @@ class ConfirmWriteUnit extends WritePageEvent {
     required this.id,
   });
 }
+
+class WatchInvoiceUnitDone extends WritePageEvent {
+  String id;
+  var context;
+
+  WatchInvoiceUnitDone({
+    required this.id,
+    required this.context,
+  });
+}
+
+class ClearRadioDefault extends WritePageEvent {}
