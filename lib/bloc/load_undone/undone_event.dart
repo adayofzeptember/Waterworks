@@ -14,8 +14,8 @@ class Reload_Undone extends NotWriteEvent {}
 class FilterData extends NotWriteEvent {
   String id;
   int segmentActive;
-  bool stopLoad;
-  FilterData({required this.id, required this.segmentActive, required this.stopLoad});
+  // bool stopLoad;
+  FilterData({required this.id, required this.segmentActive});
 }
 
 class BackMenu extends NotWriteEvent {}

@@ -3,7 +3,7 @@ part of 'undone_bloc.dart';
 class NotWriteState extends Equatable {
   List notWrite;
   int page;
-  bool isLoading, stopLoad;
+  bool isLoading;
   String error;
   int segmentActive;
   String filterId, hiddenMeter;
@@ -14,7 +14,6 @@ class NotWriteState extends Equatable {
     required this.isLoading,
     required this.error,
     required this.segmentActive,
-    required this.stopLoad,
     required this.filterId,
     required this.hiddenMeter,
   });
@@ -25,7 +24,6 @@ class NotWriteState extends Equatable {
     bool? isLoading,
     String? error,
     int? segmentActive,
-    bool? stopLoad,
     String? filterId,
     String? hiddenMeter,
   }) {
@@ -35,7 +33,6 @@ class NotWriteState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       error: error ?? this.error,
       segmentActive: segmentActive ?? this.segmentActive,
-      stopLoad: stopLoad ?? this.stopLoad,
       filterId: filterId ?? this.filterId,
       hiddenMeter: hiddenMeter ?? this.hiddenMeter,
     );
@@ -48,7 +45,6 @@ class NotWriteState extends Equatable {
         isLoading,
         error,
         segmentActive,
-        stopLoad,
         filterId,
         hiddenMeter,
       ];
