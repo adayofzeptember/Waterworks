@@ -6,16 +6,16 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/models/invoice_load_model.dart';
 import '../../ETC/api_domain_url.dart';
-import '../../screens/main screens/invoice_page2.dart';
+import '../../screens/main screens/invoice_page3.dart';
 import '../../service/get_invoice.dart';
 part 'invoice_event.dart';
 part 'invoice_state.dart';
 
 class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
   final dio = Dio();
-  InvoiceBloc()
-      : super(InvoiceState(invoice_data: '', loading: true, whatPage: '')) {
+  InvoiceBloc() : super(InvoiceState(invoice_data: '', loading: true, whatPage: '')) {
     on<Load_Invoice>((event, emit) async {
+      print('Load_Incoive');
       emit(state.copyWith(loading: true, whatPage: event.whatPage));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -28,8 +28,7 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
             "Authorization": "Bearer $token",
           }),
         );
-        dynamic dataInvoice =
-            (state.invoice_data != '') ? state.invoice_data : '';
+        dynamic dataInvoice = (state.invoice_data != '') ? state.invoice_data : '';
         dynamic nestedData = response.data['data'];
         if (response.statusCode == 200) {
           emit(state.copyWith(loading: false));
@@ -48,22 +47,12 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
             godTotal: await nestedData['sum_total'],
             prapa_cost: await nestedData['sum'],
             total: await nestedData['total'],
-            waterMeterRecord_current_unit:
-                await nestedData['water_meter_record']['current_unit'],
-            waterMeterRecord_previous_unit:
-                await nestedData['water_meter_record']['previous_unit'],
-            waterMeterRecord_record_date_format:
-                await nestedData['water_meter_record']['record_date_format'],
-            waterMeterRecord_sum_unit: await nestedData['water_meter_record']
-                ['sum_unit'],
-            waterMeterRecord_waterNumber: nestedData['water_meter_record']
-                ['water_number'],
-            waterMeterRecord_waterWrong: await (nestedData['water_meter_record']
-                            ['water_wrong']
-                        .toString() ==
-                    "1")
-                ? false
-                : true,
+            waterMeterRecord_current_unit: await nestedData['water_meter_record']['current_unit'],
+            waterMeterRecord_previous_unit: await nestedData['water_meter_record']['previous_unit'],
+            waterMeterRecord_record_date_format: await nestedData['water_meter_record']['record_date_format'],
+            waterMeterRecord_sum_unit: await nestedData['water_meter_record']['sum_unit'],
+            waterMeterRecord_waterNumber: nestedData['water_meter_record']['water_number'],
+            waterMeterRecord_waterWrong: await (nestedData['water_meter_record']['water_wrong'].toString() == "1") ? false : true,
           );
 
           emit(state.copyWith(invoice_data: dataInvoice));

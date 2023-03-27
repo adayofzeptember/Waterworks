@@ -1,38 +1,37 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/bloc/invoice/invoice_bloc.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
 import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
 import 'package:waterworks/bloc/search/search_bloc.dart';
+import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/checkbox_newround/checkbox_bloc.dart';
 import 'bloc/profile/profile_bloc.dart';
-import 'bloc/radio_butts/radio_check_bloc.dart';
 import 'offline/utils.dart';
 
 void main() {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
   const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(Start_Page_Waterworks()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+    (value) => runApp(
+      Phoenix(
+        child: Start_Page_Waterworks(),
+      ),
+    ),
+  );
 }
 
 class Start_Page_Waterworks extends StatelessWidget {
@@ -46,8 +45,8 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => SearchBloc()),
         BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
-        BlocProvider(create: (context) => RadioCheckBloc()),
-        BlocProvider(create: (context) => InvoiceBloc()),
+        // BlocProvider(create: (context) => RadioCheckBloc()),
+        BlocProvider(create: (context) => WritePageBloc()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -131,20 +130,14 @@ class _Load_PageState extends State<Load_Page> {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(
-              duration: const Duration(milliseconds: 820),
-              type: PageTransitionType.bottomToTop,
-              child: Login()),
+          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Login()),
         );
       });
     } else {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(
-              duration: const Duration(milliseconds: 820),
-              type: PageTransitionType.bottomToTop,
-              child: Menu_Page()),
+          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Menu_Page()),
         );
       });
     }
@@ -160,9 +153,7 @@ class _Load_PageState extends State<Load_Page> {
         body: Stack(
       children: <Widget>[
         Image.asset('assets/images/background_green.png',
-            width: MediaQuery.of(context).size.width * 1,
-            height: MediaQuery.of(context).size.height * 1,
-            fit: BoxFit.fill),
+            width: MediaQuery.of(context).size.width * 1, height: MediaQuery.of(context).size.height * 1, fit: BoxFit.fill),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -178,17 +169,11 @@ class _Load_PageState extends State<Load_Page> {
                 ),
                 const Text(
                   'การประปาเทศบาลนคร',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   'นครราชสีมา',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -198,19 +183,3 @@ class _Load_PageState extends State<Load_Page> {
     ));
   }
 }
-
-
-
-// Widget x() {
-//   return Container(
-//     child: Text('1'),
-//   );
-// }
-// Widget y() {
-//   return Container(
-//     child: Text('2'),
-//   );
-// }
-
-
-

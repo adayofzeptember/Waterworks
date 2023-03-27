@@ -1,23 +1,51 @@
-// part of 'write_page_bloc.dart';
+part of 'write_page_bloc.dart';
 
-// abstract class WritePageEvent extends Equatable {
-//   const WritePageEvent();
+abstract class WritePageEvent extends Equatable {
+  const WritePageEvent();
 
-//   @override
-//   List<Object> get props => [];
-// }
+  @override
+  List<Object> get props => [];
+}
 
-// class WriteWaterUnit extends WritePageEvent {
-//   var context;
+class ToPageWrite extends WritePageEvent {
+  var context;
+  String id;
+  ToPageWrite({required this.context, required this.id});
+}
 
-//     String current_unit;
-//   String water_meter_record_id;
-//   String writeStatus;
+class CheckThisBro extends WritePageEvent {
+  String getCondiotionRadio;
+  CheckThisBro({required this.getCondiotionRadio});
+}
 
-//   WriteWaterUnit({
-//     required this.current_unit,
-//     required this.username,
-//     required this.password,
- 
-//   });
-// }
+class CheckCurrentUnit extends WritePageEvent {
+  String currentUnit;
+  CheckCurrentUnit({
+    required this.currentUnit,
+  });
+}
+
+class ConfirmWriteUnit extends WritePageEvent {
+  var context;
+  String id;
+  String statusMeter;
+  String currentUnit;
+  ConfirmWriteUnit({
+    required this.context,
+    required this.statusMeter,
+    required this.currentUnit,
+    required this.id,
+  });
+}
+
+class WatchInvoiceUnitDone extends WritePageEvent {
+  String id;
+  var context;
+
+  WatchInvoiceUnitDone({
+    required this.id,
+    required this.context,
+  });
+}
+
+class ClearRadioDefault extends WritePageEvent {}
