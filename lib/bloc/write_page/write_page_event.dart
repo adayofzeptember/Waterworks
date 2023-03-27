@@ -49,3 +49,9 @@ class WatchInvoiceUnitDone extends WritePageEvent {
 }
 
 class ClearRadioDefault extends WritePageEvent {}
+
+
+class CountForReset extends WritePageEvent {
+  var context;
+  CountForReset({this.context});
+}

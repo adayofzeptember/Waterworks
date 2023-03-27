@@ -4,10 +4,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/models/invoice_load_model.dart';
-import '../../ETC/api_domain_url.dart';
-import '../../screens/main screens/invoice_page3.dart';
-import '../../service/get_invoice.dart';
 part 'invoice_event.dart';
 part 'invoice_state.dart';
 
@@ -45,6 +43,7 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
             debt_months: nestedData['count_invoices'],
             sum_debt: await nestedData['sum_invoice'],
             godTotal: await nestedData['sum_total'],
+            duedate: await nestedData['due_date_format'],
             prapa_cost: await nestedData['sum'],
             total: await nestedData['total'],
             waterMeterRecord_current_unit: await nestedData['water_meter_record']['current_unit'],

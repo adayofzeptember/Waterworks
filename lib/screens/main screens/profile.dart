@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
 import '../../offline/office_route.dart';
@@ -167,6 +165,7 @@ class _ProfileState extends State<Profile> {
                                       )),
                                   onPressed: () {
                                     Navigator.push(context, pageOffice());
+                                    
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),

@@ -13,6 +13,7 @@ class Invoice_Load_Data {
   String godTotal;
   String bank;
   String prapa_cost;
+  String duedate;
   String waterMeterRecord_waterNumber;
   bool waterMeterRecord_waterWrong;
   String waterMeterRecord_record_date_format;
@@ -32,6 +33,7 @@ class Invoice_Load_Data {
       required this.vat,
       required this.bank,
       required this.debt_months,
+      required this.duedate,
       required this.sum_debt,
       required this.godTotal,
       required this.total,

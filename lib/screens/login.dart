@@ -1,24 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-import 'dart:collection';
-import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/progressHUD.dart';
 import 'package:waterworks/bloc/profile/profile_bloc.dart';
 import 'package:waterworks/service/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
-import 'package:waterworks/ETC/color_green.dart';
 import 'package:http/http.dart' as http;
 
 import 'First_Page_bottomBar.dart';
@@ -27,14 +19,13 @@ String deviceDetail = '';
 String storedToken = '';
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  @override
   late Login_Request _login_request;
   var deviceData = <String, dynamic>{};
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -44,6 +35,7 @@ class _LoginState extends State<Login> {
   String passWord = '';
   bool circleHUD = false;
 
+  @override
   void initState() {
     circleHUD = false;
     _login_request = Login_Request();
@@ -137,6 +129,7 @@ class _LoginState extends State<Login> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกรหัสผ่าน';
                               }
+                            
                             },
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(

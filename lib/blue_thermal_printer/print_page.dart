@@ -141,6 +141,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                   if (_connected == true) {
                     _disconnect();
                   }
+                  _disconnect();
                   Navigator.pop(context);
                   // context
                   //     .read<WritePageBloc>()
@@ -191,7 +192,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                       value: _device,
                     ),
                     const SizedBox(width: 10),
-                    (_devices.isEmpty == true)
+                    (_device == null)
                         ? Container()
                         : ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -209,18 +210,23 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                 const SizedBox(height: 10),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
-              onPressed: () {
-                initPlatformState();
-              },
-              child: const Text(
-                'Refresh',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-            (_devices.isEmpty == true)
-                ? Container()
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(primary: Colors.blue),
+            //   onPressed: () {
+            //     initPlatformState();
+            //   },
+            //   child: const Text(
+            //     'Refresh',
+            //     style: TextStyle(color: Colors.white),
+            //   ),
+            // ),
+            (_device == null)
+                ? Column(
+                  children: [
+                    SizedBox(height: 20,),
+                    Text('กรุณาเลือกเครื่องพิมพ์', style: TextStyle(fontSize: 20, color: Colors.red)),
+                  ],
+                )
                 : Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: ElevatedButton(

@@ -56,6 +56,8 @@ dependencies:
   custom_radio_grouped_button: ^2.1.2+2
   group_radio_button: ^1.3.0
   flutter_phoenix: ^1.1.0
+  flutter_easyloading: ^3.0.5
+  bluetooth_enable_fork: ^0.1.6
 
 
  

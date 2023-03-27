@@ -1,14 +1,8 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/screens/main%20screens/profile.dart';
 import 'package:waterworks/screens/main%20screens/search_page.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
-import 'package:waterworks/bloc/search/search_bloc.dart';
 import 'main screens/list_Main.dart';
 
 class Menu_Page extends StatefulWidget {
@@ -34,7 +28,7 @@ class _Menu_PageState extends State<Menu_Page> {
   @override
   void dispose() {
     // TODO: implement dispose
-    print('dispose Menu_Page');
+    
     _widgetsPages;
     _index;
     super.dispose();

@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/scheduler.dart';
-import 'package:http/http.dart' as http;
-
 import '../ETC/color_green.dart';
 import '../service/get_user_consume.dart';
 

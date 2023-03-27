@@ -1,28 +1,28 @@
 class MonthTH {
   String convertMonth(String numMonth) {
-    if (numMonth == '01') {
+    if (numMonth == 'ม.ค.') {
       return 'มกราคม';
-    } else if (numMonth == '02') {
+    } else if (numMonth == 'ก.พ.') {
       return 'กุมภาพันธ์';
-    } else if (numMonth == '03') {
+    } else if (numMonth == 'มี.ค.') {
       return 'มีนาคม';
-    } else if (numMonth == '04') {
+    } else if (numMonth == 'เม.ย.') {
       return 'เมษายน';
-    } else if (numMonth == '05') {
+    } else if (numMonth == 'พ.ค.') {
       return 'พฤษภาคม';
-    } else if (numMonth == '06') {
+    } else if (numMonth == 'ม.ย.') {
       return 'มิถุนายน';
-    } else if (numMonth == '07') {
+    } else if (numMonth == 'ก.ค.') {
       return 'กรกฏาคม';
-    } else if (numMonth == '08') {
+    } else if (numMonth == 'ส.ค.') {
       return 'สิงหาคม';
-    } else if (numMonth == '09') {
+    } else if (numMonth == 'ก.ย.') {
       return 'กันยายน';
-    } else if (numMonth == '10') {
+    } else if (numMonth == 'ต.ค.') {
       return 'ตุลาคม';
-    } else if (numMonth == '11') {
+    } else if (numMonth == 'พ.ย.') {
       return 'พฤษจิกายน';
     }
-    return 'ธันวาคม';
+    return numMonth;
   }
 }

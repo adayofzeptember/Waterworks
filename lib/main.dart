@@ -17,9 +17,9 @@ import 'package:waterworks/bloc/search/search_bloc.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import 'package:waterworks/screens/First_Page_bottomBar.dart';
 import 'package:waterworks/screens/login.dart';
-import 'bloc/checkbox_newround/checkbox_bloc.dart';
 import 'bloc/profile/profile_bloc.dart';
 import 'offline/utils.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() {
   Intl.defaultLocale = 'th';
@@ -43,7 +43,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => NotWriteBloc()),
         BlocProvider(create: (context) => DoneBloc()),
         BlocProvider(create: (context) => SearchBloc()),
-        BlocProvider(create: (context) => CheckboxBloc()),
+        // BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         // BlocProvider(create: (context) => RadioCheckBloc()),
         BlocProvider(create: (context) => WritePageBloc()),
@@ -64,6 +64,7 @@ class Start_Page_Waterworks extends StatelessWidget {
           fontFamily: 'Kanit',
         ),
         home: const Load_Page(),
+        builder: EasyLoading.init(),
       ),
     );
   }
@@ -130,14 +131,20 @@ class _Load_PageState extends State<Load_Page> {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Login()),
+          PageTransition(
+              duration: const Duration(milliseconds: 820),
+              type: PageTransitionType.bottomToTop,
+              child: Login()),
         );
       });
     } else {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
-          PageTransition(duration: const Duration(milliseconds: 820), type: PageTransitionType.bottomToTop, child: Menu_Page()),
+          PageTransition(
+              duration: const Duration(milliseconds: 820),
+              type: PageTransitionType.bottomToTop,
+              child: Menu_Page()),
         );
       });
     }
@@ -153,7 +160,9 @@ class _Load_PageState extends State<Load_Page> {
         body: Stack(
       children: <Widget>[
         Image.asset('assets/images/background_green.png',
-            width: MediaQuery.of(context).size.width * 1, height: MediaQuery.of(context).size.height * 1, fit: BoxFit.fill),
+            width: MediaQuery.of(context).size.width * 1,
+            height: MediaQuery.of(context).size.height * 1,
+            fit: BoxFit.fill),
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -169,11 +178,17 @@ class _Load_PageState extends State<Load_Page> {
                 ),
                 const Text(
                   'การประปาเทศบาลนคร',
-                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
                 ),
                 const Text(
                   'นครราชสีมา',
-                  style: TextStyle(color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),

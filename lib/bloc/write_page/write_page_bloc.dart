@@ -2,13 +2,16 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/screens/main%20screens/write_page.dart';
+import 'package:waterworks/screens/write_page.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../ETC/api_domain_url.dart';
 import '../../models/invoice_load_model.dart';
-import '../../screens/main screens/invoice_page3.dart';
+import '../../screens/First_Page_bottomBar.dart';
+import '../../screens/invoice_page.dart';
 
 part 'write_page_event.dart';
 part 'write_page_state.dart';
@@ -81,7 +84,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     });
 
     on<CheckCurrentUnit>((event, emit) async {
-      emit(state.copyWith(checkCurrentUnit: (event.currentUnit != '') ? false : true));
+      emit(state.copyWith(
+          checkCurrentUnit: (event.currentUnit != '') ? false : true));
     });
     on<ClearRadioDefault>(
       (event, emit) {
@@ -90,7 +94,10 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     );
 
     on<ConfirmWriteUnit>((event, emit) async {
-      print('ConfirmWriteUnit');
+      EasyLoading.show(
+          status: 'โปรดรอสักครู่...', maskType: EasyLoadingMaskType.black);
+
+      // print('ConfirmWriteUnit');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
       try {
@@ -137,23 +144,37 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 vat: await nestedData['vat'],
                 bank: await nestedData['crossbank_number'],
                 debt_months: nestedData['count_invoices'],
+                duedate: await nestedData['due_date_format'],
                 sum_debt: await nestedData['sum_invoice'],
                 godTotal: await nestedData['sum_total'],
                 prapa_cost: await nestedData['sum'],
                 total: await nestedData['total'],
-                waterMeterRecord_current_unit: await nestedData['water_meter_record']['current_unit'],
-                waterMeterRecord_previous_unit: await nestedData['water_meter_record']['previous_unit'],
-                waterMeterRecord_record_date_format: await nestedData['water_meter_record']['record_date_format'],
-                waterMeterRecord_sum_unit: await nestedData['water_meter_record']['sum_unit'],
-                waterMeterRecord_waterNumber: nestedData['water_meter_record']['water_number'],
-                waterMeterRecord_waterWrong: (nestedData['water_meter_record']['water_wrong'].toString() == "1") ? false : true,
+                waterMeterRecord_current_unit:
+                    await nestedData['water_meter_record']['current_unit'],
+                waterMeterRecord_previous_unit:
+                    await nestedData['water_meter_record']['previous_unit'],
+                waterMeterRecord_record_date_format:
+                    await nestedData['water_meter_record']
+                        ['record_date_format'],
+                waterMeterRecord_sum_unit:
+                    await nestedData['water_meter_record']['sum_unit'],
+                waterMeterRecord_waterNumber: nestedData['water_meter_record']
+                    ['water_number'],
+                waterMeterRecord_waterWrong: (nestedData['water_meter_record']
+                                ['water_wrong']
+                            .toString() ==
+                        "1")
+                    ? false
+                    : true,
               );
 
               emit(state.copyWith(
-                invoice_data: await dataInvoice,
-                countForReset: state.countForReset + 1,
-              ));
+                  invoice_data: await dataInvoice,
+                  countForReset: state.countForReset + 1,
+                  writeCondition: 'ปกติ'));
+
               Navigator.pop(event.context);
+              EasyLoading.dismiss();
               await Future.delayed(const Duration(microseconds: 500), () {
                 Navigator.push(
                   event.context,
@@ -165,11 +186,17 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 );
               });
             } else {
+              EasyLoading.showError(response.statusMessage.toString());
+              EasyLoading.dismiss();
+              Navigator.pop(event.context);
               print('-----------fail api');
               print(response);
               emit(state.copyWith(loading: false));
             }
           } catch (e) {
+            EasyLoading.showError(e.toString());
+            EasyLoading.dismiss();
+            Navigator.pop(event.context);
             emit(state.copyWith(loading: false));
             print('----------- fail try');
 
@@ -183,6 +210,26 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       }
     });
 
+    on<CountForReset>((event, emit) async {
+      print(state.countForReset);
+      if (state.whatPage == 'list_unit_done') {
+        Navigator.pop(event.context);
+      } else {
+        if (state.countForReset == 20) {
+          Phoenix.rebirth(event.context);
+        } else {
+          await Navigator.pushReplacement(
+            event.context,
+            PageTransition(
+              duration: const Duration(milliseconds: 250),
+              type: PageTransitionType.rightToLeft,
+              child: Menu_Page(),
+            ),
+          );
+        }
+      }
+    });
+
     on<WatchInvoiceUnitDone>((event, emit) async {
       Navigator.push(
         event.context,
@@ -192,7 +239,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
           child: const InvoicePage2(),
         ),
       );
-      print('WatchInvoiceUnitDone');
+
       emit(state.copyWith(loading: true, whatPage: 'list_unit_done'));
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -207,7 +254,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             "Authorization": "Bearer $token",
           }),
         );
-        dynamic dataInvoice = (state.invoice_data != '') ? state.invoice_data : '';
+        dynamic dataInvoice =
+            (state.invoice_data != '') ? state.invoice_data : '';
         dynamic nestedData = response.data['data'];
         if (response.statusCode == 200) {
           emit(state.copyWith(loading: false));
@@ -225,13 +273,24 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             sum_debt: await nestedData['sum_invoice'],
             godTotal: await nestedData['sum_total'],
             prapa_cost: await nestedData['sum'],
+            duedate: await nestedData['due_date_format'],
             total: await nestedData['total'],
-            waterMeterRecord_current_unit: await nestedData['water_meter_record']['current_unit'],
-            waterMeterRecord_previous_unit: await nestedData['water_meter_record']['previous_unit'],
-            waterMeterRecord_record_date_format: await nestedData['water_meter_record']['record_date_format'],
-            waterMeterRecord_sum_unit: await nestedData['water_meter_record']['sum_unit'],
-            waterMeterRecord_waterNumber: nestedData['water_meter_record']['water_number'],
-            waterMeterRecord_waterWrong: await (nestedData['water_meter_record']['water_wrong'].toString() == "1") ? false : true,
+            waterMeterRecord_current_unit:
+                await nestedData['water_meter_record']['current_unit'],
+            waterMeterRecord_previous_unit:
+                await nestedData['water_meter_record']['previous_unit'],
+            waterMeterRecord_record_date_format:
+                await nestedData['water_meter_record']['record_date_format'],
+            waterMeterRecord_sum_unit: await nestedData['water_meter_record']
+                ['sum_unit'],
+            waterMeterRecord_waterNumber: nestedData['water_meter_record']
+                ['water_number'],
+            waterMeterRecord_waterWrong: await (nestedData['water_meter_record']
+                            ['water_wrong']
+                        .toString() ==
+                    "1")
+                ? false
+                : true,
           );
 
           emit(state.copyWith(
