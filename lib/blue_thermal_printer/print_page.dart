@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
@@ -7,17 +7,17 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
 import '../models/invoice_to_printer.dart';
 
-class MyApp extends StatefulWidget {
-  @override
+class Print_Thermal_Page extends StatefulWidget {
   final ToInvoice invoideModel;
+
   String checkWaterWrong;
-  MyApp({Key? key, required this.invoideModel, required this.checkWaterWrong})
+  Print_Thermal_Page(
+      {Key? key, required this.invoideModel, required this.checkWaterWrong})
       : super(key: key);
-  _MyAppState createState() => new _MyAppState();
+  _Print_Thermal_PageState createState() => new _Print_Thermal_PageState();
 }
 
-class _MyAppState extends State<MyApp> {
-
+class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
@@ -26,10 +26,20 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    checkBluetooth();
+
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
 
     super.initState();
+  }
+
+  Future<void> checkBluetooth() async {
+    BluetoothEnable.enableBluetooth.then((result) {
+      if (result == "true") {
+        initPlatformState();
+      } else if (result == "false") {}
+    });
   }
 
   Future<void> initPlatformState() async {
@@ -37,20 +47,20 @@ class _MyAppState extends State<MyApp> {
     if (await statusLocation.isGranted != true) {
       await Permission.location.request();
       await Permission.bluetooth.request();
-
-      //Permission.location.isGranted;
+      Permission.bluetooth.isGranted;
+      Permission.location.isGranted;
     }
     if (await statusLocation.isGranted) {
-      //Permission.location.isGranted;
+      Permission.location.isGranted;
     } else {
-      //Permission.location.isGranted;
+      Permission.location.isGranted;
     }
     bool? isConnected = await bluetooth.isConnected;
     List<BluetoothDevice> devices = [];
     try {
       devices = await bluetooth.getBondedDevices();
     } on PlatformException {}
-    
+
     bluetooth.onStateChanged().listen((state) {
       switch (state) {
         case BlueThermalPrinter.CONNECTED:
@@ -74,13 +84,13 @@ class _MyAppState extends State<MyApp> {
         case BlueThermalPrinter.STATE_TURNING_OFF:
           setState(() {
             _connected = false;
-            print("bluetooth device state: bluetooth turning off");
+            print("bluetooth device state: bluetooth turning off 55555");
           });
           break;
         case BlueThermalPrinter.STATE_OFF:
           setState(() {
             _connected = false;
-            print("bluetooth device state: bluetooth off");
+            print("bluetooth device state: bluetooth off  5555");
           });
           break;
         case BlueThermalPrinter.STATE_ON:
@@ -128,8 +138,13 @@ class _MyAppState extends State<MyApp> {
           children: [
             InkWell(
                 onTap: () {
-                  _disconnect();
+                  if (_connected == true) {
+                    _disconnect();
+                  }
                   Navigator.pop(context);
+                  // context
+                  //     .read<WritePageBloc>()
+                  //     .add(CountForReset(context: context));
                 },
                 child: const SizedBox(
                     width: 50,
@@ -176,15 +191,18 @@ class _MyAppState extends State<MyApp> {
                       value: _device,
                     ),
                     const SizedBox(width: 10),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: _connected ? Colors.red : Colors.green),
-                      onPressed: _connected ? _disconnect : _connect,
-                      child: Text(
-                        _connected ? 'Disconnect' : 'เชื่อมต่อ',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    (_devices.isEmpty == true)
+                        ? Container()
+                        : ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary:
+                                    _connected ? Colors.red : Colors.green),
+                            onPressed: _connected ? _disconnect : _connect,
+                            child: Text(
+                              _connected ? 'ยกเลิก' : 'เชื่อมต่อ',
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
                     const SizedBox(width: 10),
                   ],
                 ),
@@ -201,18 +219,20 @@ class _MyAppState extends State<MyApp> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.brown),
-                onPressed: () {
-                  toPrint.printInvoice_Now(
-                      widget.invoideModel, widget.checkWaterWrong.toString());
-                },
-                child: const Text('พิมพ์เอกสาร',
-                    style: TextStyle(color: Colors.white)),
-              ),
-            ),
+            (_devices.isEmpty == true)
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.brown),
+                      onPressed: () {
+                        toPrint.printInvoice_Now(widget.invoideModel,
+                            widget.checkWaterWrong.toString());
+                      },
+                      child: const Text('พิมพ์เอกสาร',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
           ],
         ),
       ),
@@ -223,7 +243,7 @@ class _MyAppState extends State<MyApp> {
     List<DropdownMenuItem<BluetoothDevice>> items = [];
     if (_devices.isEmpty) {
       items.add(const DropdownMenuItem(
-        child: Text('ยังไม่ได้จับคู่อุปกรณ์'),
+        child: Text('ยังไม่ได้เปิดบลูธูท'),
       ));
     } else {
       _devices.forEach((device) {
@@ -236,8 +256,10 @@ class _MyAppState extends State<MyApp> {
     return items;
   }
 
+  //! connectr // แลัวปริ้นต์
   void _connect() {
     if (_device != null) {
+      print(_device!.address.toString());
       bluetooth.isConnected.then((isConnected) {
         if (isConnected == false) {
           bluetooth.connect(_device!).catchError((error) {
