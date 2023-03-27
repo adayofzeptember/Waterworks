@@ -67,11 +67,7 @@ class _ProfileState extends State<Profile> {
         elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Palette.thisGreen,
-        title: BlocBuilder<WritePageBloc, WritePageState>(
-          builder: (context, state) {
-            return Text('ข้อมูลผู้จดหน่วยวัดน้ำ ${state.countForReset}');
-          },
-        ),
+        title: const Text('ข้อมูลผู้จดหน่วยวัดน้ำ'),
         centerTitle: true,
       ),
       backgroundColor: Palette.thisGreen,
