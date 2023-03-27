@@ -25,7 +25,7 @@ import '../bloc/radio_butts/radio_check_bloc.dart';
 import '../service/get_user_consume.dart';
 import 'invoice_page.dart';
 
-  var formatter = NumberFormat('#,##,000');
+var formatter = NumberFormat('#,##,000');
 
 //! หน้าจด
 class Water_Unit_Detail extends StatefulWidget {
@@ -39,7 +39,6 @@ class Water_Unit_Detail extends StatefulWidget {
 }
 
 class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
-
   final formKey = GlobalKey<FormState>();
   late WriteUnit_Request _writeUnit_Request;
   final _statusRadio = ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"];
@@ -49,7 +48,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   bool circleHUD = false;
   bool checkDept = false;
   var waterUnitController = TextEditingController();
-
 
   @override
   void initState() {
@@ -111,14 +109,12 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                     child: Center(
                       child: Column(
                         children: [
-
                           FutureBuilder<User_Consume_Data>(
                             future: futureUser,
                             builder: (context, snapshot) {
                               if (snapshot.hasData) {
                                 User_Consume_Data? data = snapshot.data;
                                 var debtLength = data!.historyInvoices!.length;
-                                
 
                                 if (debtLength == 0) {
                                   checkDept = false;
@@ -369,7 +365,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                   padding: const EdgeInsets.all(
                                                       15.0),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
                                                       const Text(
                                                         'เดือน',
@@ -380,7 +378,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                 FontWeight
                                                                     .bold),
                                                       ),
-                                                      
                                                       const Text('หน่วย',
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -389,7 +386,6 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold)),
-                                                      
                                                       const Text('จำนวนเงิน',
                                                           style: TextStyle(
                                                               fontSize: 18,
@@ -421,16 +417,13 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                             const EdgeInsets
                                                                 .all(15.0),
                                                         child: Row(
-                                                     
                                                           children: [
                                                             Container(
                                                               width: 110,
                                                               child: Text(
                                                                 data.historyInvoices![index].water_meter_record !=
                                                                         null
-                                                                    ? 
-                                                                    
-                                                                    data
+                                                                    ? data
                                                                         .historyInvoices![
                                                                             index]
                                                                         .water_meter_record!
@@ -438,7 +431,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                         .toString()
                                                                     : '-',
                                                                 style: const TextStyle(
-                                                                    fontSize: 18,
+                                                                    fontSize:
+                                                                        18,
                                                                     color: Palette
                                                                         .thisGreen,
                                                                     fontWeight:
@@ -446,19 +440,21 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                             .bold),
                                                               ),
                                                             ),
-           const SizedBox(width: 20,),
+                                                            const SizedBox(
+                                                              width: 20,
+                                                            ),
                                                             Container(
                                                               width: 75,
                                                               child: Text(
-                                                                    data.historyInvoices![index].water_meter_record !=
-                                                                        null
-                                                                    ? data
-                                                                        .historyInvoices![
-                                                                            index]
-                                                                        .water_meter_record!
-                                                                        .sumUnit
-                                                                        .toString()
-                                                                    : '-',
+                                                                  data.historyInvoices![index].water_meter_record !=
+                                                                          null
+                                                                      ? data
+                                                                          .historyInvoices![
+                                                                              index]
+                                                                          .water_meter_record!
+                                                                          .sumUnit
+                                                                          .toString()
+                                                                      : '-',
                                                                   style: const TextStyle(
                                                                       fontSize:
                                                                           18,
@@ -468,16 +464,19 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                           FontWeight
                                                                               .bold)),
                                                             ),
-                                                            const SizedBox(width: 50,),
+                                                            const SizedBox(
+                                                              width: 50,
+                                                            ),
                                                             Container(
-                                                              
                                                               child: Text(
                                                                   data
                                                                       .historyInvoices![
                                                                           index]
                                                                       .total
                                                                       .toString(),
-                                                                      textAlign: TextAlign.end,
+                                                                  textAlign:
+                                                                      TextAlign
+                                                                          .end,
                                                                   style: const TextStyle(
                                                                       fontSize:
                                                                           18,
@@ -502,7 +501,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: [
-                                const Text(
+                                        const Text(
                                           'เลขมาตรวัดน้ำที่แล้ว: ',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
@@ -613,8 +612,9 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                       ],
                                                     ),
                                                     RadioGroup<String>.builder(
-                                                      textStyle: const TextStyle(
-                                                          fontSize: 20),
+                                                      textStyle:
+                                                          const TextStyle(
+                                                              fontSize: 20),
                                                       groupValue:
                                                           state.writeCondition,
                                                       onChanged: (value) {
@@ -686,19 +686,15 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                       .toString();
                                                               _writeUnit_Request
                                                                       .writeStatus =
-                                                                      
                                                                   "0";
 
-
-                                                                    _showAlertWrite_OK(
-                                                                _writeUnit_Request
-                                                                    .current_unit
-                                                                    .toString(),
-                                                                state
-                                                                    .writeCondition);
+                                                              _showAlertWrite_OK(
+                                                                  _writeUnit_Request
+                                                                      .current_unit
+                                                                      .toString(),
+                                                                  state
+                                                                      .writeCondition);
                                                             }
-
-                                                          
                                                           } else if (state
                                                                   .writeCondition ==
                                                               "รอบใหม่") {
@@ -748,6 +744,16 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                                                                     .toString(),
                                                                 state
                                                                     .writeCondition);
+
+
+
+
+
+
+
+
+
+
                                                           }
                                                         }
                                                       },
@@ -868,6 +874,7 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
   }
 
   Future<void> _showAlertWrite_ERROR() async {
+    
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -956,8 +963,8 @@ class _Water_Unit_DetailState extends State<Water_Unit_Detail> {
                     ),
                     Text(
                       newStatus,
-                      style:
-                          const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 13, fontWeight: FontWeight.bold),
                     )
                   ],
                 ),
