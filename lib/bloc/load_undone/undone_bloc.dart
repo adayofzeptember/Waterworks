@@ -22,14 +22,22 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
     on<Load_unDoneData>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
-      emit(state.copyWith(hiddenMeter: (prefs.getString('hiddenMater') != null) ? prefs.getString('hiddenMater') : '0'));
+      emit(state.copyWith(
+          hiddenMeter: (prefs.getString('hiddenMater') != null)
+              ? prefs.getString('hiddenMater')
+              : '0'));
       String? hiddenMeter =
-          (state.hiddenMeter != '' && state.hiddenMeter != '0') ? "&customer_water_status=${state.hiddenMeter}" : "";
-      String? sagmentId = (state.filterId != '-1') ? "&water_meter_segmentation_id=${state.filterId}" : "";
+          (state.hiddenMeter != '' && state.hiddenMeter != '0')
+              ? "&customer_water_status=${state.hiddenMeter}"
+              : "";
+      String? sagmentId = (state.filterId != '-1')
+          ? "&water_meter_segmentation_id=${state.filterId}"
+          : "";
       try {
         final dio = Dio();
         final response = await dio.get(
-          waterWork_domain + "water_meter_record/index?per_page=8&status=pending&page=${state.page}$hiddenMeter$sagmentId",
+          waterWork_domain +
+              "water_meter_record/index?per_page=8&status=pending&page=${state.page}$hiddenMeter$sagmentId",
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token",
@@ -41,18 +49,25 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
             dataAllStore.add(
               NotWrite_Model(
                   id: await el['id'],
-                  customerName: await el['customer_water']['name'],
-                  waterNumber: await el['water_number'],
-                  areaNumber: await el['area_number'],
-                  customerAddress: await el['customer_water']['address'],
-                  meterNumber: (el['customer_water']['meter_number'] != "") ? await el['customer_water']['meter_number'] : "0",
-                  status: (el['customer_water']['status'] == "Normal") ? true : false),
+                  customerName: await el['customer_water']['name'] ?? '',
+                  waterNumber: await el['water_number'] ?? '',
+                  areaNumber: await el['area_number'] ?? '',
+                  customerAddress: await el['customer_water']['address'] ?? '',
+                  meterNumber: (el['customer_water']['meter_number'] != "")
+                      ? await el['customer_water']['meter_number']
+                      : "0",
+                  status: (el['customer_water']['status'] == "Normal")
+                      ? true
+                      : false),
             );
           }
 
           emit(state.copyWith(notWrite: dataAllStore));
           emit(state.copyWith(page: state.page + 1));
-          emit(state.copyWith(isLoading: (dataAllStore.length == response.data['data']['total']) ? false : true));
+          emit(state.copyWith(
+              isLoading: (dataAllStore.length == response.data['data']['total'])
+                  ? false
+                  : true));
           emit(state.copyWith(error: dataAllStore.length == 0 ? 'not' : ''));
         } else {
           print('fail');

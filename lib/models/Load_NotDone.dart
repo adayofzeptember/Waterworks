@@ -7,11 +7,13 @@ class NotWrite_Model {
   String customerAddress;
   String meterNumber;
   bool status;
-  bool? statusSearchCheck;
+  bool? statusSearchCheck
+  ;
   
 
   NotWrite_Model(
-      {required this.id,
+      {
+      required this.id,
       required this.customerName,
       required this.waterNumber,
       this.invoiceID,

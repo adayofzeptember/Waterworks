@@ -141,7 +141,6 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                   if (_connected == true) {
                     _disconnect();
                   }
-                  _disconnect();
                   Navigator.pop(context);
                   // context
                   //     .read<WritePageBloc>()
@@ -156,7 +155,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
               width: 55,
             ),
             const Text(
-              'เลือกเครื่องพิมพ์',
+              'พิมพ์เอกสาร',
               style: TextStyle(color: Colors.white),
             ),
           ],
@@ -222,12 +221,17 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
             // ),
             (_device == null)
                 ? Column(
-                  children: [
-                    SizedBox(height: 20,),
-                    Text('กรุณาเลือกเครื่องพิมพ์', style: TextStyle(fontSize: 20, color: Colors.red)),
-                  ],
-                )
-                : Padding(
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text('กรุณาเลือกเครื่องพิมพ์',
+                          style: TextStyle(fontSize: 20, color: Colors.red)),
+                    ],
+                  )
+                : 
+                _connected
+                ?Padding(
                     padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Colors.brown),
@@ -238,7 +242,8 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                       child: const Text('พิมพ์เอกสาร',
                           style: TextStyle(color: Colors.white)),
                     ),
-                  ),
+                  )
+                  : Container()
           ],
         ),
       ),
@@ -273,7 +278,11 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
           });
           setState(() => _connected = true);
         }
+        toPrint.printInvoice_Now(
+            widget.invoideModel, widget.checkWaterWrong.toString());
       });
+      toPrint.printInvoice_Now(
+          widget.invoideModel, widget.checkWaterWrong.toString());
     } else {
       show('No device selected.');
     }

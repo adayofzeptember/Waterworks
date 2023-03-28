@@ -148,7 +148,10 @@ eJxjYBgcgLEBgampdrADAJ3SAwc=:D973
 ^FH\^FDLA,${thisInvoice.inv_barcode}^FS
 ^PQ1,0,1,Y^XZ
 """;
-        } else {
+        } 
+        
+        
+        else {
           zplToPrinter = """ 
           CT~~CD,~CC^~CT~
 ^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ

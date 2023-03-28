@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
 import '../ETC/color_green.dart';
+import '../bloc/load_done/done_bloc.dart';
+import '../bloc/load_undone/undone_bloc.dart';
+import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
 import '../blue_thermal_printer/print_page.dart';
 import '../models/invoice_to_printer.dart';
@@ -38,6 +41,11 @@ class InvoicePage2 extends StatelessWidget {
                         .read<WritePageBloc>()
                         .add(CountForReset(context: context));
 
+                    context.read<NotWriteBloc>().add(BackMenu());
+                    context.read<NotWriteBloc>().add(Reload_Undone());
+                    context.read<DoneBloc>().add(Reload_Done());
+
+                    context.read<SearchBloc>().add(ClearSearch());
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios_new,
@@ -104,6 +112,9 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.duedate.toString();
                   toInvoiceModel.godTotal =
                       state.invoice_data.godTotal.toString();
+
+                  toInvoiceModel.inv_barcode =
+                      state.invoice_data.bank.toString();
 
                   //-
 
