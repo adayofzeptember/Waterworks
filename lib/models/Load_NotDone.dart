@@ -2,18 +2,15 @@ class NotWrite_Model {
   int id;
   int? invoiceID;
   String customerName;
-  String waterNumber;
+  String waterNumber; //
   String areaNumber;
   String customerAddress;
   String meterNumber;
   bool status;
-  bool? statusSearchCheck
-  ;
-  
+  bool? statusSearchCheck;
 
   NotWrite_Model(
-      {
-      required this.id,
+      {required this.id,
       required this.customerName,
       required this.waterNumber,
       this.invoiceID,
@@ -21,6 +18,5 @@ class NotWrite_Model {
       required this.customerAddress,
       required this.meterNumber,
       required this.status,
-      this.statusSearchCheck
-      });
+      this.statusSearchCheck});
 }
