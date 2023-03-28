@@ -21,6 +21,11 @@ class InvoicePage2 extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         context.read<WritePageBloc>().add(CountForReset(context: context));
+        context.read<NotWriteBloc>().add(BackMenu());
+        context.read<NotWriteBloc>().add(Reload_Undone());
+        context.read<DoneBloc>().add(Reload_Done());
+
+        context.read<SearchBloc>().add(ClearSearch());
 
         return true;
       },
