@@ -27,10 +27,8 @@ class ToInvoice {
       this.inv_record_date,
       this.inv_matr_number,
       this.inv_matr_previous_number,
-
       this.inv_unit_use,
       this.inv_prapa_cost,
-
       this.inv_service,
       this.inv_vat,
       this.inv_total,

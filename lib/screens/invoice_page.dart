@@ -24,13 +24,13 @@ class InvoicePage2 extends StatelessWidget {
         context.read<NotWriteBloc>().add(BackMenu());
         context.read<NotWriteBloc>().add(Reload_Undone());
         context.read<DoneBloc>().add(Reload_Done());
-
         context.read<SearchBloc>().add(ClearSearch());
 
         return true;
       },
       child: Scaffold(
-          appBar: AppBar(
+          appBar: 
+          AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 0,

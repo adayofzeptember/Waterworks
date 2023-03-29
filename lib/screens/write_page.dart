@@ -19,23 +19,35 @@ class WritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Palette.thisGreen,
-        title: Row(
-          children: [
-            InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                   context.read<WritePageBloc>().add(ClearRadioDefault());
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Palette.thisGreen,
+          centerTitle: true,
+          title: const Text('จดมาตรวัดน้ำ'),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+             context.read<WritePageBloc>().add(ClearRadioDefault());
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+            
+            ),
+          )
+          // title: Row(
+          //   children: [
+          //     InkWell(
+          //         onTap: () {
+          //           Navigator.pop(context);
+          //            context.read<WritePageBloc>().add(ClearRadioDefault());
 
-                },
-                child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new))),
-            const SizedBox(width: 70),
-            const Text('จดมาตรวัดน้ำ'),
-          ],
-        ),
-      ),
+          //         },
+          //         child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new))),
+          //     const SizedBox(width: 70),
+          //     const Text('จดมาตรวัดน้ำ'),
+          //   ],
+          // ),
+          ),
       body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
@@ -48,8 +60,7 @@ class WritePage extends StatelessWidget {
                   color: Colors.red,
                 ),
               );
-            } 
-            else {
+            } else {
               return SingleChildScrollView(
                 child: Stack(
                   children: [
@@ -64,7 +75,9 @@ class WritePage extends StatelessWidget {
                           Container(
                             padding: const EdgeInsets.all(15),
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 245, 245, 245), borderRadius: BorderRadius.all(Radius.circular(5))),
+                                color: Color.fromARGB(255, 245, 245, 245),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5))),
                             width: double.infinity,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -72,13 +85,17 @@ class WritePage extends StatelessWidget {
                               children: [
                                 Text(
                                   state.customerName,
-                                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
                                 ),
                                 const SizedBox(height: 15),
                                 Text(
                                   'บ้านเลขที่ ' + state.address,
                                   style: const TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 20, color: Color.fromARGB(255, 83, 83, 83)),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                      color: Color.fromARGB(255, 83, 83, 83)),
                                 ),
                                 const SizedBox(height: 15),
                                 Row(
@@ -88,18 +105,27 @@ class WritePage extends StatelessWidget {
                                     const Text(
                                       'มาตรวัดน้ำ:',
                                       style: TextStyle(
-                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromARGB(255, 83, 83, 83)),
                                     ),
                                     const SizedBox(width: 3),
                                     Container(
                                       decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)),
+                                          color: Color.fromARGB(
+                                              255, 221, 221, 221)),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, right: 5),
                                         child: Text(
                                           state.meterNumber,
-                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ),
@@ -107,18 +133,27 @@ class WritePage extends StatelessWidget {
                                     const Text(
                                       'เลข ป:',
                                       style: TextStyle(
-                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromARGB(255, 83, 83, 83)),
                                     ),
                                     const SizedBox(width: 3),
                                     Container(
                                       decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)),
+                                          color: Color.fromARGB(
+                                              255, 221, 221, 221)),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, right: 5),
                                         child: Text(
                                           state.waterNumber,
-                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ),
@@ -126,18 +161,27 @@ class WritePage extends StatelessWidget {
                                     const Text(
                                       'เขต:',
                                       style: TextStyle(
-                                          fontSize: 15, fontWeight: FontWeight.bold, color: Color.fromARGB(255, 83, 83, 83)),
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color:
+                                              Color.fromARGB(255, 83, 83, 83)),
                                     ),
                                     const SizedBox(width: 3),
                                     Container(
                                       decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                                          color: Color.fromARGB(255, 221, 221, 221)),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(5)),
+                                          color: Color.fromARGB(
+                                              255, 221, 221, 221)),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 5, right: 5),
+                                        padding: const EdgeInsets.only(
+                                            left: 5, right: 5),
                                         child: Text(
                                           state.areaNumber,
-                                          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black),
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
                                         ),
                                       ),
                                     ),
@@ -152,11 +196,15 @@ class WritePage extends StatelessWidget {
                             children: [
                               const Text(
                                 'เลขมาตรวัดน้ำที่แล้ว: ',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 19),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 19),
                               ),
                               Text(
                                 state.previousUnitFormat,
-                                style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold, fontSize: 19),
+                                style: const TextStyle(
+                                    color: Colors.red,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 19),
                               ),
                             ],
                           ),
@@ -167,18 +215,31 @@ class WritePage extends StatelessWidget {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              hintText: (state.checkCurrentUnit) ? '*กรอกมาตรวัดน้ำปัจจุบัน' : 'กรอกมาตรวัดน้ำปัจจุบัน',
-                              hintStyle: TextStyle(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                              hintText: (state.checkCurrentUnit)
+                                  ? '*กรอกมาตรวัดน้ำปัจจุบัน'
+                                  : 'กรอกมาตรวัดน้ำปัจจุบัน',
+                              hintStyle: TextStyle(
+                                  color: (state.checkCurrentUnit)
+                                      ? Colors.red
+                                      : Colors.grey),
                               focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                                  borderSide: BorderSide(
+                                      color: (state.checkCurrentUnit)
+                                          ? Colors.red
+                                          : Colors.grey),
                                   borderRadius: BorderRadius.circular(10)),
                               enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: (state.checkCurrentUnit) ? Colors.red : Colors.grey),
+                                  borderSide: BorderSide(
+                                      color: (state.checkCurrentUnit)
+                                          ? Colors.red
+                                          : Colors.grey),
                                   borderRadius: BorderRadius.circular(10)),
                               filled: true,
-                              fillColor: const Color.fromARGB(255, 238, 238, 238),
+                              fillColor:
+                                  const Color.fromARGB(255, 238, 238, 238),
                               border: OutlineInputBorder(
-                                borderSide: const BorderSide(color: Colors.white),
+                                borderSide:
+                                    const BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
@@ -192,14 +253,18 @@ class WritePage extends StatelessWidget {
                                 children: [
                                   const Text(
                                     'เลือกสถานะมาตร : ',
-                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     state.writeCondition,
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: state.writeCondition == "ปกติ" ? Palette.thisGreen : Colors.red),
+                                        color: state.writeCondition == "ปกติ"
+                                            ? Palette.thisGreen
+                                            : Colors.red),
                                   ),
                                 ],
                               ),
@@ -207,9 +272,17 @@ class WritePage extends StatelessWidget {
                                 textStyle: const TextStyle(fontSize: 20),
                                 groupValue: state.writeCondition,
                                 onChanged: (value) {
-                                  context.read<WritePageBloc>().add(CheckThisBro(getCondiotionRadio: value.toString()));
+                                  context.read<WritePageBloc>().add(
+                                      CheckThisBro(
+                                          getCondiotionRadio:
+                                              value.toString()));
                                 },
-                                items: const ["ปกติ", "รอบใหม่", "มาตรใหม่", "มาตรชำรุด"],
+                                items: const [
+                                  "ปกติ",
+                                  "รอบใหม่",
+                                  "มาตรใหม่",
+                                  "มาตรชำรุด"
+                                ],
                                 itemBuilder: (item) => RadioButtonBuilder(
                                   item,
                                 ),
@@ -224,7 +297,9 @@ class WritePage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                                 onPressed: () {
-                                  context.read<WritePageBloc>().add(CheckCurrentUnit(
+                                  context
+                                      .read<WritePageBloc>()
+                                      .add(CheckCurrentUnit(
                                         currentUnit: waterUnitController.text,
                                       ));
                                   if (waterUnitController.text != "") {
@@ -235,7 +310,8 @@ class WritePage extends StatelessWidget {
                                     //       id: writeState.writeRecordId,
                                     //     ));
                                     if (state.writeCondition == "ปกติ") {
-                                      if (int.parse(state.previousUnitFormat) > int.parse(waterUnitController.text)) {
+                                      if (int.parse(state.previousUnitFormat) >
+                                          int.parse(waterUnitController.text)) {
                                         showAlertWriteERROR(context);
                                       } else {
                                         showAlertWriteOK(
@@ -246,7 +322,8 @@ class WritePage extends StatelessWidget {
                                           state.writeRecordId,
                                         );
                                       }
-                                    } else if (state.writeCondition == "รอบใหม่") {
+                                    } else if (state.writeCondition ==
+                                        "รอบใหม่") {
                                       showAlertWriteOK(
                                         context,
                                         waterUnitController.text,
@@ -254,7 +331,8 @@ class WritePage extends StatelessWidget {
                                         '1',
                                         state.writeRecordId,
                                       );
-                                    } else if (state.writeCondition == "มาตรใหม่") {
+                                    } else if (state.writeCondition ==
+                                        "มาตรใหม่") {
                                       showAlertWriteOK(
                                         context,
                                         waterUnitController.text,
@@ -304,7 +382,8 @@ Future<void> showAlertWriteERROR(var context) async {
     barrierDismissible: false, // user must tap button!
     builder: (context) {
       return AlertDialog(
-        title: const Text('ไม่สามารถจดหน่วยน้ำได้ !', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+        title: const Text('ไม่สามารถจดหน่วยน้ำได้ !',
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
         content: SingleChildScrollView(
           child: Column(
             children: [
@@ -372,13 +451,17 @@ Future<void> showAlertWriteOK(
                       ),
                       Text(
                         newUnit,
-                        style: const TextStyle(fontSize: 25, color: Colors.red, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   Text(
                     newStatus,
-                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 13, fontWeight: FontWeight.bold),
                   )
                 ],
               ),
@@ -410,10 +493,8 @@ Future<void> showAlertWriteOK(
                   context.read<NotWriteBloc>().add(BackMenu());
                   context.read<NotWriteBloc>().add(Reload_Undone());
                   context.read<DoneBloc>().add(Reload_Done());
-                  
+
                   context.read<SearchBloc>().add(ClearSearch());
-
-
                 }
               } on SocketException catch (_) {
                 print('not connected');
