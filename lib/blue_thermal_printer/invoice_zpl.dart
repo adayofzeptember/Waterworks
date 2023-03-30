@@ -7,15 +7,13 @@ class PrintHereFucker {
     print('หน้าปริ้น ฟังชั่นปริ้น' + check);
     print(thisInvoice.inv_number);
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
-
+// https://gist.github.com/metafloor/773bc61480d1d05a976184d45099ef56
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
         String zplToPrinter = "";
         if (check == "1") {
           zplToPrinter = """
-CT~~CD,~CC^~CT~
-^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
-^XA
+^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ^XA
 ^MMT
 ^PW575
 ^LL1840
@@ -148,13 +146,10 @@ eJxjYBgcgLEBgampdrADAJ3SAwc=:D973
 ^FH\^FDLA,${thisInvoice.inv_barcode}^FS
 ^PQ1,0,1,Y^XZ
 """;
-        } 
-        
-        
-        else {
-          zplToPrinter = """ 
+        } else {
+          zplToPrinter = """
           CT~~CD,~CC^~CT~
-^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
+^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
 ^PW575
@@ -221,16 +216,13 @@ eJzt0EEJADAMBMHYqNR6CbVXG7WQRyAUZtj3PS4CAOAP657dUHbtTP8BAFD1AA52Xt0=:F586
           """;
         }
 
-        bluetooth.printCustom(
-            zplToPrinter, Size.boldMedium.val, Align.center.val);
+        bluetooth.printCustom(zplToPrinter, Size.boldMedium.val, Align.center.val);
 
         bluetooth.paperCut();
       }
     });
   }
 }
-
-
 
 // ^XA
 // ^MD20
