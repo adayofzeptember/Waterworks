@@ -9,6 +9,7 @@ class DoneState extends Equatable {
     required this.error,
     required this.segmentActive,
     required this.filterId,
+    required this.dataTotal,
   });
 
   List written;
@@ -17,6 +18,7 @@ class DoneState extends Equatable {
   String error;
   int segmentActive;
   String filterId;
+  int dataTotal;
   DoneState copyWith({
     List? written,
     int? page,
@@ -24,6 +26,7 @@ class DoneState extends Equatable {
     String? error,
     int? segmentActive,
     String? filterId,
+    int? dataTotal,
   }) {
     return DoneState(
       written: written ?? this.written,
@@ -32,6 +35,7 @@ class DoneState extends Equatable {
       error: error ?? this.error,
       segmentActive: segmentActive ?? this.segmentActive,
       filterId: filterId ?? this.filterId,
+      dataTotal: dataTotal ?? this.dataTotal,
     );
   }
 
@@ -43,5 +47,6 @@ class DoneState extends Equatable {
         error,
         segmentActive,
         filterId,
+        dataTotal,
       ];
 }
