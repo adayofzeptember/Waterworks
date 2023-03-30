@@ -17,6 +17,7 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
           error: '',
           segmentActive: 0,
           filterId: '-1',
+          dataTotal: 0,
         )) {
     on<Load_DoneData>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,26 +34,39 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
         );
         var dataAllDone = (state.written != []) ? state.written : [];
         if (response.data['responseStatus'].toString() == "true") {
-          for (var el in response.data['data']['data']) {
-            dataAllDone.add(
-              Done_Model(
-                id: await el['id'],
-                customerName: await el['customer_water']['name'],
-                waterNumber: await el['water_number'],
-                areaNumber: await el['area_number'],
-                customerAddress: await el['customer_water']['address'],
-                meterNumber: (el['customer_water']['meter_number'] != "") ? await el['customer_water']['meter_number'] : "0",
+          emit(state.copyWith(dataTotal: response.data['data']['total']));
+          if (response.data['data']['total'] != dataAllDone.length) {
+            print("if" + response.data['data']['total'].toString());
+            for (var el in response.data['data']['data']) {
+              dataAllDone.add(
+                Done_Model(
+                  id: await el['id'],
+                  customerName: await el['customer_water']['name'],
+                  waterNumber: await el['water_number'],
+                  areaNumber: await el['area_number'],
+                  customerAddress: await el['customer_water']['address'],
+                  meterNumber: (el['customer_water']['meter_number'] != "") ? await el['customer_water']['meter_number'] : "0",
 
-                invoiceID: await el['invoice']['id'],
-                // status: await (el['customer_water']['status'] == "Normal") ? true : false
-              ),
-            );
+                  invoiceID: await el['invoice']['id'],
+                  // status: await (el['customer_water']['status'] == "Normal") ? true : false
+                ),
+              );
+            }
+            emit(state.copyWith(
+              written: dataAllDone,
+              page: state.page + 1,
+              isLoading: (dataAllDone.length == response.data['data']['total']) ? false : true,
+            ));
+          } else {
+            print("total data = " + response.data['data']['total'].toString());
+            print('current data = ' + dataAllDone.length.toString());
+            emit(state.copyWith(
+              error: dataAllDone.length == 0 ? 'not' : '',
+              isLoading: false,
+            ));
           }
-
-          emit(state.copyWith(written: dataAllDone));
-          emit(state.copyWith(page: state.page + 1));
-          emit(state.copyWith(isLoading: (dataAllDone.length == response.data['data']['total']) ? false : true));
         } else {
+          emit(state.copyWith(error: 'Loading Fail'));
           print('fail');
         }
       } catch (e) {
