@@ -23,14 +23,13 @@ class InvoicePage2 extends StatelessWidget {
         context.read<WritePageBloc>().add(CountForReset(context: context));
         context.read<NotWriteBloc>().add(BackMenu());
         context.read<NotWriteBloc>().add(Reload_Undone());
-        context.read<DoneBloc>().add(Reload_Done());
+       // context.read<DoneBloc>().add(Reload_Done());
         context.read<SearchBloc>().add(ClearSearch());
 
         return true;
       },
       child: Scaffold(
-          appBar: 
-          AppBar(
+          appBar: AppBar(
             centerTitle: true,
             backgroundColor: Colors.white,
             elevation: 0,
@@ -48,8 +47,8 @@ class InvoicePage2 extends StatelessWidget {
 
                     context.read<NotWriteBloc>().add(BackMenu());
                     context.read<NotWriteBloc>().add(Reload_Undone());
-                    context.read<DoneBloc>().add(Reload_Done());
-
+                   // context.read<DoneBloc>().add(Reload_Done());
+                    
                     context.read<SearchBloc>().add(ClearSearch());
                   },
                   icon: const Icon(
@@ -90,6 +89,11 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.inv_user_number = state
                       .invoice_data.waterMeterRecord_waterNumber
                       .toString();
+
+                  toInvoiceModel.inv_user_area =
+                      state.invoice_data.areaNumber.toString();
+                  toInvoiceModel.inv_notPay_money = state.invoice_data.sum_debt.toString();
+
                   toInvoiceModel.inv_user_name =
                       state.invoice_data.customerName.toString();
                   toInvoiceModel.inv_user_address =

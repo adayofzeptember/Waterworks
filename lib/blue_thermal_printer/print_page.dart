@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
 import '../models/invoice_to_printer.dart';
 
@@ -133,36 +134,22 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            InkWell(
-                onTap: () {
-                  if (_connected == true) {
-                    _disconnect();
-                  }
-                  Navigator.pop(context);
-                  // context
-                  //     .read<WritePageBloc>()
-                  //     .add(CountForReset(context: context));
-                },
-                child: const SizedBox(
-                    width: 50,
-                    height: 50,
-                    child:
-                        Icon(Icons.arrow_back_ios_new, color: Colors.white))),
-            const SizedBox(
-              width: 55,
+        elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          title: const Text('พิมพ์ใบแจ้งค่าน้ำ'),
+          leading: IconButton(
+            onPressed: () {
+              if (_connected == true) {
+                _disconnect();
+              }
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
             ),
-            const Text(
-              'พิมพ์เอกสาร',
-              style: TextStyle(color: Colors.white),
-            ),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+          )),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             ListView(
@@ -176,11 +163,13 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                     const Text(
                       'เครื่องพิมพ์: ',
                       style: TextStyle(
+            
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(width: 10),
                     DropdownButton(
+                      
                       items: _getDeviceItems(),
                       onChanged: (BluetoothDevice? value) {
                         print(value!.address.toString());
@@ -229,21 +218,22 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                           style: TextStyle(fontSize: 20, color: Colors.red)),
                     ],
                   )
-                : 
-                _connected
-                ?Padding(
-                    padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Colors.brown),
-                      onPressed: () {  
-                        toPrint.printInvoice_Now(widget.invoideModel,
-                            widget.checkWaterWrong.toString());
-                      },
-                      child: const Text('พิมพ์เอกสาร',
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  )
-                  : Container()
+                : _connected
+                    ? Padding(
+                        padding:
+                            const EdgeInsets.only(left: 10.0, right: 10.0),
+                        child: ElevatedButton(
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.brown),
+                          onPressed: () {
+                            toPrint.printInvoice_Now(widget.invoideModel,
+                                widget.checkWaterWrong.toString());
+                          },
+                          child: const Text('พิมพ์เอกสาร',
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      )
+                    : Container()
           ],
         ),
       ),

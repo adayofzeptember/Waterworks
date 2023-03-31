@@ -211,11 +211,11 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     });
 
     on<CountForReset>((event, emit) async {
-      print(state.countForReset);
+      print(state.whatPage);
       if (state.whatPage == 'list_unit_done') {
         Navigator.pop(event.context);
       } else {
-        if (state.countForReset == 20) {
+        if (state.countForReset == 15) {
           Phoenix.rebirth(event.context);
         } else {
           await Navigator.pushReplacement(
