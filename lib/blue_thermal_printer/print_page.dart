@@ -23,6 +23,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
   bool _connected = false;
+  bool _isButtonDisabled = true;
   PrintHereFucker toPrint = PrintHereFucker();
 
   @override
@@ -134,7 +135,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
+          elevation: 0,
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text('พิมพ์ใบแจ้งค่าน้ำ'),
@@ -163,16 +164,13 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                     const Text(
                       'เครื่องพิมพ์: ',
                       style: TextStyle(
-            
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     const SizedBox(width: 10),
                     DropdownButton(
-                      
                       items: _getDeviceItems(),
                       onChanged: (BluetoothDevice? value) {
-                        print(value!.address.toString());
                         setState(() {
                           _device = value;
                         });
@@ -208,6 +206,23 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
             //     style: TextStyle(color: Colors.white),
             //   ),
             // ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: _isButtonDisabled ?Colors.brown : Colors.red),
+              onPressed: () {
+                setState(() {
+                  _isButtonDisabled = !_isButtonDisabled;
+                });
+                          toPrint.printInvoice_Now(widget.invoideModel,
+                                widget.checkWaterWrong.toString());
+                print(_isButtonDisabled.toString());
+                
+              },
+              child: Text(_isButtonDisabled ? 'พิมพ์ใบแจ้ง' : 'กำลังพิมพ์ โปรดรอ...', style: TextStyle(color: Colors.white)),
+
+
+
+
+            ),
             (_device == null)
                 ? Column(
                     children: [
@@ -220,8 +235,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                   )
                 : _connected
                     ? Padding(
-                        padding:
-                            const EdgeInsets.only(left: 10.0, right: 10.0),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: ElevatedButton(
                           style:
                               ElevatedButton.styleFrom(primary: Colors.brown),
