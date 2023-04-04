@@ -1,12 +1,10 @@
 import 'dart:convert';
-
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
-import 'package:waterworks/blue_thermal_printer/class.dart';
 import '../ETC/color_green.dart';
 import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
@@ -22,7 +20,7 @@ class InvoicePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
     MonthTH m = MonthTH();
-    PrinterConfig _pconf2 = PrinterConfig();
+   // PrinterConfig _pconf2 = PrinterConfig();
     return WillPopScope(
       onWillPop: () async {
         context.read<WritePageBloc>().add(CountForReset(context: context));
