@@ -34,19 +34,7 @@ class WritePage extends StatelessWidget {
             
             ),
           )
-          // title: Row(
-          //   children: [
-          //     InkWell(
-          //         onTap: () {
-          //           Navigator.pop(context);
-          //            context.read<WritePageBloc>().add(ClearRadioDefault());
-
-          //         },
-          //         child: const SizedBox(width: 50, height: 50, child: Icon(Icons.arrow_back_ios_new))),
-          //     const SizedBox(width: 70),
-          //     const Text('จดมาตรวัดน้ำ'),
-          //   ],
-          // ),
+  
           ),
       body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
@@ -303,12 +291,7 @@ class WritePage extends StatelessWidget {
                                         currentUnit: waterUnitController.text,
                                       ));
                                   if (waterUnitController.text != "") {
-                                    // context.read<WritePageBloc>().add(ConfirmWriteUnit(
-                                    //       context: context,
-                                    //       statusMeter: '0',
-                                    //       currentUnit: waterUnitController.text,
-                                    //       id: writeState.writeRecordId,
-                                    //     ));
+                              
                                     if (state.writeCondition == "ปกติ") {
                                       if (int.parse(state.previousUnitFormat) >
                                           int.parse(waterUnitController.text)) {

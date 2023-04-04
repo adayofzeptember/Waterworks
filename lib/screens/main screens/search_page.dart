@@ -76,7 +76,7 @@ class Search_Page extends StatelessWidget {
 
                     if (state.searchResult.isEmpty) {
                       return Text(state.statusSearch.toString());
-                      //*
+                 
                     }
 
                     return Column(

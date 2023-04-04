@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
+import 'package:waterworks/blue_thermal_printer/class.dart';
 import '../ETC/color_green.dart';
 import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
@@ -18,12 +22,13 @@ class InvoicePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
     MonthTH m = MonthTH();
+    PrinterConfig _pconf2 = PrinterConfig();
     return WillPopScope(
       onWillPop: () async {
         context.read<WritePageBloc>().add(CountForReset(context: context));
         context.read<NotWriteBloc>().add(BackMenu());
         context.read<NotWriteBloc>().add(Reload_Undone());
-       // context.read<DoneBloc>().add(Reload_Done());
+        // context.read<DoneBloc>().add(Reload_Done());
         context.read<SearchBloc>().add(ClearSearch());
 
         return true;
@@ -47,8 +52,8 @@ class InvoicePage2 extends StatelessWidget {
 
                     context.read<NotWriteBloc>().add(BackMenu());
                     context.read<NotWriteBloc>().add(Reload_Undone());
-                   // context.read<DoneBloc>().add(Reload_Done());
-                    
+                    // context.read<DoneBloc>().add(Reload_Done());
+
                     context.read<SearchBloc>().add(ClearSearch());
                   },
                   icon: const Icon(
@@ -92,7 +97,8 @@ class InvoicePage2 extends StatelessWidget {
 
                   toInvoiceModel.inv_user_area =
                       state.invoice_data.areaNumber.toString();
-                  toInvoiceModel.inv_notPay_money = state.invoice_data.sum_debt.toString();
+                  toInvoiceModel.inv_notPay_money =
+                      state.invoice_data.sum_debt.toString();
 
                   toInvoiceModel.inv_user_name =
                       state.invoice_data.customerName.toString();
@@ -597,6 +603,34 @@ class InvoicePage2 extends StatelessWidget {
                                   const SizedBox(
                                     height: 20,
                                   ),
+                                  // ElevatedButton(
+                                  //   style: ElevatedButton.styleFrom(
+                                  //       primary: Palette.thisGreen,
+                                  //       elevation: 0,
+                                  //       shape: RoundedRectangleBorder(
+                                  //         borderRadius:
+                                  //             BorderRadius.circular(15),
+                                  //       )),
+                                  //   onPressed: () async {
+                                  //     SharedPreferences prefs =
+                                  //         await SharedPreferences.getInstance();
+                                  //     String? userJson =
+                                  //         prefs.getString('conf');
+                                  //     _pconf2 = PrinterConfig.fromMap(
+                                  //         jsonDecode(userJson ?? ''));
+                                  //     print('object' + _pconf2.name.toString());
+                                  //   },
+                                  //   child: Padding(
+                                  //     padding: const EdgeInsets.all(20.0),
+                                  //     child: Container(
+                                  //       alignment: Alignment.center,
+                                  //       child: const Text(
+                                  //         "------------------",
+                                  //         style: TextStyle(color: Colors.white),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         primary: Palette.thisGreen,

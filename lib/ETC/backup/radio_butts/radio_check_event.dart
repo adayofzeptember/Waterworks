@@ -10,6 +10,7 @@ abstract class RadioCheckEvent extends Equatable {
 
 class CheckThisBro extends RadioCheckEvent {
   String getCondiotionRadio;
+  //ตัวแปรจาก event
   CheckThisBro({
     required this.getCondiotionRadio,
   });

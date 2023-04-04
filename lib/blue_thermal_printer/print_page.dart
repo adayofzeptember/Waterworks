@@ -206,23 +206,22 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
             //     style: TextStyle(color: Colors.white),
             //   ),
             // ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: _isButtonDisabled ?Colors.brown : Colors.red),
-              onPressed: () {
-                setState(() {
-                  _isButtonDisabled = !_isButtonDisabled;
-                });
-                          toPrint.printInvoice_Now(widget.invoideModel,
-                                widget.checkWaterWrong.toString());
-                print(_isButtonDisabled.toString());
-                
-              },
-              child: Text(_isButtonDisabled ? 'พิมพ์ใบแจ้ง' : 'กำลังพิมพ์ โปรดรอ...', style: TextStyle(color: Colors.white)),
-
-
-
-
-            ),
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(
+            //       primary: _isButtonDisabled ? Colors.brown : Colors.red),
+            //   onPressed: () {
+            //     setState(() {
+            //       _isButtonDisabled = !_isButtonDisabled;
+            //     });
+            //     toPrint.printInvoice_Now(
+            //         widget.invoideModel, widget.checkWaterWrong.toString());
+            //     print("รอบแรก " + _isButtonDisabled.toString());
+            //     _waitlittleshit();
+            //   },
+            //   child: Text(
+            //       _isButtonDisabled ? 'พิมพ์ใบแจ้ง' : 'กำลังพิมพ์ โปรดรอ...',
+            //       style: TextStyle(color: Colors.white)),
+            // ),
             (_device == null)
                 ? Column(
                     children: [
@@ -237,13 +236,23 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                     ? Padding(
                         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                         child: ElevatedButton(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.brown),
+                          style: ElevatedButton.styleFrom(
+                              primary: _isButtonDisabled
+                                  ? Colors.brown
+                                  : Colors.red),
                           onPressed: () {
+                            setState(() {
+                              _isButtonDisabled = !_isButtonDisabled;
+                            });
                             toPrint.printInvoice_Now(widget.invoideModel,
                                 widget.checkWaterWrong.toString());
+                            print("รอบแรก " + _isButtonDisabled.toString());
+                            _waitlittleshit();
                           },
-                          child: const Text('พิมพ์เอกสาร',
+                          child: Text(
+                              _isButtonDisabled
+                                  ? 'พิมพ์ใบแจ้ง'
+                                  : 'กำลังพิมพ์ โปรดรอ...',
                               style: TextStyle(color: Colors.white)),
                         ),
                       )
@@ -290,6 +299,15 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
     } else {
       show('No device selected.');
     }
+  }
+
+  Future _waitlittleshit() async {
+    await Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        _isButtonDisabled = !_isButtonDisabled;
+      });
+      print("รอบแรก " + _isButtonDisabled.toString());
+    });
   }
 
   void _disconnect() {
