@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
 import '../models/invoice_to_printer.dart';
+import '../screens/First_Page_bottomBar.dart';
 
 class Print_Thermal_Page extends StatefulWidget {
   final ToInvoice invoideModel;
@@ -144,7 +146,13 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
               if (_connected == true) {
                 _disconnect();
               }
-              Navigator.pop(context);
+                Navigator.pushReplacement(
+          context,
+          PageTransition(
+              duration: const Duration(milliseconds: 820),
+              type: PageTransitionType.bottomToTop,
+              child: Menu_Page()),
+        );
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
@@ -206,22 +214,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
             //     style: TextStyle(color: Colors.white),
             //   ),
             // ),
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(
-            //       primary: _isButtonDisabled ? Colors.brown : Colors.red),
-            //   onPressed: () {
-            //     setState(() {
-            //       _isButtonDisabled = !_isButtonDisabled;
-            //     });
-            //     toPrint.printInvoice_Now(
-            //         widget.invoideModel, widget.checkWaterWrong.toString());
-            //     print("รอบแรก " + _isButtonDisabled.toString());
-            //     _waitlittleshit();
-            //   },
-            //   child: Text(
-            //       _isButtonDisabled ? 'พิมพ์ใบแจ้ง' : 'กำลังพิมพ์ โปรดรอ...',
-            //       style: TextStyle(color: Colors.white)),
-            // ),
+
             (_device == null)
                 ? Column(
                     children: [
@@ -246,7 +239,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                             });
                             toPrint.printInvoice_Now(widget.invoideModel,
                                 widget.checkWaterWrong.toString());
-                            print("รอบแรก " + _isButtonDisabled.toString());
+
                             _waitlittleshit();
                           },
                           child: Text(
@@ -283,6 +276,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   //! connectr // แลัวปริ้นต์
   void _connect() {
     if (_device != null) {
+      print(_device!.name.toString());
       print(_device!.address.toString());
       bluetooth.isConnected.then((isConnected) {
         if (isConnected == false) {
@@ -291,11 +285,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
           });
           setState(() => _connected = true);
         }
-        // toPrint.printInvoice_Now(
-        //     widget.invoideModel, widget.checkWaterWrong.toString());
       });
-      // toPrint.printInvoice_Now(
-      //     widget.invoideModel, widget.checkWaterWrong.toString());
     } else {
       show('No device selected.');
     }
@@ -306,13 +296,13 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
       setState(() {
         _isButtonDisabled = !_isButtonDisabled;
       });
-      print("รอบแรก " + _isButtonDisabled.toString());
+      _disconnect();
     });
   }
 
   void _disconnect() {
     bluetooth.disconnect();
-    setState(() => _connected = false);
+    // setState(() => _connected = false);
   }
 
   Future show(

@@ -14,6 +14,7 @@ class ToInvoice {
 
   String? inv_service;
   String? inv_vat;
+  String? current_month;
   String? inv_total;
   String? inv_notPay;
   String? inv_notPay_money;
@@ -26,6 +27,7 @@ class ToInvoice {
       this.inv_user_number,
       this.inv_user_name,
       this.inv_user_address,
+      this.current_month,
       this.inv_record_date,
       this.inv_matr_number,
       this.inv_matr_previous_number,

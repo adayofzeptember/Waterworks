@@ -20,7 +20,7 @@ class InvoicePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
     MonthTH m = MonthTH();
-   // PrinterConfig _pconf2 = PrinterConfig();
+    // PrinterConfig _pconf2 = PrinterConfig();
     return WillPopScope(
       onWillPop: () async {
         context.read<WritePageBloc>().add(CountForReset(context: context));
@@ -97,6 +97,8 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.areaNumber.toString();
                   toInvoiceModel.inv_notPay_money =
                       state.invoice_data.sum_debt.toString();
+
+                      toInvoiceModel.current_month = "("+m.convertMonth(monthThai)+")";
 
                   toInvoiceModel.inv_user_name =
                       state.invoice_data.customerName.toString();
