@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
@@ -114,6 +115,20 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     } else {
       throw Exception("error...");
     }
+  }
+    Future<void> checkBluetooth() async {
+    BluetoothEnable.enableBluetooth.then((result) {
+      if (result == "true") {
+        
+      } else if (result == "false") {}
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkBluetooth();
   }
 
   @override

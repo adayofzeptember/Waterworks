@@ -36,7 +36,7 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
         if (response.data['responseStatus'].toString() == "true") {
           emit(state.copyWith(dataTotal: response.data['data']['total']));
           if (response.data['data']['total'] != dataAllDone.length) {
-            print("if" + response.data['data']['total'].toString());
+            // print("if" + response.data['data']['total'].toString());
             for (var el in response.data['data']['data']) {
               dataAllDone.add(
                 Done_Model(

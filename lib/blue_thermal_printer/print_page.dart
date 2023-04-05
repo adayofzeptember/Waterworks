@@ -6,10 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/blue_thermal_printer/invoice_zpl.dart';
+import 'package:waterworks/blue_thermal_printer/formatInvoice_zpl.dart';
 import '../models/invoice_to_printer.dart';
 import '../screens/First_Page_bottomBar.dart';
 
+// XXZFJ223200034
+// 74:D2:85:95:CB:8E
 class Print_Thermal_Page extends StatefulWidget {
   final ToInvoice invoideModel;
 
@@ -25,13 +27,16 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
   bool _connected = false;
+  //late BluetoothDevice getD;
+  //BluetoothDevice getD = BluetoothDevice('XXZFJ223200034', '74:D2:85:95:CB:8E');
   bool _isButtonDisabled = true;
   PrintHereFucker toPrint = PrintHereFucker();
 
   @override
   void initState() {
-    checkBluetooth();
+    //checkBluetooth();
 
+    // bluetooth.connect(getD);
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
 
@@ -143,16 +148,26 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
           title: const Text('พิมพ์ใบแจ้งค่าน้ำ'),
           leading: IconButton(
             onPressed: () {
-              if (_connected == true) {
-                _disconnect();
-              }
-                Navigator.pushReplacement(
-          context,
-          PageTransition(
-              duration: const Duration(milliseconds: 820),
-              type: PageTransitionType.bottomToTop,
-              child: Menu_Page()),
-        );
+              Navigator.pop(context);
+              // bluetooth.disconnect();
+              // if (_connected == true) {
+              //   bluetooth.disconnect();
+              //   Navigator.pushReplacement(
+              //     context,
+              //     PageTransition(
+              //         duration: const Duration(milliseconds: 820),
+              //         type: PageTransitionType.bottomToTop,
+              //         child: Menu_Page()),
+              //   );
+              // } else {
+              //   Navigator.pushReplacement(
+              //     context,
+              //     PageTransition(
+              //         duration: const Duration(milliseconds: 820),
+              //         type: PageTransitionType.bottomToTop,
+              //         child: Menu_Page()),
+              //   );
+              // }
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
@@ -186,35 +201,27 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                       value: _device,
                     ),
                     const SizedBox(width: 10),
-                    (_device == null)
-                        ? Container()
-                        : ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary:
-                                    _connected ? Colors.red : Colors.green),
-                            onPressed: _connected ? _disconnect : _connect,
-                            child: Text(
-                              _connected ? 'ยกเลิก' : 'เชื่อมต่อ',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
+                  
                     const SizedBox(width: 10),
                   ],
                 ),
                 const SizedBox(height: 10),
               ],
             ),
-            // ElevatedButton(
-            //   style: ElevatedButton.styleFrom(primary: Colors.blue),
-            //   onPressed: () {
-            //     initPlatformState();
-            //   },
-            //   child: const Text(
-            //     'Refresh',
-            //     style: TextStyle(color: Colors.white),
-            //   ),
-            // ),
 
+              (_device == null)
+                        ? Container()
+                        : ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary:
+                                    _connected ? Colors.red : Colors.green),
+                            onPressed: _connected ? _disconnect : _connect_then_Print,
+                            child: Text(
+                              _connected ? 'กำลังพิมพ์...' : 'พิมพ์ใบแจ้ง',
+                              style: const TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ),
+        
             (_device == null)
                 ? Column(
                     children: [
@@ -225,6 +232,7 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
                           style: TextStyle(fontSize: 20, color: Colors.red)),
                     ],
                   )
+                  
                 : _connected
                     ? Padding(
                         padding: const EdgeInsets.only(left: 10.0, right: 10.0),
@@ -273,7 +281,26 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
     return items;
   }
 
-  //! connectr // แลัวปริ้นต์
+  Future _connect_then_Print() async {
+    _connect();
+    await Future.delayed(const Duration(seconds: 5), () {
+      toPrint.printInvoice_Now(
+          widget.invoideModel, widget.checkWaterWrong.toString());
+    });
+                                _waitlittleshit();
+
+  }
+
+    Future _waitlittleshit() async {
+    await Future.delayed(const Duration(seconds: 5), () {
+      setState(() {
+        _isButtonDisabled = !_isButtonDisabled;
+      });
+      _disconnect();
+    });
+  }
+
+  //! connect // แลัวปริ้นต์
   void _connect() {
     if (_device != null) {
       print(_device!.name.toString());
@@ -291,18 +318,10 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
     }
   }
 
-  Future _waitlittleshit() async {
-    await Future.delayed(const Duration(seconds: 5), () {
-      setState(() {
-        _isButtonDisabled = !_isButtonDisabled;
-      });
-      _disconnect();
-    });
-  }
 
   void _disconnect() {
     bluetooth.disconnect();
-    // setState(() => _connected = false);
+    setState(() => _connected = false);
   }
 
   Future show(

@@ -43,7 +43,7 @@ class NotWriteBloc extends Bloc<NotWriteEvent, NotWriteState> {
         if (response.data['responseStatus'].toString() == "true") {
           emit(state.copyWith(dataTotal: response.data['data']['total']));
           if (response.data['data']['total'] != dataAllStore.length) {
-            print("if" + response.data['data']['total'].toString());
+            // print("if" + response.data['data']['total'].toString());
             for (var el in response.data['data']['data']) {
               dataAllStore.add(
                 NotWrite_Model(

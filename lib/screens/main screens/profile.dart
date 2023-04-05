@@ -253,10 +253,10 @@ class _ProfileState extends State<Profile> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () {
-                                    // setState(() {
-                                    //   circleHUD = true;
-                                    // });
-                                    // logout_removeToken();
+                                    setState(() {
+                                      circleHUD = true;
+                                    });
+                                    logout_removeToken();
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(15.0),
@@ -286,7 +286,9 @@ class _ProfileState extends State<Profile> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const Text('1.0.01'),
+                                      const Text('1.0.02'),
+                                       const SizedBox(width: 5,),
+                                      const Text('|| ล่าสุด 5 เม.ย. 2566'),
                                     ],
                                   ))
                             ],
@@ -315,7 +317,6 @@ class _ProfileState extends State<Profile> {
 
   Future logout_removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     prefs.remove('keyToken');
     prefs.clear();
     Navigator.pushReplacement(
