@@ -50,6 +50,12 @@ class WatchInvoiceUnitDone extends WritePageEvent {
 
 class ClearRadioDefault extends WritePageEvent {}
 
+class EnabledButton extends WritePageEvent {
+  bool getButt;
+
+  EnabledButton({required this.getButt});
+}
+
 
 class CountForReset extends WritePageEvent {
   var context;

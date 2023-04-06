@@ -34,8 +34,6 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
 
   @override
   void initState() {
-    //checkBluetooth();
-
     // bluetooth.connect(getD);
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
@@ -140,125 +138,92 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: const Text('พิมพ์ใบแจ้งค่าน้ำ'),
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // bluetooth.disconnect();
-              // if (_connected == true) {
-              //   bluetooth.disconnect();
-              //   Navigator.pushReplacement(
-              //     context,
-              //     PageTransition(
-              //         duration: const Duration(milliseconds: 820),
-              //         type: PageTransitionType.bottomToTop,
-              //         child: Menu_Page()),
-              //   );
-              // } else {
-              //   Navigator.pushReplacement(
-              //     context,
-              //     PageTransition(
-              //         duration: const Duration(milliseconds: 820),
-              //         type: PageTransitionType.bottomToTop,
-              //         child: Menu_Page()),
-              //   );
-              // }
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-            ),
-          )),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    const SizedBox(width: 10),
-                    const Text(
-                      'เครื่องพิมพ์: ',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    DropdownButton(
-                      items: _getDeviceItems(),
-                      onChanged: (BluetoothDevice? value) {
-                        setState(() {
-                          _device = value;
-                        });
-                      },
-                      value: _device,
-                    ),
-                    const SizedBox(width: 10),
-                  
-                    const SizedBox(width: 10),
-                  ],
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context);
 
-              (_device == null)
-                        ? Container()
-                        : ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary:
-                                    _connected ? Colors.red : Colors.green),
-                            onPressed: _connected ? _disconnect : _connect_then_Print,
-                            child: Text(
-                              _connected ? 'กำลังพิมพ์...' : 'พิมพ์ใบแจ้ง',
-                              style: const TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          ),
-        
-            (_device == null)
-                ? Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            centerTitle: true,
+            title: const Text('พิมพ์ใบแจ้งค่าน้ำ'),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+            
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_new,
+              ),
+            )),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const SizedBox(width: 10),
+                      const Text(
+                        'เครื่องพิมพ์: ',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
-                      Text('กรุณาเลือกเครื่องพิมพ์',
-                          style: TextStyle(fontSize: 20, color: Colors.red)),
+                      const SizedBox(width: 10),
+                      DropdownButton(
+                        items: _getDeviceItems(),
+                        onChanged: (BluetoothDevice? value) {
+                          setState(() {
+                            _device = value;
+                          });
+                        },
+                        value: _device,
+                      ),
+                      const SizedBox(width: 5),
+                      (_device == null)
+                          ? Icon(
+                              Icons.arrow_back_outlined,
+                              color: Colors.red,
+                            )
+                          : Container()
                     ],
-                  )
-                  
-                : _connected
-                    ? Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: _isButtonDisabled
-                                  ? Colors.brown
-                                  : Colors.red),
-                          onPressed: () {
-                            setState(() {
-                              _isButtonDisabled = !_isButtonDisabled;
-                            });
-                            toPrint.printInvoice_Now(widget.invoideModel,
-                                widget.checkWaterWrong.toString());
-
-                            _waitlittleshit();
-                          },
-                          child: Text(
-                              _isButtonDisabled
-                                  ? 'พิมพ์ใบแจ้ง'
-                                  : 'กำลังพิมพ์ โปรดรอ...',
-                              style: TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
+              (_device == null)
+                  ? Container()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: _connected ? Colors.red : Colors.green),
+                      onPressed: _connected ? null : _connect_then_Print,
+                      child: Text(
+                        _connected ? 'กำลังพิมพ์...' : 'พิมพ์ใบแจ้ง',
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+              (_device == null)
+                  ? Column(
+                      children: [
+                        SizedBox(
+                          height: 20,
                         ),
-                      )
-                    : Container()
-          ],
+                        Text('กรุณาเลือกเครื่องพิมพ์',
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold)),
+                      ],
+                    )
+                  : Container()
+            ],
+          ),
         ),
       ),
     );
@@ -287,11 +252,10 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
       toPrint.printInvoice_Now(
           widget.invoideModel, widget.checkWaterWrong.toString());
     });
-                                _waitlittleshit();
-
+    _waitlittleshit();
   }
 
-    Future _waitlittleshit() async {
+  Future _waitlittleshit() async {
     await Future.delayed(const Duration(seconds: 5), () {
       setState(() {
         _isButtonDisabled = !_isButtonDisabled;
@@ -317,7 +281,6 @@ class _Print_Thermal_PageState extends State<Print_Thermal_Page> {
       show('No device selected.');
     }
   }
-
 
   void _disconnect() {
     bluetooth.disconnect();

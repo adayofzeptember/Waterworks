@@ -10,6 +10,7 @@ import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
+import 'package:intl/intl.dart' as intl;
 import '../blue_thermal_printer/print_page.dart';
 import '../models/invoice_to_printer.dart';
 
@@ -95,10 +96,14 @@ class InvoicePage2 extends StatelessWidget {
 
                   toInvoiceModel.inv_user_area =
                       state.invoice_data.areaNumber.toString();
-                  toInvoiceModel.inv_notPay_money =
-                      state.invoice_data.sum_debt.toString();
+                  toInvoiceModel.inv_notPay_money = intl.NumberFormat
+                          .decimalPattern()
+                      .format(
+                          double.parse(state.invoice_data.sum_debt.toString()))
+                      .toString();
 
-                      toInvoiceModel.current_month = "("+m.convertMonth(monthThai)+")";
+                  toInvoiceModel.current_month =
+                      "(" + m.convertMonth(monthThai) + ")";
 
                   toInvoiceModel.inv_user_name =
                       state.invoice_data.customerName.toString();
@@ -115,18 +120,33 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.inv_unit_use =
                       state.invoice_data.waterMeterRecord_sum_unit.toString();
                   toInvoiceModel.inv_prapa_cost =
-                      state.invoice_data.prapa_cost.toString();
+                      intl.NumberFormat.decimalPattern()
+                          .format(double.parse(
+                              state.invoice_data.prapa_cost.toString()))
+                          .toString();
+                  ;
                   toInvoiceModel.inv_service =
-                      state.invoice_data.sumService.toString();
-                  toInvoiceModel.inv_vat = state.invoice_data.vat.toString();
-                  toInvoiceModel.inv_total =
-                      state.invoice_data.total.toString();
+                      intl.NumberFormat.decimalPattern()
+                          .format(double.parse(
+                              state.invoice_data.sumService.toString()))
+                          .toString();
+                  ;
+                  toInvoiceModel.inv_vat = intl.NumberFormat.decimalPattern()
+                      .format(double.parse(state.invoice_data.vat.toString()))
+                      .toString();
+                  toInvoiceModel.inv_total = intl.NumberFormat.decimalPattern()
+                      .format(double.parse(state.invoice_data.total.toString()))
+                      .toString();
+                  ;
                   toInvoiceModel.inv_notPay =
                       state.invoice_data.debt_months.toString();
                   toInvoiceModel.inv_dueDate =
                       state.invoice_data.duedate.toString();
-                  toInvoiceModel.godTotal =
-                      state.invoice_data.godTotal.toString();
+                  toInvoiceModel.godTotal = intl.NumberFormat.decimalPattern()
+                      .format(
+                          double.parse(state.invoice_data.godTotal.toString()))
+                      .toString();
+                  ;
 
                   toInvoiceModel.inv_barcode =
                       state.invoice_data.bank.toString();
@@ -308,7 +328,7 @@ class InvoicePage2 extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text('เลขมาตรครั้งก่อน',
+                                      const Text('เลขจดครั้งก่อน',
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 133, 133, 133),
@@ -337,7 +357,7 @@ class InvoicePage2 extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text('เลขมาตรครั้งนี้',
+                                      const Text('เลขจดครั้งนี้',
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 133, 133, 133),
@@ -402,8 +422,11 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state.invoice_data.prapa_cost
-                                              .toString()),
+                                          Text(
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.prapa_cost
+                                                      .toString()))),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -430,7 +453,12 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state.invoice_data.sumService),
+                                          Text(
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.sumService
+                                                      .toString()))
+                                                  .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -457,8 +485,12 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state.invoice_data.vat
-                                              .toString()),
+                                          Text(
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.vat
+                                                      .toString()))
+                                                  .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -485,8 +517,11 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state.invoice_data.total
-                                              .toString()),
+                                          Text(
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.total
+                                                      .toString()))),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -541,8 +576,11 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state.invoice_data.sum_debt
-                                              .toString()),
+                                          Text(
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.sum_debt
+                                                      .toString()))),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -571,8 +609,10 @@ class InvoicePage2 extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                              state.invoice_data.godTotal
-                                                  .toString(),
+                                              intl.NumberFormat.decimalPattern()
+                                                  .format(double.parse(state
+                                                      .invoice_data.godTotal
+                                                      .toString())),
                                               style: const TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),
@@ -603,34 +643,6 @@ class InvoicePage2 extends StatelessWidget {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  // ElevatedButton(
-                                  //   style: ElevatedButton.styleFrom(
-                                  //       primary: Palette.thisGreen,
-                                  //       elevation: 0,
-                                  //       shape: RoundedRectangleBorder(
-                                  //         borderRadius:
-                                  //             BorderRadius.circular(15),
-                                  //       )),
-                                  //   onPressed: () async {
-                                  //     SharedPreferences prefs =
-                                  //         await SharedPreferences.getInstance();
-                                  //     String? userJson =
-                                  //         prefs.getString('conf');
-                                  //     _pconf2 = PrinterConfig.fromMap(
-                                  //         jsonDecode(userJson ?? ''));
-                                  //     print('object' + _pconf2.name.toString());
-                                  //   },
-                                  //   child: Padding(
-                                  //     padding: const EdgeInsets.all(20.0),
-                                  //     child: Container(
-                                  //       alignment: Alignment.center,
-                                  //       child: const Text(
-                                  //         "------------------",
-                                  //         style: TextStyle(color: Colors.white),
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                         primary: Palette.thisGreen,

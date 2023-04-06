@@ -1,28 +1,28 @@
 class MonthTH {
-  String convertMonth(String numMonth) {
-    if (numMonth == 'ม.ค.') {
+  String convertMonth(String monthInitial) {
+    if (monthInitial == 'ม.ค.') {
       return 'มกราคม';
-    } else if (numMonth == 'ก.พ.') {
+    } else if (monthInitial == 'ก.พ.') {
       return 'กุมภาพันธ์';
-    } else if (numMonth == 'มี.ค.') {
+    } else if (monthInitial == 'มี.ค.') {
       return 'มีนาคม';
-    } else if (numMonth == 'เม.ย.') {
+    } else if (monthInitial == 'เม.ย.') {
       return 'เมษายน';
-    } else if (numMonth == 'พ.ค.') {
+    } else if (monthInitial == 'พ.ค.') {
       return 'พฤษภาคม';
-    } else if (numMonth == 'ม.ย.') {
+    } else if (monthInitial == 'ม.ย.') {
       return 'มิถุนายน';
-    } else if (numMonth == 'ก.ค.') {
+    } else if (monthInitial == 'ก.ค.') {
       return 'กรกฏาคม';
-    } else if (numMonth == 'ส.ค.') {
+    } else if (monthInitial == 'ส.ค.') {
       return 'สิงหาคม';
-    } else if (numMonth == 'ก.ย.') {
+    } else if (monthInitial == 'ก.ย.') {
       return 'กันยายน';
-    } else if (numMonth == 'ต.ค.') {
+    } else if (monthInitial == 'ต.ค.') {
       return 'ตุลาคม';
-    } else if (numMonth == 'พ.ย.') {
+    } else if (monthInitial == 'พ.ย.') {
       return 'พฤษจิกายน';
     }
-    return numMonth;
+    return monthInitial;
   }
 }

@@ -1,7 +1,19 @@
 part of 'write_page_bloc.dart';
 
 class WritePageState extends Equatable {
-  WritePageState({
+
+  int countForReset;
+  String writeRecordId;
+  String customerName, address, waterNumber, areaNumber, meterNumber;
+  String previousUnitFormat;
+  dynamic invoices;
+  dynamic invoice_data;
+  bool loading;
+  bool buttonEnable;
+  String whatPage, writeCondition;
+
+
+    WritePageState({
     required this.countForReset,
     required this.writeRecordId,
     required this.customerName,
@@ -9,6 +21,7 @@ class WritePageState extends Equatable {
     required this.waterNumber,
     required this.areaNumber,
     required this.meterNumber,
+    required this.buttonEnable,
     required this.previousUnitFormat,
     required this.invoices,
     required this.checkCurrentUnit,
@@ -17,14 +30,6 @@ class WritePageState extends Equatable {
     required this.whatPage,
     required this.writeCondition,
   });
-  int countForReset;
-  String writeRecordId;
-  String customerName, address, waterNumber, areaNumber, meterNumber;
-  String previousUnitFormat;
-  dynamic invoices;
-  dynamic invoice_data;
-  bool loading;
-  String whatPage, writeCondition;
 
   bool checkCurrentUnit;
   WritePageState copyWith({
@@ -39,6 +44,7 @@ class WritePageState extends Equatable {
     String? statusMeter,
     dynamic invoices,
     bool? checkCurrentUnit,
+    bool? buttonEnable,
     dynamic? invoice_data,
     bool? loading,
     String? whatPage,
@@ -56,6 +62,7 @@ class WritePageState extends Equatable {
       invoices: invoices ?? this.invoices,
       checkCurrentUnit: checkCurrentUnit ?? this.checkCurrentUnit,
       invoice_data: invoice_data ?? this.invoice_data,
+      buttonEnable: buttonEnable ?? this.buttonEnable,
       loading: loading ?? this.loading,
       whatPage: whatPage ?? this.whatPage,
       writeCondition: writeCondition ?? this.writeCondition,
@@ -78,5 +85,6 @@ class WritePageState extends Equatable {
         loading,
         whatPage,
         writeCondition,
+        buttonEnable
       ];
 }

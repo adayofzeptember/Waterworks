@@ -17,21 +17,28 @@ part 'write_page_state.dart';
 class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
   WritePageBloc()
       : super(WritePageState(
-          countForReset: 0,
-          writeRecordId: "",
-          customerName: "",
-          address: "",
-          waterNumber: "",
-          areaNumber: "",
-          meterNumber: "",
-          previousUnitFormat: "",
-          invoices: Null,
-          checkCurrentUnit: false,
-          invoice_data: '',
-          loading: true,
-          whatPage: '',
-          writeCondition: 'ปกติ',
-        )) {
+            countForReset: 0,
+            writeRecordId: "",
+            customerName: "",
+            address: "",
+            waterNumber: "",
+            areaNumber: "",
+            meterNumber: "",
+            previousUnitFormat: "",
+            invoices: Null,
+            checkCurrentUnit: false,
+            invoice_data: '',
+            loading: true,
+            whatPage: '',
+            writeCondition: 'ปกติ',
+            buttonEnable: true)) {
+
+    on<EnabledButton>(
+      (event, emit) {
+        emit(state.copyWith(buttonEnable: event.getButt));
+
+      },
+    );
     on<ToPageWrite>((event, emit) async {
       print('ToPageWrite');
       Navigator.push(
@@ -92,6 +99,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     );
 
     on<ConfirmWriteUnit>((event, emit) async {
+               emit(state.copyWith(buttonEnable: false));
       EasyLoading.show(
           status: 'โปรดรอสักครู่...', maskType: EasyLoadingMaskType.black);
 
@@ -116,7 +124,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
         if (response.data['responseStatus'].toString() == "true") {
           String invoiceId = response.data['data']['invoice']['id'].toString();
-          print("invouce = $invoiceId");
+          print("invoice id: $invoiceId");
           emit(state.copyWith(loading: true, whatPage: 'list_unit_notdone'));
           try {
             final responseInvoice = await dio.get(
@@ -183,17 +191,20 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   ),
                 );
               });
+                       emit(state.copyWith(buttonEnable: true));
             } else {
               EasyLoading.showError(response.statusMessage.toString());
               EasyLoading.dismiss();
               Navigator.pop(event.context);
               print('-----------fail api');
               print(response);
+                       emit(state.copyWith(buttonEnable: true));
               emit(state.copyWith(loading: false));
             }
           } catch (e) {
             EasyLoading.showError(e.toString());
             EasyLoading.dismiss();
+                   emit(state.copyWith(buttonEnable: true));
             Navigator.pop(event.context);
             emit(state.copyWith(loading: false));
             print('----------- fail try');

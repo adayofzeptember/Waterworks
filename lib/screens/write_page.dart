@@ -12,6 +12,7 @@ import '../offline/utils.dart';
 
 class WritePage extends StatelessWidget {
   String? check;
+  bool butt = true;
   WritePage({Key? key, this.check}) : super(key: key);
   TextEditingController waterUnitController = TextEditingController();
 
@@ -27,15 +28,13 @@ class WritePage extends StatelessWidget {
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
-             context.read<WritePageBloc>().add(ClearRadioDefault());
+              context.read<WritePageBloc>().add(ClearRadioDefault());
+              context.read<WritePageBloc>().add(EnabledButton(getButt: true));
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
-            
             ),
-          )
-  
-          ),
+          )),
       body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
@@ -291,7 +290,6 @@ class WritePage extends StatelessWidget {
                                         currentUnit: waterUnitController.text,
                                       ));
                                   if (waterUnitController.text != "") {
-                              
                                     if (state.writeCondition == "ปกติ") {
                                       if (int.parse(state.previousUnitFormat) >
                                           int.parse(waterUnitController.text)) {
@@ -359,47 +357,56 @@ class WritePage extends StatelessWidget {
   }
 }
 
-Future<void> showAlertWriteERROR(var context) async {
-  return showDialog<void>(
+Future showAlertWriteERROR(var context) async {
+  return showDialog(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (context) {
-      return AlertDialog(
-        title: const Text('ไม่สามารถจดหน่วยน้ำได้ !',
-            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
-        content: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    "เลขมาตรวัดน้ำปัจจุบันน้อยกว่าครั้งก่อน",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      return BlocBuilder<WritePageBloc, WritePageState>(
+        builder: (context, state) {
+          return AlertDialog(
+            title: const Text('ไม่สามารถจดหน่วยน้ำได้ !',
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "เลขมาตรวัดน้ำปัจจุบันน้อยกว่าครั้งก่อน",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                    ],
                   ),
-                  Text('โปรดตรวจสอบและจดใหม่อีกครั้ง')
+                  const SizedBox(height: 10),
                 ],
               ),
-              const SizedBox(height: 10),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: const Padding(
-              padding: EdgeInsets.all(3.0),
-              child: Text(
-                'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
-                style: TextStyle(color: Colors.white),
-              ),
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Padding(
+                  padding: EdgeInsets.all(3.0),
+                  child: Text(
+                    'เข้าใจแล้ว, ต่อไปฉันจะดูให้ดี',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                onPressed: () {
+                  context
+                      .read<WritePageBloc>()
+                      .add(EnabledButton(getButt: true));
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
       );
     },
   );
@@ -416,85 +423,100 @@ Future<void> showAlertWriteOK(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (context) {
-      return AlertDialog(
-        title: const Text('โปรดตรวจสอบความถูกต้อง'),
-        content: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+      return BlocBuilder<WritePageBloc, WritePageState>(
+        builder: (context, state) {
+          return AlertDialog(
+            title: const Text('โปรดตรวจสอบความถูกต้อง'),
+            content: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Row(
+                  const SizedBox(height: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Text(
-                        "เลขมาตรวัดน้ำ: ",
-                        style: TextStyle(fontSize: 20),
+                      Row(
+                        children: [
+                          const Text(
+                            "เลขมาตรวัดน้ำ: ",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          Text(
+                            newUnit,
+                            style: const TextStyle(
+                                fontSize: 25,
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
                       ),
                       Text(
-                        newUnit,
+                        newStatus,
                         style: const TextStyle(
-                            fontSize: 25,
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold),
-                      ),
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      )
                     ],
                   ),
-                  Text(
-                    newStatus,
-                    style: const TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.bold),
-                  )
                 ],
               ),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            child: const Text(
-              'ยกเลิก',
-              style: TextStyle(color: Colors.red),
             ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: const Text('ยืนยัน'),
-            onPressed: () async {
-              try {
-                final result = await InternetAddress.lookup('google.com');
-                if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-                  context.read<WritePageBloc>().add(ConfirmWriteUnit(
-                        context: context,
-                        statusMeter: statusMeter,
-                        currentUnit: newUnit,
-                        id: writeRecordId,
-                      ));
-                  context.read<NotWriteBloc>().add(BackMenu());
-                  context.read<NotWriteBloc>().add(Reload_Undone());
-                  context.read<DoneBloc>().add(Reload_Done());
-
-                  context.read<SearchBloc>().add(ClearSearch());
-                }
-              } on SocketException catch (_) {
-                print('not connected');
-                showMyDialog(
-                  context,
-                  () {
-                    Navigator.pop(context);
-                    loadingInternet();
-                    Future.delayed(const Duration(seconds: 3), () {
-                      checkInternet(context);
-                    });
-                  },
-                );
-              }
-            },
-          ),
-        ],
+            actions: <Widget>[
+              TextButton(
+                child: const Text(
+                  'ยกเลิก',
+                  style: TextStyle(color: Colors.red),
+                ),
+                onPressed: () {
+                  context
+                      .read<WritePageBloc>()
+                      .add(EnabledButton(getButt: true));
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('ยืนยัน'),
+                onPressed: state.buttonEnable
+                    ? () async {
+                        context
+                            .read<WritePageBloc>()
+                            .add(EnabledButton(getButt: false));
+              
+                        try {
+                          final result =
+                              await InternetAddress.lookup('google.com');
+                          if (result.isNotEmpty &&
+                              result[0].rawAddress.isNotEmpty) {
+                            context.read<WritePageBloc>().add(ConfirmWriteUnit(
+                                  context: context,
+                                  statusMeter: statusMeter,
+                                  currentUnit: newUnit,
+                                  id: writeRecordId,
+                                ));
+                            context.read<NotWriteBloc>().add(BackMenu());
+                            context.read<NotWriteBloc>().add(Reload_Undone());
+                            context.read<DoneBloc>().add(Reload_Done());
+                          
+                            context.read<SearchBloc>().add(ClearSearch());
+                          }
+                        } on SocketException catch (_) {
+                          print('not connected');
+                          showMyDialog(
+                            context,
+                            () {
+                              Navigator.pop(context);
+                              loadingInternet();
+                              Future.delayed(const Duration(seconds: 3), () {
+                                checkInternet(context);
+                              });
+                            },
+                          );
+                        }
+                      }
+                    : null,
+              ),
+            ],
+          );
+        },
       );
     },
   );
