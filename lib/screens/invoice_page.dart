@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
+import 'package:waterworks/blue_thermal_printer/bloc_printer.dart';
 import '../ETC/color_green.dart';
 import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
@@ -673,7 +674,7 @@ class InvoicePage2 extends StatelessWidget {
                                       child: Container(
                                         alignment: Alignment.center,
                                         child: const Text(
-                                          "สั่งพิมพ์",
+                                          "สั่งพิมพ์", 
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),

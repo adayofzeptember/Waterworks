@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/service/get_profile.dart';
-
 import '../../ETC/api_domain_url.dart';
 part 'profile_event.dart';
 part 'profile_state.dart';
