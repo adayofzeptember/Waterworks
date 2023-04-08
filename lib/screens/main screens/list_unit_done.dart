@@ -128,7 +128,7 @@ class _DoneState extends State<Done> {
 
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: InkWell(
+                            child: GestureDetector(
                               onTap: () {
                                 print('invoice id: ' +
                                     state.written[index].invoiceID.toString());

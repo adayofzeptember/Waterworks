@@ -243,7 +243,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       Navigator.push(
         event.context,
         PageTransition(
-          duration: const Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 250),
           type: PageTransitionType.rightToLeft,
           child: const InvoicePage2(),
         ),

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
-import 'package:waterworks/blue_thermal_printer/bloc_printer.dart';
+import 'package:waterworks/blue_thermal_printer/printer_with_bloc.dart';
 import '../ETC/color_green.dart';
 import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
@@ -472,7 +472,7 @@ class InvoicePage2 extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                  const SizedBox(
+                                   const SizedBox(
                                     height: 5,
                                   ),
                                   Row(
@@ -662,7 +662,7 @@ class InvoicePage2 extends StatelessWidget {
                                           duration:
                                               const Duration(milliseconds: 250),
                                           type: PageTransitionType.rightToLeft,
-                                          child: Print_Thermal_Page(
+                                          child: Print2(
                                             invoideModel: toInvoiceModel,
                                             checkWaterWrong: '1',
                                           ),
@@ -674,7 +674,7 @@ class InvoicePage2 extends StatelessWidget {
                                       child: Container(
                                         alignment: Alignment.center,
                                         child: const Text(
-                                          "สั่งพิมพ์", 
+                                          "สั่งพิมพ์",
                                           style: TextStyle(color: Colors.white),
                                         ),
                                       ),

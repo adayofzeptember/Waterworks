@@ -117,7 +117,8 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
     }
   }
     Future<void> checkBluetooth() async {
-    BluetoothEnable.enableBluetooth.then((result) {
+    BluetoothEnable.enableBluetooth.
+    then((result) {
       if (result == "true") {
         
       } else if (result == "false") {}
