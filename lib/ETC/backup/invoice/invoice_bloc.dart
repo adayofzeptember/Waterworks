@@ -43,7 +43,7 @@ class InvoiceBloc extends Bloc<InvoiceEvent, InvoiceState> {
             debt_months: nestedData['count_invoices'],
             sum_debt: await nestedData['sum_invoice'],
             godTotal: await nestedData['sum_total'],
-            duedate: await nestedData['due_date_format'],
+            issue_month: await nestedData['due_date_format'],
             prapa_cost: await nestedData['sum'],
             total: await nestedData['total'],
             waterMeterRecord_current_unit: await nestedData['water_meter_record']['current_unit'],

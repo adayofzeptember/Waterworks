@@ -286,9 +286,9 @@ class _ProfileState extends State<Profile> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const Text('1.0.03'),
+                                      const Text('1.0.04'),
                                        const SizedBox(width: 5,),
-                                      const Text('|| ล่าสุด 6 เม.ย. 2566'),
+                                      const Text('|| ล่าสุด 9 เม.ย. 2566 (ใบแจ้งใหม่)'),
                                     ],
                                   ))
                             ],

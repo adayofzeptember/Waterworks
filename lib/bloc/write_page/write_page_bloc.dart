@@ -32,11 +32,9 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             whatPage: '',
             writeCondition: 'ปกติ',
             buttonEnable: true)) {
-
     on<EnabledButton>(
       (event, emit) {
         emit(state.copyWith(buttonEnable: event.getButt));
-
       },
     );
     on<ToPageWrite>((event, emit) async {
@@ -99,7 +97,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     );
 
     on<ConfirmWriteUnit>((event, emit) async {
-               emit(state.copyWith(buttonEnable: false));
+      emit(state.copyWith(buttonEnable: false));
       EasyLoading.show(
           status: 'โปรดรอสักครู่...', maskType: EasyLoadingMaskType.black);
 
@@ -146,15 +144,15 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 invoiceNumber: await nestedData['invoice_number'],
                 areaNumber: await nestedData['area_number'],
                 write_date: await nestedData['issue_date_format'],
-                sumService: await nestedData['sum_service'],
-                vat: await nestedData['vat'],
+                sumService: await nestedData['sum_service_format'],
+                vat: await nestedData['vat_format'],
                 bank: await nestedData['crossbank_number'],
                 debt_months: nestedData['count_invoices'],
-                duedate: await nestedData['due_date_format'],
+                issue_month: await nestedData['due_date_format'],
                 sum_debt: await nestedData['sum_invoice'],
                 godTotal: await nestedData['sum_total'],
-                prapa_cost: await nestedData['sum'],
-                total: await nestedData['total'],
+                prapa_cost: await nestedData['sum_format'],
+                total: await nestedData['total_format'],
                 waterMeterRecord_current_unit:
                     await nestedData['water_meter_record']['current_unit'],
                 waterMeterRecord_previous_unit:
@@ -191,20 +189,20 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   ),
                 );
               });
-                       emit(state.copyWith(buttonEnable: true));
+              emit(state.copyWith(buttonEnable: true));
             } else {
               EasyLoading.showError(response.statusMessage.toString());
               EasyLoading.dismiss();
               Navigator.pop(event.context);
               print('-----------fail api');
               print(response);
-                       emit(state.copyWith(buttonEnable: true));
+              emit(state.copyWith(buttonEnable: true));
               emit(state.copyWith(loading: false));
             }
           } catch (e) {
             EasyLoading.showError(e.toString());
             EasyLoading.dismiss();
-                   emit(state.copyWith(buttonEnable: true));
+            emit(state.copyWith(buttonEnable: true));
             Navigator.pop(event.context);
             emit(state.copyWith(loading: false));
             print('----------- fail try');
@@ -239,6 +237,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       }
     });
 
+
+
+
+
+
+//*----------------------------------------------------------------------------------------------
     on<WatchInvoiceUnitDone>((event, emit) async {
       Navigator.push(
         event.context,
@@ -274,16 +278,26 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             customerAddress: await nestedData['customer_address'],
             invoiceNumber: await nestedData['invoice_number'],
             areaNumber: await nestedData['area_number'],
+            water_meter_record_nowUnit:
+                await nestedData['water_meter_record_now_unit'],
+            water_meter_record_nowMonth:
+                await nestedData['water_meter_record_now_month'],
+            water_meter_record_beforeMonth:
+                await nestedData['water_meter_record_before_month'],
+            water_meter_record_beforeUnit:
+                await nestedData['water_meter_record_before_unit'],
+            sum_months: await nestedData['sum_months'],
+            sum_invoice: await nestedData['sum_invoice'],
             write_date: await nestedData['issue_date_format'],
-            sumService: await nestedData['sum_service'],
-            vat: await nestedData['vat'],
+            sumService: await nestedData['sum_service_format'],
+            vat: await nestedData['vat_format'],
             bank: await nestedData['crossbank_number'],
             debt_months: nestedData['count_invoices'],
             sum_debt: await nestedData['sum_invoice'],
             godTotal: await nestedData['sum_total'],
-            prapa_cost: await nestedData['sum'],
-            duedate: await nestedData['due_date_format'],
-            total: await nestedData['total'],
+            prapa_cost: await nestedData['sum_format'],
+            issue_month: await nestedData['issue_date_month_format'],
+            total: await nestedData['total_format'],
             waterMeterRecord_current_unit:
                 await nestedData['water_meter_record']['current_unit'],
             waterMeterRecord_previous_unit:

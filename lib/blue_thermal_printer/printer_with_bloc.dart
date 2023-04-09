@@ -17,7 +17,8 @@ class Print2 extends StatefulWidget {
   final ToInvoice invoideModel;
 
   String checkWaterWrong;
-  Print2({Key? key, required this.invoideModel, required this.checkWaterWrong})
+  String? debt;
+  Print2({Key? key, required this.invoideModel, required this.checkWaterWrong, this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
 }
@@ -33,6 +34,7 @@ class _Print2State extends State<Print2> {
 
   @override
   void initState() {
+    print(widget.debt);
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
     super.initState();
@@ -385,7 +387,7 @@ elevation: 0,
     _connectBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
       toPrint.printInvoice_Now(
-          widget.invoideModel, widget.checkWaterWrong.toString());
+          widget.invoideModel, widget.checkWaterWrong.toString(), widget.debt.toString());
     });
     _waitlittleshit();
   }

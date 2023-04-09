@@ -4,6 +4,17 @@ class Invoice_Load_Data {
   String? customerAddress;
   String? invoiceNumber;
   String? areaNumber;
+
+  String? water_meter_record_nowUnit;
+  String? water_meter_record_nowMonth;
+   String? water_meter_record_beforeUnit;
+  String? water_meter_record_beforeMonth;
+  String? sum_months;
+  String? sum_invoice;
+  String? sum_unit_use;
+  
+
+  
   String? write_date;
   String? sumService;
   String? vat;
@@ -13,7 +24,8 @@ class Invoice_Load_Data {
   String? godTotal;
   String? bank;
   String? prapa_cost;
-  String? duedate;
+  String? issue_month;
+  
   String? waterMeterRecord_waterNumber;
   bool? waterMeterRecord_waterWrong;
   String? waterMeterRecord_record_date_format;
@@ -21,8 +33,16 @@ class Invoice_Load_Data {
   String? waterMeterRecord_current_unit;
   String? waterMeterRecord_sum_unit;
 
+
+
   Invoice_Load_Data(
       {this.id,
+      this.water_meter_record_nowUnit,
+      this.water_meter_record_nowMonth,
+      this.water_meter_record_beforeMonth,
+      this.water_meter_record_beforeUnit,
+      this.sum_months,
+      this.sum_invoice,
       this.customerName,
       this.customerAddress,
       this.invoiceNumber,
@@ -32,8 +52,9 @@ class Invoice_Load_Data {
        this.sumService,
        this.vat,
        this.bank,
+       this.sum_unit_use,
        this.debt_months,
-       this.duedate,
+       this.issue_month,
        this.sum_debt,
        this.godTotal,
        this.total,
