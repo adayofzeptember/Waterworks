@@ -17,12 +17,11 @@ dependencies:
   device_info_plus: ^8.1.0
   flutter_svg: ^1.0.3
   http: ^0.13.5
-  dropdown_button2: ^1.4.0
+
   animated_bottom_navigation_bar: ^1.1.0
   responsive_framework: ^0.1.9
   fluttertoast: ^8.0.9
   page_transition: ^2.0.9
-  # package_info_plus: ^1.4.2
   path_provider: ^2.0.11
   flutter_speed_dial: ^6.0.0
   screenshot: ^1.2.3
@@ -39,7 +38,6 @@ dependencies:
   provider: ^6.0.5
   percent_indicator: ^4.2.3
   dio: ^5.0.1
-  # package_info: ^2.0.0
   flutter_bloc: ^8.1.2
   equatable: ^2.0.5
   auto_size_text: ^3.0.0
@@ -50,6 +48,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   bluetooth_enable_fork: ^0.1.6
   package_info_plus: ^3.0.3
+  dropdown_button2: ^2.0.0
 
   ################ printer ##############################
   #bluetooth_print: ^4.3.0

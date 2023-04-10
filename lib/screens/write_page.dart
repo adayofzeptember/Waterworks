@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:waterworks/screens/main%20screens/x.dart';
 import '../ETC/color_green.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/load_done/done_bloc.dart';
@@ -15,6 +17,18 @@ class WritePage extends StatelessWidget {
   bool butt = true;
   WritePage({Key? key, this.check}) : super(key: key);
   TextEditingController waterUnitController = TextEditingController();
+
+  final List<String> items = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item5',
+    'Item6',
+    'Item7',
+    'Item8',
+  ];
+  String? selectedValue;
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +191,7 @@ class WritePage extends StatelessWidget {
                               ],
                             ),
                           ),
+                      
                           const SizedBox(height: 15),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -450,10 +465,21 @@ Future<void> showAlertWriteOK(
                           ),
                         ],
                       ),
-                      Text(
-                        newStatus,
+                   
+                      Row(
+                        children: [
+                              Text(
+                        
+                        'สถานะ: ',
                         style: const TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                          Text(
+                            newStatus,
+                            style: const TextStyle(
+                                fontSize: 15, ),
+                          ),
+                        ],
                       )
                     ],
                   ),
@@ -480,7 +506,7 @@ Future<void> showAlertWriteOK(
                         context
                             .read<WritePageBloc>()
                             .add(EnabledButton(getButt: false));
-              
+
                         try {
                           final result =
                               await InternetAddress.lookup('google.com');
@@ -495,7 +521,7 @@ Future<void> showAlertWriteOK(
                             context.read<NotWriteBloc>().add(BackMenu());
                             context.read<NotWriteBloc>().add(Reload_Undone());
                             context.read<DoneBloc>().add(Reload_Done());
-                          
+
                             context.read<SearchBloc>().add(ClearSearch());
                           }
                         } on SocketException catch (_) {

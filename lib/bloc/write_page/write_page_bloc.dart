@@ -104,7 +104,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       // print('ConfirmWriteUnit');
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
-      try {
+   
         final dio = Dio();
         final response = await dio.post(
           waterWork_domain + "water_meter_record/update",
@@ -222,9 +222,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
         } else {
           print('fail');
         }
-      } on Exception catch (e) {
-        print("Exception $e");
-      }
+     
     });
 
     on<CountForReset>((event, emit) async {

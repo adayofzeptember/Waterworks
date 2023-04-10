@@ -35,7 +35,7 @@ class _Print2State extends State<Print2> {
   @override
   void initState() {
     context.read<PrinterConnectBloc>().add(Load_Printer());
-    print(widget.debt);
+
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
     super.initState();
@@ -205,6 +205,7 @@ elevation: 0,
                                 const Icon(Icons.print_rounded),
                                 const SizedBox(width: 2),
                                 DropdownButton(
+                                  elevation: 0,
                                   underline: const SizedBox(),
                                   items: _getDeviceItems(),
                                   onChanged: (BluetoothDevice? value) {
@@ -257,24 +258,7 @@ elevation: 0,
                                     ),
                                   ),
 
-                            // ElevatedButton(
-                            //   style:
-                            //       ElevatedButton.styleFrom(primary: Colors.green),
-                            //   onPressed: (() {
-                            //     context.read<PrinterConnectBloc>().add(
-                            //         GetName_Address(
-                            //             getPrinterName: _device!.name.toString(),
-                            //             getPrinterAddress:
-                            //                 _device!.address.toString()));
-                            //     // _connectFirstTime(_device!.name.toString(),
-                            //     //     _device!.address.toString());
-                            //   }),
-                            //   child: Text(
-                            //     'เชื่อมต่อ',
-                            //     style: const TextStyle(
-                            //         color: Colors.white, fontSize: 20),
-                            //   ),
-                            // ),
+                    
                           ],
                         )
                       else
@@ -387,7 +371,7 @@ elevation: 0,
   }
 
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc) async {
-    _connectBloc(ptName_bloc, ptAddress_bloc);
+     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
       toPrint.printInvoice_Now(
           widget.invoideModel, widget.checkWaterWrong.toString(), widget.debt.toString());
@@ -404,7 +388,7 @@ elevation: 0,
     });
   } 
 
-  _connectBloc(String ptName_bloc, ptAddress_bloc) {
+  _connect_fromBloc(String ptName_bloc, ptAddress_bloc) {
     print(ptName_bloc + ' ' + ptAddress_bloc);
     getD = BluetoothDevice(ptName_bloc, ptAddress_bloc);
     bluetooth.isConnected.then((isConnected) {
