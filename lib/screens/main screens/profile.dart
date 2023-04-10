@@ -284,23 +284,34 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                               ),
-                              SizedBox(),
-                              Container(
-                                  alignment: Alignment.bottomLeft,
-                                  child: Row(
-                                    children: [
-                                      const Text(
-                                        'เวอร์ชันโปรแกรม: ',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(version_by.toString()),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text('|  ' + version_date.toString()),
-                                    ],
-                                  ))
+                              SizedBox(
+                                height: 25,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'เวอร์ชันโปรแกรม: ',
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(version_by.toString()          ,          style: TextStyle(
+                                      fontSize: 12,
+                                                 color: Color.fromARGB(255, 104, 104, 104),
+                                    ),),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    '|  ' + version_date.toString(),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                                  color: Color.fromARGB(255, 104, 104, 104),
+                              ),
+                                  ),
+                                ],
+                              )
                             ],
                           ),
                         ),

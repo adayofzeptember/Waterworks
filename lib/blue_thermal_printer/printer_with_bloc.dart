@@ -312,7 +312,9 @@ elevation: 0,
                                     ? Palette.thisGreen
                                     : const Color.fromARGB(255, 155, 153, 153),
                               ),
-                              onPressed: () {
+                              onPressed:  _isButtonDisabled
+                               ? () 
+                              {
                                 setState(() {
                                   _isButtonDisabled = !_isButtonDisabled;
                                 });
@@ -322,7 +324,8 @@ elevation: 0,
                                 _connect_then_Print(
                                     state.printer_name.toString(),
                                     state.printer_address.toString());
-                              },
+                              }
+                              : null,
                               child: Text(
                                 _isButtonDisabled
                                     ? 'พิมพ์ใบแจ้ง'
