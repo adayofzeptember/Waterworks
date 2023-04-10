@@ -21,3 +21,6 @@ class GetName_Address extends PrinterConnectEvent {
 
 class ClearName_Address extends PrinterConnectEvent {
 }
+
+class Load_Printer extends PrinterConnectEvent {
+}

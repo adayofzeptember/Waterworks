@@ -22,8 +22,8 @@ class InvoicePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
     MonthTH m = MonthTH();
-         // toInvoiceModel.inv_current_montht =
-                  //     "(" + m.convertMonth(monthThai) + ")";
+    // toInvoiceModel.inv_current_montht =
+    //     "(" + m.convertMonth(monthThai) + ")";
     // PrinterConfig _pconf2 = PrinterConfig();
     return WillPopScope(
       onWillPop: () async {
@@ -100,38 +100,49 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.inv_user_area =
                       state.invoice_data.areaNumber.toString();
 
-                            toInvoiceModel.inv_user_name =
+                  toInvoiceModel.inv_user_name =
                       state.invoice_data.customerName.toString();
                   toInvoiceModel.inv_user_address =
                       state.invoice_data.customerAddress.toString();
-              
-                  toInvoiceModel.inv_current_montht = state.invoice_data.issue_month.toString();
-                 toInvoiceModel.inv_matr_previous_number_andMonth = state.invoice_data.water_meter_record_beforeUnit.toString()+ " / "+ state.invoice_data.water_meter_record_beforeMonth.toString();
-                toInvoiceModel.inv_matr_now_number_andMonth = state.invoice_data.water_meter_record_nowUnit.toString() + " / "+state.invoice_data.water_meter_record_nowMonth.toString();
-             
 
-                  toInvoiceModel.inv_unit_use = state.invoice_data.waterMeterRecord_sum_unit.toString();
-                  toInvoiceModel.inv_prapa_cost = state.invoice_data.prapa_cost.toString();
-                  toInvoiceModel.inv_service = state.invoice_data.sumService.toString();
+                  toInvoiceModel.inv_current_montht =
+                      state.invoice_data.issue_month.toString();
+                  toInvoiceModel.inv_matr_previous_number_andMonth = state
+                          .invoice_data.water_meter_record_beforeUnit
+                          .toString() +
+                      " / " +
+                      state.invoice_data.water_meter_record_beforeMonth
+                          .toString();
+                  toInvoiceModel.inv_matr_now_number_andMonth = state
+                          .invoice_data.water_meter_record_nowUnit
+                          .toString() +
+                      " / " +
+                      state.invoice_data.water_meter_record_nowMonth.toString();
+
+                  toInvoiceModel.inv_unit_use =
+                      state.invoice_data.waterMeterRecord_sum_unit.toString();
+                  toInvoiceModel.inv_prapa_cost =
+                      state.invoice_data.prapa_cost.toString();
+                  toInvoiceModel.inv_service =
+                      state.invoice_data.sumService.toString();
                   toInvoiceModel.inv_vat = state.invoice_data.vat.toString();
-                  toInvoiceModel.inv_total = state.invoice_data.total.toString();
-                  toInvoiceModel.inv_sum_months = state.invoice_data.sum_months.toString();
-                  toInvoiceModel.inv_sum_invoice = state.invoice_data.sum_invoice.toString();
-                  toInvoiceModel.godTotal = state.invoice_data.godTotal.toString();
-                  toInvoiceModel.inv_barcode = state.invoice_data.bank.toString();
-                  
+                  toInvoiceModel.inv_total =
+                      state.invoice_data.total.toString();
+                  toInvoiceModel.inv_sum_months =
+                      state.invoice_data.sum_months.toString();
+                  toInvoiceModel.inv_sum_invoice =
+                      state.invoice_data.sum_invoice.toString();
+                  toInvoiceModel.godTotal =
+                      state.invoice_data.godTotal.toString();
+                  toInvoiceModel.inv_barcode =
+                      state.invoice_data.bank.toString();
+
                   String debCheck = '';
                   if (state.invoice_data.debt_months.toString() == '0') {
-                    print('ไม่มีหนี้');
                     debCheck = '0';
+                  } else {
+                    debCheck = '1';
                   }
-                  else{
-                     debCheck = '1';
-                  }
-
-                  print(debCheck);
-            
-              
 
                   //-
 
@@ -404,9 +415,8 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.prapa_cost
-                                                      .toString()),
+                                          Text(state.invoice_data.prapa_cost
+                                              .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -433,10 +443,8 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.sumService
-                                                      .toString()
-                                               ),
+                                          Text(state.invoice_data.sumService
+                                              .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -449,7 +457,7 @@ class InvoicePage2 extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                                   const SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
                                   Row(
@@ -463,9 +471,8 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.vat
-                                                      .toString()),
+                                          Text(state.invoice_data.vat
+                                              .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -492,9 +499,8 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.total
-                                                      .toString()),
+                                          Text(state.invoice_data.total
+                                              .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -549,9 +555,8 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.sum_debt
-                                                      .toString()),
+                                          Text(state.invoice_data.sum_debt
+                                              .toString()),
                                           const SizedBox(
                                             width: 10,
                                           ),
@@ -579,9 +584,9 @@ class InvoicePage2 extends StatelessWidget {
                                               fontWeight: FontWeight.bold)),
                                       Row(
                                         children: [
-                                          Text(state
-                                                      .invoice_data.godTotal
-                                                      .toString(),
+                                          Text(
+                                              state.invoice_data.godTotal
+                                                  .toString(),
                                               style: const TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 51, 51, 51),

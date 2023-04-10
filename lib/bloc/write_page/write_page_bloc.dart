@@ -143,15 +143,25 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 customerAddress: await nestedData['customer_address'],
                 invoiceNumber: await nestedData['invoice_number'],
                 areaNumber: await nestedData['area_number'],
+                water_meter_record_nowUnit:
+                    await nestedData['water_meter_record_now_unit'],
+                water_meter_record_nowMonth:
+                    await nestedData['water_meter_record_now_month'],
+                water_meter_record_beforeMonth:
+                    await nestedData['water_meter_record_before_month'],
+                water_meter_record_beforeUnit:
+                    await nestedData['water_meter_record_before_unit'],
+                sum_months: await nestedData['sum_months'],
+                sum_invoice: await nestedData['sum_invoice'],
                 write_date: await nestedData['issue_date_format'],
                 sumService: await nestedData['sum_service_format'],
                 vat: await nestedData['vat_format'],
                 bank: await nestedData['crossbank_number'],
                 debt_months: nestedData['count_invoices'],
-                issue_month: await nestedData['due_date_format'],
                 sum_debt: await nestedData['sum_invoice'],
                 godTotal: await nestedData['sum_total'],
                 prapa_cost: await nestedData['sum_format'],
+                issue_month: await nestedData['issue_date_month_format'],
                 total: await nestedData['total_format'],
                 waterMeterRecord_current_unit:
                     await nestedData['water_meter_record']['current_unit'],
@@ -164,12 +174,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                     await nestedData['water_meter_record']['sum_unit'],
                 waterMeterRecord_waterNumber: nestedData['water_meter_record']
                     ['water_number'],
-                waterMeterRecord_waterWrong: (nestedData['water_meter_record']
-                                ['water_wrong']
-                            .toString() ==
-                        "1")
-                    ? false
-                    : true,
+                waterMeterRecord_waterWrong:
+                    await (nestedData['water_meter_record']['water_wrong']
+                                .toString() ==
+                            "1")
+                        ? false
+                        : true,
               );
 
               emit(state.copyWith(
@@ -236,11 +246,6 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
         }
       }
     });
-
-
-
-
-
 
 //*----------------------------------------------------------------------------------------------
     on<WatchInvoiceUnitDone>((event, emit) async {

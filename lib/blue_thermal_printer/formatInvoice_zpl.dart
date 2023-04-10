@@ -7,7 +7,7 @@ import 'package:waterworks/models/invoice_to_printer.dart';
 // ^MMT
 class PrintHereFucker {
   printInvoice_Now(ToInvoice thisInvoice, String check, String debt) async {
-    // print(thisInvoice.inv_service.toString() + thisInvoice.inv_vat.toString());
+   
     print(thisInvoice.inv_number);
   
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
@@ -317,6 +317,7 @@ eJzt1k9r02AcB/Bflvo8rYQ2q5dnI2wVYXrY4ekc0kOpHkQ89AV4TDtRDx6ipx1EEyOjwhh4y8t5umhP
 """;
         }
 
+//? สำหรับเลขผิดปกปติเท่านั้ัน
         else {
           zplToPrinter = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
@@ -369,13 +370,13 @@ eJzt0z1Lw0AYwPGLBYMQLtIpwtN0Ed0UFcqJ5xsuHYKL38Cii4LXughWbXFwEf0CfhDHg0pLoXZ0Eoko
 eJxjYBgFgxIU1LHx2YDo/3zydUD6Q/88S38g/fH5PIv2BiAtPq+gveEBiC483vgBRBc/B9Ifns8rSgfR7PMq0oHyQNoiHageRB+H0LbtEFoeRrMD1XWwz5NjB+qD08x/wHQBwwc5kPwwBQAvKjkC:1168
 ^FT331,594^A@N,45,45,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD ^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.inv_current_montht}^FS^CI0
 ^FT206,324^A@N,45,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_user_number}^FS^CI0
 ^FT331,654^A@N,45,45,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD ^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.inv_matr_now_number_andMonth}^FS^CI0
 ^FT331,718^A@N,45,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_unit_use}^FS^CI0

@@ -34,6 +34,7 @@ class _Print2State extends State<Print2> {
 
   @override
   void initState() {
+    context.read<PrinterConnectBloc>().add(Load_Printer());
     print(widget.debt);
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
@@ -187,8 +188,7 @@ elevation: 0,
                   height: 200,
                   child: Column(
                     children: [
-                      if (state.printer_address.toString() == '' &&
-                          state.printer_address.toString() == '')
+                      if (state.printer_address.toString() == '' && state.printer_name.toString() == '' || state.printer_address == 'null' &&  state.printer_name == 'null')
                         Column(
                           children: [
                             Row(

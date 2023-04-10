@@ -4,9 +4,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/ETC/version_string.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
 import '../../offline/office_route.dart';
@@ -26,13 +28,21 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool circleHUD = false;
-  
+
   late Future<Profile_Data> futureProfile;
   @override
   void initState() {
     //logoutgetToken();_removeToken();
     check();
+
     super.initState();
+  }
+
+  Future _fd() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+    print('----------------------> ' + version);
+    return version;
   }
 
   void check() async {
@@ -274,9 +284,7 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 150,
-                              ),
+                              SizedBox(),
                               Container(
                                   alignment: Alignment.bottomLeft,
                                   child: Row(
@@ -286,9 +294,11 @@ class _ProfileState extends State<Profile> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      const Text('1.0.04'),
-                                       const SizedBox(width: 5,),
-                                      const Text('|| ล่าสุด 9 เม.ย. 2566 (ใบแจ้งใหม่)'),
+                                      Text(version_by.toString()),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text('|  ' + version_date.toString()),
                                     ],
                                   ))
                             ],
