@@ -42,7 +42,7 @@ class _Print3State extends State<Print3> {
     context.read<PrinterConnectBloc>().add(Load_Printer());
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
-    
+
     super.initState();
   }
 
@@ -178,198 +178,205 @@ class _Print3State extends State<Print3> {
                 ),
               ],
             )),
-        body: BlocBuilder<PrinterConnectBloc, PrinterConnectState>(
-          builder: (context, state) {
-            return Stack(
-              children: [
-                CustomPaint(
-                  painter: ShapesPainter(),
-                  child: Container(height: 0),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(0))),
-                  width: double.infinity,
-                  height: 200,
-                  child: Column(
-                    children: [
-                      if (state.printer_address.toString() == '' &&
-                              state.printer_name.toString() == '' ||
-                          state.printer_address == 'null' &&
-                              state.printer_name == 'null')
-                        Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                const SizedBox(width: 10),
-                                const Text(
-                                  'เครื่องพิมพ์: ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
-                                ),
-                                const Icon(Icons.print_rounded),
-                                const SizedBox(width: 2),
-                                DropdownButton(
-                                  elevation: 0,
-                                  underline: const SizedBox(),
-                                  items: _getDeviceItems(),
-                                  onChanged: (BluetoothDevice? value) {
-                                    setState(() {
-                                      _device = value;
-                                    });
-                                  },
-                                  value: _device,
-                                ),
-                                const SizedBox(width: 5),
-                                (_device == null)
-                                    ? const Icon(
-                                        Icons.arrow_back_outlined,
-                                        color: Colors.red,
-                                      )
-                                    : Container()
-                              ],
-                            ),
-                            (_device == null)
-                                ? Column(
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text('กรุณาเลือกเครื่องพิมพ์',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold)),
-                                    ],
-                                  )
-                                : ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Colors.green),
-                                    onPressed: (() {
-                                      context.read<PrinterConnectBloc>().add(
-                                          GetName_Address(
-                                              getPrinterName:
-                                                  _device!.name.toString(),
-                                              getPrinterAddress:
-                                                  _device!.address.toString()));
-                                      // _connectFirstTime(_device!.name.toString(),
-                                      //     _device!.address.toString());
-                                    }),
-                                    child: const Text(
-                                      'ตกลง',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
+        body: MediaQuery(
+          data: MediaQuery.of(context).copyWith(
+            textScaleFactor: 1.0,
+          ),
+          child: BlocBuilder<PrinterConnectBloc, PrinterConnectState>(
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  CustomPaint(
+                    painter: ShapesPainter(),
+                    child: Container(height: 0),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(0))),
+                    width: double.infinity,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        if (state.printer_address.toString() == '' &&
+                                state.printer_name.toString() == '' ||
+                            state.printer_address == 'null' &&
+                                state.printer_name == 'null')
+                          Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  const SizedBox(width: 10),
+                                  const Text(
+                                    'เครื่องพิมพ์: ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20),
                                   ),
-                          ],
-                        )
-                      else if (state.printer_isConnect == true)
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: _isButtonDisabled
-                                ? Palette.thisGreen
-                                : const Color.fromARGB(255, 155, 153, 153),
-                          ),
-                          onPressed: _isButtonDisabled
-                              ? () {
-                                  setState(() {
-                                    _isButtonDisabled = !_isButtonDisabled;
-                                  });
-                                  // _connectBloc(state.printer_name.toString(),
-                                  //     state.printer_address.toString());
+                                  const Icon(Icons.print_rounded),
+                                  const SizedBox(width: 2),
+                                  DropdownButton(
+                                    elevation: 0,
+                                    underline: const SizedBox(),
+                                    items: _getDeviceItems(),
+                                    onChanged: (BluetoothDevice? value) {
+                                      setState(() {
+                                        _device = value;
+                                      });
+                                    },
+                                    value: _device,
+                                  ),
+                                  const SizedBox(width: 5),
+                                  (_device == null)
+                                      ? const Icon(
+                                          Icons.arrow_back_outlined,
+                                          color: Colors.red,
+                                        )
+                                      : Container()
+                                ],
+                              ),
+                              (_device == null)
+                                  ? Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        const Text('กรุณาเลือกเครื่องพิมพ์',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold)),
+                                      ],
+                                    )
+                                  : ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Colors.green),
+                                      onPressed: (() {
+                                        context.read<PrinterConnectBloc>().add(
+                                            GetName_Address(
+                                                getPrinterName:
+                                                    _device!.name.toString(),
+                                                getPrinterAddress: _device!
+                                                    .address
+                                                    .toString()));
+                                        // _connectFirstTime(_device!.name.toString(),
+                                        //     _device!.address.toString());
+                                      }),
+                                      child: const Text(
+                                        'ตกลง',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                    ),
+                            ],
+                          )
+                        else if (state.printer_isConnect == true)
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: _isButtonDisabled
+                                  ? Palette.thisGreen
+                                  : const Color.fromARGB(255, 155, 153, 153),
+                            ),
+                            onPressed: _isButtonDisabled
+                                ? () {
+                                    setState(() {
+                                      _isButtonDisabled = !_isButtonDisabled;
+                                    });
+                                    // _connectBloc(state.printer_name.toString(),
+                                    //     state.printer_address.toString());
 
-                                  _connect_then_Print(
+                                    _connect_then_Print(
+                                        state.printer_name.toString(),
+                                        state.printer_address.toString());
+                                  }
+                                : null,
+                            child: Text(
+                              _isButtonDisabled
+                                  ? 'พิมพ์ใบแจ้ง'
+                                  : 'กำลังพิมพ์ใบแจ้ง..',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                          )
+                        else
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.print_rounded,
+                                    size: 40,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    state.printer_name.toString(),
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Icon(
+                                    Icons.check_circle,
+                                    size: 20,
+                                    color: Colors.green,
+                                  ),
+                                ],
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Palette.thisGreen,
+                                ),
+                                onPressed: () {
+                                  _connect_fromBloc(
                                       state.printer_name.toString(),
                                       state.printer_address.toString());
-                                }
-                              : null,
-                          child: Text(
-                            _isButtonDisabled
-                                ? 'พิมพ์ใบแจ้ง'
-                                : 'กำลังพิมพ์ใบแจ้ง..',
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
+                                },
+                                child: Text(
+                                  'เชื่อมต่อ',
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.red),
+                                onPressed: () {
+                                  _disconnect();
+                                  //_showAlertDeletePrinter(context);
+
+                                  // if (_connected == true) {
+                                  //   bluetooth.disconnect();
+                                  // }
+
+                                  // context
+                                  //     .read<PrinterConnectBloc>()
+                                  //     .add(ClearName_Address());
+                                },
+                                child: const Text(
+                                  'ยกเลิกการเชื่อมต่อเครื่องพิมพ์',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 15),
+                                ),
+                              ),
+                            ],
                           ),
-                        )
-                      else
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.print_rounded,
-                                  size: 40,
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  state.printer_name.toString(),
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                const Icon(
-                                  Icons.check_circle,
-                                  size: 20,
-                                  color: Colors.green,
-                                ),
-                              ],
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Palette.thisGreen,
-                              ),
-                              onPressed: () {
-                                _connect_fromBloc(state.printer_name.toString(),
-                                    state.printer_address.toString());
-                              },
-                              child: Text(
-                                'เชื่อมต่อ',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            ElevatedButton(
-                              style:
-                                  ElevatedButton.styleFrom(primary: Colors.red),
-                              onPressed: () {
-                                _disconnect();
-                                //_showAlertDeletePrinter(context);
-
-                                // if (_connected == true) {
-                                //   bluetooth.disconnect();
-                                // }
-
-                                // context
-                                //     .read<PrinterConnectBloc>()
-                                //     .add(ClearName_Address());
-                              },
-                              child: const Text(
-                                'ยกเลิกการเชื่อมต่อเครื่องพิมพ์',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
-                              ),
-                            ),
-                          ],
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -466,6 +473,10 @@ class _Print3State extends State<Print3> {
           ),
           actions: <Widget>[
             TextButton(
+              style: TextButton.styleFrom(
+   backgroundColor: Colors.green,  // Button color
+   foregroundColor: Colors.lime,   // Splash color
+),
               child: const Text(
                 'ยกเลิก',
                 style: TextStyle(color: Colors.red),

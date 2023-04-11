@@ -291,7 +291,9 @@ class _Print2State extends State<Print2> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 3,),
+                            SizedBox(
+                              height: 3,
+                            ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: _isButtonDisabled
@@ -441,6 +443,11 @@ class _Print2State extends State<Print2> {
           ),
           actions: <Widget>[
             TextButton(
+              style: TextButton.styleFrom(
+                // Button color
+                foregroundColor:
+                    Color.fromARGB(255, 235, 116, 108), // Splash color
+              ),
               child: const Text(
                 'ยกเลิก',
                 style: TextStyle(color: Colors.red),

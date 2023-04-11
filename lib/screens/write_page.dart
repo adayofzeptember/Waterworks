@@ -487,6 +487,11 @@ Future<void> showAlertWriteOK(
             ),
             actions: <Widget>[
               TextButton(
+                    style: TextButton.styleFrom(
+                // Button color
+                foregroundColor:
+                    Color.fromARGB(255, 235, 116, 108), // Splash color
+              ),
                 child: const Text(
                   'ยกเลิก',
                   style: TextStyle(color: Colors.red),

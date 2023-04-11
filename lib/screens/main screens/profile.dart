@@ -83,7 +83,8 @@ class _ProfileState extends State<Profile> {
         centerTitle: true,
       ),
       backgroundColor: Palette.thisGreen,
-      body: MediaQuery(
+      body: 
+      MediaQuery(
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
         ),
