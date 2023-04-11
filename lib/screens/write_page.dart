@@ -18,14 +18,10 @@ class WritePage extends StatelessWidget {
   TextEditingController waterUnitController = TextEditingController();
 
   final List<String> items = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
+    'ปกติ',
+    'รอบใหม่',
+    'มาตรใหม่',
+    'มาตรชำรุด',
   ];
   String? selectedValue;
 
@@ -190,9 +186,9 @@ class WritePage extends StatelessWidget {
                               ],
                             ),
                           ),
-                      
                           const SizedBox(height: 15),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               const Text(
@@ -206,6 +202,9 @@ class WritePage extends StatelessWidget {
                                     color: Colors.red,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 19),
+                              ),
+                              const SizedBox(
+                                width: 5,
                               ),
                             ],
                           ),
@@ -245,51 +244,110 @@ class WritePage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 15),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Text(
+                                'สถานะมาตร : ',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    color: Palette.thisGreen,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Container(
+                                // decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //         color:
+                                //             Color.fromARGB(255, 194, 194, 194)),
+                                //     borderRadius: BorderRadius.all(
+                                //       Radius.circular(20.0),
+                                //     )),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton2(
+                                      alignment: AlignmentDirectional.center,
+                                      items: items
+                                          .map((item) =>
+                                              DropdownMenuItem<String>(
+                                                value: item,
+                                                child: Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20,
+                                                      color: Colors.blue),
+                                                ),
+                                              ))
+                                          .toList(),
+                                      value: state.writeCondition,
+                                      onChanged: (value) {
+                                        context.read<WritePageBloc>().add(
+                                            CheckThisBro(
+                                                getCondiotionRadio:
+                                                    value.toString()));
+                                      },
+                                      buttonStyleData: const ButtonStyleData(
+                                        height: 40,
+                                        width: 120,
+                                      ),
+                                      menuItemStyleData:
+                                          const MenuItemStyleData(
+                                        height: 40,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                           Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  const Text(
-                                    'เลือกสถานะมาตร : ',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    state.writeCondition,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: state.writeCondition == "ปกติ"
-                                            ? Palette.thisGreen
-                                            : Colors.red),
-                                  ),
-                                ],
-                              ),
-                              RadioGroup<String>.builder(
-                                textStyle: const TextStyle(fontSize: 20),
-                                groupValue: state.writeCondition,
-                                onChanged: (value) {
-                                  context.read<WritePageBloc>().add(
-                                      CheckThisBro(
-                                          getCondiotionRadio:
-                                              value.toString()));
-                                },
-                                items: const [
-                                  "ปกติ",
-                                  "รอบใหม่",
-                                  "มาตรใหม่",
-                                  "มาตรชำรุด"
-                                ],
-                                itemBuilder: (item) => RadioButtonBuilder(
-                                  item,
-                                ),
-                                fillColor: Palette.thisGreen,
-                              ),
-                              const SizedBox(height: 20),
+                              // Row(
+                              //   children: [
+                              //     const Text(
+                              //       'เลือกสถานะมาตร : ',
+                              //       style: TextStyle(
+                              //           fontSize: 20,
+                              //           fontWeight: FontWeight.bold),
+                              //     ),
+                              //     Text(
+                              //       state.writeCondition,
+                              //       style: TextStyle(
+                              //           fontSize: 20,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: state.writeCondition == "ปกติ"
+                              //               ? Palette.thisGreen
+                              //               : Colors.red
+
+                              //               ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // RadioGroup<String>.builder(
+                              //   textStyle: const TextStyle(fontSize: 20),
+                              //   groupValue: state.writeCondition,
+                              //   onChanged: (value) {
+                              //     context.read<WritePageBloc>().add(
+                              //         CheckThisBro(
+                              //             getCondiotionRadio:
+                              //                 value.toString()));
+                              //   },
+                              //   items: const [
+                              //     "ปกติ",
+                              //     "รอบใหม่",
+                              //     "มาตรใหม่",
+                              //     "มาตรชำรุด"
+                              //   ],
+                              //   itemBuilder: (item) => RadioButtonBuilder(
+                              //     item,
+                              //   ),
+                              //   fillColor: Palette.thisGreen,
+                              // ),
+                              const SizedBox(height: 10),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Palette.thisGreen,
@@ -298,6 +356,7 @@ class WritePage extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(15),
                                     )),
                                 onPressed: () {
+                                  print(state.writeCondition.toString());
                                   context
                                       .read<WritePageBloc>()
                                       .add(CheckCurrentUnit(
@@ -452,8 +511,8 @@ Future<void> showAlertWriteOK(
                       Row(
                         children: [
                           const Text(
-                            "เลขมาตรวัดน้ำ: ",
-                            style: TextStyle(fontSize: 20),
+                            "เลขมาตรวัดน้ำ : ",
+                            style: TextStyle(fontSize: 22),
                           ),
                           Text(
                             newUnit,
@@ -464,19 +523,20 @@ Future<void> showAlertWriteOK(
                           ),
                         ],
                       ),
-                   
                       Row(
                         children: [
-                              Text(
-                        
-                        'สถานะ: ',
-                        style: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
+                          Text(
+                            'สถานะ : ',
+                            style: const TextStyle(
+                                fontSize: 20, ),
+                          ),
                           Text(
                             newStatus,
                             style: const TextStyle(
-                                fontSize: 15, ),
+                              fontWeight: FontWeight.bold,
+                              color: Palette.thisGreen,
+                              fontSize: 20,
+                            ),
                           ),
                         ],
                       )
@@ -487,11 +547,11 @@ Future<void> showAlertWriteOK(
             ),
             actions: <Widget>[
               TextButton(
-                    style: TextButton.styleFrom(
-                // Button color
-                foregroundColor:
-                    Color.fromARGB(255, 235, 116, 108), // Splash color
-              ),
+                style: TextButton.styleFrom(
+                  // Button color
+                  foregroundColor:
+                      Color.fromARGB(255, 235, 116, 108), // Splash color
+                ),
                 child: const Text(
                   'ยกเลิก',
                   style: TextStyle(color: Colors.red),
