@@ -18,7 +18,11 @@ class Print2 extends StatefulWidget {
 
   String checkWaterWrong;
   String? debt;
-  Print2({Key? key, required this.invoideModel, required this.checkWaterWrong, this.debt})
+  Print2(
+      {Key? key,
+      required this.invoideModel,
+      required this.checkWaterWrong,
+      this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
 }
@@ -147,7 +151,7 @@ class _Print2State extends State<Print2> {
         backgroundColor: const Color.fromARGB(209, 0, 0, 0),
         appBar: AppBar(
             backgroundColor: Colors.white,
-elevation: 0,
+            elevation: 0,
             automaticallyImplyLeading: false,
             centerTitle: true,
             title: const Text(
@@ -157,18 +161,16 @@ elevation: 0,
             leading: Row(
               children: [
                 IconButton(
-         color: Palette.thisGreen,
+                  color: Palette.thisGreen,
                   onPressed: () {
                     Navigator.pop(context);
 
                     //context.read<PrinterConnectBloc>().add(ClearName_Address());
                   },
                   icon: const Icon(
-                    
                     Icons.arrow_back_ios_new,
                   ),
                 ),
-            
               ],
             )),
         body: BlocBuilder<PrinterConnectBloc, PrinterConnectState>(
@@ -180,7 +182,7 @@ elevation: 0,
                   child: Container(height: 0),
                 ),
                 Container(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(0))),
@@ -188,7 +190,10 @@ elevation: 0,
                   height: 200,
                   child: Column(
                     children: [
-                      if (state.printer_address.toString() == '' && state.printer_name.toString() == '' || state.printer_address == 'null' &&  state.printer_name == 'null')
+                      if (state.printer_address.toString() == '' &&
+                              state.printer_name.toString() == '' ||
+                          state.printer_address == 'null' &&
+                              state.printer_name == 'null')
                         Column(
                           children: [
                             Row(
@@ -245,9 +250,8 @@ elevation: 0,
                                           GetName_Address(
                                               getPrinterName:
                                                   _device!.name.toString(),
-                                              getPrinterAddress: _device!
-                                                  .address
-                                                  .toString()));
+                                              getPrinterAddress:
+                                                  _device!.address.toString()));
                                       // _connectFirstTime(_device!.name.toString(),
                                       //     _device!.address.toString());
                                     }),
@@ -257,15 +261,12 @@ elevation: 0,
                                           color: Colors.white, fontSize: 20),
                                     ),
                                   ),
-
-                    
                           ],
                         )
                       else
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                          
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -279,40 +280,40 @@ elevation: 0,
                                 Text(
                                   state.printer_name.toString(),
                                   style: const TextStyle(fontSize: 20),
-                                ),    const SizedBox(
+                                ),
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 const Icon(
-                                
                                   Icons.check_circle,
                                   size: 20,
                                   color: Colors.green,
                                 ),
                               ],
                             ),
+                            SizedBox(height: 3,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: _isButtonDisabled
                                     ? Palette.thisGreen
                                     : const Color.fromARGB(255, 155, 153, 153),
                               ),
-                              onPressed:  _isButtonDisabled
-                               ? () 
-                              {
-                                setState(() {
-                                  _isButtonDisabled = !_isButtonDisabled;
-                                });
-                                // _connectBloc(state.printer_name.toString(),
-                                //     state.printer_address.toString());
+                              onPressed: _isButtonDisabled
+                                  ? () {
+                                      setState(() {
+                                        _isButtonDisabled = !_isButtonDisabled;
+                                      });
+                                      // _connectBloc(state.printer_name.toString(),
+                                      //     state.printer_address.toString());
 
-                                _connect_then_Print(
-                                    state.printer_name.toString(),
-                                    state.printer_address.toString());
-                              }
-                              : null,
+                                      _connect_then_Print(
+                                          state.printer_name.toString(),
+                                          state.printer_address.toString());
+                                    }
+                                  : null,
                               child: Text(
                                 _isButtonDisabled
-                                    ? 'พิมพ์ใบแจ้ง'
+                                    ? '-> พิมพ์ใบแจ้ง <-'
                                     : 'กำลังพิมพ์ใบแจ้ง..',
                                 style: const TextStyle(
                                     color: Colors.white, fontSize: 20),
@@ -322,8 +323,8 @@ elevation: 0,
                               height: 20,
                             ),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  primary: Colors.red),
+                              style:
+                                  ElevatedButton.styleFrom(primary: Colors.red),
                               onPressed: () {
                                 _showAlertDeletePrinter(context);
                                 // if (_connected == true) {
@@ -371,10 +372,10 @@ elevation: 0,
   }
 
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc) async {
-     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
+    _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(
-          widget.invoideModel, widget.checkWaterWrong.toString(), widget.debt.toString());
+      toPrint.printInvoice_Now(widget.invoideModel,
+          widget.checkWaterWrong.toString(), widget.debt.toString());
     });
     _waitlittleshit();
   }
@@ -386,7 +387,7 @@ elevation: 0,
       });
       _disconnect();
     });
-  } 
+  }
 
   _connect_fromBloc(String ptName_bloc, ptAddress_bloc) {
     print(ptName_bloc + ' ' + ptAddress_bloc);

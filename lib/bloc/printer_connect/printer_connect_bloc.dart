@@ -8,7 +8,8 @@ part 'printer_connect_state.dart';
 class PrinterConnectBloc
     extends Bloc<PrinterConnectEvent, PrinterConnectState> {
   PrinterConnectBloc()
-      : super(PrinterConnectState(printer_name: '', printer_address: '')) {
+      : super(PrinterConnectState(
+            printer_name: '', printer_address: '', printer_isConnect: false)) {
     on<GetName_Address>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -37,5 +38,17 @@ class PrinterConnectBloc
       prefs.remove('printer_address');
       emit(state.copyWith(printer_name: '', printer_address: ''));
     });
+
+    //* connecting
+
+    on<CheckPrinter_Connect>((event, emit) async {
+      emit(state.copyWith(printer_isConnect: event.getCheckIsPrinterConnect));
+      print('BT connect: '+state.printer_isConnect.toString());
+    });
+
+    // on<Printer_IsNotConnect>((event, emit) async {
+    //   emit(state.copyWith(printer_isConnect: false));
+    //   print(state.printer_isConnect.toString());
+    // });
   }
 }

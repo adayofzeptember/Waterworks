@@ -5,18 +5,17 @@ import 'package:waterworks/models/invoice_to_printer.dart';
 // ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 // ^XA
 // ^MMT
+
 class PrintHereFucker {
   printInvoice_Now(ToInvoice thisInvoice, String check, String debt) async {
-   
     print(thisInvoice.inv_number);
-  
+
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
         String zplToPrinter = "";
         if (check == "1" && debt == "1") {
-        
           zplToPrinter = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
@@ -392,8 +391,6 @@ eJxjYBgFgxIU1LHx2YDo/3zydUD6Q/88S38g/fH5PIv2BiAtPq+gveEBiC483vgBRBc/B9Ifns8rSgfR
 ^PQ1,0,1,Y^XZ
           """;
         }
-
-      
 
         bluetooth.printCustom(
             zplToPrinter, Size.boldMedium.val, Align.center.val);
