@@ -2,6 +2,14 @@ part of 'done_bloc.dart';
 
 // md
 class DoneState extends Equatable {
+  List written;
+  int page;
+  bool isLoading;
+  String error;
+  int segmentActive;
+  String filterId;
+  int dataTotal;
+
   DoneState({
     required this.written,
     required this.page,
@@ -12,13 +20,6 @@ class DoneState extends Equatable {
     required this.dataTotal,
   });
 
-  List written;
-  int page;
-  bool isLoading;
-  String error;
-  int segmentActive;
-  String filterId;
-  int dataTotal;
   DoneState copyWith({
     List? written,
     int? page,

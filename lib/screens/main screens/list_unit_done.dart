@@ -22,7 +22,6 @@ class _DoneState extends State<Done> {
 
   @override
   void initState() {
-
     context.read<DoneBloc>().add(Load_DoneData());
     scController.addListener(() {
       if (scController.position.pixels ==
@@ -35,8 +34,6 @@ class _DoneState extends State<Done> {
 
   @override
   void dispose() {
-   
-
     scController.dispose();
     super.dispose();
   }
@@ -54,7 +51,9 @@ class _DoneState extends State<Done> {
                 width: MediaQuery.of(context).size.width,
                 child: BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (context, profileState) {
-                    return ListView.builder(
+                    return 
+                    
+                    ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: profileState.segs.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -108,6 +107,7 @@ class _DoneState extends State<Done> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView.builder(
+                   
                         key: const PageStorageKey<String>('page2'),
                         cacheExtent: 1000,
                         controller: scController,

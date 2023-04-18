@@ -14,9 +14,7 @@ class InvoiceState extends Equatable {
     return InvoiceState(
         invoice_data: invoice_data ?? this.invoice_data,
         loading: loading ?? this.loading,
-        whatPage: whatPage ?? this.whatPage
-        
-        );
+        whatPage: whatPage ?? this.whatPage);
   }
 
   @override

@@ -46,7 +46,8 @@ class InvoicePage2 extends StatelessWidget {
             ),
             leading: BlocBuilder<WritePageBloc, WritePageState>(
               builder: (context, state) {
-                return IconButton(
+                return 
+                IconButton(
                   onPressed: () async {
                     context
                         .read<WritePageBloc>()
@@ -84,7 +85,8 @@ class InvoicePage2 extends StatelessWidget {
                       ),
                     ],
                   );
-                } else {
+                } 
+                else {
                   String add = state.invoice_data.customerAddress.toString();
                   String newAddress = add.substring(0, 6);
                   String month = state.invoice_data.write_date.toString();
