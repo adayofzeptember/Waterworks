@@ -10,15 +10,13 @@ class NotWrite_Model {
   bool? statusSearchCheck;
 
   NotWrite_Model(
-      {
-        
-     this.id,
-     this.customerName,
-     this.waterNumber,
+      {this.id,
+      this.customerName,
+      this.waterNumber,
       this.invoiceID,
       this.areaNumber,
-     this.customerAddress,
-     this.meterNumber,
-     this.status,
+      this.customerAddress,
+      this.meterNumber,
+      this.status,
       this.statusSearchCheck});
 }
