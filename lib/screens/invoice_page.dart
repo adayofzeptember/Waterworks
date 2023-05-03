@@ -12,7 +12,7 @@ import '../bloc/load_undone/undone_bloc.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
 import 'package:intl/intl.dart' as intl;
-import '../blue_thermal_printer/print_page.dart';
+import '../ETC/backup/print_page.dart';
 import '../models/invoice_to_printer.dart';
 
 class InvoicePage2 extends StatelessWidget {
@@ -22,9 +22,7 @@ class InvoicePage2 extends StatelessWidget {
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
     MonthTH m = MonthTH();
-    // toInvoiceModel.inv_current_montht =
-    //     "(" + m.convertMonth(monthThai) + ")";
-    // PrinterConfig _pconf2 = PrinterConfig();
+
     return WillPopScope(
       onWillPop: () async {
         context.read<WritePageBloc>().add(CountForReset(context: context));
@@ -89,6 +87,15 @@ class InvoicePage2 extends StatelessWidget {
                   String newAddress = add.substring(0, 6);
                   String month = state.invoice_data.write_date.toString();
                   String monthThai = month.substring(3, 8);
+                  String dateNum =
+                      state.invoice_data.write_date.toString().substring(1, 2);
+                  print(dateNum);
+                  var qrCode;
+                  if (int.parse(dateNum) >= 3) {
+                    qrCode = state.invoice_data.bank.toString().split('\n');
+                  } else {
+                    qrCode = state.invoice_data.bank.toString().split(' ');
+                  }
 
                   //-
                   toInvoiceModel.inv_number =
@@ -134,8 +141,8 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.sum_invoice.toString();
                   toInvoiceModel.godTotal =
                       state.invoice_data.godTotal.toString();
-                  toInvoiceModel.inv_barcode =
-                      state.invoice_data.bank.toString();
+                  toInvoiceModel.inv_barcode = qrCode;
+                  // state.invoice_data.bank.toString();
 
                   String debCheck = '';
                   if (state.invoice_data.debt_months.toString() == '0') {
@@ -639,6 +646,8 @@ class InvoicePage2 extends StatelessWidget {
                                             invoideModel: toInvoiceModel,
                                             checkWaterWrong: '1',
                                             debt: debCheck,
+                                            bank: state.invoice_data.bank
+                                                .toString(),
                                           ),
                                         ),
                                       );
@@ -671,18 +680,18 @@ class InvoicePage2 extends StatelessWidget {
                                             FocusManager.instance.primaryFocus
                                                 ?.unfocus();
 
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    duration: const Duration(
-                                                        milliseconds: 250),
-                                                    type: PageTransitionType
-                                                        .rightToLeft,
-                                                    child: Print2(
-                                                      invoideModel:
-                                                          toInvoiceModel,
-                                                      checkWaterWrong: '2',
-                                                    )));
+                                            // Navigator.push(
+                                            //     context,
+                                            //     PageTransition(
+                                            //         duration: const Duration(
+                                            //             milliseconds: 250),
+                                            //         type: PageTransitionType
+                                            //             .rightToLeft,
+                                            //         child: Print2(
+                                            //           invoideModel:
+                                            //               toInvoiceModel,
+                                            //           checkWaterWrong: '2',
+                                            //         )));
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(20.0),

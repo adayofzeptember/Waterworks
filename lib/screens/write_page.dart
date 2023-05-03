@@ -528,7 +528,8 @@ Future<void> showAlertWriteOK(
                           Text(
                             'สถานะ : ',
                             style: const TextStyle(
-                                fontSize: 20, ),
+                              fontSize: 20,
+                            ),
                           ),
                           Text(
                             newStatus,

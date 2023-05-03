@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/blue_thermal_printer/formatInvoice_zpl.dart';
+import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
 import '../models/invoice_to_printer.dart';
@@ -18,10 +18,12 @@ class Print2 extends StatefulWidget {
 
   String checkWaterWrong;
   String? debt;
+  String? bank;
   Print2(
       {Key? key,
       required this.invoideModel,
       required this.checkWaterWrong,
+      required this.bank,
       this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
@@ -39,7 +41,7 @@ class _Print2State extends State<Print2> {
   @override
   void initState() {
     context.read<PrinterConnectBloc>().add(Load_Printer());
-
+    print(widget.invoideModel.inv_barcode);
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
     super.initState();
@@ -190,6 +192,7 @@ class _Print2State extends State<Print2> {
                   height: 200,
                   child: Column(
                     children: [
+                    //  Text(widget.bank.toString()),
                       if (state.printer_address.toString() == '' &&
                               state.printer_name.toString() == '' ||
                           state.printer_address == 'null' &&
@@ -292,7 +295,7 @@ class _Print2State extends State<Print2> {
                               ],
                             ),
                             SizedBox(
-                              height: 3,
+                              height: 5,
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
@@ -377,7 +380,7 @@ class _Print2State extends State<Print2> {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
       toPrint.printInvoice_Now(widget.invoideModel,
-          widget.checkWaterWrong.toString(), widget.debt.toString());
+          widget.checkWaterWrong.toString(), widget.debt.toString(), widget.bank.toString());
     });
     _waitlittleshit();
   }

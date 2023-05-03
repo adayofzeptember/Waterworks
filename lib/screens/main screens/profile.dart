@@ -83,8 +83,7 @@ class _ProfileState extends State<Profile> {
         centerTitle: true,
       ),
       backgroundColor: Palette.thisGreen,
-      body: 
-      MediaQuery(
+      body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
         ),
@@ -285,33 +284,37 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'เวอร์ชันโปรแกรม: ',
-                                    style: TextStyle(
+                    
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'เวอร์ชันโปรแกรม: ',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      version_by.toString(),
+                                      style: TextStyle(
                                         fontSize: 12,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(version_by.toString()          ,          style: TextStyle(
-                                      fontSize: 12,
-                                                 color: Color.fromARGB(255, 104, 104, 104),
-                                    ),),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    '|  ' + version_date.toString(),
-                                    style: TextStyle(
+                                        color: Color.fromARGB(255, 104, 104, 104),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      '|  ' + version_date.toString(),
+                                      style: TextStyle(
                                         fontSize: 12,
-                                                  color: Color.fromARGB(255, 104, 104, 104),
-                              ),
-                                  ),
-                                ],
+                                        color: Color.fromARGB(255, 104, 104, 104),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               )
                             ],
                           ),

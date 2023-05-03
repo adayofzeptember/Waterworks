@@ -20,7 +20,7 @@ class ToInvoice {
   String? inv_sum_months;
   String? inv_sum_invoice;
   String? godTotal;
-  String? inv_barcode;
+  List? inv_barcode;
 
   ToInvoice(
       {this.inv_number,

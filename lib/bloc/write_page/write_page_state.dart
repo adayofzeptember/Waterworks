@@ -1,7 +1,6 @@
 part of 'write_page_bloc.dart';
 
 class WritePageState extends Equatable {
-
   int countForReset;
   String writeRecordId;
   String customerName, address, waterNumber, areaNumber, meterNumber;
@@ -11,9 +10,8 @@ class WritePageState extends Equatable {
   bool loading;
   bool buttonEnable;
   String whatPage, writeCondition;
-
-
-    WritePageState({
+  bool checkCurrentUnit;
+  WritePageState({
     required this.countForReset,
     required this.writeRecordId,
     required this.customerName,
@@ -31,7 +29,6 @@ class WritePageState extends Equatable {
     required this.writeCondition,
   });
 
-  bool checkCurrentUnit;
   WritePageState copyWith({
     int? countForReset,
     String? writeRecordId,
