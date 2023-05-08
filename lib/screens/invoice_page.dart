@@ -89,7 +89,7 @@ class InvoicePage2 extends StatelessWidget {
                   String monthThai = month.substring(3, 8);
                   String dateNum =
                       state.invoice_data.write_date.toString().substring(1, 2);
-                  print(dateNum);
+                  // print(dateNum);
                   var qrCode;
                   if (int.parse(dateNum) >= 3) {
                     qrCode = state.invoice_data.bank.toString().split('\n');

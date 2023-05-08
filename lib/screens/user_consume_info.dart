@@ -20,26 +20,23 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        title: const Text(
-          'ข้อมูลผู้ใช้น้ำ',
-          style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
-        ),
-        centerTitle: true,
-        leading: InkWell(
-            onTap: () {
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: const Text(
+            'ข้อมูลผู้ใช้น้ำ',
+            style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
               Navigator.pop(context);
             },
-            child: const SizedBox(
-                width: 50,
-                height: 50,
-                child:
-                    Icon(Icons.arrow_back_ios_new, color: Palette.thisGreen))),
-
-      
-      ),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Palette.thisGreen,
+            ),
+          )),
       body: MediaQuery(
         data: MediaQuery.of(context).copyWith(
           textScaleFactor: 1.0,
@@ -272,7 +269,6 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: data.historyWaters!.length,
                               itemBuilder: (BuildContext context, int index) {
-                              
                                 return Container(
                                   decoration: const BoxDecoration(
                                     color: Color.fromARGB(255, 233, 233, 233),
@@ -281,30 +277,41 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                                     padding: const EdgeInsets.all(15.0),
                                     child: Row(
                                       children: [
-                                        Text(
-                                          data.historyWaters![index].recordDate.toString(),
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              color: Palette.thisGreen,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(width: 60),
-                                        Text(
+                                        Container(
+                                          width: 120,
+                                          child: Text(
                                             data.historyWaters![index]
-                                                .currentUnit
+                                                .recordDate
                                                 .toString(),
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 color: Palette.thisGreen,
-                                                fontWeight: FontWeight.bold)),
-                                        const SizedBox(width: 90),
-                                        Text(
-                                            data.historyWaters![index].sumUnit
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                color: Palette.thisGreen,
-                                                fontWeight: FontWeight.bold)),
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 45),
+                                        Container(
+                                          width: 90,
+                                          child: Text(
+                                              data.historyWaters![index]
+                                                  .currentUnit
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  color: Palette.thisGreen,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
+                                        const SizedBox(width: 20),
+                                        Container(
+                                          width: 80,
+                                          child: Text(
+                                              data.historyWaters![index].sumUnit
+                                                  .toString(),
+                                              style: const TextStyle(
+                                                  fontSize: 18,
+                                                  color: Palette.thisGreen,
+                                                  fontWeight: FontWeight.bold)),
+                                        ),
                                       ],
                                     ),
                                   ),
