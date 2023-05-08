@@ -19,6 +19,7 @@ class PrintHereFucker {
         String area = '${thisInvoice.inv_barcode![1]}';
         String date = '${thisInvoice.inv_barcode![2]}';
         String price = '${thisInvoice.inv_barcode![3]}';
+        print(thisInvoice.inv_barcode);
 
         String zplToPrinter = "";
         if (check == "1" && debt == "1") {

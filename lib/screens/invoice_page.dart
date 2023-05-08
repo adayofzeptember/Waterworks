@@ -90,14 +90,17 @@ class InvoicePage2 extends StatelessWidget {
                   String dateNum =
                       state.invoice_data.write_date.toString().substring(1, 2);
                   // print(dateNum);
-                  var qrCode;
-                  if (int.parse(dateNum) >= 3) {
-                    qrCode = state.invoice_data.bank.toString().split('\n');
-                  } else {
-                    qrCode = state.invoice_data.bank.toString().split(' ');
-                  }
+              
+                   var qrCode = state.invoice_data.bank.toString().split('\n');
+                  // if (int.parse(dateNum) >= 3) {
+                  //   qrCode = state.invoice_data.bank.toString().split('\n');
+                  // } else {
+                  //   qrCode = state.invoice_data.bank.toString().split(' ');
+                  // }
+                  // print(qrCode);
+               
 
-                  //-
+                  //*
                   toInvoiceModel.inv_number =
                       state.invoice_data.invoiceNumber.toString();
                   toInvoiceModel.inv_user_number = state
