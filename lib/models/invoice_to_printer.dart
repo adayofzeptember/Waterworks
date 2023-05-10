@@ -21,6 +21,7 @@ class ToInvoice {
   String? inv_sum_invoice;
   String? godTotal;
   List? inv_barcode;
+  String? inv_barcode2;
 
   ToInvoice(
       {this.inv_number,
@@ -30,6 +31,7 @@ class ToInvoice {
       this.inv_unit_use,
       this.inv_prapa_cost,
       this.inv_service,
+      this.inv_barcode2,
       this.inv_vat,
       this.inv_total,
       this.inv_barcode,

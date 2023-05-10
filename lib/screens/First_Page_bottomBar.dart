@@ -25,14 +25,14 @@ class _Menu_PageState extends State<Menu_Page> {
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
+  // @override
+  // void dispose() {
+
     
-    _widgetsPages;
-    _index;
-    super.dispose();
-  }
+  //   _widgetsPages;
+  //   _index;
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {

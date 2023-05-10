@@ -90,15 +90,14 @@ class InvoicePage2 extends StatelessWidget {
                   String dateNum =
                       state.invoice_data.write_date.toString().substring(1, 2);
                   // print(dateNum);
-              
-                   var qrCode = state.invoice_data.bank.toString().split('\n');
+
+                  var qrCode = state.invoice_data.bank.toString().split('\n');
                   // if (int.parse(dateNum) >= 3) {
                   //   qrCode = state.invoice_data.bank.toString().split('\n');
                   // } else {
                   //   qrCode = state.invoice_data.bank.toString().split(' ');
                   // }
                   // print(qrCode);
-               
 
                   //*
                   toInvoiceModel.inv_number =
@@ -128,7 +127,9 @@ class InvoicePage2 extends StatelessWidget {
                           .toString() +
                       " / " +
                       state.invoice_data.water_meter_record_nowMonth.toString();
-
+                  ;
+                  toInvoiceModel.inv_barcode2 =
+                      state.invoice_data.bank_barcode.toString();
                   toInvoiceModel.inv_unit_use =
                       state.invoice_data.waterMeterRecord_sum_unit.toString();
                   toInvoiceModel.inv_prapa_cost =
@@ -153,7 +154,8 @@ class InvoicePage2 extends StatelessWidget {
                   } else {
                     debCheck = '1';
                   }
-
+                  
+                  print(toInvoiceModel.inv_barcode2);
                   //-
 
                   return Padding(
