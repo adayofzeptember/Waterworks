@@ -18,21 +18,11 @@ class _Menu_PageState extends State<Menu_Page> {
   void _onItemTapped(int index2) {
     setState(() {
       _index = index2;
-      // if (_index == 1) {
-      //   context.read<SearchBloc>().add(ClearSearch());
-      // }
-      //context.read<NotWriteBloc>().add(Load_unDoneData());
+   
     });
   }
 
-  // @override
-  // void dispose() {
 
-    
-  //   _widgetsPages;
-  //   _index;
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {

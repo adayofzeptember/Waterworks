@@ -89,17 +89,9 @@ class InvoicePage2 extends StatelessWidget {
                   String monthThai = month.substring(3, 8);
                   String dateNum =
                       state.invoice_data.write_date.toString().substring(1, 2);
-                  // print(dateNum);
 
                   var qrCode = state.invoice_data.bank.toString().split('\n');
-                  // if (int.parse(dateNum) >= 3) {
-                  //   qrCode = state.invoice_data.bank.toString().split('\n');
-                  // } else {
-                  //   qrCode = state.invoice_data.bank.toString().split(' ');
-                  // }
-                  // print(qrCode);
 
-                  //*
                   toInvoiceModel.inv_number =
                       state.invoice_data.invoiceNumber.toString();
                   toInvoiceModel.inv_user_number = state
@@ -118,7 +110,7 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.issue_month.toString();
                   toInvoiceModel.inv_matr_previous_number_andMonth = state
                           .invoice_data.water_meter_record_beforeUnit
-                          .toString() +
+                          .toString() +     
                       " / " +
                       state.invoice_data.water_meter_record_beforeMonth
                           .toString();
@@ -128,6 +120,8 @@ class InvoicePage2 extends StatelessWidget {
                       " / " +
                       state.invoice_data.water_meter_record_nowMonth.toString();
                   ;
+
+              
                   toInvoiceModel.inv_barcode2 =
                       state.invoice_data.bank_barcode.toString();
                   toInvoiceModel.inv_unit_use =
@@ -154,9 +148,8 @@ class InvoicePage2 extends StatelessWidget {
                   } else {
                     debCheck = '1';
                   }
-                  
-                  print(toInvoiceModel.inv_barcode2);
-                  //-
+
+                  // print(toInvoiceModel.inv_barcode2);
 
                   return Padding(
                     padding: const EdgeInsets.all(5.0),

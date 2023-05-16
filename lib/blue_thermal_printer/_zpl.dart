@@ -329,7 +329,7 @@ eJzt07FOwzAQBuALRbkOUb0GKUpeoWwdImXowGuwZc2YoWpTFTULtIxsvEIfwbCwVOormDe4bhmqBjcO
 """;
         }
 
-//? สำหรับเลขผิดปกปติเท่านั้ัน
+//? สำหรับเลขผิดปกติเท่านั้ัน
         else {
           zplToPrinter = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
