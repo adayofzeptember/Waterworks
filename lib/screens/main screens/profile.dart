@@ -157,7 +157,7 @@ class _ProfileState extends State<Profile> {
                                         children: [
                                           Text(
                                             (state.idSegs[index] != -1)
-                                                ? "${state.segs[index]}, "
+                                                ? "${state.segs[index]} - "
                                                 : '',
                                             style:
                                                 const TextStyle(fontSize: 17),

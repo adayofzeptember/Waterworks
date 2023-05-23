@@ -13,7 +13,7 @@ import 'package:waterworks/service/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:http/http.dart' as http;
 
-import 'First_Page_bottomBar.dart';
+import 'main screens/bottombar_page.dart';
 
 String deviceDetail = '';
 String storedToken = '';
@@ -226,7 +226,7 @@ class _LoginState extends State<Login> {
       print(jsonRes['data']['access_token'].toString());
       context.read<ProfileBloc>().add(LoadProfile());
       Navigator.pushReplacement(context,
-          PageTransition(duration: const Duration(milliseconds: 500), type: PageTransitionType.rightToLeft, child: Menu_Page()));
+          PageTransition(duration: const Duration(milliseconds: 500), type: PageTransitionType.rightToLeft, child: Bottom_bar_page()));
     } else {
       setState(() {
         circleHUD = false;

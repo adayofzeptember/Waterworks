@@ -5,17 +5,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
-import 'package:waterworks/screens/main%20screens/list_unit_done.dart';
-import 'package:waterworks/screens/main%20screens/list_unit_notdone.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:http/http.dart' as http;
-import '../../offline/models/customer_waterModel.dart';
-import '../../offline/models/history_invoicesModel.dart';
-import '../../offline/models/history_waterModel.dart';
-import '../../offline/service/customers_db.dart';
-import '../../offline/service/hisinvoices_db.dart';
-import '../../offline/service/hiswater_db .dart';
+import '../../../offline/models/customer_waterModel.dart';
+import '../../../offline/models/history_invoicesModel.dart';
+import '../../../offline/models/history_waterModel.dart';
+import '../../../offline/service/customers_db.dart';
+import '../../../offline/service/hisinvoices_db.dart';
+import '../../../offline/service/hiswater_db .dart';
+
+import 'list_unit_done.dart';
+import 'list_unit_notdone.dart';
 
 class Water_Unit_List extends StatefulWidget {
   Water_Unit_List({Key? key}) : super(key: key);
@@ -129,7 +130,7 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkBluetooth();
+    // checkBluetooth();
   }
 
   @override

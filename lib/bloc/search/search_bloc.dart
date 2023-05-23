@@ -49,6 +49,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
                   customerName: await el['customer_water']['name'],
                   waterNumber: await el['water_number'],
                   areaNumber: await el['area_number'],
+
                   customerAddress: await el['customer_water']['address'],
                   meterNumber: (el['customer_water']['meter_number'] != "" ||
                           el['customer_water']['meter_number'] != null)

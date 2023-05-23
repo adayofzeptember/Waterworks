@@ -6,3 +6,9 @@ abstract class BottomMenuSwitchEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class SwitchIndex extends BottomMenuSwitchEvent {
+  int getIndex;
+
+  SwitchIndex({required this.getIndex});
+}

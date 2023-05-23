@@ -11,7 +11,7 @@ import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
 import '../models/invoice_to_printer.dart';
-import '../screens/First_Page_bottomBar.dart';
+import '../screens/main screens/bottombar_page.dart';
 
 class Print2 extends StatefulWidget {
   final ToInvoice invoideModel;

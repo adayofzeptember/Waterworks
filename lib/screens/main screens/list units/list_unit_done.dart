@@ -4,38 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/bloc/load_done/done_bloc.dart';
+import 'package:waterworks/bloc/profile/profile_bloc.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
-import '../../bloc/load_undone/undone_bloc.dart';
-import '../../bloc/profile/profile_bloc.dart';
-import '../../offline/utils.dart';
-import '../user_consume_info.dart';
 
-class Notyet extends StatefulWidget {
-  const Notyet({Key? key}) : super(key: key);
+class Done extends StatefulWidget {
+  Done({Key? key}) : super(key: key);
 
   @override
-  State<Notyet> createState() => _NotyetState();
+  State<Done> createState() => _DoneState();
 }
 
-class _NotyetState extends State<Notyet> {
+class _DoneState extends State<Done> {
   ScrollController scController = ScrollController();
+
   @override
-  
   void initState() {
-    context.read<NotWriteBloc>().add(Load_unDoneData());
-    super.initState();
+    context.read<DoneBloc>().add(Load_DoneData());
     scController.addListener(() {
       if (scController.position.pixels ==
           scController.position.maxScrollExtent) {
-        context.read<NotWriteBloc>().add(Load_unDoneData());
+        context.read<DoneBloc>().add(Load_DoneData());
       }
     });
+    super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-
     scController.dispose();
     super.dispose();
   }
@@ -43,7 +39,7 @@ class _NotyetState extends State<Notyet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NotWriteBloc, NotWriteState>(
+      body: BlocBuilder<DoneBloc, DoneState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -53,7 +49,9 @@ class _NotyetState extends State<Notyet> {
                 width: MediaQuery.of(context).size.width,
                 child: BlocBuilder<ProfileBloc, ProfileState>(
                   builder: (context, profileState) {
-                    return ListView.builder(
+                    return 
+                    
+                    ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: profileState.segs.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -69,10 +67,9 @@ class _NotyetState extends State<Notyet> {
                               ),
                             ),
                             onPressed: () {
-                              context.read<NotWriteBloc>().add(FilterData(
+                              context.read<DoneBloc>().add(FilterData(
                                     id: profileState.idSegs[index].toString(),
                                     segmentActive: index,
-                                    // stopLoad: true,
                                   ));
                             },
                             child: Text(
@@ -90,7 +87,7 @@ class _NotyetState extends State<Notyet> {
                   },
                 ),
               ),
-              (state.notWrite.isEmpty)
+              (state.written.isEmpty)
                   ? Padding(
                       padding: const EdgeInsets.all(50.0),
                       child: (state.error == 'not')
@@ -108,18 +105,18 @@ class _NotyetState extends State<Notyet> {
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: ListView.builder(
+                   
+                        key: const PageStorageKey<String>('page2'),
                         cacheExtent: 1000,
-                        key: const PageStorageKey<String>('page'),
                         controller: scController,
-                        itemCount: (state.isLoading == true &&
-                                state.dataTotal != state.notWrite.length)
-                            ? state.notWrite.length + 1
-                            : state.notWrite.length,
+                        itemCount: (state.isLoading == true)
+                            ? state.written.length + 1
+                            : state.written.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == state.notWrite.length &&
-                              state.dataTotal != state.notWrite.length) {
+                          if (index == state.written.length &&
+                              state.isLoading == true) {
                             return Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.all(20),
                               child: Center(
                                   child: (Platform.isAndroid)
                                       ? const CircularProgressIndicator()
@@ -129,31 +126,28 @@ class _NotyetState extends State<Notyet> {
 
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
-                            child: Container(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                color: Palette.thisGreen,
-                              ),
-                              child: InkWell(
-                                onTap: () {
-                                  print("id: " +
-                                      state.notWrite[index].id.toString());
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                      duration:
-                                          const Duration(milliseconds: 250),
-                                      type: PageTransitionType.rightToLeft,
-                                      child: Use_Water_Info(
-                                        id: state.notWrite[index].id.toString(),
+                            child: GestureDetector(
+                              onTap: () {
+                                print('invoice id: ' +
+                                    state.written[index].invoiceID.toString());
+                                context.read<WritePageBloc>().add(
+                                      WatchInvoiceUnitDone(
+                                        id: state.written[index].invoiceID
+                                            .toString(),
+                                        context: context,
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16),
+                                  color:
+                                      const Color.fromARGB(255, 233, 233, 233),
+                                ),
                                 child: Container(
-                                  height: 150,
-                                  width: MediaQuery.of(context).size.width,
+                                  height: 130,
+                                  width: double.maxFinite,
                                   padding: const EdgeInsets.all(5.0),
                                   decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.only(
@@ -177,72 +171,47 @@ class _NotyetState extends State<Notyet> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                    'เลข ป. ' +
-                                                        state.notWrite[index]
-                                                            .waterNumber,
-                                                    style: const TextStyle(
-                                                        fontSize: 25,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Color.fromARGB(
-                                                            255, 240, 41, 27)),
-                                                  ),
-                                                  (state.notWrite[index]
-                                                              .status !=
-                                                          true)
-                                                      ? Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Container(
-                                                            decoration: const BoxDecoration(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
+                                                  Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius
                                                                         .circular(
                                                                             5)),
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        230,
-                                                                        87,
-                                                                        87)),
-                                                            child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left: 5,
-                                                                        right:
-                                                                            5),
-                                                                child: Row(
-                                                                  children: const [
-                                                                    Text(
-                                                                      'ตัดมาตร',
-                                                                      style: TextStyle(
-                                                                          color: Colors
-                                                                              .white,
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    ),
-                                                                    Icon(
-                                                                      Icons
-                                                                          .close,
-                                                                      color: Colors
-                                                                          .white,
-                                                                    ),
-                                                                  ],
-                                                                )),
-                                                          ),
-                                                        )
-                                                      : Container()
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    241,
+                                                                    241,
+                                                                    241)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5,
+                                                              right: 5),
+                                                      child: Text(
+                                                        'เลข ป. ' +
+                                                            state.written[index]
+                                                                .waterNumber,
+                                                        style: const TextStyle(
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Colors.black),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
+                                              const SizedBox(height: 5),
                                               SizedBox(
                                                 width: 200,
                                                 child: Text(
-                                                  state.notWrite[index]
-                                                      .customerName,
+                                                  state.written[index]
+                                                      .customerName
+                                                      .toString(),
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
@@ -268,17 +237,24 @@ class _NotyetState extends State<Notyet> {
                                                             255, 83, 83, 83)),
                                                   ),
                                                   const SizedBox(width: 3),
-                                                  SizedBox(
-                                                    width: 150,
+                                                  Container(
+                                                    width: 200,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                    ),
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               left: 5,
                                                               right: 5),
                                                       child: Text(
-                                                        state.notWrite[index]
-                                                                .customerAddress ??
-                                                            '',
+                                                        state.written[index]
+                                                            .customerAddress
+                                                            .toString(),
                                                         overflow: TextOverflow
                                                             .ellipsis,
                                                         style: const TextStyle(
@@ -316,18 +292,18 @@ class _NotyetState extends State<Notyet> {
                                                             color:
                                                                 Color.fromARGB(
                                                                     255,
-                                                                    221,
-                                                                    221,
-                                                                    221)),
+                                                                    241,
+                                                                    241,
+                                                                    241)),
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               left: 5,
                                                               right: 5),
                                                       child: Text(
-                                                        state.notWrite[index]
-                                                                .meterNumber ??
-                                                            '',
+                                                        state.written[index]
+                                                            .meterNumber
+                                                            .toString(),
                                                         style: const TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
@@ -359,18 +335,18 @@ class _NotyetState extends State<Notyet> {
                                                             color:
                                                                 Color.fromARGB(
                                                                     255,
-                                                                    221,
-                                                                    221,
-                                                                    221)),
+                                                                    241,
+                                                                    241,
+                                                                    241)),
                                                     child: Padding(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               left: 5,
                                                               right: 5),
                                                       child: Text(
-                                                        state.notWrite[index]
-                                                                .areaNumber ??
-                                                            '',
+                                                        state.written[index]
+                                                            .areaNumber
+                                                            .toString(),
                                                         style: const TextStyle(
                                                             fontSize: 13,
                                                             fontWeight:
@@ -381,55 +357,40 @@ class _NotyetState extends State<Notyet> {
                                                     ),
                                                   ),
                                                 ],
-                                              ),
-                                              const SizedBox(height: 5)
+                                              )
                                             ],
                                           ),
                                         ),
-                                        InkWell(
-                                          onTap: (() {
-                                            print("id: " +
-                                                state.notWrite[index].id
-                                                    .toString());
-                                            context
-                                                .read<WritePageBloc>()
-                                                .add(ToPageWrite(
-                                                  context: context,
-                                                  id: "${state.notWrite[index].id}",
-                                                ));
-                                          }),
-                                          child: Container(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                20, 15, 20, 15),
-                                            height: double.infinity,
-                                            decoration: const BoxDecoration(
+                                        Container(
+                                          padding: const EdgeInsets.all(20),
+                                          height: double.infinity,
+                                          decoration: const BoxDecoration(
+                                              color: Color.fromARGB(
+                                                  255, 241, 241, 241),
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                'assets/images/done_icon.png',
+                                                height: 50,
                                                 color: Palette.thisGreen,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10))),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  'assets/images/meter.png',
-                                                  height: 75,
-                                                  width: 75,
-                                                ),
-                                                const SizedBox(
-                                                  height: 8,
-                                                ),
-                                                const Text(
-                                                  'จด',
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18),
-                                                )
-                                              ],
-                                            ),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              const Text(
+                                                'ดูใบแจ้งหนี้',
+                                                style: TextStyle(
+                                                    color: Palette.thisGreen,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              )
+                                            ],
                                           ),
                                         )
                                       ]),
@@ -446,7 +407,7 @@ class _NotyetState extends State<Notyet> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  'จำนวนข้อมูล ${state.notWrite.length}/${state.dataTotal}',
+                  'จำนวนข้อมูล ${state.written.length}/${state.dataTotal}',
                 ),
               ),
             ],

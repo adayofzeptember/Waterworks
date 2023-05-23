@@ -11,11 +11,12 @@ import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/color_green.dart';
+import 'package:waterworks/bloc/bottom%20menu%20switch/bottom_menu_switch_bloc.dart';
 import 'package:waterworks/bloc/load_done/done_bloc.dart';
 import 'package:waterworks/bloc/load_undone/undone_bloc.dart';
 import 'package:waterworks/bloc/search/search_bloc.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
-import 'package:waterworks/screens/First_Page_bottomBar.dart';
+import 'package:waterworks/screens/main%20screens/bottombar_page.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/printer_connect/printer_connect_bloc.dart';
 import 'bloc/profile/profile_bloc.dart';
@@ -43,6 +44,7 @@ class Start_Page_Waterworks extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => NotWriteBloc()),
         BlocProvider(create: (context) => DoneBloc()),
+        BlocProvider(create: (context) => BottomMenuSwitchBloc()),
         BlocProvider(create: (context) => SearchBloc()),
         // BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
@@ -146,7 +148,7 @@ class _Load_PageState extends State<Load_Page> {
           PageTransition(
               duration: const Duration(milliseconds: 820),
               type: PageTransitionType.bottomToTop,
-              child: Menu_Page()),
+              child: Bottom_bar_page()),
         );
       });
     }

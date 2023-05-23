@@ -9,7 +9,7 @@ import 'package:waterworks/screens/write_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../ETC/api_domain_url.dart';
 import '../../models/invoice_load_model.dart';
-import '../../screens/First_Page_bottomBar.dart';
+import '../../screens/main screens/bottombar_page.dart';
 import '../../screens/invoice_page.dart';
 part 'write_page_event.dart';
 part 'write_page_state.dart';
@@ -237,7 +237,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             PageTransition(
               duration: const Duration(milliseconds: 250),
               type: PageTransitionType.rightToLeft,
-              child: Menu_Page(),
+              child: Bottom_bar_page(),
             ),
           );
         }
