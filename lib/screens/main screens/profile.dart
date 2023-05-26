@@ -8,7 +8,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/ETC/version_string.dart';
+import 'package:waterworks/version_string.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
 import '../../offline/office_route.dart';
