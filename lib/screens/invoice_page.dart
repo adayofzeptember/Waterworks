@@ -106,22 +106,23 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.inv_user_address =
                       state.invoice_data.customerAddress.toString();
 
-                  toInvoiceModel.inv_current_montht =
+                  toInvoiceModel.inv_current_month =
                       state.invoice_data.issue_month.toString();
-                  toInvoiceModel.inv_matr_previous_number_andMonth = state
-                          .invoice_data.water_meter_record_beforeUnit
-                          .toString() +     
-                      " / " +
-                      state.invoice_data.water_meter_record_beforeMonth
-                          .toString();
-                  toInvoiceModel.inv_matr_now_number_andMonth = state
-                          .invoice_data.water_meter_record_nowUnit
-                          .toString() +
-                      " / " +
-                      state.invoice_data.water_meter_record_nowMonth.toString();
-                  ;
+//!
+                  toInvoiceModel.inv_matr_previous_number = state
+                      .invoice_data.water_meter_record_beforeUnit
+                      .toString();
 
-              
+                  toInvoiceModel.inv_matr_previous_month =
+                      "(${state.invoice_data.water_meter_record_beforeMonth.toString()})";
+
+                  toInvoiceModel.inv_matr_now_month =
+                      "(${state.invoice_data.water_meter_record_nowMonth.toString()})";
+                  toInvoiceModel.inv_matr_now_number =
+                      state.invoice_data.water_meter_record_nowUnit.toString();
+
+//!
+
                   toInvoiceModel.inv_barcode2 =
                       state.invoice_data.bank_barcode.toString();
                   toInvoiceModel.inv_unit_use =

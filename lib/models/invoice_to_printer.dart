@@ -5,9 +5,12 @@ class ToInvoice {
   String? inv_user_address;
   String? inv_user_area;
 
-  String? inv_current_montht;
-  String? inv_matr_now_number_andMonth;
-  String? inv_matr_previous_number_andMonth;
+  String? inv_current_month;
+
+  String? inv_matr_now_number;
+  String? inv_matr_previous_number;
+    String? inv_matr_now_month;
+  String? inv_matr_previous_month;
 
   String? inv_unit_use;
   String? inv_prapa_cost;
