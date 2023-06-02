@@ -174,12 +174,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   ['sum_unit'],
               waterMeterRecord_waterNumber: nestedData['water_meter_record']
                   ['water_number'],
-              waterMeterRecord_waterWrong:
-                  await (nestedData['water_meter_record']['water_wrong']
-                              .toString() ==
-                          "1")
-                      ? false
-                      : true,
+              meter_status: await nestedData['meter_status'],
+              meter_status_text: await nestedData['meter_status_text'],
             );
 
             emit(state.copyWith(
@@ -311,12 +307,14 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 ['sum_unit'],
             waterMeterRecord_waterNumber: nestedData['water_meter_record']
                 ['water_number'],
-            waterMeterRecord_waterWrong: await (nestedData['water_meter_record']
-                            ['water_wrong']
-                        .toString() ==
-                    "1")
-                ? false
-                : true,
+            meter_status: await nestedData['meter_status'],
+            meter_status_text: await nestedData['meter_status_text'],
+            // waterMeterRecord_waterWrong: await (nestedData['water_meter_record']
+            //                 ['water_wrong']
+            //             .toString() ==
+            //         "1")
+            //     ? false
+            //     : true
           );
 
           emit(state.copyWith(

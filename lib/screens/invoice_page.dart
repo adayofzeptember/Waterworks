@@ -144,10 +144,23 @@ class InvoicePage2 extends StatelessWidget {
                   // state.invoice_data.bank.toString();
 
                   String debCheck = '';
+                  bool meterWrong;
                   if (state.invoice_data.debt_months.toString() == '0') {
                     debCheck = '0';
                   } else {
                     debCheck = '1';
+                  }
+                  //?
+                  if (state.invoice_data.meter_status.toString() == "0") {
+                    meterWrong = false;
+                  } else if (state.invoice_data.meter_status.toString() ==
+                          "1" ||
+                      state.invoice_data.meter_status.toString() == "2") {
+                    meterWrong = true;
+                    toInvoiceModel.wrong_water =
+                        state.invoice_data.meter_status_text.toString();
+                  } else {
+                    meterWrong = false;
                   }
 
                   // print(toInvoiceModel.inv_barcode2);
@@ -273,8 +286,7 @@ class InvoicePage2 extends StatelessWidget {
                                     const SizedBox(
                                       width: 5,
                                     ),
-                                    state.invoice_data
-                                            .waterMeterRecord_waterWrong
+                                    meterWrong
                                         ? const Text(
                                             '(น้ำผิดปกติ)',
                                             style:
@@ -665,7 +677,7 @@ class InvoicePage2 extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  state.invoice_data.waterMeterRecord_waterWrong
+                                  meterWrong
                                       ? ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                               primary: const Color.fromARGB(
@@ -679,18 +691,18 @@ class InvoicePage2 extends StatelessWidget {
                                             FocusManager.instance.primaryFocus
                                                 ?.unfocus();
 
-                                            // Navigator.push(
-                                            //     context,
-                                            //     PageTransition(
-                                            //         duration: const Duration(
-                                            //             milliseconds: 250),
-                                            //         type: PageTransitionType
-                                            //             .rightToLeft,
-                                            //         child: Print2(
-                                            //           invoideModel:
-                                            //               toInvoiceModel,
-                                            //           checkWaterWrong: '2',
-                                            //         )));
+                                            Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                    duration: const Duration(
+                                                        milliseconds: 250),
+                                                    type: PageTransitionType
+                                                        .rightToLeft,
+                                                    child: Print2(
+                                                      invoideModel:
+                                                          toInvoiceModel,
+                                                      checkWaterWrong: '2',
+                                                    )));
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(20.0),

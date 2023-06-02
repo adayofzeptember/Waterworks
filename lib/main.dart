@@ -121,7 +121,6 @@ class _Load_PageState extends State<Load_Page> {
           Future.delayed(const Duration(seconds: 3), () {
             check();
           });
-          setState(() {});
         },
       );
     }
@@ -160,7 +159,7 @@ class _Load_PageState extends State<Load_Page> {
       statusBarColor: Colors.transparent,
     ));
 
-    return Scaffold(
+    return Scaffold( 
         body: Stack(
       children: <Widget>[
         Image.asset('assets/images/background_green.png',

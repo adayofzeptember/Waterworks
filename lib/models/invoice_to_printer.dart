@@ -9,7 +9,7 @@ class ToInvoice {
 
   String? inv_matr_now_number;
   String? inv_matr_previous_number;
-    String? inv_matr_now_month;
+  String? inv_matr_now_month;
   String? inv_matr_previous_month;
 
   String? inv_unit_use;
@@ -17,6 +17,7 @@ class ToInvoice {
 
   String? inv_service;
   String? inv_vat;
+  String? wrong_water;
 
   String? inv_total;
 
@@ -36,6 +37,7 @@ class ToInvoice {
       this.inv_service,
       this.inv_barcode2,
       this.inv_vat,
+      this.wrong_water,
       this.inv_total,
       this.inv_barcode,
       this.godTotal});

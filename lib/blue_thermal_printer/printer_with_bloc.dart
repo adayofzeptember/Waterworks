@@ -23,7 +23,7 @@ class Print2 extends StatefulWidget {
       {Key? key,
       required this.invoideModel,
       required this.checkWaterWrong,
-      required this.bank,
+      bank,
       this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
@@ -40,6 +40,7 @@ class _Print2State extends State<Print2> {
 
   @override
   void initState() {
+    checkBluetooth();
     context.read<PrinterConnectBloc>().add(Load_Printer());
     print(widget.invoideModel.inv_barcode);
     print('ความปกติ: ' + widget.checkWaterWrong);
@@ -192,7 +193,7 @@ class _Print2State extends State<Print2> {
                   height: 200,
                   child: Column(
                     children: [
-                    //  Text(widget.bank.toString()),
+                      //  Text(widget.bank.toString()),
                       if (state.printer_address.toString() == '' &&
                               state.printer_name.toString() == '' ||
                           state.printer_address == 'null' &&
@@ -379,8 +380,11 @@ class _Print2State extends State<Print2> {
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(widget.invoideModel,
-          widget.checkWaterWrong.toString(), widget.debt.toString(), widget.bank.toString());
+      toPrint.printInvoice_Now(
+          widget.invoideModel,
+          widget.checkWaterWrong.toString(),
+          widget.debt.toString(),
+          widget.bank.toString());
     });
     _waitlittleshit();
   }

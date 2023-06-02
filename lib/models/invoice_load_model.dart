@@ -24,9 +24,9 @@ class Invoice_Load_Data {
   String? bank_barcode;
   String? prapa_cost;
   String? issue_month;
-
   String? waterMeterRecord_waterNumber;
-  bool? waterMeterRecord_waterWrong;
+  String? meter_status;
+  String? meter_status_text;
   String? waterMeterRecord_record_date_format;
   String? waterMeterRecord_previous_unit;
   String? waterMeterRecord_current_unit;
@@ -46,6 +46,7 @@ class Invoice_Load_Data {
       this.invoiceNumber,
       this.areaNumber,
       this.write_date,
+      this.meter_status_text,
       this.prapa_cost,
       this.sumService,
       this.vat,
@@ -61,5 +62,5 @@ class Invoice_Load_Data {
       this.waterMeterRecord_previous_unit,
       this.waterMeterRecord_waterNumber,
       this.waterMeterRecord_record_date_format,
-      this.waterMeterRecord_waterWrong});
+      this.meter_status});
 }

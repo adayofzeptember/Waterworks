@@ -24,7 +24,6 @@ class _Bottom_bar_pageState extends State<Bottom_bar_page> {
 
   @override
   Widget build(BuildContext context) {
-    print('d');
     return BlocBuilder<BottomMenuSwitchBloc, BottomMenuSwitchState>(
       builder: (context, state) {
         return Scaffold(
