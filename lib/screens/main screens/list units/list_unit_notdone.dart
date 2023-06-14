@@ -446,7 +446,7 @@ class _NotyetState extends State<Notyet> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  'จำนวนข้อมูล ${state.notWrite.length}/${state.dataTotal}',
+                  'จำนวนรายชื่อ ${state.notWrite.length}/${state.dataTotal}',
                 ),
               ),
             ],

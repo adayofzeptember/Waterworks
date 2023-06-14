@@ -141,6 +141,7 @@ class _Load_PageState extends State<Load_Page> {
         );
       });
     } else {
+   
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,

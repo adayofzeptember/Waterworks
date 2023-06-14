@@ -76,7 +76,6 @@ class Search_Page extends StatelessWidget {
 
                     if (state.searchResult.isEmpty) {
                       return Text(state.statusSearch.toString());
-                 
                     }
 
                     return Column(
@@ -472,6 +471,7 @@ class Search_Page extends StatelessWidget {
                                       ),
                                     ),
                                   )
+                                //!
                                 : Padding(
                                     padding:
                                         const EdgeInsets.only(bottom: 10.0),

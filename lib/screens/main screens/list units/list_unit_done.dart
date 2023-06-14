@@ -407,7 +407,7 @@ class _DoneState extends State<Done> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  'จำนวนข้อมูล ${state.written.length}/${state.dataTotal}',
+                  'จำนวนรายชื่อ ${state.written.length}/${state.dataTotal}',
                 ),
               ),
             ],
