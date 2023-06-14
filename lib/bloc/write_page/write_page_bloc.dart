@@ -141,6 +141,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               id: await nestedData['id'],
               customerName: await nestedData['customer_name'],
               customerAddress: await nestedData['customer_address'],
+              invoiceStatus: await nestedData['status'],
               invoiceNumber: await nestedData['invoice_number'],
               areaNumber: await nestedData['area_number'],
               water_meter_record_nowUnit:
@@ -276,6 +277,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             customerAddress: await nestedData['customer_address'],
             invoiceNumber: await nestedData['invoice_number'],
             areaNumber: await nestedData['area_number'],
+            invoiceStatus: await nestedData['status'],
             water_meter_record_nowUnit:
                 await nestedData['water_meter_record_now_unit'],
             water_meter_record_nowMonth:

@@ -12,7 +12,7 @@ class Invoice_Load_Data {
   String? sum_months;
   String? sum_invoice;
   String? sum_unit_use;
-
+  String? invoiceStatus;
   String? write_date;
   String? sumService;
   String? vat;
@@ -43,6 +43,7 @@ class Invoice_Load_Data {
       this.customerName,
       this.customerAddress,
       this.bank_barcode,
+      this.invoiceStatus,
       this.invoiceNumber,
       this.areaNumber,
       this.write_date,

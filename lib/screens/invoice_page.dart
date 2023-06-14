@@ -189,7 +189,7 @@ class InvoicePage2 extends StatelessWidget {
                             ),
                             const Center(
                                 child: Text(
-                              'ใบแจ้งหนี้ค่าน้ำประปา',
+                              'ใบแจ้งค่าน้ำประปา',
                               style: TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -635,45 +635,57 @@ class InvoicePage2 extends StatelessWidget {
                                   const SizedBox(
                                     height: 20,
                                   ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        primary: Palette.thisGreen,
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        )),
-                                    onPressed: () {
-                                      FocusManager.instance.primaryFocus
-                                          ?.unfocus();
-
-                                      Navigator.push(
-                                        context,
-                                        PageTransition(
-                                          duration:
-                                              const Duration(milliseconds: 250),
-                                          type: PageTransitionType.fade,
-                                          child: Print2(
-                                            invoideModel: toInvoiceModel,
-                                            checkWaterWrong: '1',
-                                            debt: debCheck,
-                                            bank: state.invoice_data.bank
-                                                .toString(),
+                                  if (state.invoice_data.invoiceStatus ==
+                                      "pending")
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: Palette.thisGreen,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          )),
+                                      onPressed: () {
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                        Navigator.push(
+                                          context,
+                                          PageTransition(
+                                            duration: const Duration(
+                                                milliseconds: 250),
+                                            type: PageTransitionType.fade,
+                                            child: Print2(
+                                              invoideModel: toInvoiceModel,
+                                              checkWaterWrong: '1',
+                                              debt: debCheck,
+                                              bank: state.invoice_data.bank
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          child: const Text(
+                                            "สั่งพิมพ์",
+                                            style:
+                                                TextStyle(color: Colors.white),
                                           ),
                                         ),
-                                      );
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "สั่งพิมพ์",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                                      ),
+                                    )
+                                  else
+                                    const Center(
+                                      child: Text(
+                                        'x ใบแจ้งหนี้ถูกยกเลิก',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
-                                  ),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -690,7 +702,6 @@ class InvoicePage2 extends StatelessWidget {
                                           onPressed: () {
                                             FocusManager.instance.primaryFocus
                                                 ?.unfocus();
-
                                             Navigator.push(
                                                 context,
                                                 PageTransition(
