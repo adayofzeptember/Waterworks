@@ -15,11 +15,11 @@ class PrintHereFucker {
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
-        String billID = '${thisInvoice.inv_barcode![0]}';
-        String area = '${thisInvoice.inv_barcode![1]}';
-        String date = '${thisInvoice.inv_barcode![2]}';
-        String price = '${thisInvoice.inv_barcode![3]}';
-        print(thisInvoice.inv_barcode);
+        String billID = '${thisInvoice.inv_qr![0]}';
+        String area = '${thisInvoice.inv_qr![1]}';
+        String date = '${thisInvoice.inv_qr![2]}';
+        String price = '${thisInvoice.inv_qr![3]}';
+        print(thisInvoice.inv_qr);
 
         String zplToPrinter = "";
         if (check == "1" && debt == "1") {
@@ -184,7 +184,7 @@ eJzt2E1r40YYB/CZTMgoIDQ2geLCxPImlN6KSqAo4MY+mO2e+gn24NB7UdhDdTCJ3CzEBdO99mC2X6HH
 ^FT321,1943^BQN,2,7
 ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A0${date}\\0D\\0A${price}^FS
 ^FO23,1698^GB533,242,2^FS
-^BY1,3,47^FT54,2023^BCN,,Y,N
+^BY1,3,47^FT26,2022^BCN,,Y,N
 ^FD>:${thisInvoice.inv_barcode2}^FS
 ^FT177,773^A@N,28,26,angsana.fnt
 ^FH\
@@ -333,7 +333,7 @@ eJzt1z1v20YYB/CjT9C5gHu03IUBCNJRgWbpoKLLCWYkATHcoUA/QQemQ7N0OMOLgBr2KTJgBQjsGF0c
 ^FT318,1736^BQN,2,7
 ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A0${date}\\0D\\0A${price}^FS
 ^FO19,1494^GB533,242,2^FS
-^BY1,3,51^FT51,1818^BCN,,Y,N
+^BY1,3,51^FT27,1822^BCN,,Y,N
 ^FD>:${thisInvoice.inv_barcode2}^FS
 ^FT210,718^A@N,28,26,angsana.fnt
 ^FH\

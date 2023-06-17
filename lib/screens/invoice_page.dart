@@ -90,6 +90,8 @@ class InvoicePage2 extends StatelessWidget {
                   String dateNum =
                       state.invoice_data.write_date.toString().substring(1, 2);
 
+
+
                   var qrCode = state.invoice_data.bank.toString().split('\n');
 
                   toInvoiceModel.inv_number =
@@ -122,9 +124,12 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.water_meter_record_nowUnit.toString();
 
 //!
+                  toInvoiceModel.inv_qr = qrCode;
+                  
+                  toInvoiceModel.inv_barcode2 = state.invoice_data.bank_barcode.toString();
+      
 
-                  toInvoiceModel.inv_barcode2 =
-                      state.invoice_data.bank_barcode.toString();
+                  //*
                   toInvoiceModel.inv_unit_use =
                       state.invoice_data.waterMeterRecord_sum_unit.toString();
                   toInvoiceModel.inv_prapa_cost =
@@ -140,7 +145,7 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.sum_invoice.toString();
                   toInvoiceModel.godTotal =
                       state.invoice_data.godTotal.toString();
-                  toInvoiceModel.inv_barcode = qrCode;
+
                   // state.invoice_data.bank.toString();
 
                   String debCheck = '';

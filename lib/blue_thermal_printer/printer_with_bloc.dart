@@ -42,7 +42,7 @@ class _Print2State extends State<Print2> {
   void initState() {
     checkBluetooth();
     context.read<PrinterConnectBloc>().add(Load_Printer());
-    print(widget.invoideModel.inv_barcode);
+
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
     super.initState();
