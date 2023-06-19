@@ -157,7 +157,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               write_date: await nestedData['issue_date_format'],
               sumService: await nestedData['sum_service_format'],
               vat: await nestedData['vat_format'],
-              bank: await nestedData['crossbank_number'],  //! qr
+              bank: await nestedData['crossbank_number'], //! qr
               debt_months: nestedData['count_invoices'],
               sum_debt: await nestedData['sum_invoice'],
               godTotal: await nestedData['sum_total'],
@@ -178,6 +178,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               meter_status: await nestedData['meter_status'],
               meter_status_text: await nestedData['meter_status_text'],
             );
+
+            
 
             emit(state.copyWith(
                 invoice_data: await dataInvoice,

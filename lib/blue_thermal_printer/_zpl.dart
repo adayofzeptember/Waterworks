@@ -5,21 +5,22 @@ import 'package:waterworks/models/invoice_to_printer.dart';
 // ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 // ^XA
 // ^MMT
-// ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A0${date}\\0D\\0A${price}^FS
+// ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 class PrintHereFucker {
   printInvoice_Now(
       ToInvoice thisInvoice, String check, String debt, String b) async {
     print(thisInvoice.inv_number);
-
+    String billID = '${thisInvoice.inv_qr![0]}';
+    String area = '${thisInvoice.inv_qr![1]}';
+    String date = '${thisInvoice.inv_qr![2]}';
+    String price = '${thisInvoice.inv_qr![3]}';
+    // print(billID + " " + area + " " + date + " " + price);
+    // print('barcode2' + thisInvoice.inv_barcode2.toString());
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
 
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
-        String billID = '${thisInvoice.inv_qr![0]}';
-        String area = '${thisInvoice.inv_qr![1]}';
-        String date = '${thisInvoice.inv_qr![2]}';
-        String price = '${thisInvoice.inv_qr![3]}';
-        print(thisInvoice.inv_qr);
+
 
         String zplToPrinter = "";
         if (check == "1" && debt == "1") {
@@ -182,7 +183,7 @@ eJzt2E1r40YYB/CZTMgoIDQ2geLCxPImlN6KSqAo4MY+mO2e+gn24NB7UdhDdTCJ3CzEBdO99mC2X6HH
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_sum_months}^FS^CI0
 ^FT321,1943^BQN,2,7
-^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A0${date}\\0D\\0A${price}^FS
+^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 ^FO23,1698^GB533,242,2^FS
 ^BY1,3,47^FT26,2022^BCN,,Y,N
 ^FD>:${thisInvoice.inv_barcode2}^FS
@@ -331,7 +332,7 @@ eJzt1z1v20YYB/CjT9C5gHu03IUBCNJRgWbpoKLLCWYkATHcoUA/QQemQ7N0OMOLgBr2KTJgBQjsGF0c
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_user_area}^FS^CI0
 ^FT318,1736^BQN,2,7
-^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A0${date}\\0D\\0A${price}^FS
+^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 ^FO19,1494^GB533,242,2^FS
 ^BY1,3,51^FT27,1822^BCN,,Y,N
 ^FD>:${thisInvoice.inv_barcode2}^FS
