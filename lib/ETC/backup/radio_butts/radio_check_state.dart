@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'radio_check_bloc.dart';
 // ค่า state ที่ต้องการให้เปลี่ยน
 class RadioCheckState extends Equatable {

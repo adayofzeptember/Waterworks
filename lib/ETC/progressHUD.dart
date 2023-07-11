@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'color_green.dart';
 
 class ProgressHUD extends StatelessWidget {
   final Widget child;

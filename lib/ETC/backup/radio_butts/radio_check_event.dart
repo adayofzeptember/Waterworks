@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'radio_check_bloc.dart';
 
 abstract class RadioCheckEvent extends Equatable {

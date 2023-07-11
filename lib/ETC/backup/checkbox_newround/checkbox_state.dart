@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'checkbox_bloc.dart';
 
 class CheckboxState extends Equatable {

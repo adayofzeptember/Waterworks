@@ -1,5 +1,5 @@
 part of 'printer_connect_bloc.dart';
-
+// ignore_for_file: must_be_immutable
 class PrinterConnectState extends Equatable {
   String printer_name;
   String printer_address;

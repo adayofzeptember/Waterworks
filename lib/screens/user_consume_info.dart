@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'package:flutter/material.dart';
 import '../ETC/color_green.dart';
 import '../service/get_user_consume.dart';

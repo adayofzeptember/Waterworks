@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
@@ -49,7 +51,6 @@ class _LoginState extends State<Login> {
     return ProgressHUD(child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
-  @override
   Widget _uiSetUp(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
@@ -96,6 +97,7 @@ class _LoginState extends State<Login> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกชื่อบัญชี';
                               }
+                              return null;
                             },
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -129,6 +131,7 @@ class _LoginState extends State<Login> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกรหัสผ่าน';
                               }
+                              return null;
                             
                             },
                             keyboardType: TextInputType.text,

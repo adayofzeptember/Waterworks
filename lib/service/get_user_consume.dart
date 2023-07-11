@@ -1,14 +1,9 @@
 import 'dart:math';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
-import 'package:waterworks/ETC/api_domain_url.dart';
 //! โมเดล json
 
 class Personal_Use {

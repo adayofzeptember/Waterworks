@@ -1,5 +1,5 @@
 part of 'search_bloc.dart';
-
+// ignore_for_file: must_be_immutable
 // get values from UI
 abstract class SearchEvent extends Equatable {
   const SearchEvent();

@@ -1,5 +1,5 @@
 part of 'search_bloc.dart';
-
+// ignore_for_file: must_be_immutable
 // เก็บค่าไว้เปลี่ยนแปลง
 class SearchState extends Equatable {
   List searchResult;

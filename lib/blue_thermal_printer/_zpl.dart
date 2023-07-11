@@ -17,11 +17,9 @@ class PrintHereFucker {
     // print(billID + " " + area + " " + date + " " + price);
     // print('barcode2' + thisInvoice.inv_barcode2.toString());
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
-
+  
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == true) {
-
-
         String zplToPrinter = "";
         if (check == "1" && debt == "1") {
           //? มีหนี้
@@ -427,7 +425,7 @@ eJzt07Fu2zAQBuCjGZgdDDFbNDCS2yWrsmkIYmfKa/AR2M1DixBdnCEgOmbKsyh70Ge4wkNWZfNgWLmj
 ^FO371,893^GB180,0,2^FS
 ^FO3,923^GB571,0,2^FS
 ^PQ1,0,1,Y^XZ
-          """;
+""";
         }
 
         bluetooth.printCustom(

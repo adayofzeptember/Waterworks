@@ -1,5 +1,5 @@
 part of 'bottom_menu_switch_bloc.dart';
-
+// ignore_for_file: must_be_immutable
 class BottomMenuSwitchState extends Equatable {
   int index;
   BottomMenuSwitchState({required this.index});

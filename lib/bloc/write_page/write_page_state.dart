@@ -1,5 +1,5 @@
 part of 'write_page_bloc.dart';
-
+// ignore_for_file: must_be_immutable
 class WritePageState extends Equatable {
   int countForReset;
   String writeRecordId;
@@ -42,7 +42,7 @@ class WritePageState extends Equatable {
     dynamic invoices,
     bool? checkCurrentUnit,
     bool? buttonEnable,
-    dynamic? invoice_data,
+    dynamic invoice_data,
     bool? loading,
     String? whatPage,
     String? writeCondition,

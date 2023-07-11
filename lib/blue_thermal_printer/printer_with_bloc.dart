@@ -4,15 +4,14 @@ import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
 import '../models/invoice_to_printer.dart';
-import '../screens/main screens/bottombar_page.dart';
 
+// ignore: must_be_immutable
 class Print2 extends StatefulWidget {
   final ToInvoice invoideModel;
 
@@ -42,7 +41,6 @@ class _Print2State extends State<Print2> {
   void initState() {
     checkBluetooth();
     context.read<PrinterConnectBloc>().add(Load_Printer());
-
     print('ความปกติ: ' + widget.checkWaterWrong);
     initPlatformState();
     super.initState();

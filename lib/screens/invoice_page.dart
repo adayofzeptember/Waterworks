@@ -1,18 +1,13 @@
-import 'dart:convert';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/month_thai_covert.dart';
 import 'package:waterworks/blue_thermal_printer/printer_with_bloc.dart';
 import '../ETC/color_green.dart';
-import '../bloc/load_done/done_bloc.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
-import 'package:intl/intl.dart' as intl;
-import '../ETC/backup/print_page.dart';
 import '../models/invoice_to_printer.dart';
 
 class InvoicePage2 extends StatelessWidget {
@@ -87,8 +82,8 @@ class InvoicePage2 extends StatelessWidget {
                   String newAddress = add.substring(0, 6);
                   String month = state.invoice_data.write_date.toString();
                   String monthThai = month.substring(3, 8);
-                  String dateNum =
-                      state.invoice_data.write_date.toString().substring(1, 2);
+                  // String dateNum =
+                  //     state.invoice_data.write_date.toString().substring(1, 2);
 
 
 

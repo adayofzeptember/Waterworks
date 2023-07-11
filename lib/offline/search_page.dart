@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:waterworks/offline/detail_customer.dart';
 import 'package:waterworks/offline/models/customer_waterModel.dart';
@@ -112,6 +109,7 @@ class _SearchPageState extends State<SearchPage> {
           ),
         ),
       ),
+      // ignore: unnecessary_null_comparison
       body: (users != null)
           ? ListView.builder(
               itemCount: users.length,

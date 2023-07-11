@@ -31,8 +31,7 @@ class CustomersDatabase {
   Future _createDB(Database db, int version) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
-    const boolType = 'BOOLEAN NOT NULL';
-    const integerType = 'INTEGER NOT NULL';
+   
 
     await db.execute('''CREATE TABLE $tableCustomers (
       ${CustomersFields.id} $idType,

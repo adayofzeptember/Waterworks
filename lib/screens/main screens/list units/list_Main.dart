@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

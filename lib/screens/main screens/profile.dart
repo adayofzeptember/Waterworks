@@ -72,7 +72,7 @@ class _ProfileState extends State<Profile> {
         child: _uiLogOut(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
-  @override
+ 
   Widget _uiLogOut(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

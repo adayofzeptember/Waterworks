@@ -1,12 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:waterworks/offline/office_route.dart';
 import 'package:waterworks/offline/service/water_db.dart';
-
 import '../ETC/color_green.dart';
 import 'models/waterModel.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class PageOffline extends StatefulWidget {
   const PageOffline({Key? key}) : super(key: key);
@@ -20,18 +19,8 @@ class _PageOfflineState extends State<PageOffline> {
   late Future<List<Water>> waters;
   int i = 0;
   Future<void> createWater(numPor, zone, numMeter) async {
-    final utcTime = DateTime.now();
-    final localTime = utcTime.toLocal();
-    var formattedDate = DateFormat('EEEE,d,MMMM,y,hh:mm').format(localTime);
-    List datetime = formattedDate.split(',');
+
     i++;
-    Water water = Water(
-      numPor: numPor,
-      zone: zone,
-      numMeter: numMeter,
-      saveDate: "${datetime[1]} ${datetime[2]} ${int.parse(datetime[3]) + 543} ${datetime[4]}",
-    );
-    Water newWater = await _db.create(water);
     setState(() {
       waters = _db.selectAllWater();
     });
