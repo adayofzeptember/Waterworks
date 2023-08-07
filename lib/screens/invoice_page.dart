@@ -85,8 +85,6 @@ class InvoicePage2 extends StatelessWidget {
                   // String dateNum =
                   //     state.invoice_data.write_date.toString().substring(1, 2);
 
-
-
                   var qrCode = state.invoice_data.bank.toString().split('\n');
 
                   toInvoiceModel.inv_number =
@@ -120,9 +118,11 @@ class InvoicePage2 extends StatelessWidget {
 
 //!
                   toInvoiceModel.inv_qr = qrCode;
-                  
-                  toInvoiceModel.inv_barcode2 = state.invoice_data.bank_barcode.toString();
-      
+
+                  toInvoiceModel.inv_barcode2 =
+                      state.invoice_data.bank_barcode.toString();
+                  toInvoiceModel.dueDate =
+                      state.invoice_data.dueDate.toString();
 
                   //*
                   toInvoiceModel.inv_unit_use =
@@ -646,6 +646,7 @@ class InvoicePage2 extends StatelessWidget {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
+                                        print(state.invoice_data.dueDate);
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
                                         Navigator.push(

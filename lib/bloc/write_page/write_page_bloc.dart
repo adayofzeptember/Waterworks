@@ -140,6 +140,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             dataInvoice = Invoice_Load_Data(
               id: await nestedData['id'],
               customerName: await nestedData['customer_name'],
+              dueDate: await nestedData['due_date_format'],
               customerAddress: await nestedData['customer_address'],
               invoiceStatus: await nestedData['status'],
               invoiceNumber: await nestedData['invoice_number'],
@@ -178,8 +179,6 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               meter_status: await nestedData['meter_status'],
               meter_status_text: await nestedData['meter_status_text'],
             );
-
-            
 
             emit(state.copyWith(
                 invoice_data: await dataInvoice,
@@ -243,7 +242,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       }
     });
 
-//*----------------------------------------------------------------------------------------------
+//*--------------------------------------- ดูบิล --------------------------------------------------
     on<WatchInvoiceUnitDone>((event, emit) async {
       Navigator.push(
         event.context,
@@ -292,6 +291,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             sum_invoice: await nestedData['sum_invoice'],
             write_date: await nestedData['issue_date_format'],
             sumService: await nestedData['sum_service_format'],
+            dueDate: await nestedData['due_date_format'],
             vat: await nestedData['vat_format'],
             bank: await nestedData['crossbank_number'],
             bank_barcode: await nestedData['crossbank_number_barcode'],

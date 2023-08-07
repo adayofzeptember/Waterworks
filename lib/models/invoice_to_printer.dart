@@ -26,6 +26,7 @@ class ToInvoice {
   String? godTotal;
   List? inv_qr;
   String? inv_barcode2;
+  String? dueDate;
 
   ToInvoice(
       {this.inv_number,
@@ -35,6 +36,7 @@ class ToInvoice {
       this.inv_unit_use,
       this.inv_prapa_cost,
       this.inv_service,
+      this.dueDate,
       this.inv_barcode2,
       this.inv_vat,
       this.wrong_water,

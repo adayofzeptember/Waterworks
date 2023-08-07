@@ -27,6 +27,7 @@ class Invoice_Load_Data {
   String? waterMeterRecord_waterNumber;
   String? meter_status;
   String? meter_status_text;
+  String? dueDate;
   String? waterMeterRecord_record_date_format;
   String? waterMeterRecord_previous_unit;
   String? waterMeterRecord_current_unit;
@@ -40,6 +41,7 @@ class Invoice_Load_Data {
       this.water_meter_record_beforeUnit,
       this.sum_months,
       this.sum_invoice,
+      this.dueDate,
       this.customerName,
       this.customerAddress,
       this.bank_barcode,
