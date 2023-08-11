@@ -72,7 +72,6 @@ class _ProfileState extends State<Profile> {
         child: _uiLogOut(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
- 
   Widget _uiLogOut(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -225,7 +224,10 @@ class _ProfileState extends State<Profile> {
                                       )),
                                   onPressed: () async {
                                     final Uri url = Uri.parse(
-                                        'https://drive.google.com/drive/folders/1XfDECxDHTFMolckRb5eq76yT8asc0SEO?usp=share_link');
+                                        'https://www.dropbox.com/scl/fo/t15br3qm94f6gey3y8wjv/h?rlkey=g964qgru1rw38ifvakcdiwv4g&dl=0'
+                                        //'https://drive.google.com/drive/folders/1XfDECxDHTFMolckRb5eq76yT8asc0SEO?usp=share_link'
+                               
+                                        );
                                     if (await canLaunchUrl(url)) {
                                       await launchUrl(
                                         url,
@@ -284,7 +286,6 @@ class _ProfileState extends State<Profile> {
                                   ),
                                 ),
                               ),
-                    
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
@@ -300,7 +301,8 @@ class _ProfileState extends State<Profile> {
                                       version_by.toString(),
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: Color.fromARGB(255, 104, 104, 104),
+                                        color:
+                                            Color.fromARGB(255, 104, 104, 104),
                                       ),
                                     ),
                                     const SizedBox(
@@ -310,7 +312,8 @@ class _ProfileState extends State<Profile> {
                                       '|  ' + version_date.toString(),
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: Color.fromARGB(255, 104, 104, 104),
+                                        color:
+                                            Color.fromARGB(255, 104, 104, 104),
                                       ),
                                     ),
                                   ],
