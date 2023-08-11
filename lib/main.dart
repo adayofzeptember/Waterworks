@@ -108,11 +108,13 @@ class _Load_PageState extends State<Load_Page> {
         //print('connected');
         _Load_And_Go();
         print('connected');
+
         context.read<ProfileBloc>().add(LoadProfile());
         await _Load_And_Go();
       }
     } on SocketException catch (_) {
       print('not connected');
+
       showMyDialog(
         context,
         () {
@@ -141,7 +143,6 @@ class _Load_PageState extends State<Load_Page> {
         );
       });
     } else {
-   
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(
           context,
@@ -160,7 +161,7 @@ class _Load_PageState extends State<Load_Page> {
       statusBarColor: Colors.transparent,
     ));
 
-    return Scaffold( 
+    return Scaffold(
         body: Stack(
       children: <Widget>[
         Image.asset('assets/images/background_green.png',

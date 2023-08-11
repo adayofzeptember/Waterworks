@@ -307,47 +307,6 @@ class WritePage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Row(
-                              //   children: [
-                              //     const Text(
-                              //       'เลือกสถานะมาตร : ',
-                              //       style: TextStyle(
-                              //           fontSize: 20,
-                              //           fontWeight: FontWeight.bold),
-                              //     ),
-                              //     Text(
-                              //       state.writeCondition,
-                              //       style: TextStyle(
-                              //           fontSize: 20,
-                              //           fontWeight: FontWeight.bold,
-                              //           color: state.writeCondition == "ปกติ"
-                              //               ? Palette.thisGreen
-                              //               : Colors.red
-
-                              //               ),
-                              //     ),
-                              //   ],
-                              // ),
-                              // RadioGroup<String>.builder(
-                              //   textStyle: const TextStyle(fontSize: 20),
-                              //   groupValue: state.writeCondition,
-                              //   onChanged: (value) {
-                              //     context.read<WritePageBloc>().add(
-                              //         CheckThisBro(
-                              //             getCondiotionRadio:
-                              //                 value.toString()));
-                              //   },
-                              //   items: const [
-                              //     "ปกติ",
-                              //     "รอบใหม่",
-                              //     "มาตรใหม่",
-                              //     "มาตรชำรุด"
-                              //   ],
-                              //   itemBuilder: (item) => RadioButtonBuilder(
-                              //     item,
-                              //   ),
-                              //   fillColor: Palette.thisGreen,
-                              // ),
                               const SizedBox(height: 10),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
