@@ -147,7 +147,7 @@ eJzt0jFLw0AUB/B3RvoUSqJbhNgK/QIRlxMEHQJufoZ0chITXBzEnjjo5O7iR5FLU5ul0K9wxcE14lKh
 ^FH\^CI17^F8^FD${thisInvoice.inv_current_month}^FS^CI0
 ^FT193,397^A@N,45,45,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD${thisInvoice.inv_number}^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.inv_user_number}^FS^CI0
 ^FT357,720^A@N,45,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_matr_previous_number}^FS^CI0
