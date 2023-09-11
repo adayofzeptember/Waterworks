@@ -52,7 +52,8 @@ class Start_Page_Waterworks extends StatelessWidget {
         // BlocProvider(create: (context) => RadioCheckBloc()),
         BlocProvider(create: (context) => WritePageBloc()),
       ],
-      child: MaterialApp(
+      child: 
+      MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
