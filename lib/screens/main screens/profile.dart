@@ -324,7 +324,8 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-                      const CircleAvatar(
+                      const 
+                      CircleAvatar(
                         radius: 85,
                         backgroundColor: Colors.white,
                         child: CircleAvatar(

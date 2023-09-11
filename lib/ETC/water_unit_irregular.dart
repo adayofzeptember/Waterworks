@@ -44,10 +44,12 @@ class _Irregular_WaterState extends State<Irregular_Water> {
           child: Column(children: [
             Container(
                 width: double.infinity,
-                child: SvgPicture.asset(
+                child: 
+                SvgPicture.asset(
                   'assets/images/irr.svg',
                   fit: BoxFit.cover,
-                )),
+                )
+                ),
             const SizedBox(
               width: 10,
             ),

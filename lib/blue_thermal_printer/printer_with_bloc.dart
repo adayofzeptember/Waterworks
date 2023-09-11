@@ -176,7 +176,8 @@ class _Print2State extends State<Print2> {
             )),
         body: BlocBuilder<PrinterConnectBloc, PrinterConnectState>(
           builder: (context, state) {
-            return Stack(
+            return 
+            Stack(
               children: [
                 CustomPaint(
                   painter: ShapesPainter(),
