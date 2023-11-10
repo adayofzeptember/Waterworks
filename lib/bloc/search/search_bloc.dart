@@ -20,6 +20,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
+        
         try {
           final dio = Dio();
           final response = await dio.get(
@@ -32,7 +33,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
           );
           var dataSearchRes = [];
           if (response.statusCode == 400 || response.statusCode == 200) {
-            if (response.data['data']['data'].length == 0) {
+            if (response.data['data']['data'].length == 0) { 
               //! พอโหลดเสร็จจะไม่ใช่เลข 0 แล้ว
               emit(state.copyWith(statusSearch: 'ไม่พบข้อมูล'));
             } else {

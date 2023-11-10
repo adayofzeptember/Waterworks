@@ -52,8 +52,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         // BlocProvider(create: (context) => RadioCheckBloc()),
         BlocProvider(create: (context) => WritePageBloc()),
       ],
-      child: 
-      MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -132,7 +131,6 @@ class _Load_PageState extends State<Load_Page> {
   Future _Load_And_Go() async {
     SharedPreferences prefs2 = await SharedPreferences.getInstance();
     var getThatToken = prefs2.get('keyToken');
-
     if (getThatToken.toString() == 'null') {
       await Future.delayed(const Duration(seconds: 2), () {
         Navigator.pushReplacement(

@@ -22,16 +22,21 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
     on<Load_DoneData>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('keyToken');
-      String? sagmentId = (state.filterId != '-1') ? "&water_meter_segmentation_id=${state.filterId}" : "";
+      String? sagmentId = (state.filterId != '-1')
+          ? "&water_meter_segmentation_id=${state.filterId}"
+          : "";
 
       try {
         final response = await dio.get(
-          waterWork_domain + "water_meter_record/index?per_page=8&status=processing&page=${state.page}$sagmentId",
+          waterWork_domain +
+              "water_meter_record/index?per_page=8&status=processing&page=${state.page}$sagmentId",
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token",
           }),
+       
         );
+
         var dataAllDone = (state.written != []) ? state.written : [];
         if (response.data['responseStatus'].toString() == "true") {
           emit(state.copyWith(dataTotal: response.data['data']['total']));
@@ -45,7 +50,9 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
                   waterNumber: await el['water_number'],
                   areaNumber: await el['area_number'],
                   customerAddress: await el['customer_water']['address'],
-                  meterNumber: (el['customer_water']['meter_number'] != "") ? await el['customer_water']['meter_number'] : "0",
+                  meterNumber: (el['customer_water']['meter_number'] != "")
+                      ? await el['customer_water']['meter_number']
+                      : "0",
 
                   invoiceID: await el['invoice']['id'],
                   // status: await (el['customer_water']['status'] == "Normal") ? true : false
@@ -55,7 +62,9 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
             emit(state.copyWith(
               written: dataAllDone,
               page: state.page + 1,
-              isLoading: (dataAllDone.length == response.data['data']['total']) ? false : true,
+              isLoading: (dataAllDone.length == response.data['data']['total'])
+                  ? false
+                  : true,
             ));
           } else {
             print("total data = " + response.data['data']['total'].toString());

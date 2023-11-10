@@ -14,7 +14,6 @@ import 'package:waterworks/bloc/profile/profile_bloc.dart';
 import 'package:waterworks/service/post_login.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
 import 'package:http/http.dart' as http;
-
 import 'main screens/bottombar_page.dart';
 
 String deviceDetail = '';

@@ -9,7 +9,6 @@ import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import '../../../bloc/load_undone/undone_bloc.dart';
 import '../../user_consume_info.dart';
 
-
 class Notyet extends StatefulWidget {
   const Notyet({Key? key}) : super(key: key);
 
@@ -20,7 +19,6 @@ class Notyet extends StatefulWidget {
 class _NotyetState extends State<Notyet> {
   ScrollController scController = ScrollController();
   @override
-  
   void initState() {
     context.read<NotWriteBloc>().add(Load_unDoneData());
     super.initState();
