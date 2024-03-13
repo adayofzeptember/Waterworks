@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:io';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:group_radio_button/group_radio_button.dart';
 import '../ETC/color_green.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/load_done/done_bloc.dart';
@@ -33,7 +34,7 @@ class WritePage extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Palette.thisGreen,
           centerTitle: true,
-          title: const Text('จดมาตรวัดน้ำ'),
+          title: const Text('จดมาตรวัดน้ำ', style: TextStyle(color: Colors.white),),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -42,6 +43,7 @@ class WritePage extends StatelessWidget {
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
+              color: Colors.white,
             ),
           )),
       body: MediaQuery(
@@ -50,6 +52,7 @@ class WritePage extends StatelessWidget {
         ),
         child: BlocBuilder<WritePageBloc, WritePageState>(
           builder: (context, state) {
+ 
             if (state.loading == true) {
               return const Center(
                 child: CircularProgressIndicator(
@@ -579,6 +582,8 @@ Future<void> showAlertWriteOK(
                               result[0].rawAddress.isNotEmpty) {
                             context.read<WritePageBloc>().add(ConfirmWriteUnit(
                                   context: context,
+                                  getLat: state.lat,
+                                  getLng: state.lng,
                                   statusMeter: statusMeter,
                                   currentUnit: newUnit,
                                   id: writeRecordId,

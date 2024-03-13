@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'write_page_bloc.dart';
 
 class WritePageState extends Equatable {
@@ -11,6 +13,8 @@ class WritePageState extends Equatable {
   bool buttonEnable;
   String whatPage, writeCondition;
   bool checkCurrentUnit;
+  String lat;
+    String lng;
   WritePageState({
     required this.countForReset,
     required this.writeRecordId,
@@ -20,6 +24,8 @@ class WritePageState extends Equatable {
     required this.areaNumber,
     required this.meterNumber,
     required this.buttonEnable,
+    required this.lat,
+    required this.lng,
     required this.previousUnitFormat,
     required this.invoices,
     required this.checkCurrentUnit,
@@ -40,9 +46,11 @@ class WritePageState extends Equatable {
     String? previousUnitFormat,
     String? statusMeter,
     dynamic invoices,
+        String? lat,
+            String? lng,
     bool? checkCurrentUnit,
     bool? buttonEnable,
-    dynamic? invoice_data,
+    dynamic invoice_data,
     bool? loading,
     String? whatPage,
     String? writeCondition,
@@ -57,6 +65,8 @@ class WritePageState extends Equatable {
       meterNumber: meterNumber ?? this.meterNumber,
       previousUnitFormat: previousUnitFormat ?? this.previousUnitFormat,
       invoices: invoices ?? this.invoices,
+            lat: lat ?? this.lat,
+                  lng: lng ?? this.lng,
       checkCurrentUnit: checkCurrentUnit ?? this.checkCurrentUnit,
       invoice_data: invoice_data ?? this.invoice_data,
       buttonEnable: buttonEnable ?? this.buttonEnable,
@@ -78,6 +88,7 @@ class WritePageState extends Equatable {
         previousUnitFormat,
         invoices,
         checkCurrentUnit,
+        lat,lng,
         invoice_data,
         loading,
         whatPage,

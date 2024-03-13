@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:waterworks/offline/office_route.dart';
@@ -6,7 +8,6 @@ import 'package:waterworks/offline/service/water_db.dart';
 import '../ETC/color_green.dart';
 import 'models/waterModel.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class PageOffline extends StatefulWidget {
   const PageOffline({Key? key}) : super(key: key);

@@ -30,7 +30,6 @@ class _LoginState extends State<Login> {
   var deviceData = <String, dynamic>{};
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   final formKey_LogIn = GlobalKey<FormState>();
-  Map<String, dynamic> _deviceData = <String, dynamic>{};
   String userName = '';
   String passWord = '';
   bool circleHUD = false;
@@ -49,7 +48,6 @@ class _LoginState extends State<Login> {
     return ProgressHUD(child: _uiSetUp(context), inAsyncCall: circleHUD, opacity: 0.3);
   }
 
-  @override
   Widget _uiSetUp(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
@@ -96,6 +94,7 @@ class _LoginState extends State<Login> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกชื่อบัญชี';
                               }
+                              return null;
                             },
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
@@ -129,6 +128,7 @@ class _LoginState extends State<Login> {
                               if (value!.isEmpty) {
                                 return 'โปรดกรอกรหัสผ่าน';
                               }
+                              return null;
                             
                             },
                             keyboardType: TextInputType.text,
@@ -213,7 +213,7 @@ class _LoginState extends State<Login> {
       headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
       body: body_Login,
     );
-    //print(jsonDecode(response.body.toString()));
+    print(jsonDecode(response.body.toString()));
     var jsonRes = json.decode(response.body);
     if (response.statusCode == 400 || response.statusCode == 200) {
       setState(() {
@@ -240,7 +240,7 @@ class _LoginState extends State<Login> {
           textAlign: TextAlign.center,
         ),
       ));
-      print('response.body');
+      print(response.body);
     }
   }
 
@@ -261,7 +261,6 @@ class _LoginState extends State<Login> {
     }
 
     setState(() {
-      _deviceData = deviceData;
 
       deviceDetail = (deviceData['brand'] == null) ? "IPHONE" : deviceData['brand'] + '-' + deviceData['model'];
     });

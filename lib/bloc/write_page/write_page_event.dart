@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'write_page_bloc.dart';
 
 abstract class WritePageEvent extends Equatable {
@@ -30,11 +32,15 @@ class ConfirmWriteUnit extends WritePageEvent {
   String id;
   String statusMeter;
   String currentUnit;
+  String? getLat,getLng;
   ConfirmWriteUnit({
     required this.context,
     required this.statusMeter,
     required this.currentUnit,
     required this.id,
+    this.getLat,
+    this.getLng
+
   });
 }
 

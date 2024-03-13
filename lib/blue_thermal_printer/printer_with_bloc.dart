@@ -1,17 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
-import '../models/invoice_to_printer.dart';
-import '../screens/First_Page_bottomBar.dart';
+import '../ETC/models/invoice_to_printer.dart';
 
 class Print2 extends StatefulWidget {
   final ToInvoice invoideModel;

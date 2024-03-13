@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/models/Load_NotDone.dart';
+import 'package:waterworks/ETC/models/Load_NotDone.dart';
 import '../../ETC/api_domain_url.dart';
 part 'undone_event.dart';
 part 'undone_state.dart';

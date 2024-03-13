@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'printer_connect_bloc.dart';
 
 abstract class PrinterConnectEvent extends Equatable {

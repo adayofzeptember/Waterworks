@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/ETC/api_domain_url.dart';
-import '../../../models/Load_Done.dart';
+import '../../ETC/models/Load_Done.dart';
 part 'done_event.dart';
 part 'done_state.dart';
 

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'undone_bloc.dart';
 
 class NotWriteState extends Equatable {

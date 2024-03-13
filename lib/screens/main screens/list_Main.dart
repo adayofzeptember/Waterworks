@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:bluetooth_enable_fork/bluetooth_enable_fork.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -193,33 +195,33 @@ class _Water_Unit_ListState extends State<Water_Unit_List> {
           ),
           title: const Text(
             'รายการจดหน่วยน้ำ',
-            style: TextStyle(color: Color.fromARGB(255, 83, 83, 83)),
+            style: TextStyle(color: Color.fromARGB(255, 83, 83, 83), fontWeight: FontWeight.bold),
           ),
-          actions: [
-            (downloadPer != 0.0 && downloadPer != 100.0)
-                ? Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Text(
-                        downloadPer.toStringAsFixed(1) + "%",
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  )
-                : IconButton(
-                    onPressed: () {
-                      downloadUsers();
-                      // downloadAll();
-                    },
-                    icon: const Icon(
-                      Icons.download_for_offline_rounded,
-                      color: Palette.thisGreen,
-                    ),
-                  ),
-          ],
+          // actions: [
+          //   (downloadPer != 0.0 && downloadPer != 100.0)
+          //       ? Center(
+          //           child: Padding(
+          //             padding: const EdgeInsets.only(right: 8.0),
+          //             child: Text(
+          //               downloadPer.toStringAsFixed(1) + "%",
+          //               style: const TextStyle(
+          //                 color: Colors.grey,
+          //                 fontWeight: FontWeight.bold,
+          //               ),
+          //             ),
+          //           ),
+          //         )
+          //       : IconButton(
+          //           onPressed: () {
+          //             downloadUsers();
+          //             // downloadAll();
+          //           },
+          //           icon: const Icon(
+          //             Icons.download_for_offline_rounded,
+          //             color: Palette.thisGreen,
+          //           ),
+          //         ),
+          // ],
         ),
         body: TabBarView(
           children: [Notyet(), Done()],

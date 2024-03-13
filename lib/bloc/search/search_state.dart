@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'search_bloc.dart';
 
 // เก็บค่าไว้เปลี่ยนแปลง

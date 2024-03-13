@@ -7,7 +7,6 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import '../../bloc/load_undone/undone_bloc.dart';
 import '../../bloc/profile/profile_bloc.dart';
-import '../../offline/utils.dart';
 import '../user_consume_info.dart';
 
 class Notyet extends StatefulWidget {

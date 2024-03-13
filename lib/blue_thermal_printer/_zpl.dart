@@ -1,6 +1,6 @@
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
 import 'package:waterworks/blue_thermal_printer/print_setting.dart';
-import 'package:waterworks/models/invoice_to_printer.dart';
+import 'package:waterworks/ETC/models/invoice_to_printer.dart';
 
 // ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 // ^XA
