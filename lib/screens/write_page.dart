@@ -368,7 +368,7 @@ class WritePage extends StatelessWidget {
                                 child: Container(
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.all(20),
-                                  child: const Text(
+                                  child:   Text(
                                     "ยืนยัน",
                                     style: TextStyle(color: Colors.white),
                                   ),
@@ -525,7 +525,7 @@ Future<void> showAlertWriteOK(
                 },
               ),
               TextButton(
-                child: const Text('ยืนยัน'),
+                child:   Text('ยืนยัน'),
                 onPressed: state.buttonEnable
                     ? () async {
                         context
@@ -538,6 +538,8 @@ Future<void> showAlertWriteOK(
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
                             context.read<WritePageBloc>().add(ConfirmWriteUnit(
+                                     getLat: state.lat,
+                                  getLng: state.lng,
                                   context: context,
                                   statusMeter: statusMeter,
                                   currentUnit: newUnit,

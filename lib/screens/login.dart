@@ -1,9 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'dart:convert';
-import 'dart:io';
 import 'dart:async';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +26,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   late Login_Request _login_request;
   var deviceData = <String, dynamic>{};
-  static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+
   final formKey_LogIn = GlobalKey<FormState>();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
   String userName = '';
@@ -39,7 +37,7 @@ class _LoginState extends State<Login> {
   void initState() {
     circleHUD = false;
     _login_request = Login_Request();
-    getDeviceInfo();
+  
     super.initState();
   }
 
@@ -176,7 +174,7 @@ class _LoginState extends State<Login> {
 
                                 _login_request.username = userName;
                                 _login_request.password = passWord;
-                                _login_request.device_name = deviceDetail.toString().toUpperCase();
+                                _login_request.device_name = 'android';
                                 print(jsonEncode(_login_request));
                                 loginNormal(_login_request);
                               },
@@ -246,27 +244,5 @@ class _LoginState extends State<Login> {
     }
   }
 
-  Future<void> getDeviceInfo() async {
-    Map<String, dynamic> _readAndroidBuildData(AndroidDeviceInfo build) {
-      return <String, dynamic>{
-        'brand': build.brand,
-        'model': build.model,
-      };
-    }
 
-    try {
-      if (Platform.isAndroid) {
-        deviceData = _readAndroidBuildData(await deviceInfoPlugin.androidInfo);
-      }
-    } on PlatformException {
-      deviceData = <String, dynamic>{'Error:': 'Failed to get platform version.'};
-    }
-
-    setState(() {
-      _deviceData = deviceData;
-
-      deviceDetail = (deviceData['brand'] == null) ? "IPHONE" : deviceData['brand'] + '-' + deviceData['model'];
-    });
-    print(deviceDetail);
-  }
 }

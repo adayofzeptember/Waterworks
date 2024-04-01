@@ -53,6 +53,8 @@ class Search_Page extends StatelessWidget {
                               BorderRadius.all(Radius.circular(230.0)))),
                 ),
                 const SizedBox(height: 15),
+
+                //! หน้าแสดง
                 BlocBuilder<SearchBloc, SearchState>(
                   builder: (context, state) {
                     if (state.statusSearch == "0") {

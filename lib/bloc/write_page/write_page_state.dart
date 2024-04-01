@@ -11,7 +11,11 @@ class WritePageState extends Equatable {
   bool buttonEnable;
   String whatPage, writeCondition;
   bool checkCurrentUnit;
+    String lat;
+    String lng;
   WritePageState({
+    required this.lat,
+    required this.lng,
     required this.countForReset,
     required this.writeRecordId,
     required this.customerName,
@@ -46,12 +50,16 @@ class WritePageState extends Equatable {
     bool? loading,
     String? whatPage,
     String? writeCondition,
+        String? lat,
+            String? lng,
   }) {
     return WritePageState(
       countForReset: countForReset ?? this.countForReset,
       writeRecordId: writeRecordId ?? this.writeRecordId,
       customerName: customerName ?? this.customerName,
       address: address ?? this.address,
+                  lat: lat ?? this.lat,
+                  lng: lng ?? this.lng,
       waterNumber: waterNumber ?? this.waterNumber,
       areaNumber: areaNumber ?? this.areaNumber,
       meterNumber: meterNumber ?? this.meterNumber,
@@ -79,6 +87,7 @@ class WritePageState extends Equatable {
         invoices,
         checkCurrentUnit,
         invoice_data,
+           lat,lng,
         loading,
         whatPage,
         writeCondition,

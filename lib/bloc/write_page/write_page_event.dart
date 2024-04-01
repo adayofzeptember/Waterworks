@@ -32,11 +32,14 @@ class ConfirmWriteUnit extends WritePageEvent {
   String id;
   String statusMeter;
   String currentUnit;
+  String? getLat,getLng;
   ConfirmWriteUnit({
     required this.context,
     required this.statusMeter,
     required this.currentUnit,
     required this.id,
+    required this.getLat,
+   required this.getLng
   });
 }
 

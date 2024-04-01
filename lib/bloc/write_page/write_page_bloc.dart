@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/screens/write_page.dart';
@@ -17,6 +18,8 @@ part 'write_page_state.dart';
 class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
   WritePageBloc()
       : super(WritePageState(
+        lat: '0',
+        lng: '0',
             countForReset: 0,
             writeRecordId: "",
             customerName: "",
@@ -38,6 +41,15 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       },
     );
     on<ToPageWrite>((event, emit) async {
+               EasyLoading.show(
+          status: 'กำลังเข้าถึงตำแหน่งปัจจุบัน...', maskType: EasyLoadingMaskType.black);
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      print(position.latitude.toString() + position.longitude.toString());
+         EasyLoading.dismiss();
+      emit(state.copyWith(
+          lat: position.latitude.toString(),
+          lng: position.longitude.toString()));
       print('ToPageWrite');
       Navigator.push(
         event.context,
@@ -112,6 +124,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
           'water_meter_record_id': event.id,
           'current_unit': event.currentUnit,
           'new_round': event.statusMeter,
+              'lat': event.getLng,
+          'lng': event.getLng,
         },
         options: Options(headers: {
           'Content-Type': 'application/json',

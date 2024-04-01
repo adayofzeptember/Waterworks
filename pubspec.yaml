@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   shared_preferences: ^2.0.15
-  device_info_plus: ^8.1.0
   flutter_svg: ^1.0.3
   http: ^0.13.5
   animated_bottom_navigation_bar: ^1.1.0
@@ -47,7 +46,7 @@ dependencies:
   bluetooth_enable_fork: ^0.1.6
   package_info_plus: ^3.0.3
   dropdown_button2: ^2.0.0
-
+  geolocator: ^10.1.0
   ################ printer ##############################
   #bluetooth_print: ^4.3.0
   #print_bluetooth_thermal: ^1.0.5

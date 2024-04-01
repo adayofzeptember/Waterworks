@@ -223,11 +223,9 @@ class _ProfileState extends State<Profile> {
                                         borderRadius: BorderRadius.circular(10),
                                       )),
                                   onPressed: () async {
-                                    
                                     final Uri url = Uri.parse(
                                         'https://www.dropbox.com/scl/fo/t15br3qm94f6gey3y8wjv/h?rlkey=g964qgru1rw38ifvakcdiwv4g&dl=0'
-                                        //'https://drive.google.com/drive/folders/1XfDECxDHTFMolckRb5eq76yT8asc0SEO?usp=share_link'
-                               
+                                        
                                         );
                                     if (await canLaunchUrl(url)) {
                                       await launchUrl(
@@ -324,8 +322,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
-                      const 
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 85,
                         backgroundColor: Colors.white,
                         child: CircleAvatar(
