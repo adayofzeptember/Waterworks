@@ -154,15 +154,13 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
           if (responseInvoice.statusCode == 200) {
             emit(state.copyWith(loading: false));
-   for (var item in nestedData['history_meters']) {
-          
-            fiveMonthsBackList.add(FiveMonths_Back(
-              month: await item['month'].toString(),
-              sum_unit: await item['sum_unit'].toString(),
-            ));
-          }
+            for (var item in nestedData['history_meters']) {
+              fiveMonthsBackList.add(FiveMonths_Back(
+                month: await item['month'].toString(),
+                sum_unit: await item['sum_unit'].toString(),
+              ));
+            }
             dataInvoice = Invoice_Load_Data(
-              fiveMonths_Back_Model: fiveMonthsBackList,
               id: await nestedData['id'],
               customerName: await nestedData['customer_name'],
               dueDate: await nestedData['due_date_format'],
@@ -209,6 +207,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
               meter_name: await nestedData['customer_water']['water_meter_fee']
                   ['name'],
+              fiveMonths_Back_Model: fiveMonthsBackList,
             );
 
             emit(state.copyWith(
@@ -306,14 +305,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
           emit(state.copyWith(loading: false));
 
           for (var item in nestedData['history_meters']) {
-          
             fiveMonthsBackList.add(FiveMonths_Back(
               month: await item['month'].toString(),
               sum_unit: await item['sum_unit'].toString(),
             ));
           }
           dataInvoice = Invoice_Load_Data(
-            fiveMonths_Back_Model: fiveMonthsBackList,
             id: await nestedData['id'],
             customerName: await nestedData['customer_name'],
             customerAddress: await nestedData['customer_address'],
@@ -359,6 +356,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             sum_total: await nestedData['sum_total'],
             meter_name: await nestedData['customer_water']['water_meter_fee']
                 ['name'],
+            fiveMonths_Back_Model: fiveMonthsBackList,
           );
 
           emit(state.copyWith(

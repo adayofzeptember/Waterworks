@@ -312,6 +312,7 @@ eJztWUuL5NYVPvdKNSPUTo0EVbEx7SDUG6GBdtvZNGUYq8Y1WWVRDV1kE8jEq5BV7+JdLpohCHno3yDU
 
         bluetooth.printCustom(
             zplToPrinter, Size.boldMedium.val, Align.center.val);
+            
         bluetooth.paperCut();
       }
     });
