@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
                             height: 60,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  primary: const Color.fromARGB(255, 235, 88, 62),
+                                  backgroundColor: const Color.fromARGB(255, 235, 88, 62),
                                   elevation: 0,
                                   // side: BorderSide(color: Colors.white),
                                   shape: RoundedRectangleBorder(

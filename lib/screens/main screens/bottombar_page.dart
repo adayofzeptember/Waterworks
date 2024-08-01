@@ -77,6 +77,7 @@ class _Bottom_bar_pageState extends State<Bottom_bar_page> {
                     ),
                     label: 'ค้นหา'),
                 BottomNavigationBarItem(
+                  
                     activeIcon: SvgPicture.asset(
                       'assets/icons/person.svg',
                       height: 30,

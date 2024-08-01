@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/blue_thermal_printer/_zpl.dart';
+import 'package:waterworks/blue_thermal_printer/newZPLL.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
 import '../models/invoice_to_printer.dart';
@@ -247,7 +248,7 @@ class _Print2State extends State<Print2> {
                                   )
                                 : ElevatedButton(
                                     style: ElevatedButton.styleFrom(
-                                        primary: Colors.green),
+                                        backgroundColor: Colors.green),
                                     onPressed: (() {
                                       context.read<PrinterConnectBloc>().add(
                                           GetName_Address(
@@ -299,7 +300,7 @@ class _Print2State extends State<Print2> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: _isButtonDisabled
+                                backgroundColor: _isButtonDisabled
                                     ? Palette.thisGreen
                                     : const Color.fromARGB(255, 155, 153, 153),
                               ),
@@ -329,7 +330,7 @@ class _Print2State extends State<Print2> {
                             ),
                             ElevatedButton(
                               style:
-                                  ElevatedButton.styleFrom(primary: Colors.red),
+                                  ElevatedButton.styleFrom(backgroundColor: Colors.red),
                               onPressed: () {
                                 _showAlertDeletePrinter(context);
                                 // if (_connected == true) {

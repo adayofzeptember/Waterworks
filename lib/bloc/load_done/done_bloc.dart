@@ -50,9 +50,9 @@ class DoneBloc extends Bloc<DoneEvent, DoneState> {
                   waterNumber: await el['water_number'],
                   areaNumber: await el['area_number'],
                   customerAddress: await el['customer_water']['address'],
-                  meterNumber: (el['customer_water']['meter_number'] != "")
+                  meterNumber: await (el['customer_water']['meter_number'] != "")
                       ? await el['customer_water']['meter_number']
-                      : "0",
+                      : "-",
 
                   invoiceID: await el['invoice']['id'],
                   // status: await (el['customer_water']['status'] == "Normal") ? true : false

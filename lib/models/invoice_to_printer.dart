@@ -28,13 +28,28 @@ class ToInvoice {
   String? inv_barcode2;
   String? dueDate;
 
+  //*new
+  String? total_format;
+  String? meter_number;
+  String? sum_total;
+  String? meter_name;
+  String? month;
+    List? fiveMonths_Back_Model;
+
+
   ToInvoice(
       {this.inv_number,
+      this.fiveMonths_Back_Model,
       this.inv_user_number,
       this.inv_user_name,
       this.inv_user_address,
+      this.meter_name,
+      this.month,
+      this.sum_total,
       this.inv_unit_use,
       this.inv_prapa_cost,
+      this.total_format,
+      this.meter_number,
       this.inv_service,
       this.dueDate,
       this.inv_barcode2,

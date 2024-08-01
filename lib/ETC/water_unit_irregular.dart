@@ -55,7 +55,7 @@ class _Irregular_WaterState extends State<Irregular_Water> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  primary: Palette.thisGreen,
+                  backgroundColor: Palette.thisGreen,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

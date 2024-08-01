@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +80,7 @@ class InvoicePage2 extends StatelessWidget {
                     ],
                   );
                 } else {
+                  print(state.invoice_data.fiveMonths_Back_Model[0].month.toString());
                   String add = state.invoice_data.customerAddress.toString();
                   String newAddress = add.substring(0, 6);
                   String month = state.invoice_data.write_date.toString();
@@ -138,10 +141,16 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.sum_months.toString();
                   toInvoiceModel.inv_sum_invoice =
                       state.invoice_data.sum_invoice.toString();
-                  toInvoiceModel.godTotal =
-                      state.invoice_data.godTotal.toString();
+            
 
                   // state.invoice_data.bank.toString();
+                  //*nnew
+                  toInvoiceModel.total_format = state.invoice_data.total_format.toString();
+                  toInvoiceModel.meter_number = state.invoice_data.meter_number.toString();
+                  toInvoiceModel.sum_total = state.invoice_data.sum_total.toString();
+                  toInvoiceModel.month = m.convertMonth(monthThai);
+                  toInvoiceModel.meter_name = state.invoice_data.meter_name.toString();
+                  toInvoiceModel.fiveMonths_Back_Model = state.invoice_data.fiveMonths_Back_Model;
 
                   String debCheck = '';
                   bool meterWrong;
@@ -603,7 +612,7 @@ class InvoicePage2 extends StatelessWidget {
                                       Row(
                                         children: [
                                           Text(
-                                              state.invoice_data.godTotal
+                                              state.invoice_data.sum_total
                                                   .toString(),
                                               style: const TextStyle(
                                                   color: Color.fromARGB(
@@ -639,7 +648,7 @@ class InvoicePage2 extends StatelessWidget {
                                       "pending")
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                          primary: Palette.thisGreen,
+                                          backgroundColor: Palette.thisGreen,
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -693,7 +702,7 @@ class InvoicePage2 extends StatelessWidget {
                                   meterWrong
                                       ? ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                              primary: const Color.fromARGB(
+                                              backgroundColor: const Color.fromARGB(
                                                   255, 247, 113, 60),
                                               elevation: 0,
                                               shape: RoundedRectangleBorder(

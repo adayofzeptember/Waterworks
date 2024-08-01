@@ -19,7 +19,7 @@ class Invoice_Load_Data {
   String? total;
   int? debt_months;
   String? sum_debt;
-  String? godTotal;
+
   String? bank;
   String? bank_barcode;
   String? prapa_cost;
@@ -32,9 +32,17 @@ class Invoice_Load_Data {
   String? waterMeterRecord_previous_unit;
   String? waterMeterRecord_current_unit;
   String? waterMeterRecord_sum_unit;
+  //new
+  String? total_format;
+  String? meter_number;
+  String? sum_total;
+  String? meter_name;
+  String? month;
+  List? fiveMonths_Back_Model;
 
   Invoice_Load_Data(
       {this.id,
+      this.fiveMonths_Back_Model,
       this.water_meter_record_nowUnit,
       this.water_meter_record_nowMonth,
       this.water_meter_record_beforeMonth,
@@ -42,13 +50,18 @@ class Invoice_Load_Data {
       this.sum_months,
       this.sum_invoice,
       this.dueDate,
+      this.sum_total,
+      this.total_format,
       this.customerName,
+      this. month,
       this.customerAddress,
       this.bank_barcode,
       this.invoiceStatus,
       this.invoiceNumber,
       this.areaNumber,
+      this.meter_number,
       this.write_date,
+      this.meter_name,
       this.meter_status_text,
       this.prapa_cost,
       this.sumService,
@@ -58,7 +71,6 @@ class Invoice_Load_Data {
       this.debt_months,
       this.issue_month,
       this.sum_debt,
-      this.godTotal,
       this.total,
       this.waterMeterRecord_current_unit,
       this.waterMeterRecord_sum_unit,
