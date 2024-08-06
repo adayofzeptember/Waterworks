@@ -35,14 +35,20 @@ class ToInvoice {
   String? meter_name;
   String? month;
     List? fiveMonths_Back_Model;
+        List? debtmonths_step;
+    String? sum_months;
+    String? sum_total_text;
 
-
+ 
   ToInvoice(
       {this.inv_number,
       this.fiveMonths_Back_Model,
       this.inv_user_number,
       this.inv_user_name,
       this.inv_user_address,
+      this.debtmonths_step,
+      this.sum_months,
+      this.sum_total_text,
       this.meter_name,
       this.month,
       this.sum_total,

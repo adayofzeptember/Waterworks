@@ -6,7 +6,6 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:waterworks/models/fivemonthsback.dart';
 import 'package:waterworks/screens/write_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../ETC/api_domain_url.dart';
@@ -151,6 +150,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
           dynamic dataInvoice = '';
           dynamic nestedData = responseInvoice.data['data'];
           List<FiveMonths_Back> fiveMonthsBackList = [];
+          List<DebtMonths_Step> debtmonthsList = [];
+
 
           if (responseInvoice.statusCode == 200) {
             emit(state.copyWith(loading: false));
@@ -158,6 +159,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               fiveMonthsBackList.add(FiveMonths_Back(
                 month: await item['month'].toString(),
                 sum_unit: await item['sum_unit'].toString(),
+              ));
+            }
+                     for (var item in nestedData['months_step']) {
+              debtmonthsList.add(DebtMonths_Step(
+                name: await item['name'].toString(),
+                total: await item['total'].toString(),
               ));
             }
             dataInvoice = Invoice_Load_Data(
@@ -176,7 +183,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   await nestedData['water_meter_record_before_month'],
               water_meter_record_beforeUnit:
                   await nestedData['water_meter_record_before_unit'],
-              sum_months: await nestedData['sum_months'],
+              sum_months: await nestedData['sum_months'] ?? ' ',
               sum_invoice: await nestedData['sum_invoice'],
               write_date: await nestedData['issue_date_format'],
               sumService: await nestedData['sum_service_format'],
@@ -208,6 +215,10 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               meter_name: await nestedData['customer_water']['water_meter_fee']
                   ['name'],
               fiveMonths_Back_Model: fiveMonthsBackList,
+              debt_months_step: debtmonthsList,
+            sum_total_text: await nestedData['sum_total_text'],
+
+            
             );
 
             emit(state.copyWith(
@@ -274,6 +285,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
 //*--------------------------------------- ดูบิล --------------------------------------------------
     on<WatchInvoiceUnitDone>((event, emit) async {
+      
       Navigator.push(
         event.context,
         PageTransition(
@@ -301,6 +313,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             (state.invoice_data != '') ? state.invoice_data : '';
         dynamic nestedData = response.data['data'];
         List<FiveMonths_Back> fiveMonthsBackList = [];
+          List<DebtMonths_Step> debtmonthsList = [];
+
         if (response.statusCode == 200) {
           emit(state.copyWith(loading: false));
 
@@ -310,6 +324,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               sum_unit: await item['sum_unit'].toString(),
             ));
           }
+                        for (var item in nestedData['months_step']) {
+              debtmonthsList.add(DebtMonths_Step(
+                name: await item['name'].toString(),
+                total: await item['total'].toString(),
+              ));
+            }
           dataInvoice = Invoice_Load_Data(
             id: await nestedData['id'],
             customerName: await nestedData['customer_name'],
@@ -357,6 +377,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             meter_name: await nestedData['customer_water']['water_meter_fee']
                 ['name'],
             fiveMonths_Back_Model: fiveMonthsBackList,
+            debt_months_step: debtmonthsList,
+            sum_total_text: await nestedData['sum_total_text'],
           );
 
           emit(state.copyWith(

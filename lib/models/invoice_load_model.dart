@@ -39,6 +39,9 @@ class Invoice_Load_Data {
   String? meter_name;
   String? month;
   List? fiveMonths_Back_Model;
+  List? debt_months_step;
+  String? sum_total_text;
+ 
 
   Invoice_Load_Data(
       {this.id,
@@ -49,9 +52,11 @@ class Invoice_Load_Data {
       this.water_meter_record_beforeUnit,
       this.sum_months,
       this.sum_invoice,
+      this.debt_months_step,
       this.dueDate,
       this.sum_total,
       this.total_format,
+      this.sum_total_text,
       this.customerName,
       this. month,
       this.customerAddress,
@@ -79,3 +84,19 @@ class Invoice_Load_Data {
       this.waterMeterRecord_record_date_format,
       this.meter_status});
 }
+class FiveMonths_Back {
+  String? month;
+  String? sum_unit;
+
+  FiveMonths_Back({this.month, this.sum_unit});
+}
+
+class DebtMonths_Step {
+  String? name;
+  String? total;
+
+  DebtMonths_Step({this.name, this.total});
+}
+
+
+

@@ -6,6 +6,14 @@ import 'package:waterworks/models/invoice_to_printer.dart';
 // ^XA
 // ^MMT
 
+//${thisInvoice}
+// ${thisInvoice.fiveMonths_Back_Model?[0].month}
+// ${thisInvoice.fiveMonths_Back_Model?[0].sum_unit}
+// ${thisInvoice.debtmonths_step?[0].name}
+// ${thisInvoice.debtmonths_step?[0].total}
+
+
+
 // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // ^FD>:${thisInvoice.inv_barcode2}^FS
 class PrintHereFucker {
@@ -73,9 +81,9 @@ class PrintHereFucker {
 ^FT403,585^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_number}^FS^CI0
-^FT82,1085^A@N,39,33,angsana.fnt
+^FT57,1080^A@N,34,30,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD(หนึ่งร้อยสี่สิบเจ็ดบาทหกสิบหกสตางค์)^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.sum_total_text}^FS^CI0
 ^FT203,1190^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.fiveMonths_Back_Model?[1].month}^FS^CI0
@@ -112,15 +120,39 @@ class PrintHereFucker {
 ^FT454,914^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.total_format}^FS^CI0
-^FT447,1033^A@N,39,37,angsana.fnt
+^FT454,1033^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.sum_total}^FS^CI0
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice}^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice }^FS^CI0
 ^FT296,82^A@N,47,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบแจ้งค่าน้ำประปา^FS^CI0
+^FT38,765^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[0].name}^FS^CI0
+^FT38,814^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[1].name}^FS^CI0
+^FT38,859^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[2].name}^FS^CI0
+^FT38,914^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[3].name}^FS^CI0
+^FT152,765^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[0].total}^FS^CI0
+^FT152,814^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[1].total}^FS^CI0
+^FT152,859^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[2].total}^FS^CI0
+^FT150,914^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[3].total}^FS^CI0
 ^PQ1,0,1,Y^XZ
 """;
         } else if (check == "1" && debt == "0") {
@@ -174,9 +206,9 @@ class PrintHereFucker {
 ^FT403,585^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_number}^FS^CI0
-^FT82,1085^A@N,39,33,angsana.fnt
+^FT57,1080^A@N,34,30,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD(หนึ่งร้อยสี่สิบเจ็ดบาทหกสิบหกสตางค์)^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.sum_total_text}^FS^CI0
 ^FT203,1190^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.fiveMonths_Back_Model?[1].month}^FS^CI0
@@ -213,7 +245,7 @@ class PrintHereFucker {
 ^FT454,914^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.total_format}^FS^CI0
-^FT447,1033^A@N,39,37,angsana.fnt
+^FT454,1033^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.sum_total}^FS^CI0
 ^FT454,976^A@N,39,37,angsana.fnt
@@ -222,6 +254,30 @@ class PrintHereFucker {
 ^FT296,82^A@N,47,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบแจ้งค่าน้ำประปา^FS^CI0
+^FT38,765^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[0].name}^FS^CI0
+^FT38,814^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[1].name}^FS^CI0
+^FT38,859^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[2].name}^FS^CI0
+^FT38,914^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[3].name}^FS^CI0
+^FT152,765^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[0].total}^FS^CI0
+^FT152,814^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[1].total}^FS^CI0
+^FT152,859^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[2].total}^FS^CI0
+^FT150,914^A@N,39,37,angsana.fnt
+^FH\
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[3].total}^FS^CI0
 ^PQ1,0,1,Y^XZ
 """;
         }
