@@ -42,11 +42,14 @@ class _Bottom_bar_pageState extends State<Bottom_bar_page> {
               ],
             ),
             child: BottomNavigationBar(
+              selectedLabelStyle: TextStyle(color: Palette.thisGreen),
+              unselectedLabelStyle: TextStyle(color: Colors.white),
               currentIndex: state.index,
               onTap: _onItemTapped,
               type: BottomNavigationBarType.fixed,
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
+
                     activeIcon: SvgPicture.asset(
                       'assets/icons/home.svg',
                       height: 30,
@@ -77,6 +80,7 @@ class _Bottom_bar_pageState extends State<Bottom_bar_page> {
                     ),
                     label: 'ค้นหา'),
                 BottomNavigationBarItem(
+                  
                   
                     activeIcon: SvgPicture.asset(
                       'assets/icons/person.svg',

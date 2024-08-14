@@ -11,7 +11,6 @@ import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/version_string.dart';
 import '../../bloc/profile/profile_bloc.dart';
 import '../../main.dart';
-import '../../offline/office_route.dart';
 import '../../service/get_profile.dart';
 import '../../ETC/progressHUD.dart';
 import '../../offline/utils.dart';
@@ -181,36 +180,36 @@ class _ProfileState extends State<Profile> {
                               const SizedBox(
                                 height: 20,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
-                                      elevation: 0,
-                                      side:
-                                          const BorderSide(color: Colors.grey),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      )),
-                                  onPressed: () {
-                                    Navigator.push(context, pageOffice());
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      alignment: Alignment.center,
-                                      child: const Text(
-                                        "ใช้งานแบบออฟไลน์",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.grey,
-                                            fontSize: 15),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.all(8.0),
+                              //   child: ElevatedButton(
+                              //     style: ElevatedButton.styleFrom(
+                              //         backgroundColor: Colors.white,
+                              //         elevation: 0,
+                              //         side:
+                              //             const BorderSide(color: Colors.grey),
+                              //         shape: RoundedRectangleBorder(
+                              //           borderRadius: BorderRadius.circular(10),
+                              //         )),
+                              //     onPressed: () {
+                              //       Navigator.push(context, pageOffice());
+                              //     },
+                              //     child: Padding(
+                              //       padding: const EdgeInsets.all(15.0),
+                              //       child: Container(
+                              //         width: double.infinity,
+                              //         alignment: Alignment.center,
+                              //         child: const Text(
+                              //           "ใช้งานแบบออฟไลน์",
+                              //           style: TextStyle(
+                              //               fontWeight: FontWeight.bold,
+                              //               color: Colors.grey,
+                              //               fontSize: 15),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: ElevatedButton(

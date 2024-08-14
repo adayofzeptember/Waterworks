@@ -11,10 +11,6 @@ import '../bloc/load_undone/undone_bloc.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
 import '../models/invoice_to_printer.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as img;
-import 'dart:convert';
 
 class InvoicePage2 extends StatelessWidget {
   const InvoicePage2({Key? key}) : super(key: key);
@@ -162,10 +158,10 @@ class InvoicePage2 extends StatelessWidget {
                       state.invoice_data.fiveMonths_Back_Model;
                   toInvoiceModel.sum_months =
                       state.invoice_data.sum_months.toString();
-                       toInvoiceModel.debtmonths_step =
+                  toInvoiceModel.debtmonths_step =
                       state.invoice_data.debt_months_step;
 
-                           toInvoiceModel.sum_total_text =
+                  toInvoiceModel.sum_total_text =
                       state.invoice_data.sum_total_text.toString();
 
                   String debCheck = '';
@@ -774,80 +770,4 @@ class InvoicePage2 extends StatelessWidget {
   }
 }
 
-Future<void> convertAndShowImage(BuildContext context) async {
-  final url = 'https://uat.waterwork-krc.go.th/storage/upload/images/5bSqRvyIkfyFrzxpJp3IQLBkLKXWLbM8jpglbvkU.png';
-  final response = await http.get(Uri.parse(url));
 
-  if (response.statusCode != 200) {
-    print('Failed to download image');
-    return;
-  }
-
-  final originalImage = img.decodeImage(response.bodyBytes);
-  final grayscaleImage = img.grayscale(originalImage!);
-  final monochromeImage = threshold(grayscaleImage, 128);
-
- final zplCode = generateZPL(monochromeImage);
-
-
-
-}
-
-img.Image threshold(img.Image grayscaleImage, int thresholdValue) {
-  final monochromeImage = img.Image(grayscaleImage.width, grayscaleImage.height);
-
-  for (int y = 0; y < grayscaleImage.height; y++) {
-    for (int x = 0; x < grayscaleImage.width; x++) {
-      final pixel = grayscaleImage.getPixel(x, y);
-      final luminance = img.getLuminance(pixel);
-      final color = luminance > thresholdValue ? img.getColor(255, 255, 255) : img.getColor(0, 0, 0);
-      monochromeImage.setPixel(x, y, color);
-    }
-  }
-
-  return monochromeImage;
-  
-}
-
-String generateZPL(img.Image image) {
-  final width = image.width;
-  final height = image.height;
-  final buffer = StringBuffer();
-
-  buffer.write('^XA\n');
-  buffer.write('^FO0,0\n');
-  buffer.write('^GFA,');
-
-  // Calculate bytes and total bytes
-  int rowBytes = (width + 7) ~/ 8;
-  int totalBytes = rowBytes * height;
-  int row, col, bit;
-  final bytes = List<int>.filled(totalBytes, 0);
-
-  for (row = 0; row < height; row++) {
-    for (col = 0; col < width; col++) {
-      bit = 128 >> (col & 7);
-      if (image.getPixel(col, row) == img.getColor(0, 0, 0)) {
-        bytes[row * rowBytes + (col >> 3)] |= bit;
-      }
-    }
-  }
-
-  // Convert bytes to hexadecimal representation
-  String hexData = bytesToHexString(bytes);
-  print('$totalBytes,$totalBytes,$rowBytes,$hexData');
-
-  buffer.write('$totalBytes,$totalBytes,$rowBytes,$hexData\n');
-  buffer.write('^FS\n');
-  buffer.write('^XZ\n');
-
-  return buffer.toString();
-}
-
-String bytesToHexString(List<int> bytes) {
-  final buffer = StringBuffer();
-  for (final byte in bytes) {
-    buffer.write(byte.toRadixString(16).padLeft(2, '0'));
-  }
-  return buffer.toString().toUpperCase();
-}

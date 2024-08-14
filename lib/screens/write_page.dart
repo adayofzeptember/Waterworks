@@ -30,11 +30,11 @@ class WritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          elevation: 0,
+          elevation: 1,
           automaticallyImplyLeading: false,
           backgroundColor: Palette.thisGreen,
           centerTitle: true,
-          title: const Text('จดมาตรวัดน้ำ'),
+          title: Text('จดมาตรวัดน้ำ', style: TextStyle(color: Colors.white),),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -43,6 +43,7 @@ class WritePage extends StatelessWidget {
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
+              color: Colors.white,
             ),
           )),
       body: MediaQuery(
@@ -60,8 +61,10 @@ class WritePage extends StatelessWidget {
             } else {
               return SingleChildScrollView(
                 child: Stack(
+                  
                   children: [
                     CustomPaint(
+                      
                       painter: ShapesPainter(),
                       child: Container(height: 150),
                     ),

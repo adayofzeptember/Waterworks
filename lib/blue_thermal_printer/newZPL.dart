@@ -12,18 +12,16 @@ import 'package:waterworks/models/invoice_to_printer.dart';
 // ${thisInvoice.debtmonths_step?[0].name}
 // ${thisInvoice.debtmonths_step?[0].total}
 
-
-
 // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // ^FD>:${thisInvoice.inv_barcode2}^FS
 class PrintHereFucker {
   printInvoice_Now(
       ToInvoice thisInvoice, String check, String debt, String b) async {
     print(thisInvoice.inv_number);
-    String billID = '${thisInvoice.inv_qr![0]}';
-    String area = '${thisInvoice.inv_qr![1]}';
-    String date = '${thisInvoice.inv_qr![2]}';
-    String price = '${thisInvoice.inv_qr![3]}';
+    // String billID = '${thisInvoice.inv_qr![0]}';
+    // String area = '${thisInvoice.inv_qr![1]}';
+    // String date = '${thisInvoice.inv_qr![2]}';
+    // String price = '${thisInvoice.inv_qr![3]}';
     // print(billID + " " + area + " " + date + " " + price);
     // print('barcode2' + thisInvoice.inv_barcode2.toString());
     BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
@@ -125,7 +123,7 @@ class PrintHereFucker {
 ^FH\^CI17^F8^FD${thisInvoice.sum_total}^FS^CI0
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice }^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice}^FS^CI0
 ^FT296,82^A@N,47,45,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบแจ้งค่าน้ำประปา^FS^CI0
@@ -157,7 +155,7 @@ class PrintHereFucker {
 """;
         } else if (check == "1" && debt == "0") {
           //? ไม่ค้าง
-          zplToPrinter = """
+          zplToPrinter = """ 
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
@@ -363,12 +361,15 @@ eJztWUuL5NYVPvdKNSPUTo0EVbEx7SDUG6GBdtvZNGUYq8Y1WWVRDV1kE8jEq5BV7+JdLpohCHno3yDU
 ^FO371,893^GB180,0,2^FS
 ^FO3,923^GB571,0,2^FS
 ^PQ1,0,1,Y^XZ
-""";
+"""; 
+
         }
 
         bluetooth.printCustom(
             zplToPrinter, Size.boldMedium.val, Align.center.val);
-            
+        bluetooth.printCustom(
+            zplToPrinter, Size.boldMedium.val, Align.center.val);
+
         bluetooth.paperCut();
       }
     });

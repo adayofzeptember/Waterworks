@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/blue_thermal_printer/_zpl.dart';
+//import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import 'package:waterworks/blue_thermal_printer/newZPL.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';

@@ -53,6 +53,7 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => WritePageBloc()),
       ],
       child: MaterialApp(
+        
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -64,6 +65,7 @@ class Start_Page_Waterworks extends StatelessWidget {
           Locale('th', 'TH'),
         ],
         theme: ThemeData(
+          useMaterial3: false,
           primarySwatch: Palette.thisGreen,
           fontFamily: 'Kanit',
         ),
@@ -84,12 +86,12 @@ class Load_Page extends StatefulWidget {
 class _Load_PageState extends State<Load_Page> {
   @override
   initState() {
-    grantBlue();
+    grantBluetooth();
     check();
     super.initState();
   }
 
-  Future<void> grantBlue() async {
+  Future<void> grantBluetooth() async {
     var statusLocation = Permission.location;
     if (await statusLocation.isGranted != true) {
       await Permission.location.request();
