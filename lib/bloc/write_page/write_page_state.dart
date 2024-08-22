@@ -1,4 +1,5 @@
 part of 'write_page_bloc.dart';
+
 // ignore_for_file: must_be_immutable
 class WritePageState extends Equatable {
   int countForReset;
@@ -7,12 +8,13 @@ class WritePageState extends Equatable {
   String previousUnitFormat;
   dynamic invoices;
   dynamic invoice_data;
+  dynamic bill_data;
   bool loading;
   bool buttonEnable;
   String whatPage, writeCondition;
   bool checkCurrentUnit;
-    String lat;
-    String lng;
+  String lat;
+  String lng;
   WritePageState({
     required this.lat,
     required this.lng,
@@ -24,6 +26,7 @@ class WritePageState extends Equatable {
     required this.areaNumber,
     required this.meterNumber,
     required this.buttonEnable,
+    required this.bill_data,
     required this.previousUnitFormat,
     required this.invoices,
     required this.checkCurrentUnit,
@@ -47,19 +50,21 @@ class WritePageState extends Equatable {
     bool? checkCurrentUnit,
     bool? buttonEnable,
     dynamic invoice_data,
+      dynamic bill_data,
     bool? loading,
     String? whatPage,
     String? writeCondition,
-        String? lat,
-            String? lng,
+    String? lat,
+    String? lng,
   }) {
     return WritePageState(
       countForReset: countForReset ?? this.countForReset,
       writeRecordId: writeRecordId ?? this.writeRecordId,
       customerName: customerName ?? this.customerName,
       address: address ?? this.address,
-                  lat: lat ?? this.lat,
-                  lng: lng ?? this.lng,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
+      bill_data: bill_data ?? this.bill_data,
       waterNumber: waterNumber ?? this.waterNumber,
       areaNumber: areaNumber ?? this.areaNumber,
       meterNumber: meterNumber ?? this.meterNumber,
@@ -81,13 +86,15 @@ class WritePageState extends Equatable {
         customerName,
         address,
         waterNumber,
+        bill_data,
         areaNumber,
         meterNumber,
         previousUnitFormat,
         invoices,
         checkCurrentUnit,
         invoice_data,
-           lat,lng,
+        lat,
+        lng,
         loading,
         whatPage,
         writeCondition,

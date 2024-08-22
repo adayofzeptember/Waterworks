@@ -46,14 +46,13 @@ class Start_Page_Waterworks extends StatelessWidget {
         BlocProvider(create: (context) => DoneBloc()),
         BlocProvider(create: (context) => BottomMenuSwitchBloc()),
         BlocProvider(create: (context) => SearchBloc()),
-        // BlocProvider(create: (context) => CheckboxBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => PrinterConnectBloc()),
-        // BlocProvider(create: (context) => RadioCheckBloc()),
         BlocProvider(create: (context) => WritePageBloc()),
+        // BlocProvider(create: (context) => CheckboxBloc()),
+        // BlocProvider(create: (context) => RadioCheckBloc()),
       ],
       child: MaterialApp(
-        
         debugShowCheckedModeBanner: false,
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
@@ -177,20 +176,20 @@ class _Load_PageState extends State<Load_Page> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 100),
+                  padding: EdgeInsets.only(top: 100),
                   child: Image.asset('assets/images/badge.png'),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
-                const Text(
+                Text(
                   'การประปาเทศบาลนคร',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 25,
                       fontWeight: FontWeight.bold),
                 ),
-                const Text(
+                Text(
                   'นครราชสีมา',
                   style: TextStyle(
                       color: Colors.white,

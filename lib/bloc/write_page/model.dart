@@ -19,7 +19,7 @@ class Invoice_Load_Data {
   String? total;
   int? debt_months;
   String? sum_debt;
-
+  String? tax;
   String? bank;
   String? bank_barcode;
   String? prapa_cost;
@@ -41,13 +41,13 @@ class Invoice_Load_Data {
   List? fiveMonths_Back_Model;
   List? debt_months_step;
   String? sum_total_text;
- 
 
   Invoice_Load_Data(
       {this.id,
       this.fiveMonths_Back_Model,
       this.water_meter_record_nowUnit,
       this.water_meter_record_nowMonth,
+      this.tax,
       this.water_meter_record_beforeMonth,
       this.water_meter_record_beforeUnit,
       this.sum_months,
@@ -58,7 +58,7 @@ class Invoice_Load_Data {
       this.total_format,
       this.sum_total_text,
       this.customerName,
-      this. month,
+      this.month,
       this.customerAddress,
       this.bank_barcode,
       this.invoiceStatus,
@@ -84,6 +84,42 @@ class Invoice_Load_Data {
       this.waterMeterRecord_record_date_format,
       this.meter_status});
 }
+
+class Bill_Load_Data {
+  int? bill_id;
+  String? bill_customerName;
+  String? bill_customerAddress;
+  String? bill_taxNumber;
+  String? bill_invoiceNumber;
+  String? bill_areaNumber;
+  String? bill_waterNumber;
+  String? bill_size;
+  String? bill_sumFormat;
+  String? bill_sumService;
+  String? bill_discount;
+  String? bill_vat;
+  String? bill_totalFormat;
+
+  List? fiveMonths_Back_Model;
+
+  Bill_Load_Data({
+    this.bill_id,
+    this.fiveMonths_Back_Model,
+    this.bill_customerName,
+    this.bill_customerAddress,
+    this.bill_taxNumber,
+    this.bill_invoiceNumber,
+    this.bill_areaNumber,
+    this.bill_waterNumber,
+    this.bill_size,
+    this.bill_sumFormat,
+    this.bill_sumService,
+    this.bill_discount,
+    this.bill_vat,
+    this.bill_totalFormat,
+  });
+}
+
 class FiveMonths_Back {
   String? month;
   String? sum_unit;
@@ -97,6 +133,3 @@ class DebtMonths_Step {
 
   DebtMonths_Step({this.name, this.total});
 }
-
-
-

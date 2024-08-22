@@ -6,15 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
-//import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import 'package:waterworks/blue_thermal_printer/newZPL.dart';
+import 'package:waterworks/blue_thermal_printer/zpl3.dart';
+//import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
-import '../models/invoice_to_printer.dart';
+import '../models/invoice_bill_model_TOPRINTER.dart';
 
 // ignore: must_be_immutable
 class Print2 extends StatefulWidget {
   final ToInvoice invoideModel;
+    ToInvoice_Bill billModel;
 
   String checkWaterWrong;
   String? debt;
@@ -22,6 +24,7 @@ class Print2 extends StatefulWidget {
   Print2(
       {Key? key,
       required this.invoideModel,
+      required this.billModel,
       required this.checkWaterWrong,
       bank,
       this.debt})
@@ -382,9 +385,13 @@ class _Print2State extends State<Print2> {
     await Future.delayed(const Duration(seconds: 5), () {
       toPrint.printInvoice_Now(
           widget.invoideModel,
-          widget.checkWaterWrong.toString(),
-          widget.debt.toString(),
-          widget.bank.toString());
+          widget.billModel
+          // widget.checkWaterWrong.toString(),
+          // widget.debt.toString(),
+          // widget.bank.toString()
+          );
+          
+    
     });
     _waitlittleshit();
   }

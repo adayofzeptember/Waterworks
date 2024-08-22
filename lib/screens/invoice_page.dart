@@ -10,7 +10,7 @@ import '../ETC/color_green.dart';
 import '../bloc/load_undone/undone_bloc.dart';
 import '../bloc/search/search_bloc.dart';
 import '../bloc/write_page/write_page_bloc.dart';
-import '../models/invoice_to_printer.dart';
+import '../models/invoice_bill_model_TOPRINTER.dart';
 
 class InvoicePage2 extends StatelessWidget {
   const InvoicePage2({Key? key}) : super(key: key);
@@ -18,6 +18,7 @@ class InvoicePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
+    ToInvoice_Bill toBillModel = ToInvoice_Bill();
     MonthTH m = MonthTH();
 
     return WillPopScope(
@@ -161,6 +162,9 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.debtmonths_step =
                       state.invoice_data.debt_months_step;
 
+                        toInvoiceModel.inv_tax =
+                      state.invoice_data.tax;
+
                   toInvoiceModel.sum_total_text =
                       state.invoice_data.sum_total_text.toString();
 
@@ -185,6 +189,9 @@ class InvoicePage2 extends StatelessWidget {
                   }
 
                   // print(toInvoiceModel.inv_barcode2);
+
+                  //!----------------------------BILL----------------------------
+                  toBillModel.bill_id = state.bill_data.bill_id;
 
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -682,6 +689,7 @@ class InvoicePage2 extends StatelessWidget {
                                                 milliseconds: 250),
                                             type: PageTransitionType.fade,
                                             child: Print2(
+                                              billModel: toBillModel,
                                               invoideModel: toInvoiceModel,
                                               checkWaterWrong: '1',
                                               debt: debCheck,
@@ -738,6 +746,7 @@ class InvoicePage2 extends StatelessWidget {
                                                     type: PageTransitionType
                                                         .rightToLeft,
                                                     child: Print2(
+                                                      billModel: toBillModel,
                                                       invoideModel:
                                                           toInvoiceModel,
                                                       checkWaterWrong: '2',

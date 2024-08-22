@@ -4,6 +4,7 @@ class ToInvoice {
   String? inv_user_name;
   String? inv_user_address;
   String? inv_user_area;
+  String? inv_tax;
 
   String? inv_current_month;
 
@@ -34,12 +35,11 @@ class ToInvoice {
   String? sum_total;
   String? meter_name;
   String? month;
-    List? fiveMonths_Back_Model;
-        List? debtmonths_step;
-    String? sum_months;
-    String? sum_total_text;
+  List? fiveMonths_Back_Model;
+  List? debtmonths_step;
+  String? sum_months;
+  String? sum_total_text;
 
- 
   ToInvoice(
       {this.inv_number,
       this.fiveMonths_Back_Model,
@@ -51,6 +51,7 @@ class ToInvoice {
       this.sum_total_text,
       this.meter_name,
       this.month,
+      this.inv_tax,
       this.sum_total,
       this.inv_unit_use,
       this.inv_prapa_cost,
@@ -64,4 +65,40 @@ class ToInvoice {
       this.inv_total,
       this.inv_qr,
       this.godTotal});
+}
+
+
+class ToInvoice_Bill {
+  int? bill_id;
+  String? bill_customerName;
+  String? bill_customerAddress;
+  String? bill_taxNumber;
+  String? bill_invoiceNumber;
+  String? bill_areaNumber;
+  String? bill_waterNumber;
+  String? bill_size;
+  String? bill_sumFormat;
+  String? bill_sumService;
+  String? bill_discount;
+  String? bill_vat;
+  String? bill_totalFormat;
+
+  List? fiveMonths_Back_Model;
+
+  ToInvoice_Bill({
+    this.bill_id,
+    this.fiveMonths_Back_Model,
+    this.bill_customerName,
+    this.bill_customerAddress,
+    this.bill_taxNumber,
+    this.bill_invoiceNumber,
+    this.bill_areaNumber,
+    this.bill_waterNumber,
+    this.bill_size,
+    this.bill_sumFormat,
+    this.bill_sumService,
+    this.bill_discount,
+    this.bill_vat,
+    this.bill_totalFormat,
+  });
 }

@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:waterworks/screens/write_page.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../../ETC/api_domain_url.dart';
-import '../../models/invoice_load_model.dart';
+import 'model.dart';
 import '../../screens/main screens/bottombar_page.dart';
 import '../../screens/invoice_page.dart';
 part 'write_page_event.dart';
@@ -20,6 +20,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       : super(WritePageState(
             lat: '0',
             lng: '0',
+            bill_data: '',
             countForReset: 0,
             writeRecordId: "",
             customerName: "",
@@ -95,6 +96,26 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       }
     });
 
+    on<CountForReset>((event, emit) async {
+      print(state.whatPage);
+      if (state.whatPage == 'list_unit_done') {
+        Navigator.pop(event.context);
+      } else {
+        if (state.countForReset == 15) {
+          Phoenix.rebirth(event.context);
+        } else {
+          await Navigator.pushReplacement(
+            event.context,
+            PageTransition(
+              duration: const Duration(milliseconds: 250),
+              type: PageTransitionType.rightToLeft,
+              child: Bottom_bar_page(),
+            ),
+          );
+        }
+      }
+    });
+
     on<CheckThisBro>((event, emit) {
       emit(state.copyWith(writeCondition: event.getCondiotionRadio));
     });
@@ -148,10 +169,11 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             }),
           );
           dynamic dataInvoice = '';
+          dynamic dataBill = '';
+
           dynamic nestedData = responseInvoice.data['data'];
           List<FiveMonths_Back> fiveMonthsBackList = [];
           List<DebtMonths_Step> debtmonthsList = [];
-
 
           if (responseInvoice.statusCode == 200) {
             emit(state.copyWith(loading: false));
@@ -161,7 +183,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 sum_unit: await item['sum_unit'].toString(),
               ));
             }
-                     for (var item in nestedData['months_step']) {
+            for (var item in nestedData['months_step']) {
               debtmonthsList.add(DebtMonths_Step(
                 name: await item['name'].toString(),
                 total: await item['total'].toString(),
@@ -175,6 +197,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               invoiceStatus: await nestedData['status'],
               invoiceNumber: await nestedData['invoice_number'],
               areaNumber: await nestedData['area_number'],
+    
               water_meter_record_nowUnit:
                   await nestedData['water_meter_record_now_unit'],
               water_meter_record_nowMonth:
@@ -216,13 +239,34 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   ['name'],
               fiveMonths_Back_Model: fiveMonthsBackList,
               debt_months_step: debtmonthsList,
-            sum_total_text: await nestedData['sum_total_text'],
-
-            
+              sum_total_text: await nestedData['sum_total_text'],
+                        tax: await nestedData['customer_water']
+                    ['tax_number'],
             );
+
+            dataBill = Bill_Load_Data(
+                fiveMonths_Back_Model: fiveMonthsBackList,
+                bill_id: await nestedData['bill']['id'],
+                bill_customerName: await nestedData['bill']['customer_name'],
+                bill_customerAddress: await nestedData['bill']
+                    ['customer_address'],
+                bill_taxNumber: await nestedData['customer_water']
+                    ['tax_number'],
+                bill_invoiceNumber: await nestedData['bill']['record_invoice']
+                    ['invoice_number'],
+                bill_areaNumber: await nestedData['bill']['area_number'],
+                bill_waterNumber: await nestedData['bill']['water_number'],
+                bill_size: await nestedData['customer_water']['water_meter_fee']
+                    ['name'],
+                bill_sumFormat: await nestedData['bill']['sum_format'],
+                bill_sumService: await nestedData['bill']['sum_service_format'],
+                bill_discount: await nestedData['bill']['discount_format'],
+                bill_vat: await nestedData['bill']['vat_format'],
+                bill_totalFormat: await nestedData['bill']['total_format']);
 
             emit(state.copyWith(
                 invoice_data: await dataInvoice,
+                bill_data: await dataBill,
                 countForReset: state.countForReset + 1,
                 writeCondition: 'ปกติ'));
 
@@ -263,29 +307,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       }
     });
 
-    on<CountForReset>((event, emit) async {
-      print(state.whatPage);
-      if (state.whatPage == 'list_unit_done') {
-        Navigator.pop(event.context);
-      } else {
-        if (state.countForReset == 15) {
-          Phoenix.rebirth(event.context);
-        } else {
-          await Navigator.pushReplacement(
-            event.context,
-            PageTransition(
-              duration: const Duration(milliseconds: 250),
-              type: PageTransitionType.rightToLeft,
-              child: Bottom_bar_page(),
-            ),
-          );
-        }
-      }
-    });
-
 //*--------------------------------------- ดูบิล --------------------------------------------------
     on<WatchInvoiceUnitDone>((event, emit) async {
-      
       Navigator.push(
         event.context,
         PageTransition(
@@ -311,9 +334,10 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
         );
         dynamic dataInvoice =
             (state.invoice_data != '') ? state.invoice_data : '';
+        dynamic dataBill;
         dynamic nestedData = response.data['data'];
         List<FiveMonths_Back> fiveMonthsBackList = [];
-          List<DebtMonths_Step> debtmonthsList = [];
+        List<DebtMonths_Step> debtmonthsList = [];
 
         if (response.statusCode == 200) {
           emit(state.copyWith(loading: false));
@@ -324,12 +348,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               sum_unit: await item['sum_unit'].toString(),
             ));
           }
-                        for (var item in nestedData['months_step']) {
-              debtmonthsList.add(DebtMonths_Step(
-                name: await item['name'].toString(),
-                total: await item['total'].toString(),
-              ));
-            }
+          for (var item in nestedData['months_step']) {
+            debtmonthsList.add(DebtMonths_Step(
+              name: await item['name'].toString(),
+              total: await item['total'].toString(),
+            ));
+          }
           dataInvoice = Invoice_Load_Data(
             id: await nestedData['id'],
             customerName: await nestedData['customer_name'],
@@ -372,6 +396,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             meter_status_text: await nestedData['meter_status_text'],
             //*new
             total_format: await nestedData['total_format'],
+            tax: await nestedData['customer_water']
+                    ['tax_number'],
             meter_number: await nestedData['customer_water']['meter_number'],
             sum_total: await nestedData['sum_total'],
             meter_name: await nestedData['customer_water']['water_meter_fee']
@@ -381,9 +407,27 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             sum_total_text: await nestedData['sum_total_text'],
           );
 
-          emit(state.copyWith(
-            invoice_data: dataInvoice,
-          ));
+          dataBill = Bill_Load_Data(
+              fiveMonths_Back_Model: fiveMonthsBackList,
+              bill_id: await nestedData['bill']['id'],
+              bill_customerName: await nestedData['bill']['customer_name'],
+              bill_customerAddress: await nestedData['bill']
+                  ['customer_address'],
+              bill_taxNumber: await nestedData['customer_water']['tax_number'],
+              bill_invoiceNumber: await nestedData['bill']['record_invoice']
+                  ['invoice_number'],
+              bill_areaNumber: await nestedData['bill']['area_number'],
+              bill_waterNumber: await nestedData['bill']['water_number'],
+              bill_size: await nestedData['customer_water']['water_meter_fee']
+                  ['name'],
+              bill_sumFormat: await nestedData['bill']['sum_format'],
+              bill_sumService: await nestedData['bill']['sum_service_format'],
+              bill_discount: await nestedData['bill']['discount_format'],
+              bill_vat: await nestedData['bill']['vat_format'],
+              bill_totalFormat: await nestedData['bill']['total_format']);
+
+
+          emit(state.copyWith(invoice_data: dataInvoice, bill_data: dataBill));
         } else {
           print('-----------fail api');
           print(response);
