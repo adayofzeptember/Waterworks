@@ -18,7 +18,7 @@ class InvoicePage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ToInvoice toInvoiceModel = ToInvoice();
-    ToInvoice_Bill toBillModel = ToInvoice_Bill();
+    ToPrint_Bill toBillModel = ToPrint_Bill();
     MonthTH m = MonthTH();
 
     return WillPopScope(
@@ -162,8 +162,7 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.debtmonths_step =
                       state.invoice_data.debt_months_step;
 
-                        toInvoiceModel.inv_tax =
-                      state.invoice_data.tax;
+                  toInvoiceModel.inv_tax = state.invoice_data.tax;
 
                   toInvoiceModel.sum_total_text =
                       state.invoice_data.sum_total_text.toString();
@@ -191,7 +190,62 @@ class InvoicePage2 extends StatelessWidget {
                   // print(toInvoiceModel.inv_barcode2);
 
                   //!----------------------------BILL----------------------------
-                  toBillModel.bill_id = state.bill_data.bill_id;
+                  toBillModel.bill_number = state.bill_data.bill_number;
+                  toBillModel.bill_customerName =
+                      state.bill_data.bill_customerName;
+
+                  toBillModel.bill_customerAddress =
+                      state.bill_data.bill_customerAddress;
+                  toBillModel.bill_taxNumber = state.bill_data.bill_taxNumber;
+
+                  toBillModel.bill_areaNumber = state.bill_data.bill_areaNumber;
+
+                  toBillModel.bill_waterNumber =
+                      state.bill_data.bill_waterNumber;
+
+                  toBillModel.bill_Month = state.bill_data.bill_Month;
+
+                  toBillModel.bill_meterNumber =
+                      state.bill_data.bill_meterNumber;
+
+                  toBillModel.bill_size = state.bill_data.bill_size;
+
+                  toBillModel.bill_invoiceNumber =
+                      state.bill_data.bill_invoiceNumber;
+
+                  toBillModel.bill_nowNumber = state.bill_data.bill_nowNumber;
+                  toBillModel.bill_previousNumber =
+                      state.bill_data.bill_previousNumber;
+
+                  toBillModel.bill_sumUnit = state.bill_data.bill_sumUnit;
+
+                  toBillModel.bill_sumFormat = state.bill_data.bill_sumFormat;
+
+                  toBillModel.bill_sumService = state.bill_data.bill_sumService;
+
+                  toBillModel.bill_discount = state.bill_data.bill_discount;
+
+                  toBillModel.bill_vat = state.bill_data.bill_vat;
+
+                  toBillModel.bill_totalFormat =
+                      state.bill_data.bill_totalFormat;
+                  toBillModel.bill_totalFormat_text =
+                      state.bill_data.bill_totalFormat_text;
+
+
+                  toBillModel.bill_zpl = state.bill_data.bill_zpl;
+                  toBillModel.fiveMonths_Back_Model = state.bill_data.fiveMonths_Back_Model;
+
+                  //
+                  toBillModel.bill_zpl = state.bill_data.bill_zpl;
+                  toBillModel.bill_paymentType = state.bill_data.bill_paymentType;
+                  toBillModel.bill_recieveName = state.bill_data.bill_recieveName;
+                  toBillModel.bill_recievePosition = state.bill_data.bill_recievePosition;
+                  toBillModel.bill_issue_dateFormat = state.bill_data.bill_issue_dateFormat;
+
+
+ 
+                      
 
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -688,7 +742,7 @@ class InvoicePage2 extends StatelessWidget {
                                             duration: const Duration(
                                                 milliseconds: 250),
                                             type: PageTransitionType.fade,
-                                            child: Print2(
+                                            child: Print_Screen(
                                               billModel: toBillModel,
                                               invoideModel: toInvoiceModel,
                                               checkWaterWrong: '1',
@@ -745,7 +799,7 @@ class InvoicePage2 extends StatelessWidget {
                                                         milliseconds: 250),
                                                     type: PageTransitionType
                                                         .rightToLeft,
-                                                    child: Print2(
+                                                    child: Print_Screen(
                                                       billModel: toBillModel,
                                                       invoideModel:
                                                           toInvoiceModel,
@@ -778,5 +832,3 @@ class InvoicePage2 extends StatelessWidget {
     );
   }
 }
-
-

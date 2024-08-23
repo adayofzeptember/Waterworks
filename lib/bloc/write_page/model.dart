@@ -4,7 +4,6 @@ class Invoice_Load_Data {
   String? customerAddress;
   String? invoiceNumber;
   String? areaNumber;
-
   String? water_meter_record_nowUnit;
   String? water_meter_record_nowMonth;
   String? water_meter_record_beforeUnit;
@@ -41,6 +40,7 @@ class Invoice_Load_Data {
   List? fiveMonths_Back_Model;
   List? debt_months_step;
   String? sum_total_text;
+  String? zpl;
 
   Invoice_Load_Data(
       {this.id,
@@ -54,6 +54,7 @@ class Invoice_Load_Data {
       this.sum_invoice,
       this.debt_months_step,
       this.dueDate,
+      this.zpl,
       this.sum_total,
       this.total_format,
       this.sum_total_text,
@@ -86,30 +87,56 @@ class Invoice_Load_Data {
 }
 
 class Bill_Load_Data {
-  int? bill_id;
+  String? bill_id;
+  String? bill_number;
   String? bill_customerName;
   String? bill_customerAddress;
   String? bill_taxNumber;
-  String? bill_invoiceNumber;
   String? bill_areaNumber;
   String? bill_waterNumber;
+  String? bill_Month;
+  String? bill_meterNumber;
   String? bill_size;
+  String? bill_invoiceNumber;
+  String? bill_previousNumber;
+  String? bill_nowNumber;
+  String? bill_sumUnit;
   String? bill_sumFormat;
   String? bill_sumService;
   String? bill_discount;
   String? bill_vat;
   String? bill_totalFormat;
+  String? bill_totalFormat_text;
+  String? bill_zpl;
+
+  String? bill_paymentType;
+  String? bill_recieveName;
+  String? bill_recievePosition;
+  String? bill_issue_dateFormat;
+
 
   List? fiveMonths_Back_Model;
 
   Bill_Load_Data({
+    this.bill_paymentType,
+    this.bill_recieveName,
+    this.bill_recievePosition,
+    this.bill_issue_dateFormat,
+    this.bill_sumUnit,
+    this.bill_zpl,
+    this.bill_totalFormat_text,
     this.bill_id,
+    this.bill_previousNumber,
+    this.bill_nowNumber,
     this.fiveMonths_Back_Model,
+    this.bill_Month,
     this.bill_customerName,
     this.bill_customerAddress,
     this.bill_taxNumber,
+    this.bill_number,
     this.bill_invoiceNumber,
     this.bill_areaNumber,
+    this.bill_meterNumber,
     this.bill_waterNumber,
     this.bill_size,
     this.bill_sumFormat,

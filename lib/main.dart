@@ -19,7 +19,7 @@ import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
 import 'package:waterworks/screens/main%20screens/bottombar_page.dart';
 import 'package:waterworks/screens/login.dart';
 import 'bloc/printer_connect/printer_connect_bloc.dart';
-import 'bloc/profile/profile_bloc.dart';
+import 'bloc/profile/profile_bloc.dart';                
 import 'offline/utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 

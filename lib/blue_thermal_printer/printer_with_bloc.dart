@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
-import 'package:waterworks/blue_thermal_printer/newZPL.dart';
 import 'package:waterworks/blue_thermal_printer/zpl3.dart';
 //import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
@@ -14,14 +13,14 @@ import '../bloc/printer_connect/printer_connect_bloc.dart';
 import '../models/invoice_bill_model_TOPRINTER.dart';
 
 // ignore: must_be_immutable
-class Print2 extends StatefulWidget {
+class Print_Screen extends StatefulWidget {
   final ToInvoice invoideModel;
-    ToInvoice_Bill billModel;
+  final ToPrint_Bill billModel;
 
   String checkWaterWrong;
   String? debt;
   String? bank;
-  Print2(
+  Print_Screen(
       {Key? key,
       required this.invoideModel,
       required this.billModel,
@@ -32,14 +31,14 @@ class Print2 extends StatefulWidget {
   _Print2State createState() => new _Print2State();
 }
 
-class _Print2State extends State<Print2> {
+class _Print2State extends State<Print_Screen> {
   BlueThermalPrinter bluetooth = BlueThermalPrinter.instance;
   List<BluetoothDevice> _devices = [];
   BluetoothDevice? _device;
   bool _connected = false;
   late BluetoothDevice getD;
   bool _isButtonDisabled = true;
-  PrintHereFucker toPrint = PrintHereFucker();
+  ZplPrintHere toPrint = ZplPrintHere();
 
   @override
   void initState() {
@@ -180,8 +179,7 @@ class _Print2State extends State<Print2> {
             )),
         body: BlocBuilder<PrinterConnectBloc, PrinterConnectState>(
           builder: (context, state) {
-            return 
-            Stack(
+            return Stack(
               children: [
                 CustomPaint(
                   painter: ShapesPainter(),
@@ -332,8 +330,8 @@ class _Print2State extends State<Print2> {
                               height: 20,
                             ),
                             ElevatedButton(
-                              style:
-                                  ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red),
                               onPressed: () {
                                 _showAlertDeletePrinter(context);
                                 // if (_connected == true) {
@@ -383,15 +381,11 @@ class _Print2State extends State<Print2> {
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(
-          widget.invoideModel,
-          widget.billModel
+      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel
           // widget.checkWaterWrong.toString(),
           // widget.debt.toString(),
           // widget.bank.toString()
           );
-          
-    
     });
     _waitlittleshit();
   }
