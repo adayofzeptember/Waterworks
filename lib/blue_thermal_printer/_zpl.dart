@@ -2,9 +2,9 @@
 // import 'package:waterworks/blue_thermal_printer/print_setting.dart';
 // import 'package:waterworks/models/invoice_to_printer.dart';
 
-// // ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
-// // ^XA
-// // ^MMT
+// ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
+// ^XA
+// ^MMT
 
 // // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // // ^FD>:${thisInvoice.inv_barcode2}^FS

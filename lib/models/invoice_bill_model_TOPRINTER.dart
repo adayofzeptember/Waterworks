@@ -8,8 +8,6 @@ class ToInvoice {
   String? inv_user_number;
   String? inv_number;
 
-
-
   String? inv_current_month;
 
   String? inv_matr_now_number;
@@ -44,16 +42,26 @@ class ToInvoice {
   List? debtmonths_step;
   String? sum_months;
   String? sum_total_text;
-
-
+  String? information_waterWrong;
+  String? information_discountText;
+  String? information_textDuedate;
+  String? information_textOverdue;
+  String? information_textAlert;
+  String? information_textdebitbank;
 
   ToInvoice(
       {this.inv_number,
       this.fiveMonths_Back_Model,
       this.inv_user_number,
       this.inv_user_name,
+      this.information_textAlert,
+      this.information_textdebitbank,
+      this.information_textDuedate,
+      this.information_textOverdue,
       this.inv_user_address,
       this.debtmonths_step,
+      this.information_discountText,
+      this.information_waterWrong,
       this.sum_months,
       this.sum_total_text,
       this.meter_name,
@@ -74,7 +82,6 @@ class ToInvoice {
       this.inv_qr,
       this.godTotal});
 }
-
 
 class ToPrint_Bill {
   String? bill_id;
@@ -98,7 +105,7 @@ class ToPrint_Bill {
   String? bill_totalFormat;
   String? bill_totalFormat_text;
   String? bill_zpl;
-  
+
   String? bill_paymentType;
   String? bill_recieveName;
   String? bill_recievePosition;
@@ -107,7 +114,7 @@ class ToPrint_Bill {
   List? fiveMonths_Back_Model;
 
   ToPrint_Bill({
-       this.bill_paymentType,
+    this.bill_paymentType,
     this.bill_recieveName,
     this.bill_recievePosition,
     this.bill_issue_dateFormat,

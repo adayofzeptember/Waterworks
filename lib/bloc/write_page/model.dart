@@ -41,12 +41,30 @@ class Invoice_Load_Data {
   List? debt_months_step;
   String? sum_total_text;
   String? zpl;
+  String? information_waterWrong;
+  String? information_discountText;
+  String? information_textDuedate;
+  String? information_textOverdue;
+String? paymentAutoCheck;
+  String? information_textAlert;
+  String? information_textdebitbank;
+
+
+
 
   Invoice_Load_Data(
       {this.id,
+      this.information_textAlert,
+      this.information_textdebitbank,
+      this.information_textDuedate,
+      this.paymentAutoCheck,
+      this.information_textOverdue,
+ 
       this.fiveMonths_Back_Model,
       this.water_meter_record_nowUnit,
       this.water_meter_record_nowMonth,
+      this.information_waterWrong,
+      this.information_discountText,
       this.tax,
       this.water_meter_record_beforeMonth,
       this.water_meter_record_beforeUnit,

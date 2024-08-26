@@ -81,8 +81,13 @@ class InvoicePage2 extends StatelessWidget {
                     ],
                   );
                 } else {
-                  // print(state.invoice_data.fiveMonths_Back_Model[0].month
-                  //     .toString());
+
+                  print('-----'+state.invoice_data.paymentAutoCheck.toString());
+                  print('-----'+state.invoice_data.information_textdebitbank.toString());
+                  print('-----'+state.invoice_data.information_textAlert.toString());
+
+        
+
                   String add = state.invoice_data.customerAddress.toString();
                   String newAddress = add.substring(0, 6);
                   String month = state.invoice_data.write_date.toString();
@@ -162,14 +167,27 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.debtmonths_step =
                       state.invoice_data.debt_months_step;
 
+                  toInvoiceModel.information_discountText =
+                      state.invoice_data.information_discountText.toString();
+                  toInvoiceModel.information_textDuedate =
+                      state.invoice_data.information_textDuedate.toString();
+                  toInvoiceModel.information_textOverdue =
+                      state.invoice_data.information_textOverdue.toString();
+                  toInvoiceModel.information_waterWrong =
+                      state.invoice_data.information_waterWrong.toString();
+
+
+                      toInvoiceModel.information_textdebitbank =     state.invoice_data.information_textdebitbank.toString();
+                      toInvoiceModel.information_textAlert =     state.invoice_data.information_textAlert.toString();
+
                   toInvoiceModel.inv_tax = state.invoice_data.tax;
 
                   toInvoiceModel.sum_total_text =
                       state.invoice_data.sum_total_text.toString();
-
+                  
                   String debCheck = '';
                   bool meterWrong;
-                  if (state.invoice_data.debt_months.toString() == '0') {
+                  if (state.invoice_data.paymentAutoCheck.toString() == '0' ||state.invoice_data.paymentAutoCheck.toString() == 'null') {
                     debCheck = '0';
                   } else {
                     debCheck = '1';
@@ -232,20 +250,20 @@ class InvoicePage2 extends StatelessWidget {
                   toBillModel.bill_totalFormat_text =
                       state.bill_data.bill_totalFormat_text;
 
-
                   toBillModel.bill_zpl = state.bill_data.bill_zpl;
-                  toBillModel.fiveMonths_Back_Model = state.bill_data.fiveMonths_Back_Model;
+                  toBillModel.fiveMonths_Back_Model =
+                      state.bill_data.fiveMonths_Back_Model;
 
                   //
                   toBillModel.bill_zpl = state.bill_data.bill_zpl;
-                  toBillModel.bill_paymentType = state.bill_data.bill_paymentType;
-                  toBillModel.bill_recieveName = state.bill_data.bill_recieveName;
-                  toBillModel.bill_recievePosition = state.bill_data.bill_recievePosition;
-                  toBillModel.bill_issue_dateFormat = state.bill_data.bill_issue_dateFormat;
-
-
- 
-                      
+                  toBillModel.bill_paymentType =
+                      state.bill_data.bill_paymentType;
+                  toBillModel.bill_recieveName =
+                      state.bill_data.bill_recieveName;
+                  toBillModel.bill_recievePosition =
+                      state.bill_data.bill_recievePosition;
+                  toBillModel.bill_issue_dateFormat =
+                      state.bill_data.bill_issue_dateFormat;
 
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -747,6 +765,7 @@ class InvoicePage2 extends StatelessWidget {
                                               invoideModel: toInvoiceModel,
                                               checkWaterWrong: '1',
                                               debt: debCheck,
+                                              checkPaymentAuto: debCheck,
                                               bank: state.invoice_data.bank
                                                   .toString(),
                                             ),
@@ -800,6 +819,7 @@ class InvoicePage2 extends StatelessWidget {
                                                     type: PageTransitionType
                                                         .rightToLeft,
                                                     child: Print_Screen(
+                                                      checkPaymentAuto: debCheck,
                                                       billModel: toBillModel,
                                                       invoideModel:
                                                           toInvoiceModel,

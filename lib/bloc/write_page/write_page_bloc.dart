@@ -241,6 +241,23 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               debt_months_step: debtmonthsList,
               sum_total_text: await nestedData['sum_total_text'],
               tax: await nestedData['customer_water']['tax_number'],
+
+              information_discountText: await nestedData['information_data']
+                  ['invoice_has_discount'],
+              information_waterWrong: await nestedData['information_data']
+                  ['invoice_meter_wrong'],
+              information_textDuedate: await nestedData['information_data']
+                  ['invoice_text_duedate'],
+              information_textOverdue: await nestedData['information_data']
+                  ['invoice_text_overdue'],
+
+              paymentAutoCheck: await nestedData['customer_water']
+                      ['bank_payment_auto']
+                  .toString(),
+              information_textAlert: await nestedData['information_data']
+                  ['invoice_text_alert'],
+              information_textdebitbank: await nestedData['information_data']
+                  ['invoice_text_debit_bank'],
             );
 
             dataBill = Bill_Load_Data(
@@ -426,6 +443,22 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             fiveMonths_Back_Model: fiveMonthsBackList,
             debt_months_step: debtmonthsList,
             sum_total_text: await nestedData['sum_total_text'],
+            information_discountText: await nestedData['information_data']
+                ['invoice_has_discount'],
+            information_waterWrong: await nestedData['information_data']
+                ['invoice_meter_wrong'],
+            information_textDuedate: await nestedData['information_data']
+                ['invoice_text_duedate'],
+            information_textOverdue: await nestedData['information_data']
+                ['invoice_text_overdue'],
+
+            paymentAutoCheck: await nestedData['customer_water']
+                    ['bank_payment_auto']
+                .toString(),
+            information_textAlert: await nestedData['information_data']
+                ['invoice_text_alert'],
+            information_textdebitbank: await nestedData['information_data']
+                ['invoice_text_debit_bank'],
           );
 
           dataBill = Bill_Load_Data(

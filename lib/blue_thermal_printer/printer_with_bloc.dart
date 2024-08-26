@@ -19,16 +19,19 @@ class Print_Screen extends StatefulWidget {
 
   String checkWaterWrong;
   String? debt;
+  String? checkPaymentAuto;
   String? bank;
   Print_Screen(
       {Key? key,
       required this.invoideModel,
       required this.billModel,
+      required this.checkPaymentAuto,
       required this.checkWaterWrong,
       bank,
       this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
+
 }
 
 class _Print2State extends State<Print_Screen> {
@@ -381,7 +384,7 @@ class _Print2State extends State<Print_Screen> {
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel
+      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, widget.checkPaymentAuto.toString(),
           // widget.checkWaterWrong.toString(),
           // widget.debt.toString(),
           // widget.bank.toString()
