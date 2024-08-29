@@ -82,11 +82,11 @@ class InvoicePage2 extends StatelessWidget {
                   );
                 } else {
 
-                  print('-----'+state.invoice_data.paymentAutoCheck.toString());
-                  print('-----'+state.invoice_data.information_textdebitbank.toString());
-                  print('-----'+state.invoice_data.information_textAlert.toString());
+                  // print('-----'+state.invoice_data.paymentAutoCheck.toString());
+                  // print('-----'+state.invoice_data.information_textdebitbank.toString());
+                  // print('-----'+state.invoice_data.information_textAlert.toString());
 
-        
+             print('due date'+state.invoice_data.dueDate);
 
                   String add = state.invoice_data.customerAddress.toString();
                   String newAddress = add.substring(0, 6);
@@ -131,7 +131,7 @@ class InvoicePage2 extends StatelessWidget {
 
                   toInvoiceModel.inv_barcode2 =
                       state.invoice_data.bank_barcode.toString();
-                  toInvoiceModel.dueDate =
+                  toInvoiceModel.information_textDuedate =
                       state.invoice_data.dueDate.toString();
 
                   //*
@@ -751,7 +751,7 @@ class InvoicePage2 extends StatelessWidget {
                                                 BorderRadius.circular(15),
                                           )),
                                       onPressed: () {
-                                        print(state.invoice_data.dueDate);
+                                        // print(state.invoice_data.dueDate);
                                         FocusManager.instance.primaryFocus
                                             ?.unfocus();
                                         Navigator.push(
