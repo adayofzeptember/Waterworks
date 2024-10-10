@@ -19,6 +19,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
   WritePageBloc()
       : super(WritePageState(
             lat: '0',
+            statebillID: 0,
             lng: '0',
             bill_data: '',
             countForReset: 0,
@@ -173,6 +174,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
           dynamic nestedData = responseInvoice.data['data'];
           List<FiveMonths_Back> fiveMonthsBackList = [];
+          List<FiveMonths_Back> fiveMonthsBackList_Bill = [];
+
           List<DebtMonths_Step> debtmonthsList = [];
 
           if (responseInvoice.statusCode == 200) {
@@ -183,6 +186,15 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 sum_unit: await item['sum_unit'].toString(),
               ));
             }
+
+                 for (var item in nestedData['bill_history_meters']) {
+              fiveMonthsBackList_Bill.add(FiveMonths_Back(
+                month: await item['month'].toString(),
+                sum_unit: await item['sum_unit'].toString(),
+              ));
+            }
+
+
             for (var item in nestedData['months_step']) {
               debtmonthsList.add(DebtMonths_Step(
                 name: await item['name'].toString(),
@@ -289,7 +301,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               bill_totalFormat: await nestedData['bill']['total_format'],
               bill_totalFormat_text: await nestedData['bill']
                   ['total_format_text'],
-              fiveMonths_Back_Model: fiveMonthsBackList,
+              fiveMonths_Back_Model: fiveMonthsBackList_Bill,
               //*
               bill_zpl: await nestedData['bill']['bill_license_zpl'].toString(),
               bill_paymentType: await nestedData['bill']
@@ -304,6 +316,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             );
 
             emit(state.copyWith(
+                statebillID: await nestedData['bill']['id'],
                 invoice_data: await dataInvoice,
                 bill_data: await dataBill,
                 countForReset: state.countForReset + 1,
@@ -376,6 +389,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
         dynamic dataBill;
         dynamic nestedData = response.data['data'];
         List<FiveMonths_Back> fiveMonthsBackList = [];
+             List<FiveMonths_Back> fiveMonthsBackList_Bill = [];
         List<DebtMonths_Step> debtmonthsList = [];
 
         if (response.statusCode == 200) {
@@ -387,6 +401,13 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               sum_unit: await item['sum_unit'].toString(),
             ));
           }
+
+                  for (var item in nestedData['bill_history_meters']) {
+              fiveMonthsBackList_Bill.add(FiveMonths_Back(
+                month: await item['month'].toString(),
+                sum_unit: await item['sum_unit'].toString(),
+              ));
+            }
           for (var item in nestedData['months_step']) {
             debtmonthsList.add(DebtMonths_Step(
               name: await item['name'].toString(),
@@ -502,7 +523,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 await nestedData['bill']['total_format'].toString(),
             bill_totalFormat_text:
                 await nestedData['bill']['total_format_text'].toString(),
-            fiveMonths_Back_Model: fiveMonthsBackList,
+            fiveMonths_Back_Model: fiveMonthsBackList_Bill,
             //
             bill_zpl: await nestedData['bill']['bill_license_zpl'].toString(),
             bill_paymentType:
@@ -515,7 +536,11 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 await nestedData['bill']['issue_date_format'].toString(),
           );
 
-          emit(state.copyWith(invoice_data: dataInvoice, bill_data: dataBill));
+          emit(state.copyWith(
+            invoice_data: dataInvoice,
+            bill_data: dataBill,
+            statebillID: await nestedData['bill']['id']),
+          );
         } else {
           print('-----------fail api');
           print(response);
@@ -527,6 +552,25 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
 
         print("Exception $e");
       }
+    });
+
+    //*
+
+    on<SendAfterPrint>((event, emit) async {  final dio = Dio();
+      print('-------------------sendtien test---------------');
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('keyToken');
+      print(state.statebillID);
+
+    
+      final response = await dio.post(
+        waterWork_domain + "record_bill/status/update/${state.statebillID}",
+        options: Options(headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        }),
+      );
+      print(response.data.toString());
     });
   }
 }

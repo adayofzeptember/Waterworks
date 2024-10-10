@@ -27,6 +27,16 @@ class CheckCurrentUnit extends WritePageEvent {
   });
 }
 
+
+class SendAfterPrint extends WritePageEvent {
+  var context;
+
+  SendAfterPrint({
+
+    required this.context,
+  });
+}
+
 class ConfirmWriteUnit extends WritePageEvent {
   var context;
   String id;

@@ -883,14 +883,16 @@ Future<User_Consume_Data> fetch_user_consume(String recordID) async {
   SharedPreferences prefs2 = await SharedPreferences.getInstance();
   var getThatToken = prefs2.get('keyToken');
 
-  var url = waterWork_domain + 'water_meter_record/show/' + recordID;
+  var url = waterWork_domain + 'water_meter_record/history/' + recordID;
   var response = await http.get(Uri.parse(url), headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': 'Bearer $getThatToken',
   });
+
   var jsonResponse = json.decode(response.body);
   var jsonCon = jsonResponse['data'];
+  print(jsonResponse);
   //var k = jsonResponse['data']['customer_water']['name'];
   User_Consume_Data water_user_use = User_Consume_Data.fromJson(jsonCon);
   if (response.statusCode == 200) {

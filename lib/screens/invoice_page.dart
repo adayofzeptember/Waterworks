@@ -390,12 +390,12 @@ class InvoicePage2 extends StatelessWidget {
                                         ? const Text(
                                             '(น้ำผิดปกติ)',
                                             style:
-                                                TextStyle(color: Colors.amber),
+                                                TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                                           )
                                         : const Text(
                                             '(น้ำปกติ)',
                                             style: TextStyle(
-                                                color: Palette.thisGreen),
+                                                color: Palette.thisGreen, fontWeight: FontWeight.bold),
                                           )
                                   ],
                                 ),
@@ -797,48 +797,48 @@ class InvoicePage2 extends StatelessWidget {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  meterWrong
-                                      ? ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              backgroundColor:
-                                                  const Color.fromARGB(
-                                                      255, 247, 113, 60),
-                                              elevation: 0,
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              )),
-                                          onPressed: () {
-                                            FocusManager.instance.primaryFocus
-                                                ?.unfocus();
-                                            Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                    duration: const Duration(
-                                                        milliseconds: 250),
-                                                    type: PageTransitionType
-                                                        .rightToLeft,
-                                                    child: Print_Screen(
-                                                      checkPaymentAuto: debCheck,
-                                                      billModel: toBillModel,
-                                                      invoideModel:
-                                                          toInvoiceModel,
-                                                      checkWaterWrong: '2',
-                                                    )));
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(20.0),
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              child: const Text(
-                                                "สั่งพิมพ์หน่วยน้ำผิดปกติ",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      : const Text('')
+                                  // meterWrong
+                                  //     ? ElevatedButton(
+                                  //         style: ElevatedButton.styleFrom(
+                                  //             backgroundColor:
+                                  //                 const Color.fromARGB(
+                                  //                     255, 247, 113, 60),
+                                  //             elevation: 0,
+                                  //             shape: RoundedRectangleBorder(
+                                  //               borderRadius:
+                                  //                   BorderRadius.circular(15),
+                                  //             )),
+                                  //         onPressed: () {
+                                  //           FocusManager.instance.primaryFocus
+                                  //               ?.unfocus();
+                                  //           Navigator.push(
+                                  //               context,
+                                  //               PageTransition(
+                                  //                   duration: const Duration(
+                                  //                       milliseconds: 250),
+                                  //                   type: PageTransitionType
+                                  //                       .rightToLeft,
+                                  //                   child: Print_Screen(
+                                  //                     checkPaymentAuto: debCheck,
+                                  //                     billModel: toBillModel,
+                                  //                     invoideModel:
+                                  //                         toInvoiceModel,
+                                  //                     checkWaterWrong: '2',
+                                  //                   )));
+                                  //         },
+                                  //         child: Padding(
+                                  //           padding: const EdgeInsets.all(20.0),
+                                  //           child: Container(
+                                  //             alignment: Alignment.center,
+                                  //             child: const Text(
+                                  //               "สั่งพิมพ์หน่วยน้ำผิดปกติ",
+                                  //               style: TextStyle(
+                                  //                   color: Colors.white),
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       )
+                                  //     : const Text('')
                                 ],
                               ),
                             )

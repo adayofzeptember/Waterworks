@@ -224,101 +224,114 @@ class _Use_Water_InfoState extends State<Use_Water_Info> {
                           const SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Palette.thisGreen,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15.0),
-                              child: Row(
-                                children: const [
-                                  Text(
-                                    'เดือน',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    width: 120,
-                                  ),
-                                  const Text('หน่วย',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                  const SizedBox(
-                                    width: 65,
-                                  ),
-                                  const Text('จำนวนเงิน',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                ],
-                              ),
-                            ),
-                          ),
-                          //! list ตรงนี้
-                          // Text(data.historyWaters![1].id.toString())
-                          ListView.builder(
-                              padding: EdgeInsets.zero,
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: data.historyWaters!.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 233, 233, 233),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text(
-                                            data.historyWaters![index]
-                                                .recordDate
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                color: Palette.thisGreen,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 45),
-                                        Container(
-                                          width: 90,
-                                          child: Text(
-                                              data.historyWaters![index]
-                                                  .currentUnit
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 18,
-                                                  color: Palette.thisGreen,
-                                                  fontWeight: FontWeight.bold)),
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Container(
-                                          width: 80,
-                                          child: Text(
-                                              data.historyWaters![index].sumUnit
-                                                  .toString(),
-                                              style: const TextStyle(
-                                                  fontSize: 18,
-                                                  color: Palette.thisGreen,
-                                                  fontWeight: FontWeight.bold)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              }),
+                        Container(
+  decoration: const BoxDecoration(
+    color: Palette.thisGreen,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(10),
+      topRight: Radius.circular(10),
+    ),
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(15.0),
+    child: Table(
+      columnWidths: const {
+        0: FlexColumnWidth(3), // Column for 'เดือน'
+        1: FlexColumnWidth(2), // Column for 'เลขอ่าน'
+        2: FlexColumnWidth(2), // Column for 'หน่วยที่ใช้'
+      },
+      children: [
+        // Header row
+        TableRow(
+          children: [
+            Text(
+              'เดือน',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'เลขอ่าน',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'หน่วยที่ใช้',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+),
+
+// List of rows (dynamic data)
+ListView.builder(
+  padding: EdgeInsets.zero,
+  scrollDirection: Axis.vertical,
+  shrinkWrap: true,
+  physics: const NeverScrollableScrollPhysics(),
+  itemCount: data.historyWaters!.length,
+  itemBuilder: (BuildContext context, int index) {
+    final history = data.historyWaters![index];
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 233, 233, 233),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Table(
+          columnWidths: const {
+            0: FlexColumnWidth(3), // Column for 'เดือน'
+            1: FlexColumnWidth(2), // Column for 'เลขอ่าน'
+            2: FlexColumnWidth(2), // Column for 'หน่วยที่ใช้'
+          },
+          children: [
+            TableRow(
+              children: [
+                Text(
+                  history.recordDate.toString(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Palette.thisGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  history.currentUnit.toString(),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Palette.thisGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  history.sumUnit?.toString() ?? '0.00',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Palette.thisGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  },
+),
+
                         ],
                       );
                     }

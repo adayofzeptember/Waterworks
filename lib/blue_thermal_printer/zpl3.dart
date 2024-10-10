@@ -1,4 +1,5 @@
 import 'package:blue_thermal_printer/blue_thermal_printer.dart';
+
 import 'package:waterworks/blue_thermal_printer/print_setting.dart';
 import 'package:waterworks/models/invoice_bill_model_TOPRINTER.dart';
 // ^FO192,1312^GFA,02688,02688,00028,:Z64:
@@ -19,8 +20,8 @@ import 'package:waterworks/models/invoice_bill_model_TOPRINTER.dart';
 // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // ^FD>:${thisInvoice.inv_barcode2}^FS
 class ZplPrintHere {
-  printInvoice_Now(ToInvoice thisInvoice, ToPrint_Bill thisBill,
-      String paymentAutoCheck) async {
+  printInvoice_Now(ToInvoice thisInvoice, ToPrint_Bill thisBill, 
+      String paymentAutoCheck,) async {
     // print(paymentAutoCheck);
     String billID = '${thisInvoice.inv_qr![0]}';
     String area = '${thisInvoice.inv_qr![1]}';
@@ -169,7 +170,7 @@ class ZplPrintHere {
 ^FB434,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_textOverdue}^FS^CI0
 ^FT19,1526^A@N,31,26,angsana.fnt
 ^FH\
-^FB459,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_waterWrong}^FS^CI0
+^FB459,1,0,C^FH\^CI17^F8^FD${thisInvoice.wrong_water}^FS^CI0
 ^FT18,1564^A@N,31,26,angsana.fnt
 ^FH\
 ^FB321,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_discountText}^FS^CI0
@@ -184,6 +185,7 @@ class ZplPrintHere {
 """;
 
         } else {
+          
           zplToPrinter1_Invoice = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
@@ -313,7 +315,7 @@ class ZplPrintHere {
 ^FH\^CI17^F8^FD${thisInvoice.inv_tax}^FS^CI0
 ^FT19,1526^A@N,31,26,angsana.fnt
 ^FH\
-^FB459,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_waterWrong}^FS^CI0
+^FB459,1,0,C^FH\^CI17^F8^FD${thisInvoice.wrong_water}^FS^CI0
 ^FT18,1564^A@N,31,26,angsana.fnt
 ^FH\
 ^FB321,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_discountText}^FS^CI0
@@ -323,6 +325,9 @@ class ZplPrintHere {
 ^PQ1,0,1,Y^XZ
 """;
         }
+
+//!----------------------------------------------------------------------------------------------------------------
+        //ใบเสด
 
         zplToPrinter2_Bill = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
@@ -450,6 +455,13 @@ ${thisBill.bill_zpl}
             zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
       bluetooth.printCustom(
           zplToPrinter2_Bill, Size.boldMedium.val, Align.center.val);
+
+
+        
+
+                         
+
+
 
         bluetooth.paperCut();
       }

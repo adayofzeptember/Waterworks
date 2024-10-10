@@ -15,6 +15,7 @@ class WritePageState extends Equatable {
   bool checkCurrentUnit;
   String lat;
   String lng;
+  int statebillID;
   WritePageState({
     required this.lat,
     required this.lng,
@@ -22,6 +23,7 @@ class WritePageState extends Equatable {
     required this.writeRecordId,
     required this.customerName,
     required this.address,
+    required this.statebillID,
     required this.waterNumber,
     required this.areaNumber,
     required this.meterNumber,
@@ -43,6 +45,7 @@ class WritePageState extends Equatable {
     String? address,
     String? waterNumber,
     String? areaNumber,
+     int? statebillID,
     String? meterNumber,
     String? previousUnitFormat,
     String? statusMeter,
@@ -61,6 +64,8 @@ class WritePageState extends Equatable {
       countForReset: countForReset ?? this.countForReset,
       writeRecordId: writeRecordId ?? this.writeRecordId,
       customerName: customerName ?? this.customerName,
+      statebillID: statebillID ?? this.statebillID,
+      
       address: address ?? this.address,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
@@ -87,6 +92,7 @@ class WritePageState extends Equatable {
         address,
         waterNumber,
         bill_data,
+        statebillID,
         areaNumber,
         meterNumber,
         previousUnitFormat,
