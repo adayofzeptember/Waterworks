@@ -32,7 +32,6 @@ class Print_Screen extends StatefulWidget {
       this.debt})
       : super(key: key);
   _Print2State createState() => new _Print2State();
-
 }
 
 class _Print2State extends State<Print_Screen> {
@@ -303,32 +302,41 @@ class _Print2State extends State<Print_Screen> {
                             SizedBox(
                               height: 5,
                             ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _isButtonDisabled
-                                    ? Palette.thisGreen
-                                    : const Color.fromARGB(255, 155, 153, 153),
-                              ),
-                              onPressed: _isButtonDisabled
-                                  ? () {
-                                      setState(() {
-                                        _isButtonDisabled = !_isButtonDisabled;
-                                      });
-                                      // _connectBloc(state.printer_name.toString(),
-                                      //     state.printer_address.toString());
+                            BlocBuilder<WritePageBloc, WritePageState>(
+                              builder: (context, state2ToCkeck) {
+                                return ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: _isButtonDisabled
+                                        ? Palette.thisGreen
+                                        : const Color.fromARGB(
+                                            255, 155, 153, 153),
+                                  ),
+                                  onPressed: _isButtonDisabled
+                                      ? () {
+                                          setState(() {
+                                            _isButtonDisabled =
+                                                !_isButtonDisabled;
+                                          });
+                                          // _connectBloc(state.printer_name.toString(),
+                                          //     state.printer_address.toString());
+                                       
 
-                                      _connect_then_Print(
-                                          state.printer_name.toString(),
-                                          state.printer_address.toString(), context);
-                                    }
-                                  : null,
-                              child: Text(
-                                _isButtonDisabled
-                                    ? '-> พิมพ์ใบแจ้ง <-'
-                                    : 'กำลังพิมพ์ใบแจ้ง..',
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
+                                          _connect_then_Print(
+                                              state.printer_name.toString(),
+                                              state.printer_address.toString(),
+                                              state2ToCkeck.checkBilPrint.toString(),
+                                              context);
+                                        }
+                                      : null,
+                                  child: Text(
+                                    _isButtonDisabled
+                                        ? '-> พิมพ์ใบแจ้ง <-'
+                                        : 'กำลังพิมพ์ใบแจ้ง..',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                );
+                              },
                             ),
                             const SizedBox(
                               height: 20,
@@ -382,44 +390,15 @@ class _Print2State extends State<Print_Screen> {
     return items;
   }
 
-  Future _connect_then_Print(String ptName_bloc, ptAddress_bloc, context) async {
+  Future _connect_then_Print(
+      String ptName_bloc, ptAddress_bloc,String checkbill, context) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, widget.checkPaymentAuto.toString()
-          // widget.checkWaterWrong.toString(),
-          // widget.debt.toString(),
-          // widget.bank.toString()
-          );
+      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, checkbill,
+          widget.checkPaymentAuto.toString());
     });
     _waitlittleshit();
   }
-
-//   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc, context) async {
-//   // Connect to the printer
-//   await _connect_fromBloc(ptName_bloc, ptAddress_bloc);
-
-//   // Wait for 5 seconds to ensure the connection is established
-//   await Future.delayed(const Duration(seconds: 5));
-
-//   // Attempt to print and get the result (assuming printInvoice_Now returns a Future<bool> for success)
-//   bool printSuccess = await toPrint.printInvoice_Now(
-//     widget.invoideModel,
-//     widget.billModel,
-//     widget.checkPaymentAuto.toString(),
- 
-//   );
-
-//   if (printSuccess) {
-//     print("Print successful");
-//     context.read<WritePageBloc>().add(SendAfterPrint(context: context));
-//     // Optionally add further actions here, like showing a success message
-//   } else {
-//     print("Print failed");
-//     // Optionally handle print failure here, like showing an error message
-//   }
-
-//    _waitlittleshit();
-// }
 
   Future _waitlittleshit() async {
     await Future.delayed(const Duration(seconds: 5), () {
@@ -427,14 +406,14 @@ class _Print2State extends State<Print_Screen> {
         _isButtonDisabled = !_isButtonDisabled;
       });
       _disconnect();
-        context.read<WritePageBloc>().add(SendAfterPrint(context: context));
+      context.read<WritePageBloc>().add(SendAfterPrint(context: context));
     });
   }
 
   _connect_fromBloc(String ptName_bloc, ptAddress_bloc) {
     print(ptName_bloc + ' ' + ptAddress_bloc);
     getD = BluetoothDevice(ptName_bloc, ptAddress_bloc);
-  
+
     bluetooth.isConnected.then((isConnected) {
       if (isConnected == false) {
         bluetooth.connect(getD).catchError((error) {});
@@ -443,8 +422,6 @@ class _Print2State extends State<Print_Screen> {
         _connected = true;
       });
     });
-
- 
   }
 
   void _disconnect() {

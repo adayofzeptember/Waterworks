@@ -20,9 +20,13 @@ import 'package:waterworks/models/invoice_bill_model_TOPRINTER.dart';
 // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // ^FD>:${thisInvoice.inv_barcode2}^FS
 class ZplPrintHere {
-  printInvoice_Now(ToInvoice thisInvoice, ToPrint_Bill thisBill, 
-      String paymentAutoCheck,) async {
-    // print(paymentAutoCheck);
+  printInvoice_Now(
+    ToInvoice thisInvoice,
+    ToPrint_Bill thisBill,
+    String checkBill,
+    String paymentAutoCheck,
+  ) async {
+    print('==================' + checkBill);
     String billID = '${thisInvoice.inv_qr![0]}';
     String area = '${thisInvoice.inv_qr![1]}';
     String date = '${thisInvoice.inv_qr![2]}';
@@ -183,9 +187,7 @@ class ZplPrintHere {
 ^FB117,1,0,C^FH\^CI17^F8^FD(ขออภัยหากชำระแล้ว)^FS^CI0
 ^PQ1,0,1,Y^XZ
 """;
-
         } else {
-          
           zplToPrinter1_Invoice = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
@@ -329,7 +331,135 @@ class ZplPrintHere {
 //!----------------------------------------------------------------------------------------------------------------
         //ใบเสด
 
-        zplToPrinter2_Bill = """
+//         zplToPrinter2_Bill = """
+// ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
+// ^XA
+// ^MMT
+// ^PW575
+// ^LL1590
+// ^LS0
+// ^FO192,1312^GFA,02688,02688,00028,:Z64:
+// ^FT260,1420^FD
+// ${thisBill.bill_zpl}
+// ^FS
+// ^FT116,1190^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![0].month}^FS^CI0
+// ^FT126,1242^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![0].sum_unit}^FS^CI0
+// ^FT225,1242^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![1].sum_unit}^FS^CI0
+// ^FT313,1242^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![2].sum_unit}^FS^CI0
+// ^FT415,1242^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![3].sum_unit}^FS^CI0
+// ^FT507,1242^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![4].sum_unit}^FS^CI0
+// ^FT42,248^A@N,31,30,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FDชื่อ: ${thisBill.bill_customerName}^FS^CI0
+// ^FT42,305^A@N,31,30,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FDที่อยู่: ${thisBill.bill_customerAddress}^FS^CI0
+// ^FT82,476^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_areaNumber}^FS^CI0
+// ^FT248,476^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_waterNumber}^FS^CI0
+// ^FT417,476^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_Month}^FS^CI0
+// ^FT46,578^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_meterNumber}^FS^CI0
+// ^FT247,578^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_size}^FS^CI0
+// ^FT402,578^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_invoiceNumber}^FS^CI0
+// ^FT57,1080^A@N,34,30,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_totalFormat_text}^FS^CI0
+// ^FT203,1190^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![1].month}^FS^CI0
+// ^FT299,1190^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![2].month}^FS^CI0
+// ^FT399,1190^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![3].month}^FS^CI0
+// ^FT489,1190^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![4].month}^FS^CI0
+// ^FT34,708^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_nowNumber}^FS^CI0
+// ^FT139,708^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_previousNumber}^FS^CI0
+// ^FT234,708^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_sumUnit}^FS^CI0
+// ^FT454,708^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_sumFormat}^FS^CI0
+// ^FT454,765^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_sumService}^FS^CI0
+// ^FT454,814^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_discount}^FS^CI0
+// ^FT454,859^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_vat}^FS^CI0
+// ^FT454,914^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
+// ^FT454,1033^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
+// ^FT454,976^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD0^FS^CI0
+// ^FT225,56^A@N,42,41,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FDใบเสร็จรับเงิน/ใบกำกับภาษี^FS^CI0
+// ^FT0,1334^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FB519,1,0,C^FH\^CI17^F8^FD${thisBill.bill_paymentType}^FS^CI0
+// ^FT220,1447^A@N,39,33,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_recieveName}^FS^CI0
+// ^FT180,1493^A@N,39,33,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_recievePosition}^FS^CI0
+// ^FT220,1539^A@N,39,30,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FDวันที่ชำระเงิน ${thisBill.bill_issue_dateFormat}^FS^CI0
+// ^FT42,357^A@N,31,30,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FD${thisBill.bill_taxNumber}^FS^CI0
+// ^FT259,103^A@N,39,37,angsana.fnt
+// ^FH\
+// ^FH\^CI17^F8^FDเลขที่: ${thisBill.bill_number}^FS^CI0
+// ^PQ1,0,1,Y^XZ
+// """;
+
+        if (checkBill.toString() == "0") {
+          bluetooth.printCustom(
+              zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
+
+          bluetooth.paperCut();
+        } else {
+          zplToPrinter2_Bill = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
@@ -451,19 +581,13 @@ ${thisBill.bill_zpl}
 ^PQ1,0,1,Y^XZ
 """;
 
-        bluetooth.printCustom(
-            zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
-      bluetooth.printCustom(
-          zplToPrinter2_Bill, Size.boldMedium.val, Align.center.val);
+          bluetooth.printCustom(
+              zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
+          bluetooth.printCustom(
+              zplToPrinter2_Bill, Size.boldMedium.val, Align.center.val);
 
-
-        
-
-                         
-
-
-
-        bluetooth.paperCut();
+          bluetooth.paperCut();
+        }
       }
     });
   }

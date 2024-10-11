@@ -81,12 +81,11 @@ class InvoicePage2 extends StatelessWidget {
                     ],
                   );
                 } else {
-
                   // print('-----'+state.invoice_data.paymentAutoCheck.toString());
                   // print('-----'+state.invoice_data.information_textdebitbank.toString());
                   // print('-----'+state.invoice_data.information_textAlert.toString());
 
-             print('due date'+state.invoice_data.dueDate);
+                  //  print('due date'+state.invoice_data.dueDate);
 
                   String add = state.invoice_data.customerAddress.toString();
                   String newAddress = add.substring(0, 6);
@@ -176,94 +175,154 @@ class InvoicePage2 extends StatelessWidget {
                   toInvoiceModel.information_waterWrong =
                       state.invoice_data.information_waterWrong.toString();
 
-
-                      toInvoiceModel.information_textdebitbank =     state.invoice_data.information_textdebitbank.toString();
-                      toInvoiceModel.information_textAlert =     state.invoice_data.information_textAlert.toString();
+                  toInvoiceModel.information_textdebitbank =
+                      state.invoice_data.information_textdebitbank.toString();
+                  toInvoiceModel.information_textAlert =
+                      state.invoice_data.information_textAlert.toString();
 
                   toInvoiceModel.inv_tax = state.invoice_data.tax;
 
                   toInvoiceModel.sum_total_text =
                       state.invoice_data.sum_total_text.toString();
-                  
+
                   String debCheck = '';
                   bool meterWrong;
-                  if (state.invoice_data.paymentAutoCheck.toString() == '0' ||state.invoice_data.paymentAutoCheck.toString() == 'null') {
+                  if (state.invoice_data.paymentAutoCheck.toString() == '0' ||
+                      state.invoice_data.paymentAutoCheck.toString() ==
+                          'null') {
                     debCheck = '0';
                   } else {
                     debCheck = '1';
                   }
-                  //?
+                  //?---------------------------- เช็คน้ำผิดปกติ------------------------------------
                   if (state.invoice_data.meter_status.toString() == "0") {
+                    toInvoiceModel.wrong_water =
+                        (state.invoice_data.meter_status_text.toString() == '')
+                            ? ' '
+                            : state.invoice_data.meter_status_text.toString();
                     meterWrong = false;
                   } else if (state.invoice_data.meter_status.toString() ==
                           "1" ||
                       state.invoice_data.meter_status.toString() == "2") {
                     meterWrong = true;
                     toInvoiceModel.wrong_water =
-                        state.invoice_data.meter_status_text.toString();
+                        (state.invoice_data.meter_status_text.toString() == '')
+                            ? ' '
+                            : state.invoice_data.meter_status_text.toString();
                   } else {
+                    toInvoiceModel.wrong_water =
+                        (state.invoice_data.meter_status_text.toString() == '')
+                            ? ' '
+                            : state.invoice_data.meter_status_text.toString();
                     meterWrong = false;
                   }
-
-                  // print(toInvoiceModel.inv_barcode2);
+                  //?------------------------------------------------------------------------------
 
                   //!----------------------------BILL----------------------------
-                  toBillModel.bill_number = state.bill_data.bill_number;
-                  toBillModel.bill_customerName =
-                      state.bill_data.bill_customerName;
+                  if (state.checkBilPrint == '0') {
+                    toBillModel.bill_number = '';
+                    toBillModel.bill_customerName = '';
 
-                  toBillModel.bill_customerAddress =
-                      state.bill_data.bill_customerAddress;
-                  toBillModel.bill_taxNumber = state.bill_data.bill_taxNumber;
+                    toBillModel.bill_customerAddress = '';
+                    toBillModel.bill_taxNumber = '';
 
-                  toBillModel.bill_areaNumber = state.bill_data.bill_areaNumber;
+                    toBillModel.bill_areaNumber = '';
 
-                  toBillModel.bill_waterNumber =
-                      state.bill_data.bill_waterNumber;
+                    toBillModel.bill_waterNumber = '';
 
-                  toBillModel.bill_Month = state.bill_data.bill_Month;
+                    toBillModel.bill_Month = '';
 
-                  toBillModel.bill_meterNumber =
-                      state.bill_data.bill_meterNumber;
+                    toBillModel.bill_meterNumber = '';
 
-                  toBillModel.bill_size = state.bill_data.bill_size;
+                    toBillModel.bill_size = '';
 
-                  toBillModel.bill_invoiceNumber =
-                      state.bill_data.bill_invoiceNumber;
+                    toBillModel.bill_invoiceNumber = '';
 
-                  toBillModel.bill_nowNumber = state.bill_data.bill_nowNumber;
-                  toBillModel.bill_previousNumber =
-                      state.bill_data.bill_previousNumber;
+                    toBillModel.bill_nowNumber = '';
+                    toBillModel.bill_previousNumber = '';
 
-                  toBillModel.bill_sumUnit = state.bill_data.bill_sumUnit;
+                    toBillModel.bill_sumUnit = '';
 
-                  toBillModel.bill_sumFormat = state.bill_data.bill_sumFormat;
+                    toBillModel.bill_sumFormat = '';
 
-                  toBillModel.bill_sumService = state.bill_data.bill_sumService;
+                    toBillModel.bill_sumService = '';
 
-                  toBillModel.bill_discount = state.bill_data.bill_discount;
+                    toBillModel.bill_discount = '';
 
-                  toBillModel.bill_vat = state.bill_data.bill_vat;
+                    toBillModel.bill_vat = '';
 
-                  toBillModel.bill_totalFormat =
-                      state.bill_data.bill_totalFormat;
-                  toBillModel.bill_totalFormat_text =
-                      state.bill_data.bill_totalFormat_text;
+                    toBillModel.bill_totalFormat = '';
+                    toBillModel.bill_totalFormat_text = '';
 
-                  toBillModel.bill_zpl = state.bill_data.bill_zpl;
-                  toBillModel.fiveMonths_Back_Model =
-                      state.bill_data.fiveMonths_Back_Model;
+                    toBillModel.bill_zpl = '';
+                    // toBillModel.fiveMonths_Back_Model =
+                    //   ;
 
-                  //
-                  toBillModel.bill_zpl = state.bill_data.bill_zpl;
-                  toBillModel.bill_paymentType =
-                      state.bill_data.bill_paymentType;
-                  toBillModel.bill_recieveName =
-                      state.bill_data.bill_recieveName;
-                  toBillModel.bill_recievePosition =
-                      state.bill_data.bill_recievePosition;
-                  toBillModel.bill_issue_dateFormat =
-                      state.bill_data.bill_issue_dateFormat;
+                    toBillModel.bill_zpl = '';
+                    toBillModel.bill_paymentType = '';
+                    toBillModel.bill_recieveName = '';
+                    toBillModel.bill_recievePosition = '';
+                    toBillModel.bill_issue_dateFormat = '';
+                  } else {
+                    toBillModel.bill_number = state.bill_data.bill_number;
+                    toBillModel.bill_customerName =
+                        state.bill_data.bill_customerName;
+
+                    toBillModel.bill_customerAddress =
+                        state.bill_data.bill_customerAddress;
+                    toBillModel.bill_taxNumber = state.bill_data.bill_taxNumber;
+
+                    toBillModel.bill_areaNumber =
+                        state.bill_data.bill_areaNumber;
+
+                    toBillModel.bill_waterNumber =
+                        state.bill_data.bill_waterNumber;
+
+                    toBillModel.bill_Month = state.bill_data.bill_Month;
+
+                    toBillModel.bill_meterNumber =
+                        state.bill_data.bill_meterNumber;
+
+                    toBillModel.bill_size = state.bill_data.bill_size;
+
+                    toBillModel.bill_invoiceNumber =
+                        state.bill_data.bill_invoiceNumber;
+
+                    toBillModel.bill_nowNumber = state.bill_data.bill_nowNumber;
+                    toBillModel.bill_previousNumber =
+                        state.bill_data.bill_previousNumber;
+
+                    toBillModel.bill_sumUnit = state.bill_data.bill_sumUnit;
+
+                    toBillModel.bill_sumFormat = state.bill_data.bill_sumFormat;
+
+                    toBillModel.bill_sumService =
+                        state.bill_data.bill_sumService;
+
+                    toBillModel.bill_discount = state.bill_data.bill_discount;
+
+                    toBillModel.bill_vat = state.bill_data.bill_vat;
+
+                    toBillModel.bill_totalFormat =
+                        state.bill_data.bill_totalFormat;
+                    toBillModel.bill_totalFormat_text =
+                        state.bill_data.bill_totalFormat_text;
+
+                    toBillModel.bill_zpl = state.bill_data.bill_zpl;
+                    toBillModel.fiveMonths_Back_Model =
+                        state.bill_data.fiveMonths_Back_Model;
+
+                    //
+                    toBillModel.bill_zpl = state.bill_data.bill_zpl;
+                    toBillModel.bill_paymentType =
+                        state.bill_data.bill_paymentType;
+                    toBillModel.bill_recieveName =
+                        state.bill_data.bill_recieveName;
+                    toBillModel.bill_recievePosition =
+                        state.bill_data.bill_recievePosition;
+                    toBillModel.bill_issue_dateFormat =
+                        state.bill_data.bill_issue_dateFormat;
+                  }
 
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -389,13 +448,15 @@ class InvoicePage2 extends StatelessWidget {
                                     meterWrong
                                         ? const Text(
                                             '(น้ำผิดปกติ)',
-                                            style:
-                                                TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold),
                                           )
                                         : const Text(
                                             '(น้ำปกติ)',
                                             style: TextStyle(
-                                                color: Palette.thisGreen, fontWeight: FontWeight.bold),
+                                                color: Palette.thisGreen,
+                                                fontWeight: FontWeight.bold),
                                           )
                                   ],
                                 ),

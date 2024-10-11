@@ -541,7 +541,7 @@ Future<void> showAlertWriteOK(
                           if (result.isNotEmpty &&
                               result[0].rawAddress.isNotEmpty) {
                             context.read<WritePageBloc>().add(ConfirmWriteUnit(
-                                     getLat: state.lat,
+                                  getLat: state.lat,
                                   getLng: state.lng,
                                   context: context,
                                   statusMeter: statusMeter,

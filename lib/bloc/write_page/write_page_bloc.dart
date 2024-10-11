@@ -23,6 +23,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             lng: '0',
             bill_data: '',
             countForReset: 0,
+            checkBilPrint: '',
             writeRecordId: "",
             customerName: "",
             address: "",
@@ -177,9 +178,13 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
           List<FiveMonths_Back> fiveMonthsBackList_Bill = [];
 
           List<DebtMonths_Step> debtmonthsList = [];
+          print('bill print status: ' + nestedData['bill_print']);
 
           if (responseInvoice.statusCode == 200) {
-            emit(state.copyWith(loading: false));
+            emit(state.copyWith(
+                loading: false,
+                checkBilPrint: nestedData['bill_print'].toString()));
+
             for (var item in nestedData['history_meters']) {
               fiveMonthsBackList.add(FiveMonths_Back(
                 month: await item['month'].toString(),
@@ -187,13 +192,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
               ));
             }
 
-                 for (var item in nestedData['bill_history_meters']) {
+            for (var item in nestedData['bill_history_meters']) {
               fiveMonthsBackList_Bill.add(FiveMonths_Back(
                 month: await item['month'].toString(),
                 sum_unit: await item['sum_unit'].toString(),
               ));
             }
-
 
             for (var item in nestedData['months_step']) {
               debtmonthsList.add(DebtMonths_Step(
@@ -272,55 +276,84 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                   ['invoice_text_debit_bank'],
             );
 
-            dataBill = Bill_Load_Data(
-              bill_id: await nestedData['bill']['id'],
-              bill_number: await nestedData['bill']['bill_number'],
-              bill_customerName: await nestedData['bill']['customer_name'],
-              bill_customerAddress: await nestedData['bill']
-                  ['customer_address'],
-              bill_taxNumber: await nestedData['customer_water']['tax_number'],
-              bill_areaNumber: await nestedData['bill']['area_number'],
-              bill_waterNumber: await nestedData['bill']['water_number'],
-              bill_Month: await nestedData['bill']['invoice_date_month_format'],
-              bill_meterNumber: await nestedData['customer_water']
-                  ['meter_number'],
-              bill_size: await nestedData['customer_water']['water_meter_fee']
-                  ['name'],
-              bill_invoiceNumber: await nestedData['bill']['record_invoice']
-                  ['invoice_number'],
-              bill_previousNumber: await nestedData['bill']['record_invoice']
-                  ['water_meter_record']['previous_unit'],
-              bill_nowNumber: await nestedData['bill']['record_invoice']
-                  ['water_meter_record']['current_unit'],
-              bill_sumUnit: await nestedData['bill']['record_invoice']
-                  ['water_meter_record']['sum_unit'],
-              bill_sumFormat: await nestedData['bill']['sum_format'],
-              bill_sumService: await nestedData['bill']['sum_service_format'],
-              bill_discount: await nestedData['bill']['discount_format'],
-              bill_vat: await nestedData['bill']['vat_format'],
-              bill_totalFormat: await nestedData['bill']['total_format'],
-              bill_totalFormat_text: await nestedData['bill']
-                  ['total_format_text'],
-              fiveMonths_Back_Model: fiveMonthsBackList_Bill,
-              //*
-              bill_zpl: await nestedData['bill']['bill_license_zpl'].toString(),
-              bill_paymentType: await nestedData['bill']
-                      ['payment_type_description']
-                  .toString(),
-              bill_recieveName:
-                  await nestedData['bill']['user_receive_name'].toString(),
-              bill_recievePosition:
-                  await nestedData['bill']['user_position'].toString(),
-              bill_issue_dateFormat:
-                  await nestedData['bill']['issue_date_format'].toString(),
-            );
+            if (state.checkBilPrint == "0") {
+              print('no bill ');
+              emit(
+                state.copyWith(
+                  invoice_data: dataInvoice,
+                ),
+              );
+            } else {
+              print('bill ');
+              dataBill = Bill_Load_Data(
+                bill_id: await nestedData['bill']['id'].toString(),
+                bill_number: await nestedData['bill']['bill_number'].toString(),
+                bill_customerName:
+                    await nestedData['bill']['customer_name'].toString(),
+                bill_customerAddress:
+                    await nestedData['bill']['customer_address'].toString(),
+                bill_taxNumber:
+                    await nestedData['customer_water']['tax_number'].toString(),
+                bill_areaNumber:
+                    await nestedData['bill']['area_number'].toString(),
+                bill_waterNumber:
+                    await nestedData['bill']['water_number'].toString(),
+                bill_Month: await nestedData['bill']
+                        ['invoice_date_month_format']
+                    .toString(),
+                bill_meterNumber: await nestedData['customer_water']
+                        ['meter_number']
+                    .toString(),
+                bill_size: await nestedData['customer_water']['water_meter_fee']
+                        ['name']
+                    .toString(),
+                bill_invoiceNumber: await nestedData['bill']['record_invoice']
+                        ['invoice_number']
+                    .toString(),
+                bill_previousNumber: await nestedData['bill']['record_invoice']
+                        ['water_meter_record']['previous_unit']
+                    .toString(),
+                bill_nowNumber: await nestedData['bill']['record_invoice']
+                        ['water_meter_record']['current_unit']
+                    .toString(),
+                bill_sumUnit: await nestedData['bill']['record_invoice']
+                        ['water_meter_record']['sum_unit']
+                    .toString(),
+                bill_sumFormat:
+                    await nestedData['bill']['sum_format'].toString(),
+                bill_sumService:
+                    await nestedData['bill']['sum_service_format'].toString(),
+                bill_discount:
+                    await nestedData['bill']['discount_format'].toString(),
+                bill_vat: await nestedData['bill']['vat_format'].toString(),
+                bill_totalFormat:
+                    await nestedData['bill']['total_format'].toString(),
+                bill_totalFormat_text:
+                    await nestedData['bill']['total_format_text'].toString(),
+                fiveMonths_Back_Model: fiveMonthsBackList_Bill,
+                //
+                bill_zpl:
+                    await nestedData['bill']['bill_license_zpl'].toString(),
+                bill_paymentType: await nestedData['bill']
+                        ['payment_type_description']
+                    .toString(),
+                bill_recieveName:
+                    await nestedData['bill']['user_receive_name'].toString(),
+                bill_recievePosition:
+                    await nestedData['bill']['user_position'].toString(),
+                bill_issue_dateFormat:
+                    await nestedData['bill']['issue_date_format'].toString(),
+              );
 
-            emit(state.copyWith(
-                statebillID: await nestedData['bill']['id'],
-                invoice_data: await dataInvoice,
-                bill_data: await dataBill,
-                countForReset: state.countForReset + 1,
-                writeCondition: 'ปกติ'));
+              emit(
+                state.copyWith(
+                    invoice_data: dataInvoice,
+                    bill_data: dataBill,
+                    countForReset: state.countForReset + 1,
+                    writeCondition: 'ปกติ',
+                    statebillID: await nestedData['bill']['id']),
+              );
+            }
 
             Navigator.pop(event.context);
             EasyLoading.dismiss();
@@ -336,7 +369,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             });
             emit(state.copyWith(buttonEnable: true));
           } else {
-            EasyLoading.showError(response.statusMessage.toString());
+            EasyLoading.showError('1' + response.statusMessage.toString());
             EasyLoading.dismiss();
             Navigator.pop(event.context);
             print('-----------fail api');
@@ -345,13 +378,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             emit(state.copyWith(loading: false));
           }
         } catch (e) {
-          EasyLoading.showError(e.toString());
+          EasyLoading.showError('2' + e.toString());
           EasyLoading.dismiss();
           emit(state.copyWith(buttonEnable: true));
           Navigator.pop(event.context);
           emit(state.copyWith(loading: false));
           print('----------- fail try');
-
           print("Exception $e");
         }
       } else {
@@ -389,11 +421,14 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
         dynamic dataBill;
         dynamic nestedData = response.data['data'];
         List<FiveMonths_Back> fiveMonthsBackList = [];
-             List<FiveMonths_Back> fiveMonthsBackList_Bill = [];
+        List<FiveMonths_Back> fiveMonthsBackList_Bill = [];
         List<DebtMonths_Step> debtmonthsList = [];
+        print('bill print status: ' + nestedData['bill_print']);
 
         if (response.statusCode == 200) {
-          emit(state.copyWith(loading: false));
+          emit(state.copyWith(
+              loading: false,
+              checkBilPrint: nestedData['bill_print'].toString()));
 
           for (var item in nestedData['history_meters']) {
             fiveMonthsBackList.add(FiveMonths_Back(
@@ -402,12 +437,12 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             ));
           }
 
-                  for (var item in nestedData['bill_history_meters']) {
-              fiveMonthsBackList_Bill.add(FiveMonths_Back(
-                month: await item['month'].toString(),
-                sum_unit: await item['sum_unit'].toString(),
-              ));
-            }
+          for (var item in nestedData['bill_history_meters']) {
+            fiveMonthsBackList_Bill.add(FiveMonths_Back(
+              month: await item['month'].toString(),
+              sum_unit: await item['sum_unit'].toString(),
+            ));
+          }
           for (var item in nestedData['months_step']) {
             debtmonthsList.add(DebtMonths_Step(
               name: await item['name'].toString(),
@@ -482,65 +517,78 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
                 ['invoice_text_debit_bank'],
           );
 
-          dataBill = Bill_Load_Data(
-            bill_id: await nestedData['bill']['id'].toString(),
-            bill_number: await nestedData['bill']['bill_number'].toString(),
-            bill_customerName:
-                await nestedData['bill']['customer_name'].toString(),
-            bill_customerAddress:
-                await nestedData['bill']['customer_address'].toString(),
-            bill_taxNumber:
-                await nestedData['customer_water']['tax_number'].toString(),
-            bill_areaNumber: await nestedData['bill']['area_number'].toString(),
-            bill_waterNumber:
-                await nestedData['bill']['water_number'].toString(),
-            bill_Month: await nestedData['bill']['invoice_date_month_format']
-                .toString(),
-            bill_meterNumber:
-                await nestedData['customer_water']['meter_number'].toString(),
-            bill_size: await nestedData['customer_water']['water_meter_fee']
-                    ['name']
-                .toString(),
-            bill_invoiceNumber: await nestedData['bill']['record_invoice']
-                    ['invoice_number']
-                .toString(),
-            bill_previousNumber: await nestedData['bill']['record_invoice']
-                    ['water_meter_record']['previous_unit']
-                .toString(),
-            bill_nowNumber: await nestedData['bill']['record_invoice']
-                    ['water_meter_record']['current_unit']
-                .toString(),
-            bill_sumUnit: await nestedData['bill']['record_invoice']
-                    ['water_meter_record']['sum_unit']
-                .toString(),
-            bill_sumFormat: await nestedData['bill']['sum_format'].toString(),
-            bill_sumService:
-                await nestedData['bill']['sum_service_format'].toString(),
-            bill_discount:
-                await nestedData['bill']['discount_format'].toString(),
-            bill_vat: await nestedData['bill']['vat_format'].toString(),
-            bill_totalFormat:
-                await nestedData['bill']['total_format'].toString(),
-            bill_totalFormat_text:
-                await nestedData['bill']['total_format_text'].toString(),
-            fiveMonths_Back_Model: fiveMonthsBackList_Bill,
-            //
-            bill_zpl: await nestedData['bill']['bill_license_zpl'].toString(),
-            bill_paymentType:
-                await nestedData['bill']['payment_type_description'].toString(),
-            bill_recieveName:
-                await nestedData['bill']['user_receive_name'].toString(),
-            bill_recievePosition:
-                await nestedData['bill']['user_position'].toString(),
-            bill_issue_dateFormat:
-                await nestedData['bill']['issue_date_format'].toString(),
-          );
+          if (state.checkBilPrint == "0") {
+            print('no bill ');
+            emit(
+              state.copyWith(
+                invoice_data: dataInvoice,
+              ),
+            );
+          } else {
+            print('bill ');
+            dataBill = Bill_Load_Data(
+              bill_id: await nestedData['bill']['id'].toString(),
+              bill_number: await nestedData['bill']['bill_number'].toString(),
+              bill_customerName:
+                  await nestedData['bill']['customer_name'].toString(),
+              bill_customerAddress:
+                  await nestedData['bill']['customer_address'].toString(),
+              bill_taxNumber:
+                  await nestedData['customer_water']['tax_number'].toString(),
+              bill_areaNumber:
+                  await nestedData['bill']['area_number'].toString(),
+              bill_waterNumber:
+                  await nestedData['bill']['water_number'].toString(),
+              bill_Month: await nestedData['bill']['invoice_date_month_format']
+                  .toString(),
+              bill_meterNumber:
+                  await nestedData['customer_water']['meter_number'].toString(),
+              bill_size: await nestedData['customer_water']['water_meter_fee']
+                      ['name']
+                  .toString(),
+              bill_invoiceNumber: await nestedData['bill']['record_invoice']
+                      ['invoice_number']
+                  .toString(),
+              bill_previousNumber: await nestedData['bill']['record_invoice']
+                      ['water_meter_record']['previous_unit']
+                  .toString(),
+              bill_nowNumber: await nestedData['bill']['record_invoice']
+                      ['water_meter_record']['current_unit']
+                  .toString(),
+              bill_sumUnit: await nestedData['bill']['record_invoice']
+                      ['water_meter_record']['sum_unit']
+                  .toString(),
+              bill_sumFormat: await nestedData['bill']['sum_format'].toString(),
+              bill_sumService:
+                  await nestedData['bill']['sum_service_format'].toString(),
+              bill_discount:
+                  await nestedData['bill']['discount_format'].toString(),
+              bill_vat: await nestedData['bill']['vat_format'].toString(),
+              bill_totalFormat:
+                  await nestedData['bill']['total_format'].toString(),
+              bill_totalFormat_text:
+                  await nestedData['bill']['total_format_text'].toString(),
+              fiveMonths_Back_Model: fiveMonthsBackList_Bill,
+              //
+              bill_zpl: await nestedData['bill']['bill_license_zpl'].toString(),
+              bill_paymentType: await nestedData['bill']
+                      ['payment_type_description']
+                  .toString(),
+              bill_recieveName:
+                  await nestedData['bill']['user_receive_name'].toString(),
+              bill_recievePosition:
+                  await nestedData['bill']['user_position'].toString(),
+              bill_issue_dateFormat:
+                  await nestedData['bill']['issue_date_format'].toString(),
+            );
 
-          emit(state.copyWith(
-            invoice_data: dataInvoice,
-            bill_data: dataBill,
-            statebillID: await nestedData['bill']['id']),
-          );
+            emit(
+              state.copyWith(
+                  invoice_data: dataInvoice,
+                  bill_data: dataBill,
+                  statebillID: await nestedData['bill']['id']),
+            );
+          }
         } else {
           print('-----------fail api');
           print(response);
@@ -549,28 +597,30 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
       } catch (e) {
         emit(state.copyWith(loading: false));
         print('----------- fail try');
-
         print("Exception $e");
       }
     });
 
     //*
 
-    on<SendAfterPrint>((event, emit) async {  final dio = Dio();
-      print('-------------------sendtien test---------------');
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('keyToken');
-      print(state.statebillID);
-
-    
-      final response = await dio.post(
-        waterWork_domain + "record_bill/status/update/${state.statebillID}",
-        options: Options(headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $token",
-        }),
-      );
-      print(response.data.toString());
+    on<SendAfterPrint>((event, emit) async {
+      final dio = Dio();
+      if (state.checkBilPrint == '1') {
+        print('-------------------updated api for bill---------------');
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? token = prefs.getString('keyToken');
+        print(state.statebillID);
+        final response = await dio.post(
+          waterWork_domain + "record_bill/status/update/${state.statebillID}",
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          }),
+        );
+        print(response.data.toString());
+      } else {
+        print('-------------------no bill no update-------------');
+      }
     });
   }
 }

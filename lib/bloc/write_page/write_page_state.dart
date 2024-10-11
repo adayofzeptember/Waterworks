@@ -3,6 +3,7 @@ part of 'write_page_bloc.dart';
 // ignore_for_file: must_be_immutable
 class WritePageState extends Equatable {
   int countForReset;
+  String checkBilPrint;
   String writeRecordId;
   String customerName, address, waterNumber, areaNumber, meterNumber;
   String previousUnitFormat;
@@ -18,6 +19,7 @@ class WritePageState extends Equatable {
   int statebillID;
   WritePageState({
     required this.lat,
+    required this.checkBilPrint,
     required this.lng,
     required this.countForReset,
     required this.writeRecordId,
@@ -44,6 +46,7 @@ class WritePageState extends Equatable {
     String? customerName,
     String? address,
     String? waterNumber,
+    String? checkBilPrint,
     String? areaNumber,
      int? statebillID,
     String? meterNumber,
@@ -65,7 +68,7 @@ class WritePageState extends Equatable {
       writeRecordId: writeRecordId ?? this.writeRecordId,
       customerName: customerName ?? this.customerName,
       statebillID: statebillID ?? this.statebillID,
-      
+      checkBilPrint: checkBilPrint ?? this.checkBilPrint,
       address: address ?? this.address,
       lat: lat ?? this.lat,
       lng: lng ?? this.lng,
@@ -92,6 +95,7 @@ class WritePageState extends Equatable {
         address,
         waterNumber,
         bill_data,
+        checkBilPrint,
         statebillID,
         areaNumber,
         meterNumber,
