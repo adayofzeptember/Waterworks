@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
-import 'package:waterworks/blue_thermal_printer/zpl3.dart';
+// import 'package:waterworks/blue_thermal_printer/zpl3.dart';
 //import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
@@ -41,7 +41,8 @@ class _Print2State extends State<Print_Screen> {
   bool _connected = false;
   late BluetoothDevice getD;
   bool _isButtonDisabled = true;
-  ZplPrintHere toPrint = ZplPrintHere();
+  var toPrint;
+  // ToPrint_Bill toPrint = ToPrint_Bill();
 
   @override
   void initState() {
@@ -190,18 +191,14 @@ class _Print2State extends State<Print_Screen> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(0))),
+                  decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(0))),
                   width: double.infinity,
                   height: 200,
                   child: Column(
                     children: [
                       //  Text(widget.bank.toString()),
-                      if (state.printer_address.toString() == '' &&
-                              state.printer_name.toString() == '' ||
-                          state.printer_address == 'null' &&
-                              state.printer_name == 'null')
+                      if (state.printer_address.toString() == '' && state.printer_name.toString() == '' ||
+                          state.printer_address == 'null' && state.printer_name == 'null')
                         Column(
                           children: [
                             Row(
@@ -211,9 +208,7 @@ class _Print2State extends State<Print_Screen> {
                                 const SizedBox(width: 10),
                                 const Text(
                                   'เครื่องพิมพ์: ',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20),
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                                 ),
                                 const Icon(Icons.print_rounded),
                                 const SizedBox(width: 2),
@@ -244,29 +239,20 @@ class _Print2State extends State<Print_Screen> {
                                         height: 10,
                                       ),
                                       const Text('กรุณาเลือกเครื่องพิมพ์',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold)),
+                                          style: TextStyle(fontSize: 20, color: Colors.red, fontWeight: FontWeight.bold)),
                                     ],
                                   )
                                 : ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green),
+                                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                                     onPressed: (() {
-                                      context.read<PrinterConnectBloc>().add(
-                                          GetName_Address(
-                                              getPrinterName:
-                                                  _device!.name.toString(),
-                                              getPrinterAddress:
-                                                  _device!.address.toString()));
+                                      context.read<PrinterConnectBloc>().add(GetName_Address(
+                                          getPrinterName: _device!.name.toString(), getPrinterAddress: _device!.address.toString()));
                                       // _connectFirstTime(_device!.name.toString(),
                                       //     _device!.address.toString());
                                     }),
                                     child: const Text(
                                       'ตกลง',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
+                                      style: TextStyle(color: Colors.white, fontSize: 20),
                                     ),
                                   ),
                           ],
@@ -306,34 +292,23 @@ class _Print2State extends State<Print_Screen> {
                               builder: (context, state2ToCkeck) {
                                 return ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: _isButtonDisabled
-                                        ? Palette.thisGreen
-                                        : const Color.fromARGB(
-                                            255, 155, 153, 153),
+                                    backgroundColor: _isButtonDisabled ? Palette.thisGreen : const Color.fromARGB(255, 155, 153, 153),
                                   ),
                                   onPressed: _isButtonDisabled
                                       ? () {
                                           setState(() {
-                                            _isButtonDisabled =
-                                                !_isButtonDisabled;
+                                            _isButtonDisabled = !_isButtonDisabled;
                                           });
                                           // _connectBloc(state.printer_name.toString(),
                                           //     state.printer_address.toString());
-                                       
 
-                                          _connect_then_Print(
-                                              state.printer_name.toString(),
-                                              state.printer_address.toString(),
-                                              state2ToCkeck.checkBilPrint.toString(),
-                                              context);
+                                          // _connect_then_Print(state.printer_name.toString(), state.printer_address.toString(),
+                                          //     state2ToCkeck.checkBilPrint.toString(), context);
                                         }
                                       : null,
                                   child: Text(
-                                    _isButtonDisabled
-                                        ? '-> พิมพ์ใบแจ้ง <-'
-                                        : 'กำลังพิมพ์ใบแจ้ง..',
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 20),
+                                    _isButtonDisabled ? '-> พิมพ์ใบแจ้ง <-' : 'กำลังพิมพ์ใบแจ้ง..',
+                                    style: const TextStyle(color: Colors.white, fontSize: 20),
                                   ),
                                 );
                               },
@@ -342,8 +317,7 @@ class _Print2State extends State<Print_Screen> {
                               height: 20,
                             ),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                               onPressed: () {
                                 _showAlertDeletePrinter(context);
                                 // if (_connected == true) {
@@ -356,8 +330,7 @@ class _Print2State extends State<Print_Screen> {
                               },
                               child: const Text(
                                 'ยกเลิกการเชื่อมต่อเครื่องพิมพ์',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 15),
+                                style: TextStyle(color: Colors.white, fontSize: 15),
                               ),
                             ),
                           ],
@@ -390,12 +363,10 @@ class _Print2State extends State<Print_Screen> {
     return items;
   }
 
-  Future _connect_then_Print(
-      String ptName_bloc, ptAddress_bloc,String checkbill, context) async {
+  Future _connect_then_Print(String ptName_bloc, ptAddress_bloc, String checkbill, context) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
     await Future.delayed(const Duration(seconds: 5), () {
-      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, checkbill,
-          widget.checkPaymentAuto.toString());
+      toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, checkbill, widget.checkPaymentAuto.toString());
     });
     _waitlittleshit();
   }
@@ -435,8 +406,7 @@ class _Print2State extends State<Print_Screen> {
       barrierDismissible: false, // user must tap button!
       builder: (context) {
         return AlertDialog(
-          title: const Text('ยกเลิกการเชื่อมต่อเครื่องพิมพ์ ?',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+          title: const Text('ยกเลิกการเชื่อมต่อเครื่องพิมพ์ ?', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
           content: SingleChildScrollView(
             child: Column(
               children: [
@@ -456,8 +426,7 @@ class _Print2State extends State<Print_Screen> {
             TextButton(
               style: TextButton.styleFrom(
                 // Button color
-                foregroundColor:
-                    Color.fromARGB(255, 235, 116, 108), // Splash color
+                foregroundColor: Color.fromARGB(255, 235, 116, 108), // Splash color
               ),
               child: const Text(
                 'ยกเลิก',
