@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
-// import 'package:waterworks/blue_thermal_printer/zpl3.dart';
+import 'package:waterworks/blue_thermal_printer/zpl3.dart';
 //import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
@@ -41,8 +41,7 @@ class _Print2State extends State<Print_Screen> {
   bool _connected = false;
   late BluetoothDevice getD;
   bool _isButtonDisabled = true;
-  var toPrint;
-  // ToPrint_Bill toPrint = ToPrint_Bill();
+  ZplPrintHere toPrint = ZplPrintHere();
 
   @override
   void initState() {
@@ -302,8 +301,8 @@ class _Print2State extends State<Print_Screen> {
                                           // _connectBloc(state.printer_name.toString(),
                                           //     state.printer_address.toString());
 
-                                          // _connect_then_Print(state.printer_name.toString(), state.printer_address.toString(),
-                                          //     state2ToCkeck.checkBilPrint.toString(), context);
+                                          _connect_then_Print(state.printer_name.toString(), state.printer_address.toString(),
+                                              state2ToCkeck.checkBilPrint.toString(), context);
                                         }
                                       : null,
                                   child: Text(
@@ -365,6 +364,10 @@ class _Print2State extends State<Print_Screen> {
 
   Future _connect_then_Print(String ptName_bloc, ptAddress_bloc, String checkbill, context) async {
     _connect_fromBloc(ptName_bloc, ptAddress_bloc);
+    print("-----------------");
+    print('${widget.invoideModel}, ${widget.billModel.toString()}, $checkbill, ${widget.checkPaymentAuto.toString()}');
+    print("-----------------");
+
     await Future.delayed(const Duration(seconds: 5), () {
       toPrint.printInvoice_Now(widget.invoideModel, widget.billModel, checkbill, widget.checkPaymentAuto.toString());
     });
