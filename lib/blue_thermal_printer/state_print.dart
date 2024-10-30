@@ -146,7 +146,7 @@ class ZplPrintHere {
 ^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[2].name}^FS^CI0
 ^FT38,914^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[4].name}^FS^CI0
+^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[3].name}^FS^CI0
 ^FT152,765^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.debtmonths_step?[0].total}^FS^CI0
@@ -186,8 +186,7 @@ class ZplPrintHere {
         } else {
           // ไม่มีแสกนบาโค้ด
           zplToPrinter1_Invoice = """
-CT~~CD,~CC^~CT~
-^XA~TA000~JSN^LT0^MNW^MTD^PON^PMN^LH0,0^JMA^PR1,1~SD10^JUS^LRN^CI0^XZ
+^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
 ^PW575
@@ -413,32 +412,32 @@ ${thisBill.bill_zpl}
 ^FH\^CI17^F8^FD${thisBill.bill_sumUnit}^FS^CI0
 ^FT454,708^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_sumFormat}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_sumFormat}^FS^CI0
 ^FT454,765^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_sumService}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_sumService}^FS^CI0
 ^FT454,814^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_discount}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_discount}^FS^CI0
 ^FT454,859^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_vat}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_vat}^FS^CI0
 ^FT454,914^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
 ^FT454,1031^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
-^FB24,1,0,R^FH\^CI17^F8^FD0^FS^CI0
+^FH\^CI17^F8^FD19^FS^CI0
 ^FT225,40^A@N,42,41,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบเสร็จรับเงิน/ใบกำกับภาษี^FS^CI0
 ^FT38,1334^A@N,39,37,angsana.fnt
 ^FH\
 ^FB519,1,0,C^FH\^CI17^F8^FD${thisBill.bill_paymentType}^FS^CI0
-^FT234,1451^A@N,39,33,angsana.fnt
+^FT176,1451^A@N,39,33,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_recieveName}^FS^CI0
 ^FT99,1493^A@N,39,33,angsana.fnt

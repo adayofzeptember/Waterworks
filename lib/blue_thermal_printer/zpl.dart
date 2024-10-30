@@ -11,15 +11,9 @@ import 'package:waterworks/models/invoice_bill_model_TOPRINTER.dart';
 // ^XA
 // ^MMT
 
-//${thisInvoice}
-// ${thisInvoice.fiveMonths_Back_Model?[0].month}
-// ${thisInvoice.fiveMonths_Back_Model?[0].sum_unit}
-// ${thisInvoice.debtmonths_step?[0].name}
-// ${thisInvoice.debtmonths_step?[0].total}
-
 // ^FH\\^FDLA,${billID}\\0D\\0A${area}\\0D\\0A${date}\\0D\\0A${price}^FS
 // ^FD>:${thisInvoice.inv_barcode2}^FS
-class ZplPrintHere {
+class ZplPrintHere_haha {
   printInvoice_Now(
     ToInvoice thisInvoice,
     ToPrint_Bill thisBill,
@@ -42,12 +36,14 @@ class ZplPrintHere {
         String zplToPrinter2_Bill = "";
 
         if (paymentAutoCheck.toString() == '0' || paymentAutoCheck == "null") {
+          //แสกนบาโค้ด
+
           zplToPrinter1_Invoice = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
 ^PW575
-^LL1590
+^LL1597
 ^LS0
 ^FT116,1190^A@N,39,37,angsana.fnt
 ^FH\
@@ -67,10 +63,10 @@ class ZplPrintHere {
 ^FT507,1242^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.fiveMonths_Back_Model?[4].sum_unit}^FS^CI0
-^FT42,240^A@N,31,30,angsana.fnt
+^FT46,278^A@N,31,30,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDชื่อ: ${thisInvoice.inv_user_name}^FS^CI0
-^FT42,297^A@N,31,30,angsana.fnt
+^FT46,334^A@N,31,30,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDที่อยู่: ${thisInvoice.inv_user_address}^FS^CI0
 ^FT82,476^A@N,39,37,angsana.fnt
@@ -136,7 +132,7 @@ class ZplPrintHere {
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice}^FS^CI0
-^FT296,82^A@N,47,45,angsana.fnt
+^FT236,74^A@N,72,60,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบแจ้งค่าน้ำประปา^FS^CI0
 ^FT38,765^A@N,39,37,angsana.fnt
@@ -166,7 +162,7 @@ class ZplPrintHere {
 ^FT16,1325^A@N,31,30,angsana.fnt
 ^FH\
 ^FB510,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_textDuedate}^FS^CI0
-^FT42,349^A@N,31,30,angsana.fnt
+^FT46,386^A@N,31,30,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_tax}^FS^CI0
 ^FT16,1374^A@N,23,18,angsana.fnt
@@ -188,12 +184,13 @@ class ZplPrintHere {
 ^PQ1,0,1,Y^XZ
 """;
         } else {
+          // ไม่มีแสกนบาโค้ด
           zplToPrinter1_Invoice = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
 ^PW575
-^LL1590
+^LL1597
 ^LS0
 ^FT116,1190^A@N,39,37,angsana.fnt
 ^FH\
@@ -213,10 +210,10 @@ class ZplPrintHere {
 ^FT507,1242^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.fiveMonths_Back_Model?[4].sum_unit}^FS^CI0
-^FT42,248^A@N,31,30,angsana.fnt
+^FT46,262^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDชื่อ: ${thisInvoice.inv_user_name}^FS^CI0
-^FT42,305^A@N,31,30,angsana.fnt
+^FT46,319^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDที่อยู่: ${thisInvoice.inv_user_address}^FS^CI0
 ^FT82,476^A@N,39,37,angsana.fnt
@@ -282,7 +279,7 @@ class ZplPrintHere {
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_sum_invoice}^FS^CI0
-^FT296,82^A@N,47,45,angsana.fnt
+^FT250,70^A@N,56,56,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบแจ้งค่าน้ำประปา^FS^CI0
 ^FT38,765^A@N,39,37,angsana.fnt
@@ -312,7 +309,7 @@ class ZplPrintHere {
 ^FT129,1339^A@N,31,30,angsana.fnt
 ^FH\
 ^FB320,1,0,C^FH\^CI17^F8^FD${thisInvoice.information_textAlert}^FS^CI0
-^FT42,357^A@N,31,30,angsana.fnt
+^FT46,371^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisInvoice.inv_tax}^FS^CI0
 ^FT19,1526^A@N,31,26,angsana.fnt
@@ -328,21 +325,22 @@ class ZplPrintHere {
 """;
         }
 
-//!----------------------------------------------------------------------------------------------------------------
+//!-------------------------บิล BIll---------------------------------------------------------------------------------------
 
         if (checkBill.toString() == "0") {
           bluetooth.printCustom(
               zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
           bluetooth.paperCut();
         } else {
+          //${thisBill}
           zplToPrinter2_Bill = """
 ^XA~TA000~JSN^LT0^MNN^MTD^PON^PMN^LH0,0^JMA^PR5,5~SD10^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
 ^PW575
-^LL1590
+^LL1597
 ^LS0
-^FO192,1312^GFA,02688,02688,00028,:Z64:
+^FO192,1344^GFA,01792,01792,00028,:Z64:
 ^FT260,1420^FD
 ${thisBill.bill_zpl}
 ^FS
@@ -364,12 +362,12 @@ ${thisBill.bill_zpl}
 ^FT507,1242^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.fiveMonths_Back_Model![4].sum_unit}^FS^CI0
-^FT42,248^A@N,31,30,angsana.fnt
+^FT42,255^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FDชื่อ: ${thisBill.bill_customerName}^FS^CI0
-^FT42,305^A@N,31,30,angsana.fnt
+^FH\^CI17^F8^FD${thisBill.bill_customerName}^FS^CI0
+^FT42,312^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FDที่อยู่: ${thisBill.bill_customerAddress}^FS^CI0
+^FH\^CI17^F8^FD${thisBill.bill_customerAddress}^FS^CI0
 ^FT82,476^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_areaNumber}^FS^CI0
@@ -379,13 +377,13 @@ ${thisBill.bill_zpl}
 ^FT417,476^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_Month}^FS^CI0
-^FT46,578^A@N,39,37,angsana.fnt
+^FT45,573^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_meterNumber}^FS^CI0
-^FT247,578^A@N,39,37,angsana.fnt
+^FT248,573^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_size}^FS^CI0
-^FT402,578^A@N,39,37,angsana.fnt
+^FT402,573^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_invoiceNumber}^FS^CI0
 ^FT57,1080^A@N,34,30,angsana.fnt
@@ -427,31 +425,31 @@ ${thisBill.bill_zpl}
 ^FT454,914^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
-^FT454,1033^A@N,39,37,angsana.fnt
+^FT454,1031^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_totalFormat}^FS^CI0
 ^FT454,976^A@N,39,37,angsana.fnt
 ^FH\
-^FH\^CI17^F8^FD0^FS^CI0
-^FT225,56^A@N,42,41,angsana.fnt
+^FH\^CI17^F8^FD19^FS^CI0
+^FT225,40^A@N,42,41,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDใบเสร็จรับเงิน/ใบกำกับภาษี^FS^CI0
-^FT0,1334^A@N,39,37,angsana.fnt
+^FT38,1334^A@N,39,37,angsana.fnt
 ^FH\
 ^FB519,1,0,C^FH\^CI17^F8^FD${thisBill.bill_paymentType}^FS^CI0
-^FT220,1447^A@N,39,33,angsana.fnt
+^FT176,1451^A@N,39,33,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_recieveName}^FS^CI0
-^FT180,1493^A@N,39,33,angsana.fnt
+^FT99,1493^A@N,39,33,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_recievePosition}^FS^CI0
-^FT220,1539^A@N,39,30,angsana.fnt
+^FT176,1539^A@N,39,30,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDวันที่ชำระเงิน ${thisBill.bill_issue_dateFormat}^FS^CI0
-^FT42,357^A@N,31,30,angsana.fnt
+^FT42,364^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FD${thisBill.bill_taxNumber}^FS^CI0
-^FT259,103^A@N,39,37,angsana.fnt
+^FT231,75^A@N,39,37,angsana.fnt
 ^FH\
 ^FH\^CI17^F8^FDเลขที่: ${thisBill.bill_number}^FS^CI0
 ^PQ1,0,1,Y^XZ
@@ -460,61 +458,10 @@ ${thisBill.bill_zpl}
               zplToPrinter2_Bill, Size.boldMedium.val, Align.center.val);
           bluetooth.printCustom(
               zplToPrinter1_Invoice, Size.boldMedium.val, Align.center.val);
+
           bluetooth.paperCut();
         }
       }
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -38,6 +38,8 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
             whatPage: '',
             writeCondition: 'ปกติ',
             buttonEnable: true)) {
+
+              
     on<EnabledButton>(
       (event, emit) {
         emit(state.copyWith(buttonEnable: event.getButt));
@@ -606,7 +608,7 @@ class WritePageBloc extends Bloc<WritePageEvent, WritePageState> {
     on<SendAfterPrint>((event, emit) async {
       final dio = Dio();
       if (state.checkBilPrint == '1') {
-        print('-------------------updated api for bill---------------');
+        print('-------------------updated send api for bill---------------');
         SharedPreferences prefs = await SharedPreferences.getInstance();
         String? token = prefs.getString('keyToken');
         print(state.statebillID);

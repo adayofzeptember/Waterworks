@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:waterworks/ETC/color_green.dart';
 import 'package:waterworks/bloc/write_page/write_page_bloc.dart';
-import 'package:waterworks/blue_thermal_printer/zpl3.dart';
+import 'package:waterworks/blue_thermal_printer/state_print.dart';
 //import 'package:waterworks/blue_thermal_printer/_zpl.dart';
 import '../ETC/shapes_painter.dart';
 import '../bloc/printer_connect/printer_connect_bloc.dart';
@@ -406,7 +406,7 @@ class _Print2State extends State<Print_Screen> {
         _isButtonDisabled = !_isButtonDisabled;
       });
       _disconnect();
-      context.read<WritePageBloc>().add(SendAfterPrint(context: context));
+     context.read<WritePageBloc>().add(SendAfterPrint(context: context));
     });
   }
 

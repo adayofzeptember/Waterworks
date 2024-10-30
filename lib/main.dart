@@ -23,7 +23,6 @@ import 'bloc/profile/profile_bloc.dart';
 import 'offline/utils.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
-
 void main() {
   Intl.defaultLocale = 'th';
   WidgetsFlutterBinding.ensureInitialized();
